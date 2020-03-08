@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>demo-1</artifactId>
+	<artifactId>YouMarket</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo-1</name>
-	<description>Demo project for Spring Boot</description>
+	<name>YouMarket</name>
+	<description>Aplicación de compras programadas con dietas y nutricionista</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -63,6 +63,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.1</version><!--$NO-MVN-MAN-VER$-->
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
 		
 	
 	<plugin>
