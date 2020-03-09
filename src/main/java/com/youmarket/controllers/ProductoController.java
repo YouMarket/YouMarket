@@ -10,11 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.youmarket.domain.Producto;
 import com.youmarket.services.ProductoService;
 
-@Controller
+@RestController
 @RequestMapping("producto")
 public class ProductoController {
 
@@ -22,11 +23,10 @@ public class ProductoController {
 	private ProductoService productService;
 	
 	@RequestMapping("/list")
-	public String listProductos(Model model){
+	public List<Producto> listProductos(Model model){
 		List<Producto> productos=productService.listaProductos();
-		model.addAttribute("productos", productos);
 		
-		return "listaProductos";
+		return productos;
 	}
 	
 //	@RequestMapping("/new")
