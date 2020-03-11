@@ -10,6 +10,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Positive;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Factura {
 
@@ -25,40 +32,6 @@ public class Factura {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaFactura;
+
 	
-	public Factura (){
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
-	}
-
-	public Double getTotalIva() {
-		return totalIva;
-	}
-
-	public void setTotalIva(Double totalIva) {
-		this.totalIva = totalIva;
-	}
-
-	public Date getFechaFactura() {
-		return fechaFactura;
-	}
-
-	public void setFechaFactura(Date fechaFactura) {
-		this.fechaFactura = fechaFactura;
-	}
 }

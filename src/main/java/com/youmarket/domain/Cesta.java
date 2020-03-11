@@ -10,6 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Cesta {
 
@@ -26,57 +33,5 @@ public class Cesta {
 	@OneToOne
 	private Usuario usuario;
 	
-	
-	
-	public Cesta() {
-		
-	}
 
-
-
-	public int getId() {
-		return id;
-	}
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
-
-	public String getName() {
-		return name;
-	}
-
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
-	public List<Producto> getProductos() {
-		return productos;
-	}
-
-
-
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
-
-
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 }

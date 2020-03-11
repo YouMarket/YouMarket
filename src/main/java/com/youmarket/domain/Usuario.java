@@ -13,6 +13,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Usuario {
 
@@ -29,6 +36,7 @@ public class Usuario {
 	@Column(name="dni", length=20)
 	private String dni;
 	
+	@Column(name="fecha_nacimiento")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaNacimiento;
 	
@@ -41,6 +49,13 @@ public class Usuario {
 	@Column(name="rol", length = 10)
 	private String rol;
 	
+	private String email;
+	
+	private String password;
+	
+	@Column(name="telefono", length=20)
+	private String telefono;
+	
 	@OneToMany
 	@NotNull
 	private List<Direccion> direcciones;
@@ -51,71 +66,5 @@ public class Usuario {
 	@OneToMany
 	private List<Factura> facturas;
 	
-	public Usuario() {
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	public String getSubscripcion() {
-		return subscripcion;
-	}
-
-	public void setSubscripcion(String subscripcion) {
-		this.subscripcion = subscripcion;
-	}
-
-	public String getcPostal() {
-		return cPostal;
-	}
-
-	public void setcPostal(String cPostal) {
-		this.cPostal = cPostal;
-	}
-
-	public String getRol() {
-		return rol;
-	}
-
-	public void setRol(String rol) {
-		this.rol = rol;
-	}
+	
 }

@@ -8,6 +8,13 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.Type;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Direccion {
 
@@ -15,41 +22,18 @@ public class Direccion {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="nombre", length=100)
+	@Column(name="direccion")
 	private String name;
 	
 	@Column(nullable = false)
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean principal;
 	
+	private String poblacion;
 	
-	public Direccion(){
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean isPrincipal() {
-		return principal;
-	}
-
-	public void setPrincipal(boolean principal) {
-		this.principal = principal;
-	}
+	private String provincia;
 	
+	@Column(name="c_postal")
+	private String cposta;
 	
 }
