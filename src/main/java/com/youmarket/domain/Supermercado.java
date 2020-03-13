@@ -35,7 +35,7 @@ public class Supermercado {
 	@Column(name="intolerancia", length = 250)
 	private String intolerancia;
 	
-	@OneToMany
+	@OneToMany(mappedBy="supermercado")
 	private List<Producto> productos;
 	
 
