@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -29,7 +30,7 @@ public class Cesta {
 	@Column(name="nombre", length=255)
 	private String name;
 	
-	@OneToMany(mappedBy="cesta")
+	@ManyToMany(mappedBy="cesta")
 	private List<Producto> productos;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Positive;
@@ -45,7 +46,7 @@ public class Producto {
 	@JoinColumn(name="marca")
 	private Marca marca;
 	
-	@OneToMany
+	@ManyToMany
 	private List<Etiqueta> etiqueta;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -56,6 +57,11 @@ public class Producto {
 	@JoinColumn(name="supermercado_id")
 	private Supermercado supermercado;
 	
+	@JoinColumn(name="url_imagen")
+	private String imagen;
+	
+	@JoinColumn(name="unidad")
+	private String unidad;
 
 	public Producto(int id, String name, @Positive double precio) {
 		super();
