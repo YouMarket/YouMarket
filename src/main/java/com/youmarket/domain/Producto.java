@@ -50,10 +50,6 @@ public class Producto {
 	private List<Etiqueta> etiqueta;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="cesta_id")
-	private Cesta cesta;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="supermercado_id")
 	private Supermercado supermercado;
 	

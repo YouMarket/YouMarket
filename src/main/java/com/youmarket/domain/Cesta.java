@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +29,7 @@ public class Cesta {
 	@Column(name="nombre", length=255)
 	private String name;
 	
-	@ManyToMany(mappedBy="cesta")
+	@ManyToMany
 	private List<Producto> productos;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
