@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Header from './Header'
 import './App.css';
+import Productos from './Productos';
  
 class App extends Component {
  
@@ -17,10 +18,11 @@ class App extends Component {
 //                this.setState({message: message});
 //            });
 //    };
-// 
+
     render() {
         return (
           <Header/>
+          <Productos/>
         );
     }
 }
