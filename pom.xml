@@ -101,12 +101,12 @@
             </configuration>
         </execution>
          <execution>
-            <id>npm run build</id>
+            <id>npm start</id>
             <goals>
                 <goal>npm</goal>
             </goals>
             <configuration>
-                <arguments>run build</arguments>
+                <arguments>start</arguments>
             </configuration>
         </execution>
     </executions>
