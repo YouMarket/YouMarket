@@ -1,0 +1,10 @@
+.productos-container{
+	padding: 40px 60px;
+}
+
+.grid{
+	display: grid;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	grid-template-columns: 240px 240px 240px 240px;
+}

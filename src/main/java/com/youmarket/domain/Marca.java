@@ -1,5 +1,6 @@
 package com.youmarket.domain;
 
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,28 +18,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Supermercado {
+public class Marca {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="nombre", length=50)
+	@Column(name="nombre", length=100)
 	private String name;
 	
-	@Column(name="descripcion", length = 250)
-	private String descripcion;
+	@Column(name="descripcion")
+	private String description;
 	
-	@Column(name="c_postal", length = 5)
-	private String cPostal;
-	
-	@Column(name="intolerancia", length = 250)
-	private String intolerancia;
-	
-	@OneToMany(mappedBy="supermercado")
+	@OneToMany(mappedBy="marca")
 	private List<Producto> productos;
-	
-
 	
 	
 }

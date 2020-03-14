@@ -1,16 +1,25 @@
 package com.youmarket.domain;
-import javax.persistence.Column;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Positive;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name="producto") 
 public class Producto {
 	
 	@Id
@@ -31,12 +40,27 @@ public class Producto {
 	
 	@Positive
 	private double peso;
-
-	public Producto() {
-		
-	}
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="marca")
+	private Marca marca;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="departamento")
+	private Departamento departamento;
+	
+	@ManyToMany
+	private List<Etiqueta> etiqueta;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="supermercado_id")
+	private Supermercado supermercado;
+	
+	@Column(name="url_imagen")
+	private String imagen;
+	
+	@JoinColumn(name="unidad")
+	private String unidad;
 
 	public Producto(int id, String name, @Positive double precio) {
 		super();
@@ -47,65 +71,6 @@ public class Producto {
 
 
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-
-
-
-	public double getPrecioIva() {
-		return precioIva;
-	}
-
-
-
-	public void setPrecioIva(double precioIva) {
-		this.precioIva = precioIva;
-	}
-
-
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-
-
-	public double getPeso() {
-		return peso;
-	}
-
-
-
-	public void setPeso(double peso) {
-		this.peso = peso;
-	}
 	
 	
 }
