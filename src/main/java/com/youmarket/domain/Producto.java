@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Positive;
 
 import lombok.AllArgsConstructor;
@@ -46,6 +45,10 @@ public class Producto {
 	@JoinColumn(name="marca")
 	private Marca marca;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="departamento")
+	private Departamento departamento;
+	
 	@ManyToMany
 	private List<Etiqueta> etiqueta;
 	
@@ -53,7 +56,7 @@ public class Producto {
 	@JoinColumn(name="supermercado_id")
 	private Supermercado supermercado;
 	
-	@JoinColumn(name="url_imagen")
+	@Column(name="url_imagen")
 	private String imagen;
 	
 	@JoinColumn(name="unidad")
