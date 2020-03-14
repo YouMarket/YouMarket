@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
+import Header from './Header'
 import './App.css';
 import Productos from './Productos';
  
@@ -18,9 +18,10 @@ class App extends Component {
 //                this.setState({message: message});
 //            });
 //    };
- 
+
     render() {
         return (
+          <Header/>
           <Productos/>
         );
     }
