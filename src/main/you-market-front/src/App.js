@@ -5,6 +5,7 @@ import {
 	  Route
 	} from "react-router-dom";
 import Productos from './Productos';
+
 import Carro from './Carro';
  
 function App() {
@@ -20,8 +21,8 @@ function App() {
 		        <Route path="/">
 		        	<Productos />
 		        </Route>
-		    </Switch>
-         </Router>
+		      </Switch>
+        </Router>
         );
 }
 
