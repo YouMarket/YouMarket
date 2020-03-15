@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './styles.css';
+import './styles.css';
 import logo from '../logo.png';
 import carro from './shopping-cart-solid.svg';
 import menu from './bars-solid.svg';
@@ -22,7 +22,7 @@ function menuInteraction() {
 	  } else {
 		    x.style.display = "flex";
 	  }
- 
+	  return false;
 };
 
 
@@ -40,7 +40,7 @@ function Header() {
 		<a className="carro" href="">
 		  	<img src={carro} className="carro-icon" alt="Carro"/>
 		</a>
-		<a href="javascript:void(0);" className="hamburger-menu" onClick={menuInteraction}>
+		<a href="#" className="hamburger-menu" onClick={menuInteraction}>
 	   		<img src={menu} className="hamburger-icon" alt="Menu"/>
 	    </a>
 	  </div>
