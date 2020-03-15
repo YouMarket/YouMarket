@@ -1,16 +1,12 @@
 package com.youmarket.domain;
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.Positive;
 
-
 @Entity
-@Table(name="producto") 
 public class Producto {
 	
 	@Id
@@ -22,15 +18,6 @@ public class Producto {
 	
 	@Positive
 	private double precio;
-	
-	@Positive
-	private double precioIva;
-	
-	@Column(name="descripcion", length = 255)
-	private String descripcion;
-	
-	@Positive
-	private double peso;
 
 	public Producto() {
 		
@@ -69,42 +56,6 @@ public class Producto {
 
 	public void setPrecio(double precio) {
 		this.precio = precio;
-	}
-
-
-
-	public double getPrecioIva() {
-		return precioIva;
-	}
-
-
-
-	public void setPrecioIva(double precioIva) {
-		this.precioIva = precioIva;
-	}
-
-
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-
-
-	public double getPeso() {
-		return peso;
-	}
-
-
-
-	public void setPeso(double peso) {
-		this.peso = peso;
 	}
 	
 	
