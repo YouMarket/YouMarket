@@ -12,8 +12,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.youmarket.YouMarketApplication;
 import com.youmarket.domain.Cesta;
+import com.youmarket.domain.Producto;
 import com.youmarket.repositories.CestaRepository;
 import com.youmarket.services.CestaService;
+import com.youmarket.services.ProductoService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = YouMarketApplication.class)
@@ -26,6 +28,9 @@ public class ProductoServiceTest {
 	
 	@Autowired(required = true)
 	private CestaRepository cestaRepository;
+	
+	@Autowired(required = true)
+	private ProductoService productoService;
 	
 	
     
@@ -41,21 +46,22 @@ public class ProductoServiceTest {
     @Test
     public void pruebaLosSerrano2() {
 
-    	Collection<Cesta> cestas = cestaRepository.findAll();
-    	System.out.println(cestas);
+    	//Collection<Cesta> cestas = cestaRepository.findAll();
+    	//System.out.println(cestas);
 
         assertThat(2)
           .isEqualTo(2);
     }
     
+
+    
     @Test
-    public void showProductTest() {
-
-    	Collection<Cesta> cestas = cestaRepository.findAll();
-    	System.out.println(cestas);
-
-        assertThat(2)
-          .isEqualTo(2);
+    public void listaProductosTest() {
+    	
+    	Collection<Producto> productos = this.productoService.listaProductos();
+    	
+    	assertThat(productos).hasAtLeastOneElementOfType(Producto.class);
+    	
     }
     
     
