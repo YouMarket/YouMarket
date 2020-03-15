@@ -22,4 +22,5 @@ function Producto({id, imagen, nombre, supermercado, precio, unidad}: Props) {
   </div>
  );
 }
+
 export default Producto;

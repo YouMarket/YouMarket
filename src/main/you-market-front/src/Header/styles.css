@@ -63,15 +63,6 @@
 }
 
 
-a:visited {
-	color: #464646;
-}
-
-a:hover {
-	color: #8bb547;
-}
-
-
 @media (min-width: 580px){
 	.header-links {
 		display: flex;
