@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import Header from './Header'
 import './App.css';
 import Productos from './Productos';
- 
+import Dieta from './Dieta';
+import Dietas from './Dietas';
+
+
 class App extends Component {
  
     state = {};
@@ -24,7 +27,10 @@ class App extends Component {
          <div>
           <Header/>
           <Productos/>
-         </div>
+          <br/>
+
+	      <Dietas/>
+	     </div>
         );
     }
 }
