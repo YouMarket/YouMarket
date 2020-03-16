@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import './styles.css';
 import Producto from '../Producto';
 import Header from '../Header';
 
+
 function Productos() {
+	
+	const [productos, setProductos] = useState([]);
+	
+	const fetchProductos = useCallback(() => {
+	    return fetch('localhost:8081/producto/list')
+	      .then(res => res.json())
+	      .then(productos => {
+	        setProductos(productos);
+	        console.log(productos);
+	      });
+	  }, []);
+	
+	useEffect(() => {
+	    fetchProductos();
+	  }, [fetchProductos]);
+	
+	
   return(
 	<div>	  
 	  <Header/>
