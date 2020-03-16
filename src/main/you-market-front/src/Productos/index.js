@@ -8,11 +8,14 @@ function Productos() {
 	
 	const [productos, setProductos] = useState([]);
 	
+	
 	const fetchProductos = useCallback(() => {
-	    return fetch('localhost:8081/producto/list')
+	    return fetch('http://localhost:8081/producto/list', {
+	    	mode: 'no-cors'
+	    	})
 	      .then(res => res.json())
 	      .then(productos => {
-	        setProductos(productos);
+	        setProductos(productos.results);
 	        console.log(productos);
 	      });
 	  }, []);
@@ -20,6 +23,7 @@ function Productos() {
 	useEffect(() => {
 	    fetchProductos();
 	  }, [fetchProductos]);
+	
 	
 	
   return(

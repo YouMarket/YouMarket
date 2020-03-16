@@ -1,6 +1,7 @@
 
 package com.youmarket.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +26,9 @@ public class ProductoController {
 	@RequestMapping("/list")
 	public List<Producto> listProductos(Model model){
 		List<Producto> productos=productService.listaProductos();
+//		List<Producto> productos = new ArrayList<>();
+//		Producto p1 = new Producto(1, "hola", 1);
+
 		
 		return productos;
 	}
