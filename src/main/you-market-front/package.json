@@ -1,8 +1,12 @@
 {
   "name": "you-market-front",
   "version": "0.1.0",
-  "proxy": "http://localhost:8081",
+  "proxy": "https://youmarket.herokuapp.com/",
   "private": true,
+   "engines": {
+    "npm": "5.7.1",
+    "node": "9.5.0"
+  },
   "dependencies": {
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
