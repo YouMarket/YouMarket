@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.css';
+import {Link} from 'react-router-dom';
 
 interface Props {
 	tipo: string,
@@ -8,10 +9,10 @@ interface Props {
 
 function Dieta({tipo, imagen}: Props) {
   return(
-  <div className="dieta-container">
+  <Link to="/recetas" className="dieta-container">
   	<img className="dieta-imagen" src={imagen} alt={tipo}/>
   	<p className="dieta-tipo">{tipo}</p>
-  </div>
+  </Link>
  );
 }
 export default Dieta;
