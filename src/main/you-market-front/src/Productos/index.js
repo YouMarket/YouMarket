@@ -10,9 +10,7 @@ function Productos() {
 	
 	
 	const fetchProductos = useCallback(() => {
-	    return fetch('http://localhost:8081/producto/list', {
-	    	mode: 'no-cors'
-	    	})
+	    return fetch('relative-path')
 	      .then(res => res.json())
 	      .then(productos => {
 	        setProductos(productos.results);
