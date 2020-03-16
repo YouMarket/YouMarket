@@ -1,0 +1,45 @@
+.container{
+    padding-top: 50px;
+    max-width: 1110px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .container {
+        padding: 20px 5px;
+    }
+
+    .button-finish {
+        float: none !important;
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+    }
+
+}
+
+.products-container-list {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.introduction {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.button-finish {
+    float: right;
+    background-color: black;
+    border: none;
+    color: white;
+    margin-top: 20px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
