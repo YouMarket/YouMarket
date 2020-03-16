@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './styles.css';
+import './styles.css';
 
 interface Props {
 	id: number;
@@ -22,4 +22,5 @@ function Producto({id, imagen, nombre, supermercado, precio, unidad}: Props) {
   </div>
  );
 }
+
 export default Producto;
