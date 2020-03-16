@@ -38,7 +38,7 @@ public class Producto {
 	@Column(name="descripcion", length = 255)
 	private String descripcion;
 	
-	@Positive
+	@Column(name="peso", columnDefinition="Decimal(10,2) default '0.00'")
 	private double peso;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
