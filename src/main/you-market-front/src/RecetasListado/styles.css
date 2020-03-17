@@ -1,0 +1,13 @@
+.recetas-container{
+	padding: 40px 30px;
+	display: flex;
+	justify-content: center;
+	
+}
+
+@media (min-width: 1100px){
+	.recetas-container{
+		padding: 40px 60px;
+	}
+	
+}
