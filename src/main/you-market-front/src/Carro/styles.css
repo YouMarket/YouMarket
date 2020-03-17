@@ -18,6 +18,15 @@
         display: block;
     }
 
+    .price {
+        float: none !important;
+        max-width: 90% !important;
+        margin: 0 auto;
+        display: block;
+        padding: 0;
+        text-align: center;
+    }
+
 }
 
 .products-container-list {
@@ -38,8 +47,18 @@
     color: white;
     margin-top: 20px;
     padding: 15px 32px;
+    clear: both;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
+}
+
+.price {
+    float: right;
+    max-width: 200px;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 20px;
+    clear: both;
 }
