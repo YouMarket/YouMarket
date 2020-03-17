@@ -11,11 +11,15 @@
         padding: 20px 5px;
     }
 
-    .button-finish {
+    .buttons {
         float: none !important;
         width: 90%;
         margin: 0 auto;
         display: block;
+    }
+
+    .button-finish, .save-cesta {
+        width: 100%;
     }
 
     .price {
@@ -40,8 +44,17 @@
     margin-bottom: 40px;
 }
 
-.button-finish {
+.buttons {
+    clear: both;
     float: right;
+}
+
+.save-cesta {
+    margin-right: 20px;
+}
+
+.button-finish, .save-cesta {
+    display: inline-block;
     background-color: black;
     border: none;
     color: white;
