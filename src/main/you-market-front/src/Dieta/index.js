@@ -3,15 +3,15 @@ import './styles.css';
 import {Link} from 'react-router-dom';
 
 interface Props {
-	tipo: string,
+	nombre: string,
 	imagen: string,
 }
 
-function Dieta({tipo, imagen}: Props) {
+function Dieta({nombre, imagen}: Props) {
   return(
   <Link to="/recetas" className="dieta-container">
-  	<img className="dieta-imagen" src={imagen} alt={tipo}/>
-  	<p className="dieta-tipo">{tipo}</p>
+  	<img className="dieta-imagen" src={imagen} alt={nombre}/>
+  	<p className="dieta-nombre">{nombre}</p>
   </Link>
  );
 }

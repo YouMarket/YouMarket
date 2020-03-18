@@ -8,21 +8,20 @@ function Dietas() {
 	
 	const [dietas, setDietas] = useState([]);
 	
-	
 	const fetchDietas = useCallback(() => {
-	    return fetch('http://localhost:8081/dieta/list', {
-	    	mode: 'no-cors'
-	    	})
+	    return fetch('dieta/list')
 	      .then(res => res.json())
 	      .then(dietas => {
-	        setDietas(dietas.results);
+	        setDietas(dietas)
 	        console.log(dietas);
 	      });
-	  }, []);
+	  	}, []);
+    console.log(dietas);	useEffect(() => {
+	    fetchDietas(dietas);
+	  }, []);	
 	
-	useEffect(() => {
-	    fetchDietas();
-	  }, [fetchDietas]);
+    
+
 		
 	return(
 	  <div>
@@ -33,18 +32,16 @@ function Dietas() {
 			  	<Dieta tipo="Mediterránea" imagen="https://cdn.aarp.net/content/dam/aarp/health/healthy-living/2016/09/1140-medit-diet-esp.imgcache.revd53e4a281b35d80e0dbbdbab012c6186.jpg"/>
 			  	<Dieta tipo="Hiperproteica" imagen="https://www.prensalibre.com/wp-content/uploads/2019/08/Prote%C3%ADnas-2.jpg?quality=82&w=760&h=430&crop=1"/>
 		  	</div>
-			<div>
-			 {dietas.map(dieta => ( <p> {dieta.tipo} </p> ))}
-			</div>
 		    <div>
-		      {dietas.map(dieta => (
-		        <div key={dieta.tipo}>
-		          <Dieta name={dieta.tipo} />
-		        </div>
+		      {dietas && dietas.map(dieta => (
+		    		  <div key={dieta.nombre}>
+				          <Dieta name={dieta.nombre} />
+				        </div>
 		      ))}
 		    </div>
 		 </div>
 	 </div>
- );
+	);
+	
 }
 export default Dietas;

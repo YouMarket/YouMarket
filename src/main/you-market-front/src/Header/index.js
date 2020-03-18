@@ -40,7 +40,7 @@ function Header() {
 	  	<img className="logo" src={logo} alt="Logo"/>
 	  	<div className="header-links">
 		   	<Link to="/" className="header-link" >Productos</Link>
-		   	<Link className="header-link" to="/dietas">Dietas</Link>
+		   	<Link className="header-link" to="/dieta/list">Dietas</Link>
 		   	<Link className="header-link" to="/products">Cestas</Link>
 	   	</div>
 		<Link className="carro" to="/carro">
