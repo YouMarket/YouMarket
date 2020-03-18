@@ -1,0 +1,37 @@
+.receta-container{
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #aaaaaa;
+}
+
+.receta-imagen{
+	height: 200px;
+	max-width: 240px;
+	display: block;
+	object-fit:cover;
+	border-bottom: 1px solid #aaaaaa;
+}
+
+.receta-content{
+	padding: 16px;
+	max-width: 207px;
+}
+
+.receta-title{
+	font-size: 16px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	margin-bottom: 16px;
+}
+
+.receta-info-wrapper {
+	display: grid;
+	grid-template-rows: 33%;
+}
+
+.receta-info{
+	border-left: 1px solid #aaaaaa;
+	padding-left: 4px;
+	margin: 0 0 8px 0;
+}
