@@ -7,6 +7,9 @@ import {
 import Productos from './Productos';
 import Dietas from './Dietas';
 
+import RecetasListado from './RecetasListado';
+import ProductoDetalle from './ProductoDetalle';
+
 
 import Carro from './Carro';
  
@@ -17,11 +20,17 @@ function App() {
 		    	<Route path="/productos">
 		    		<Productos />
 		    	</Route>
+		    	<Route path="/productodetalle">
+	    			<ProductoDetalle />
+	    		</Route>
 		    	<Route path="/carro">
 	    			<Carro />
 	    		</Route>
 		    	<Route path="/dietas">
     				<Dietas />
+    			</Route>
+    			<Route path="/recetas">
+    				<RecetasListado/>
     			</Route>
 		        <Route path="/">
 		        	<Productos />
