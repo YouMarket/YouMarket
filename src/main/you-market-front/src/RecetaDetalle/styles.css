@@ -1,0 +1,35 @@
+.receta-container{
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #aaaaaa;
+	
+}
+
+.receta-imagen{
+	height: 200px;
+	max-width: 240px;
+	display: block;
+	object-fit:cover;
+	float: left;
+}
+
+.receta-info{
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	max-width: 207px;
+	float: left;
+}
+
+.receta-personas{
+	margin: 0 0 12px 0;
+}
+
+.receta-tiempo{
+	margin: 0 0 8px 0;
+}
+
+.receta-calorias{
+	margin:0;
+	
+}
