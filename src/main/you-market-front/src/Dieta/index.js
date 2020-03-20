@@ -4,15 +4,22 @@ import {Link} from 'react-router-dom';
 
 interface Props {
 	nombre: string,
-	imagen: string,
+	url_imagen: string,
+	id: int,
+	tipo: string,
+	descripcion: string,
+	
 }
 
-function Dieta({nombre, imagen}: Props) {
+function Dieta({nombre, url_imagen, descripcion, id, tipo}: Props) {
   return(
   <Link to="/recetas" className="dieta-container">
-  	<img className="dieta-imagen" src={imagen} alt={nombre}/>
-  	<p className="dieta-nombre">{nombre}</p>
+  	<img className="dieta-imagen" src={url_imagen} alt={nombre}/>
+  	<div classname="dieta-info">
+  		<p classname="dieta-nombre"> {nombre} </p>
+  	</div>
   </Link>
+
  );
 }
 export default Dieta;
