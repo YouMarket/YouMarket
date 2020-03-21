@@ -23,7 +23,7 @@ insert into usuario (id, nombre, apellidos, dni, c_postal, rol, email, password,
 
 insert into factura (id, total, total_iva, usuario_id) values (1, 13.43, 17, 1);
 
-insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (1,'Pan de molde',0.79,1,'€','/src/main/resources/productos/p1.jpg.jpg',1,1,1);
+insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (1,'Pan de molde',0.79,1,'€','/src/main/resources/productos/p1.jpg',1,1,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (2,'Pan de molde sin corteza',1.57,1.99,'€','/src/main/resources/productos/p2.jpg',1,1,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (3,'Pan integral',1.41,1.79,'€','/src/main/resources/productos/p3.jpg',1,2,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (4,'Bollicao',0.94,1.2,'€','/src/main/resources/productos/p4.jpg',1,1,1);
