@@ -4,8 +4,8 @@
     max-width: 600px;
     margin: 0 auto;
     margin-bottom: 15px;
-    cursor: pointer;
     box-shadow: 0 1px 3px #aaaaaa;
+    position: relative;
 }
 
 .producto-list-container::after {
@@ -43,6 +43,42 @@
     font-size: 14px;
 }
 
+.borrar-producto {
+    float: right;
+    max-width: 30px;
+    max-height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+}
+
+.menos {
+    margin-left: 0 !important;
+}
+
+.mas, .menos {
+    width: 15px;
+    height: 15px;
+    background-color: rgb(200, 247, 42, 70%);
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.contador {
+    font-weight: bold;
+    font-size: large;
+}
+
+.mas, .menos, .contador {
+    float: left;
+    margin: 5px;
+}
+
 @media only screen and (max-width: 500px) {
     .producto-list-container {
         max-width: 90%;
@@ -56,7 +92,7 @@
     }
 
     .producto-list-info {
-        width: 100%;
+        width: 90%;
         float: none;
         padding: 15px;
     }
