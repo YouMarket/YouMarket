@@ -42,6 +42,7 @@ function Header() {
 		   	<Link to="/" className="header-link" >Productos</Link>
 		   	<Link className="header-link" to="/dietas">Dietas</Link>
 		   	<Link className="header-link" to="/products">Cestas</Link>
+		   	<Link className="header-link" to="/registro">Registro</Link>
 	   	</div>
 		<Link className="carro" to="/carro">
 		  	<img src={carro} className="carro-icon" alt="Carro"/>

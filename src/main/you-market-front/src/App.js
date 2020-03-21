@@ -9,6 +9,7 @@ import Dietas from './Dietas';
 
 import RecetasListado from './RecetasListado';
 import ProductoDetalle from './ProductoDetalle';
+import RegistroUsuario from './Registro';
 
 
 import Carro from './Carro';
@@ -32,6 +33,9 @@ function App() {
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
+    			<!-- <Route path="/registro">
+					<RegistroUsuario/>
+				</Route> -->
 		        <Route path="/">
 		        	<Productos />
 		        </Route>
