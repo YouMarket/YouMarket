@@ -30,8 +30,5 @@ public class Marca {
 	@Column(name="descripcion")
 	private String description;
 	
-	@OneToMany(mappedBy="marca")
-	private List<Producto> productos;
-	
 	
 }

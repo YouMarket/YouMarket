@@ -13,7 +13,7 @@ interface Props {
 function Producto({id, imagen, nombre, supermercado, precio, unidad}: Props) {
   return(
   <div className="producto-container">
-  	<img className="producto-imagen" src={imagen} alt={imagen}/>
+  	<img className="producto-imagen" src={imagen} alt="Imagen"/>
   	<div className="producto-info">
   		<p className="producto-precio">{precio} {unidad}</p>
   		<p className="producto-nombre">{nombre}</p>
