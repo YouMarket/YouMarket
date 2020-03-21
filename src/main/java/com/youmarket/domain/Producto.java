@@ -3,7 +3,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,18 +40,18 @@ public class Producto {
 	@Column(name="peso", columnDefinition="Decimal(10,2) default '0.00'")
 	private double peso;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(optional= true)
 	@JoinColumn(name="marca")
 	private Marca marca;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(optional= true)
 	@JoinColumn(name="departamento")
 	private Departamento departamento;
 	
 	@ManyToMany
 	private List<Etiqueta> etiqueta;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(optional= true)
 	@JoinColumn(name="supermercado_id")
 	private Supermercado supermercado;
 	
@@ -62,7 +61,7 @@ public class Producto {
 	@JoinColumn(name="unidad")
 	private String unidad;
 
-	public Producto(int id, String name, @Positive double precio) {
+	public Producto(int id, String name, double precio) {
 		super();
 		this.id = id;
 		this.name = name;

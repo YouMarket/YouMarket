@@ -29,6 +29,4 @@ public class Departamento {
 	@Column(name="descripcion")
 	private String description;
 	
-	@OneToMany(mappedBy="departamento")
-	private List<Producto> productos;
 }
