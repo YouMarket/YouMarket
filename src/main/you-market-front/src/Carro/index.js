@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.css';
 import Header from '../Header';
-import ProductoListado from '../Producto-listado'
+import ProductoListado from '../ProductoListado'
 
 function Carro() {
   return(  
