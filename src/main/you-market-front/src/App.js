@@ -12,7 +12,7 @@ import ProductoDetalle from './ProductoDetalle';
 
 
 import Carro from './Carro';
- 
+	
 function App() {
         return (
         <Router>
