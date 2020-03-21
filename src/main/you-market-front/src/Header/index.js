@@ -1,8 +1,8 @@
 import React from 'react';
 import './styles.css';
 import logo from '../logo.png';
-import carro from './shopping-cart-solid.svg';
-import menu from './bars-solid.svg';
+import carro from './shopping-cart.svg';
+import menu from './menu.svg';
 import {Link} from 'react-router-dom';
 
 
