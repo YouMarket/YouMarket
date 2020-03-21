@@ -26,7 +26,7 @@ function App() {
 		    	<Route path="/carro">
 	    			<Carro />
 	    		</Route>
-		    	<Route path="/dietas">
+		    	<Route path="/dieta/list">
     				<Dietas />
     			</Route>
     			<Route path="/recetas">
