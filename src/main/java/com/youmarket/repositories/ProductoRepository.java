@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.youmarket.repositories;
 
 import java.util.List;
@@ -14,14 +13,4 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer>{
 	List<Producto> findAllBySupermercado(int id);
 
 }
-=======
-package com.youmarket.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.youmarket.domain.Producto;
-
-public interface ProductoRepository extends JpaRepository<Producto, Integer>{
-
-}
->>>>>>> refs/heads/develop
