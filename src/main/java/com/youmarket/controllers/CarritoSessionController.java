@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.youmarket.domain.Producto;
+import com.youmarket.domain.CestaProducto;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,25 +20,25 @@ public class CarritoSessionController {
     @GetMapping("/")
     public String process(Model model, HttpSession session){
         @SuppressWarnings("unchecked")
-        List<Producto> productos = (List<Producto>)session.getAttribute("MY_SESSION_PRODUCTOS");
+        List<CestaProducto> carrito = (List<CestaProducto>)session.getAttribute("MY_SESSION_CARRITO");
 
-        if(productos == null){
-            productos = new ArrayList<>();
+        if(carrito == null){
+            carrito = new ArrayList<>();
         }
-        model.addAttribute("productos", productos);
+        model.addAttribute("carrito", carrito);
         return "index";
     }
 
     @PostMapping("/carritoSession")
-	public String carritoSession(@RequestParam("productos") List<Producto> productos, HttpServletRequest request) {
+	public String carritoSession(@RequestParam("productos") List<CestaProducto> productos, HttpServletRequest request) {
 		@SuppressWarnings("unchecked")
-		List<Producto> productSession = (List<Producto>) request.getSession().getAttribute("MY_SESSION_PRODUCTOS");
-		if (productSession == null) {
-			productSession = new ArrayList<>();
-			request.getSession().setAttribute("MY_SESSION_PRODUCTOS", productSession);
+		List<CestaProducto> carrito = (List<CestaProducto>) request.getSession().getAttribute("MY_SESSION_CARRITO");
+		if (carrito == null) {
+			carrito = new ArrayList<>();
+			request.getSession().setAttribute("MY_SESSION_CARRITO", carrito);
 		}
-		productSession.addAll(productos);
-		request.getSession().setAttribute("MY_SESSION_PRODUCTOS", productSession);
+		carrito.addAll(productos);
+		request.getSession().setAttribute("MY_SESSION_CARRITO", carrito);
 		return "redirect:/";
     }
     
