@@ -18,18 +18,17 @@ public class DietaService {
 	public List<Dieta> findAll(){
 		return this.dietaRepository.findAll();
 	}
-}
+
 
 	public Dieta save(Dieta d) {
-		return repo.save(d);
+		return dietaRepository.save(d);
 	}
 
-	public void delete() {
-		// TODO Auto-generated method stub
-		
+	public void delete(Dieta d) {
+		this.dietaRepository.delete(d);
 	}
 
-	public Cesta findById(int idDieta) {
-		return repo.findById(idDieta).get();
+	public Dieta findById(int idDieta) {
+		return dietaRepository.findById(idDieta).get();
 	}
 }

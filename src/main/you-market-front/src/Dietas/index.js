@@ -16,7 +16,8 @@ function Dietas() {
 	        console.log(dietas);
 	      });
 	  	}, []);
-    console.log(dietas);	useEffect(() => {
+    console.log(dietas);
+    useEffect(() => {
 	    fetchDietas(dietas);
 	  }, []);	
 	
