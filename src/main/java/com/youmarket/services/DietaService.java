@@ -19,3 +19,17 @@ public class DietaService {
 		return this.dietaRepository.findAll();
 	}
 }
+
+	public Dieta save(Dieta d) {
+		return repo.save(d);
+	}
+
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Cesta findById(int idDieta) {
+		return repo.findById(idDieta).get();
+	}
+}

@@ -7,3 +7,4 @@ import com.youmarket.domain.Dieta;
 public interface DietaRepository extends JpaRepository<Dieta, Integer>{
 
 }
+

@@ -20,20 +20,33 @@ public class CestaService {
 		return repo.findAll(); 
 	}
 
+	public Cesta findById(int id) {
+		
+		return repo.findById(id).get();
+	}
+
+	public Cesta save(Cesta p) {
+		
+		return repo.save(p);
+	}
+
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public Cesta findCesta(int id) {
 		return this.repo.findById(id).orElse(null);
 	}
 
-	public Cesta save(Cesta c) {
-		return this.repo.save(c);
-	}
 
 	public void delete(Cesta c) {
 		this.repo.delete(c);
 	}
 	
 	public Cesta saveProductos(Cesta c, List<Producto> lp){
-		c.setProductos(lp);
+		
+//		c.setProductos(lp);
 		return this.save(c);
 	}
 }
