@@ -26,7 +26,7 @@ public class Direccion {
 	private int id;
 	
 	@Column(name="direccion")
-	private String name;
+	private String direccion;
 	
 	@Column(nullable = false)
 	@Type(type = "org.hibernate.type.NumericBooleanType")

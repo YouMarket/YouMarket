@@ -27,7 +27,7 @@ public class Cesta {
 	private int id;
 	
 	@Column(name="nombre", length=255)
-	private String name;
+	private String nombre;
 	
 	@OneToMany(mappedBy="cesta")
 	private List<CestaProducto> productos;
