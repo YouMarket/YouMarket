@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 
 interface Props {
-	id: number;
+	id: number,
 	imagen: string,
 	nombre: string,
 	supermercado: string,
