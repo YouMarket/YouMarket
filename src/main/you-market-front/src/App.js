@@ -33,9 +33,9 @@ function App() {
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
-    			<!-- <Route path="/registro">
+    			<Route path="/registro">
 					<RegistroUsuario/>
-				</Route> -->
+				</Route> 
 		        <Route path="/">
 		        	<Productos />
 		        </Route>
