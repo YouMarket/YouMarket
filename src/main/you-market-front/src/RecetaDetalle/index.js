@@ -1,28 +1,43 @@
-import React from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import './styles.css';
 import Header from '../Header';
 
-interface Props {
-	id: number;
-	imagen: string,
-	nombre: string,
-	personas: number,
-	tiempo: string,
-	calorias: number
-}
-
-function RecetaDetalle({id, imagen, nombre, personas, tiempo, calorias}: Props) {
+  const [recetas, setRecetas] = useState([]);
+	
+	
+  const fetchRecetas = useCallback(() => {
+	    return fetch('receta/list')
+	      .then(res => res.json())
+	      .then(recetas => {
+	        setRecetas(recetas);
+	        console.log(recetas);
+	      });
+	  }, []);
+	
+	useEffect(() => {
+	    fetchRecetas();
+	  }, [fetchRecetas]);
+  
   return(
-		  <div>
-		  	<Header/>
-		  		<h1> Hummus </h1>
-		  		<img className="receta-imagen" src="https://cutt.ly/leche" alt="hummus"/>
-				  	<div className="receta-info">
-				  		<p> <b> Personas: </b>  2 </p>
-				  		<p> <b> Tiempo(minutos): </b>  15 </p>
-				  		<p> <b> Kcal: </b>  550 </p>
-				  	</div>
-		  </div>
+	<div>	  
+	  <Header/>
+	  <div className="receta-container">
+	  	<div className="grid">
+	  		{receta.map(receta => (
+	  			<Receta 
+	  				id={receta.id}  
+	  				imagen={receta.url_imagen} 
+	  				nombre={receta.nombre} 
+	  				descripcion={receta.descripcion}
+	  				personas={receta.personas} 
+	  				tiempo={receta.tiempo} 
+	  				calorias={receta.calorias}
+	  				key={producto.id}
+	  			/>
+	  		))}
+	  	</div>
+	  </div>
+	</div>
  );
 }
 
