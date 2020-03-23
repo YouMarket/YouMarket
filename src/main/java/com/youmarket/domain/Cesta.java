@@ -29,10 +29,7 @@ public class Cesta {
 	@Column(name="nombre", length=255)
 	private String nombre;
 	
-	@OneToMany(mappedBy="cesta")
-	private List<CestaProducto> productos;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	

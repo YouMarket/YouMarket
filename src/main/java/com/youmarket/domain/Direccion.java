@@ -39,7 +39,7 @@ public class Direccion {
 	@Column(name="c_postal")
 	private String cposta;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	

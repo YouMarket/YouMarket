@@ -56,16 +56,5 @@ public class Usuario {
 	@Column(name="telefono", length=20)
 	private String telefono;
 	
-	@OneToMany(mappedBy="usuario")
-	private List<Direccion> direcciones;
-	
-	@OneToMany(mappedBy="usuario")
-	private List<Pago> pagos;
-	
-	@OneToMany(mappedBy="usuario")
-	private List<Factura> facturas;
-	
-	@OneToMany(mappedBy="usuario")
-	private List<Cesta> cesta;
 	
 }
