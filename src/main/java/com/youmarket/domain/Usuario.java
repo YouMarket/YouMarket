@@ -9,18 +9,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Entity
+@Table(name="usuario") 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Getter(value = AccessLevel.PUBLIC)
+@Setter(value = AccessLevel.PUBLIC)
+@ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario {
 
 	@Id
@@ -36,7 +49,6 @@ public class Usuario {
 	@Column(name="dni", length=20)
 	private String dni;
 	
-	@Column(name="fecha_nacimiento")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaNacimiento;
 	
@@ -49,23 +61,14 @@ public class Usuario {
 	@Column(name="rol", length = 10)
 	private String rol;
 	
-	private String email;
-	
-	private String password;
-	
-	@Column(name="telefono", length=20)
-	private String telefono;
-	
-	@OneToMany(mappedBy="usuario")
+	@OneToMany
+	@NotNull
 	private List<Direccion> direcciones;
 	
-	@OneToMany(mappedBy="usuario")
+	@OneToMany
 	private List<Pago> pagos;
 	
-	@OneToMany(mappedBy="usuario")
+	@OneToMany
 	private List<Factura> facturas;
-	
-	@OneToMany(mappedBy="usuario")
-	private List<Cesta> cesta;
 	
 }

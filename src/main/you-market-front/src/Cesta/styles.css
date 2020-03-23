@@ -1,0 +1,50 @@
+.cesta-container{
+	display: flex;
+	flex-direction: column;
+	
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.cesta-icon{
+
+	float:left;
+	
+	
+}
+
+.cesta-editar{
+	display:block;
+}
+
+.cesta-imagen{
+
+	max-width: 65%;
+}
+
+.cesta-info{
+	text-align:center;
+	max-width: 207px;
+
+}
+
+
+.cesta-nombre{
+	text-align:center;
+}
+
+.cesta-productos{
+	margin: 0 0 0px 0;
+}
+
+.cesta-id{
+	margin: 0 0 0px 0;
+}
+
+.nueva-cesta{
+	padding-top:2%;
+	text-align:center;
+	
+}

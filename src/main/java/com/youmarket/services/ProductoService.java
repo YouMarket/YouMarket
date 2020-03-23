@@ -33,8 +33,4 @@ public class ProductoService {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public List<Producto> listaProductosSuper(int id){
-		return repo.findAllBySupermercado(id);
-	}
 }
