@@ -29,5 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
-/pom.xml
+
+### Ignores del proyecto ###
 /src/main/resources/application.properties
+/pom.xml
