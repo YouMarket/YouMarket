@@ -31,8 +31,8 @@ const [productos, setProductos] = useState([]);
 	  			<Producto 
 	  				id={producto.id}  
 	  				imagen={producto.imagen} 
-	  				nombre={producto.name} 
-	  				supermercado={producto.supermercado.name} 
+	  				nombre={producto.nombre} 
+	  				supermercado={producto.supermercado.nombre} 
 	  				precio={producto.precioIva} 
 	  				unidad={producto.unidad}
 	  				key={producto.id}

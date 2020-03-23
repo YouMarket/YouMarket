@@ -57,6 +57,11 @@
     border-radius: 50%;
 }
 
+.menos-0 {
+    cursor: none;
+    opacity: 50%;
+}
+
 .menos {
     margin-left: 0 !important;
 }
