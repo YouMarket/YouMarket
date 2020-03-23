@@ -1,0 +1,100 @@
+.producto-list-container {
+    border: 1px solid gray;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px #aaaaaa;
+    position: relative;
+}
+
+.producto-list-container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.producto-list-imagen {
+    width: 150px;
+    height: 150px;
+    float: left;
+    object-fit: cover;
+}
+
+.producto-list-info {
+    width: calc(110% - 250px);
+    float: right;
+}
+
+.producto-list-nombre {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.producto-list-precio {
+    color: gray;
+}
+
+.producto-list-supermercado {
+    color: green;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.borrar-producto {
+    float: right;
+    max-width: 30px;
+    max-height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+}
+
+.menos {
+    margin-left: 0 !important;
+}
+
+.mas, .menos {
+    width: 15px;
+    height: 15px;
+    background-color: rgb(200, 247, 42, 70%);
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.contador {
+    font-weight: bold;
+    font-size: large;
+}
+
+.mas, .menos, .contador {
+    float: left;
+    margin: 5px;
+}
+
+@media only screen and (max-width: 500px) {
+    .producto-list-container {
+        max-width: 90%;
+        padding: 0px;
+    }
+
+    .producto-list-imagen {
+        width: 100%;
+        max-height: 300px;
+        float: none;
+    }
+
+    .producto-list-info {
+        width: 90%;
+        float: none;
+        padding: 15px;
+    }
+}

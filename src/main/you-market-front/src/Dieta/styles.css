@@ -17,10 +17,12 @@
 .dieta-info{
 	display: flex;
 	flex-direction: column;
-	padding: 1px;
+	padding: 16px;
+	max-width: 207px;
 }
 
-.dieta-tipo{
-	margin: 12px 12px 12px 12px;
+.dieta-nombre{
+	margin: 0 0 8px 0;
 }
+
 

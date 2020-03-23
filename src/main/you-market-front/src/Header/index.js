@@ -1,8 +1,8 @@
 import React from 'react';
 import './styles.css';
 import logo from '../logo.png';
-import carro from './shopping-cart-solid.svg';
-import menu from './bars-solid.svg';
+import carro from './shopping-cart.svg';
+import menu from './menu.svg';
 import {Link} from 'react-router-dom';
 
 
@@ -40,7 +40,7 @@ function Header() {
 	  	<img className="logo" src={logo} alt="Logo"/>
 	  	<div className="header-links">
 		   	<Link to="/" className="header-link" >Productos</Link>
-		   	<Link className="header-link" to="/dietas">Dietas</Link>
+		   	<Link className="header-link" to="/dieta/list">Dietas</Link>
 		   	<Link className="header-link" to="/products">Cestas</Link>
 	   	</div>
 		<Link className="carro" to="/carro">
