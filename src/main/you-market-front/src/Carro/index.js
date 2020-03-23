@@ -3,10 +3,12 @@ import './styles.css';
 import Header from '../Header';
 import ProductoListado from '../ProductoListado'
 
+
+
 function Carro() {
 const[carrito, setCarrito] = useState([]);
 	const fetchCarrito = useCallback(() => {
-		return fetch('carrito')
+		return fetch('carrito/carrito2')
 			.then(res => res.json())
 			.then(carrito => {
 				setCarrito(carrito)
@@ -28,7 +30,7 @@ const[carrito, setCarrito] = useState([]);
 
 			<div className="products-container-list">
 				{carrito.map(cestaproducto => (
-					<ProductoListado id={cestaproducto.producto.id} nombre ={cestaproducto.producto.nombre} supermercado={cestaproducto.producto.supermercado} precio ={cestaproducto.producto.precio} urlImagen={cestaproducto.producto.urlImagen} unidad = {cestaproducto.producto.unidad} cantidad = {cestaproducto.cantidad} />
+					<ProductoListado id={cestaproducto.producto.id} nombre ={cestaproducto.producto.nombre} supermercado={cestaproducto.producto.supermercado.nombre} precio ={cestaproducto.producto.precio} urlImagen={cestaproducto.producto.urlImagen} unidad = {cestaproducto.producto.unidad} cantidad = {cestaproducto.cantidad} />
 				))}
 				{/*  <ProductoListado id="1" nombre="leche" supermercado="Mercadona" precio="1,3" imagen="https://cutt.ly/leche" unidad="€/litro" cantidad="1"/>
 				 <ProductoListado id="1" nombre="leche" supermercado="Mercadona" precio="1,3" imagen="https://cutt.ly/leche" unidad="€/litro" cantidad="1"/>

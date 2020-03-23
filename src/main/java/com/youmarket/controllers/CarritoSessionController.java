@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.youmarket.domain.CestaProducto;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,14 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class CarritoSessionController {
 
     @GetMapping("/carrito")
-    public List<CestaProducto> carritoGet(HttpSession session) {
+    public ResponseEntity<List<CestaProducto>> carritoGet(HttpSession session) {
 		@SuppressWarnings("unchecked")
         List<CestaProducto> carrito = (List<CestaProducto>)session.getAttribute("MY_SESSION_CARRITO");
 
         if(carrito == null){
             carrito = new ArrayList<>();
-        }
-        return carrito;
+		}
+		System.out.println(carrito);
+		return ResponseEntity.ok(carrito);
+		
     }
 
     @PostMapping("/carrito")
