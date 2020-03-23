@@ -13,7 +13,7 @@ import RegistroUsuario from './Registro';
 
 
 import Carro from './Carro';
- 
+	
 function App() {
         return (
         <Router>
