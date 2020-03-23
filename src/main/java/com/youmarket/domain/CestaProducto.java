@@ -24,7 +24,7 @@ public class CestaProducto {
 	@JoinColumn(name = "producto_id")
 	Producto producto;
 	
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@MapsId("id")
 	@JoinColumn(name = "cesta_id")
 	Cesta cesta;
