@@ -31,8 +31,6 @@ function closeMenu() {
 	x.style.display = "none";
 }
 
-
-
 function Header() {
   return(
 	<div>
@@ -43,9 +41,14 @@ function Header() {
 		   	<Link className="header-link" to="/dieta/list">Dietas</Link>
 		   	<Link className="header-link" to="/products">Cestas</Link>
 	   	</div>
-		<Link className="carro" to="/carro">
-		  	<img src={carro} className="icon" alt="Carro"/>
-		</Link>
+		<div className="carro-menu-container">
+			<Link className="carro" to="/carro">
+				<img src={carro} className="icon" alt="Carro"/>
+			</Link>
+			<div className="carro-contador-container">
+				<p className="carro-contador">0</p>
+			</div>
+		</div>
 		<Link className="perfil" to="/perfil">
 		   	<img src={user} className="icon" alt="Mi Perfil"/>
 		</Link>

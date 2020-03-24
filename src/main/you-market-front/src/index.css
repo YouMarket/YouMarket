@@ -11,4 +11,27 @@ body {
   display: table;
 }
 
+.menos {
+  margin-left: 0 !important;
+}
+
+.mas, .menos {
+  width: 15px;
+  height: 15px;
+  background-color: rgb(148,194,76, 0.75);
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.contador {
+  font-weight: bold;
+  font-size: large;
+}
+
+.mas, .menos, .contador {
+  float: left;
+  margin: 5px;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900&display=swap');
