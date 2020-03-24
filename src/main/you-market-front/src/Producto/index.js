@@ -23,30 +23,13 @@ function Producto({id, imagen, nombre, supermercado, precio, unidad, cantidad = 
 		if(cantidad > 0){
 			cantidad = cantidad - 1
 			document.getElementById(idContador).textContent = cantidad
-			//updateLessStyle()
 		}
 	}
 	
 	function plusProduct() {
 		cantidad = cantidad + 1
 		document.getElementById(idContador).textContent = cantidad
-		//updateLessStyle()
 	}
-
-/* 	function updateLessStyle(){
-		if(cantidad == 0){
-			pStyle = {
-				cursor: 'initial',
-				opacity: '50%'
-			}
-		} else {
-			pStyle = {
-				cursor: 'pointer',
-				opacity: '100%'
-			}
-		}
-		return pStyle
-	} */
 
   return(
   <div className="producto-container">
