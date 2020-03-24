@@ -2,10 +2,13 @@ import React,  { useFetch, useCallback, useState, useEffect } from 'react';
 import style from './styles.css';
 import cest from './cesta2.png';
 import { Formik } from 'formik';
-import {InputText} from 'primereact/inputtext';
+import {Button} from 'primereact/button';
+import Header from '../Header';
 
 
 const formCesta = () => (
+<div>
+  <Header/>
   <div className="titulo">
     <h1>Crear cesta</h1>
     <img src={cest} className="cesta-imagen-edit"/>
@@ -24,7 +27,7 @@ const formCesta = () => (
       }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-        	fetch('cesta', {
+        	fetch('../../cesta', {
         			headers: {
         				"Content-Type": "application/json"
         			},
@@ -50,41 +53,46 @@ const formCesta = () => (
       }) => (
         <form onSubmit={handleSubmit}>
         <div className="grid">
-          Usuario: <input
-            type="number"
+        <input
+            type="hidden"
             name="usuario.id"
+            id="user"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.usuario}
           />
-          {errors.usuario && touched.usuario}
-        	<div className="grid">
-          name: <input
+           
+        {errors.usuario && touched.usuario}
+        	<span className="p-float-label">
+        	<label htmlFor="name">Nombre: </label>
+          <input
+          id="name"
             type="text"
             name="name"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.name}
           />
-          <hidden
-          type="text"
+          </span>
+          <input
+          type="hidden"
           name="productos"
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.productos}
           />
           {errors.name && touched.name}
-        		<div className="grid">
-          <button type="submit" disabled={isSubmitting}>
-          Submit
+          <div className="grid2">
+          <button type="submit" disabled={isSubmitting} className="submit">
+          Enviar
           </button>
-          		</div>
-          	</div>
+          </div>
           </div>
         </form>
       )}
     </Formik>
   </div>
+ </div>
 );
 
 export default formCesta;

@@ -43,25 +43,7 @@ public class CestaController {
 	
 	@PostMapping
     public ResponseEntity<Cesta> create(@RequestBody FormCesta c) {
-		Usuario User2=new Usuario();
-		Optional<Usuario> user=usuarioService.userPorId(c.getUsuario());
-		user.ifPresent(u -> {
-		  User2.setApellidos(u.getApellidos());
-		  User2.setDirecciones(u.getDirecciones());
-		  User2.setCPostal(u.getCPostal());
-		  User2.setDni(u.getDni());
-		  User2.setFacturas(u.getFacturas());
-		  User2.setFechaNacimiento(u.getFechaNacimiento());
-		  User2.setId(u.getId());
-		  User2.setName(u.getName());
-		  User2.setPagos(u.getPagos());
-		  User2.setRol(u.getRol());
-		  User2.setSubscripcion(u.getSubscripcion());
-		});
-		
-		Cesta nc=new Cesta();
-		nc.setName(c.getName());
-		nc.setUsuario(User2);
+		Cesta nc =cestaService.creaCesta(c);
 		nc=cestaService.save(nc);
 		
 		URI location= ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -70,7 +52,7 @@ public class CestaController {
     }
 	
 	@GetMapping("/user/{id}")
-    public ResponseEntity<List<Cesta>> cestasPorUsuario(@Valid @PathVariable Integer id) {
+    public ResponseEntity<List<Cesta>> cestasPorUsuario(@PathVariable Integer id) {
         return ResponseEntity.ok(cestaService.cestasPorUsuario(id));
     }
 	

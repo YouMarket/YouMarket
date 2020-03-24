@@ -1,5 +1,5 @@
 .titulo{
-	padding:5% 5%;
+	padding:2% 5%;
 	font-size:90%;
 	text-align:center;
 }
@@ -8,14 +8,44 @@
 	max-width: 25%;
 	padding-bottom:3%;
 }
+
 .grid {
 	text-align:center;
 	display: grid;
-	grid-column-gap: 125px;
+	grid-column-gap: 10px;
 	grid-row-gap: 10%;
-	grid-template-columns: 240px 240px;
+	grid-template-columns: 35%;
+	padding-left:39%;
+	width:100%;
+}
+input[type=text]{
+	padding-bottom:3%;
+	margin-bottom:5%;
+	width:100%;
+}
+input[type=text]:focus {
+	border:3px solid #4CAF50;
 }
 
-* {
-  box-sizing: border-box;
+.grid2 {
+	text-align:center;
+	max-width:100%;
+	
 }
+
+.grid2 button{
+	background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  padding: 3% 15%;	
+  text-decoration: none;
+  display: inline-block;
+  font-size: 100%;
+
+}
+
+.submit{
+	backgroung-color:green;
+}
+

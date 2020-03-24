@@ -1,16 +1,24 @@
 package com.youmarket.domain;
-import javax.persistence.Column;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Positive;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name="producto") 
 public class Producto {
 	
 	@Id
@@ -18,7 +26,7 @@ public class Producto {
 	private int id;
 	
 	@Column(name="nombre", length=50)
-	private String name;
+	private String nombre;
 	
 	@Positive
 	private double precio;
@@ -29,83 +37,39 @@ public class Producto {
 	@Column(name="descripcion", length = 255)
 	private String descripcion;
 	
-	@Positive
+	@Column(name="peso", columnDefinition="Decimal(10,2) default '0.00'")
 	private double peso;
-
-	public Producto() {
-		
-	}
 	
+	@ManyToOne(optional= true)
+	@JoinColumn(name="marca")
+	private Marca marca;
 	
+	@ManyToOne(optional= true)
+	@JoinColumn(name="departamento")
+	private Departamento departamento;
+	
+	@ManyToMany
+	private List<Etiqueta> etiqueta;
+	
+	@ManyToOne(optional= true)
+	@JoinColumn(name="supermercado_id")
+	private Supermercado supermercado;
+	
+	@Column(name="url_imagen")
+	private String urlImagen;
+	
+	@JoinColumn(name="unidad")
+	private String unidad;
 
-	public Producto(int id, String name, @Positive double precio) {
+	public Producto(int id, String name, double precio) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.nombre = name;
 		this.precio = precio;
 	}
 
 
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-
-
-
-	public double getPrecioIva() {
-		return precioIva;
-	}
-
-
-
-	public void setPrecioIva(double precioIva) {
-		this.precioIva = precioIva;
-	}
-
-
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-
-
-	public double getPeso() {
-		return peso;
-	}
-
-
-
-	public void setPeso(double peso) {
-		this.peso = peso;
-	}
 	
 	
 }

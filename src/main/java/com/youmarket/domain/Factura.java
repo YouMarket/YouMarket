@@ -2,17 +2,26 @@ package com.youmarket.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Positive;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name="factura") 
 public class Factura {
 
 	@Id
@@ -22,45 +31,20 @@ public class Factura {
 	@Positive
 	private Double total;
 	
+	@Column(name="total_iva")
 	@Positive
 	private Double totalIva;
 	
+	@Column(name="fecha_factura")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaFactura;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 	
-	public Factura (){
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
-	}
-
-	public Double getTotalIva() {
-		return totalIva;
-	}
-
-	public void setTotalIva(Double totalIva) {
-		this.totalIva = totalIva;
-	}
-
-	public Date getFechaFactura() {
-		return fechaFactura;
-	}
-
-	public void setFechaFactura(Date fechaFactura) {
-		this.fechaFactura = fechaFactura;
-	}
+	@ManyToOne(optional = true)
+	@JoinColumn(name="pedido_id")
+	private Pedido pedido;
+	
 }

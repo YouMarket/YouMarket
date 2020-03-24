@@ -2,13 +2,21 @@ package com.youmarket.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name="pago") 
 public class Pago {
 
 	
@@ -27,48 +35,9 @@ public class Pago {
 	
 	@Column(name="caducidad", length=10)
 	private String caducidad;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 	
-	public Pago() {
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getTitular() {
-		return titular;
-	}
-
-	public void setTitular(String titular) {
-		this.titular = titular;
-	}
-
-	public String getCvv() {
-		return cvv;
-	}
-
-	public void setCvv(String cvv) {
-		this.cvv = cvv;
-	}
-
-	public String getCaducidad() {
-		return caducidad;
-	}
-
-	public void setCaducidad(String caducidad) {
-		this.caducidad = caducidad;
-	}
 }

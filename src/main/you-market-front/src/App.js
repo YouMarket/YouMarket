@@ -1,30 +1,33 @@
-import React, {Component} from 'react';
+import React from 'react';
+
+import {
+	  BrowserRouter as Router,
+	  Switch,
+	  Route
+	} from "react-router-dom";
 
 import Cestas from './Cestas'
+import ShowCesta from './ShowCesta'
 import FormCesta from './FormCesta'
 import './App.css';
  
-class App extends Component {
- 
-    state = {};
- 
-//    componentDidMount() {
-//        setInterval(this.hello, 250);
-//    }
-// 
-//    hello = () => {
-//        fetch('/producto/list')
-//            .then(response => response.text())
-//            .then(message => {
-//                this.setState({message: message});
-//            });
-//    };
-// 
-    render() {
+function App() {
+	
         return (
-          <FormCesta/>
+        <Router>
+	        <Switch>
+		    	<Route path="/cesta">
+		    		<Cestas />
+		    	</Route>
+		    	<Route path="/create/cesta">
+	    			<FormCesta />
+	    		</Route>
+	    		<Route path="/show/cesta/:id">
+	    			<ShowCesta />
+	    		</Route>
+		      </Switch>
+        </Router>
         );
-    }
 }
- 
-export default App;	
+
+export default App;
