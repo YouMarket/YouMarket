@@ -16,7 +16,11 @@ import DatosEnvio from './Perfil/DatosEnvio';
 
 
 import Carro from './Carro';
-	
+
+import config from 'react-global-configuration';
+
+config.set({ carroContador: 0 }, { freeze : false });
+
 function App() {
         return (
         <Router>
