@@ -5,7 +5,7 @@ import less from '../assets/less.svg'
 
 interface Props {
 	id: number,
-	imagen: string,
+	urlImagen: string,
 	nombre: string,
 	supermercado: string,
 	precio: number,
@@ -13,11 +13,10 @@ interface Props {
 	cantidad: number
 }
 
-function Producto({id, imagen, nombre, supermercado, precio, unidad, cantidad = 0}: Props) {
+function Producto({id, urlImagen, nombre, supermercado, precio, unidad, cantidad = 0}: Props) {
 	
 	var idContador = "contador-"+id
 	var idMenos = "menos-"+id
-	//var pStyle
 
 	function lessProduct(){
 		if(cantidad > 0){
@@ -33,7 +32,7 @@ function Producto({id, imagen, nombre, supermercado, precio, unidad, cantidad = 
 
   return(
   <div className="producto-container">
-  	<img className="producto-imagen" src={imagen} alt="Imagen"/>
+  	<img className="producto-imagen" src={urlImagen} alt="Imagen"/>
   	<div className="producto-info">
   		<p className="producto-precio">{precio} {unidad}</p>
   		<p className="producto-nombre">{nombre}</p>

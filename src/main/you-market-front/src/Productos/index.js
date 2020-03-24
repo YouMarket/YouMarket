@@ -30,7 +30,7 @@ const [productos, setProductos] = useState([]);
 	  		{productos.map(producto => (
 	  			<Producto 
 	  				id={producto.id}  
-	  				imagen={producto.imagen} 
+	  				urlImagen={producto.urlImagen} 
 	  				nombre={producto.nombre} 
 	  				supermercado={producto.supermercado.nombre} 
 	  				precio={producto.precioIva} 

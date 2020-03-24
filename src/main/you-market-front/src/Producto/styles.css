@@ -2,7 +2,8 @@
 	display: flex;
 	flex-direction: column;
 	border: 1px solid #aaaaaa;
-	
+	box-shadow: 0 1px 3px #aaaaaa;
+	cursor: pointer;
 }
 
 .producto-imagen{
@@ -33,7 +34,7 @@
 }
 
 .producto-supermercado{
-	color: green;
+	color: #779C3D;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 14px;
