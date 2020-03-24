@@ -30,7 +30,7 @@ if (!cesta){
 <div>
   <Header/>
   
-	  <div className="cestas-container">
+	  <div className="cestas-container-show">
 	  
 	  <Cesta nombre={cesta.nombre} id={cesta.id} productos="" total=""/>     
 	  </div>
