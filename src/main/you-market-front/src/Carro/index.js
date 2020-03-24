@@ -8,7 +8,7 @@ import ProductoListado from '../ProductoListado'
 function Carro() {
 const[carrito, setCarrito] = useState([]);
 	const fetchCarrito = useCallback(() => {
-		return fetch('carrito/carrito2')
+		return fetch('carrito')
 			.then(res => res.json())
 			.then(carrito => {
 				setCarrito(carrito)
