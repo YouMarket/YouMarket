@@ -34,7 +34,9 @@
 }
 
 .producto-list-precio {
-    color: gray;
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
 }
 
 .producto-list-supermercado {

@@ -1,5 +1,5 @@
-insert into supermercado (id, nombre, descripcion, c_postal) values (1, 'Mercadona - Triana', 'Mercadona de calle Salado', '41010');
-insert into supermercado (id, nombre, descripcion, c_postal) values (2, 'Mercadona - centro', 'Mercadona de calle Torneo', '41001');
+insert into supermercado (id, nombre, descripcion, c_postal) values (1, 'Mercadona', 'Mercadona de calle Salado', '41010');
+insert into supermercado (id, nombre, descripcion, c_postal) values (2, 'Lidl', 'Lidl de calle Torneo', '41001');
 
 insert into marca (id, nombre) values (1, 'Hacendado');
 insert into marca (id, nombre) values (2, 'Danone');

@@ -23,7 +23,9 @@
 
 .producto-precio{
 	margin: 0 0 12px 0;
-	color: gray;
+	font-weight: 600;
+    font-size: 20px;
+    color: black;
 }
 
 .producto-nombre{

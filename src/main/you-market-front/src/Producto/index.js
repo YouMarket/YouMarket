@@ -2,6 +2,7 @@ import React from 'react';
 import './styles.css';
 import plus from '../assets/plus.svg'
 import less from '../assets/less.svg'
+import Header from '../Header';
 
 interface Props {
 	id: number,
@@ -21,7 +22,7 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad, cantidad
 	function lessProduct(){
 		if(cantidad > 0){
 			cantidad = cantidad - 1
-			document.getElementById(idContador).textContent = cantidad
+			document.getElementById(idContador).textContent = cantidad	
 		}
 	}
 	
