@@ -30,9 +30,9 @@ function ProductoDetalle() {
 	  	  <Header/>
 	  	  <div>
 	  	  		<div>
-	  	  			<h1> {producto.name} </h1>
+	  	  			<h2> {producto.nombre} </h2>
 	  			</div>
-	  			<img className="producto-imagen" src={producto.imagen} alt={producto.nombre}/>
+	  			<img className="producto-imagen" src={producto.urlImagen} alt={producto.nombre}/>
 			  	<div className="producto-info">
 			  		<div>
 						<b> Descripcion: </b>{producto.descripcion}
