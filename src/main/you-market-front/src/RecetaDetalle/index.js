@@ -4,41 +4,52 @@ import Header from '../Header';
 
   const [recetas, setRecetas] = useState([]);
 	
+  const { id } = useParams();
 	
-  const fetchRecetas = useCallback(() => {
-	    return fetch('receta/list')
+  const fetchReceta = useCallback(() => {
+	    return fetch(`../../../receta/${id}`)
 	      .then(res => res.json())
 	      .then(recetas => {
-	        setRecetas(recetas);
-	        console.log(recetas);
+	        setReceta(receta);
+	        console.log(receta);
 	      });
-	  }, []);
-	
-	useEffect(() => {
-	    fetchRecetas();
-	  }, [fetchRecetas]);
+		}, []);
+  	console.log(receta);
+  	useEffect(() => {
+  		fetchReceta(receta);
+  	  }, []);
+  	
+  	if (!receta){
+    	return null;
+    }
   
   return(
-	<div>	  
-	  <Header/>
-	  <div className="receta-container">
-	  	<div className="grid">
-	  		{receta.map(receta => (
-	  			<Receta 
-	  				id={receta.id}  
-	  				imagen={receta.url_imagen} 
-	  				nombre={receta.nombre} 
-	  				descripcion={receta.descripcion}
-	  				personas={receta.personas} 
-	  				tiempo={receta.tiempo} 
-	  				calorias={receta.calorias}
-	  				key={producto.id}
-	  			/>
-	  		))}
-	  	</div>
-	  </div>
+	<div>
+		  <Header/>
+		  <div>
+		  		<div>
+		  			<h2> {receta.nombre} </h2>
+				</div>
+				<img className="receta-imagen" src={receta.urlImagen} alt={receta.nombre}/>
+			  	<div className="receta-info">
+			  		<div>
+			  			<b> Calorias: </b>{receta.calorias}
+					</div>
+					<div>
+						<b> Personas: </b> {receta.personas}
+					</div>
+					<div>
+						<b> Tiempo: </b> {receta.tiempo}
+					</div>
+					<div>
+						<b> Descripcion: </b>{receta.descripcion}
+					</div>
+		
+			  	</div>
+		  	</div>
 	</div>
- );
-}
+	);
 
+}  
+  
 export default RecetaDetalle;

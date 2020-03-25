@@ -46,6 +46,10 @@ function App() {
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
+    			<Route path="/show/receta/:id">
+    				<ProductoDetalle />
+    			</Route>
+    			
     			<Route path="/perfil">
 					<Perfil/>
 				</Route>
