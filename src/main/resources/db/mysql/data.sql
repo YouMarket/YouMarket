@@ -23,6 +23,10 @@ insert into usuario (id, nombre, apellidos, dni, c_postal, rol, email, password,
 
 insert into factura (id, total, total_iva, usuario_id) values (1, 13.43, 17, 1);
 
+insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (123, 'Vegetariana de invierno', 'Vegetariana', True, 'https://static1.abc.es/media/salud/2019/05/17/brocoli-kOoH--620x349@abc.jpg', 'Esto es una dieta sin carne ni pescado');
+insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (234, 'Hiperproteica', 'Hiperproteica', True, 'https://www.aquiconfidencial.es/wp-content/uploads/2018/07/dieta-hiperproteica.jpg', 'Esto es una dieta alta en proteínas. Incluye grandes cantidades de legumbres, carne, pescado y huevo.');
+
+
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (1,'Pan de molde',0.79,1,'€','https://www.recetasdepan.net/wp-content/uploads/2019/12/Receta-de-pan-de-molde.jpg',1,1,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (2,'Pan de molde sin corteza',1.57,1.99,'€','https://www.panflor.es/wp-content/uploads/2018/04/Blanco-sin-corteza.jpg',1,1,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (3,'Pan integral',1.41,1.79,'€','https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/f1ec1b78-4db1-45ac-9189-40619b7fad74/Derivates/2c238c6b-e380-486e-b9dc-39e41695a5ba.jpg',1,2,1);
