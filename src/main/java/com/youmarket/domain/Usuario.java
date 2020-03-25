@@ -28,7 +28,7 @@ public class Usuario {
 	private int id;
 	
 	@Column(name="nombre", length=100)
-	private String name;
+	private String nombre;
 	
 	@Column(name="apellidos", length=150)
 	private String apellidos;
@@ -56,16 +56,5 @@ public class Usuario {
 	@Column(name="telefono", length=20)
 	private String telefono;
 	
-	@OneToMany(mappedBy="usuario")
-	private List<Direccion> direcciones;
-	
-	@OneToMany(mappedBy="usuario")
-	private List<Pago> pagos;
-	
-	@OneToMany(mappedBy="usuario")
-	private List<Factura> facturas;
-	
-	@OneToMany(mappedBy="usuario")
-	private List<Cesta> cesta;
 	
 }

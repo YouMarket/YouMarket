@@ -25,7 +25,7 @@ public class Receta {
 	
 	private String nombre;
 	
-	private String description;
+	private String descripcion;
 	
 	private Integer personas;
 	

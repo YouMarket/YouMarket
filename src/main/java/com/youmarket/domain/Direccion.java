@@ -26,7 +26,7 @@ public class Direccion {
 	private int id;
 	
 	@Column(name="direccion")
-	private String name;
+	private String direccion;
 	
 	@Column(nullable = false)
 	@Type(type = "org.hibernate.type.NumericBooleanType")
@@ -39,7 +39,7 @@ public class Direccion {
 	@Column(name="c_postal")
 	private String cposta;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	

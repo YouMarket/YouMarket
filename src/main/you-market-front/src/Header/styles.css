@@ -8,7 +8,7 @@
 .logo{
 	height: 80px;
 	width: 80px;
-	margin: 0 0 8px 8px;
+	margin: 0 0 8px 32px;
 }
 
 .header-links{
@@ -40,10 +40,14 @@
 
 .carro {
 	margin-left: auto;
-	margin-right: 16px;
+	display: inline-block;
 }
 
-.carro-icon{
+.perfil {
+	display: none;
+}
+
+.icon{
 	height: 40px;
 	width: 40px;
 }
@@ -63,8 +67,35 @@
 	color: #464646;
 }
 
+.carro-contador {
+	background-color: black;
+	color: white;
+	border-radius: 50%;
+	text-align: center;
+	width: 20px;
+	height: 20px;
+	padding: 4px;
+	margin: 0;
+	position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
 
-@media (min-width: 580px){
+.carro-contador-container {
+	height: 44px;
+	width: 30px;
+	float: right;
+	margin-left: 10px;
+}
+
+.carro-menu-container {
+	position: relative;
+	float: left;
+}
+
+
+@media (min-width: 600px){
 	.header-links {
 		display: flex;
 	}
@@ -73,12 +104,17 @@
 		display: none;
 	}
 	
-	.carro {
+	.carro-menu-container {
 		margin-left: 0;
 		margin-right: 32px
 	}
 	
 	#menuLinks {
 		display: none;
+	}
+	
+	.perfil{
+		display: block;
+		margin-right: 32px;
 	}
 }
