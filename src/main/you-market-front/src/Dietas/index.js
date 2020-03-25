@@ -1,8 +1,8 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect} from 'react';
 import './styles.css';
 import Dieta from '../Dieta';
 import Header from '../Header';
-
+	
 function Dietas() {
 	
 	
@@ -17,12 +17,11 @@ function Dietas() {
 	      });
 	  	}, []);
     console.log(dietas);
+    
     useEffect(() => {
 	    fetchDietas(dietas);
 	  }, []);	
 	
-    
-
 		
 	return(
 	  <div>
@@ -31,7 +30,12 @@ function Dietas() {
 		  	  	<div className="grid">
 			      {dietas && dietas.map(dieta => (
 			    		  <div key={dieta.nombre}>
-					          <Dieta nombre={dieta.nombre} url_imagen={dieta.url_imagen}/>
+					          <Dieta nombre={dieta.nombre}
+					          url_imagen={dieta.url_imagen}
+					          id={dieta.id}
+					          tipo={dieta.tipo}
+					          descripcion={dieta.descripcion}
+					          activa={dieta.activa}/>
 					      </div>
 			      ))}
 			    </div>
