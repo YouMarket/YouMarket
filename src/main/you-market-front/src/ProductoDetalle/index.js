@@ -1,29 +1,64 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect} from 'react';
 import './styles.css';
 import Header from '../Header';
+import { useParams } from "react-router-dom";
 
-interface Props {
-	id: number;
-	imagen: string,
-	nombre: string,
-	supermercado: string,
-	precio: number,
-	unidad: string
-}
+function ProductoDetalle() {
 
-function ProductoDetalle({id, imagen, nombre, supermercado, precio, unidad}: Props) {
-  return(
-		  <div>
-		  	<Header/>
-		  		<h1> Patata </h1>
-		  		<img className="producto-imagen" src="https://cutt.ly/leche" alt="patata"/>
-				  	<div className="producto-info">
-				  		<p> <b> Producto: </b>  Patata </p>
-				  		<p> <b> Precio: </b>  0,8 €/kilo</p>
-				  		<p> <b> Supermercado: </b>  Mercadona </p>
-				  	</div>
-		  </div>
- );
+	const [ producto, setProducto] = useState();
+	
+	const { id } = useParams();
+	
+	const fetchProducto = useCallback(() => {
+	    return fetch(`../../../producto/${id}`)
+	      .then(res => res.json())
+	      .then(producto => {
+	        setProducto(producto)
+	        console.log(producto);
+	      });
+	  	}, []);
+    console.log(producto);
+    useEffect(() => {
+	    fetchProducto(producto);
+	  }, []);	
+	
+    if (!producto){
+    	return null;
+    }	
+	return(
+	  <div>
+	  	  <Header/>
+	  	  <div>
+	  	  		<div>
+	  	  			<h1> {producto.name} </h1>
+	  			</div>
+	  			<img className="producto-imagen" src={producto.imagen} alt={producto.nombre}/>
+			  	<div className="producto-info">
+			  		<div>
+						<b> Descripcion: </b>{producto.descripcion}
+					</div>
+		  			<div>
+		  				<b> Precio: </b> {producto.precio}
+		  			</div>
+		  			<div>
+	  					<b> Precio IVA: </b> {producto.precioIva}
+	  				</div>
+		  			<div>
+		  				<b> Unidad: </b>{producto.unidad}
+	  				</div>
+			  		<div>
+  						<b> Marca: </b>{producto.marca.name}
+  					</div>
+			  		<div>
+						<b> Supermercado: </b> {producto.supermercado.name}
+					</div>
+
+			  	</div>
+	  	  	</div>
+	 </div>
+	);
+	
+	
 }
 
 export default ProductoDetalle;

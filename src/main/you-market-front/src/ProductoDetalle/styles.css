@@ -14,10 +14,6 @@
 }
 
 .producto-info{
-	display: flex;
-	flex-direction: column;
-	padding: 16px;
-	max-width: 207px;
 	float: left;
 }
 
