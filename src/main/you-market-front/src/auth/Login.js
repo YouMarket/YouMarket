@@ -9,7 +9,12 @@ class Login extends React.Component{
 		    super(props);
 		    this.state = { errors: "" };
 		    this.state = { status: "NotLogged" };
+		    this.state = { usuario: []};
 		  }
+	 onChangeUsuario(Susuario) {        
+		    this.setState({ usuario: Susuario });
+		  }
+	 
 	 onChangeStatus() {        
 		    this.setState({ status: "Logged" });
 		  }
@@ -44,19 +49,16 @@ class Login extends React.Component{
 		        			body:JSON.stringify(values, null, 2)
 		        	}).then(response => {
 		                if (response.data.usuario!=null) {
-		                    {this.inicializa();}
 		                    this.onChangeStatus("Logged");
+		                    this.onChangeUsuario(response.json())
 		                    {this.handleRedirect('home');}
 		                  }
 		                else{
-		                	if(response.data.errors){
-		                	this.onChangeErrors(response.data.errors);
-		                	}else{
-		                	this.onChangeErrors("Fallo de conexión");
-		                	console.log(this.state.errors)
+		                	this.onChangeErrors("Contraseña incorrecta");
+	
 		                	}
 		                	
-		                }})
+		                })
 		          
 		          alert(JSON.stringify(values, null, 2));
 		          setSubmitting(false);
@@ -81,6 +83,7 @@ class Login extends React.Component{
 		            type="text"
 		            name="email"
 		            id="email"
+		            autoComplete="new-password"
 		            onChange={handleChange}
 		            onBlur={handleBlur}
 		            value={values.email}
@@ -94,6 +97,7 @@ class Login extends React.Component{
 		          id="password"
 		            type="password"
 		            name="password"
+		            autoComplete="new-password"
 		            onChange={handleChange}
 		            onBlur={handleBlur}
 		            value={values.name}
@@ -105,6 +109,7 @@ class Login extends React.Component{
 		          <button type="submit" disabled={isSubmitting} className="submit-login">
 		          Iniciar Sesión
 		          </button>
+		          <small style={{ color: 'red' }}>{this.state.errors}</small>
 
 		        </form>
 		      )}
