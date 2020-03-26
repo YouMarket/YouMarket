@@ -47,6 +47,7 @@ class Login extends React.Component{
 		        			},
 		        			method:'POST',
 		        			body:JSON.stringify(values, null, 2)
+
 					}).then(response => response.json())
 						.then(data => {
 						console.log(data)
@@ -57,9 +58,11 @@ class Login extends React.Component{
 						console.log(response)
 						console.log(response.json())
 						if (response.usuario!=null) {
+		        	}).then(response => {
+		                if (response.data.usuario!=null) {
 		                    this.onChangeStatus("Logged");
 		                    this.onChangeUsuario(response.json())
-		                    {this.handleRedirect('../');}
+		                    {this.handleRedirect('home');}
 		                  }
 		                else{
 		                	this.onChangeErrors("Contraseña incorrecta");
