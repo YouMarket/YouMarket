@@ -2,8 +2,8 @@ import React from 'react';
 import './styles.css';
 import plus from '../assets/plus.svg'
 import less from '../assets/less.svg'
-import Header from '../Header'
-import config from 'react-global-configuration';
+import Header from '../Header';
+import {Link} from 'react-router-dom';
 
 interface Props {
 	id: number,
@@ -32,19 +32,22 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad, cantidad
 		document.getElementById(idContador).textContent = cantidad
 	}
 
-	return(
-		<div className="producto-container">
-		<img className="producto-imagen" src={urlImagen} alt="Imagen"/>
-		<div className="producto-info">
-			<p className="producto-precio">{precio} {unidad}</p>
-			<p className="producto-nombre">{nombre}</p>
-			<p className="producto-supermercado">{supermercado}</p>
-			<div className="producto-editar-cantidad">
-				<img id={idMenos} className="menos" src={less} onClick={lessProduct}/>
-				<p id={idContador} className="contador">{cantidad}</p>
-				<img className="mas" src={plus} onClick={plusProduct}/>
-			</div>
-		</div>
+  return(
+  <div className="producto-container">
+  	<Link to={`../../../show/producto/${id}`}>
+  		<img className="producto-imagen" src={urlImagen} alt="Imagen"/>
+  	
+  	<div className="producto-info">
+  		<p className="producto-precio">{precio} {unidad}</p>
+  		<p className="producto-nombre">{nombre}</p>
+  		<p className="producto-supermercado">{supermercado}</p>
+  	</div>
+  	</Link>
+  	<div className="producto-info">
+		<div className="producto-editar-cantidad">
+			<img id={idMenos} className="menos" src={less} onClick={lessProduct}/>
+			<p id={idContador} className="contador">{cantidad}</p>
+			<img className="mas" src={plus} onClick={plusProduct}/>
 		</div>
 	);
 }

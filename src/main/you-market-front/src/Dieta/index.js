@@ -2,24 +2,25 @@ import React from 'react';
 import './styles.css';
 import {Link} from 'react-router-dom';
 
-interface Props {
-	nombre: string,
-	url_imagen: string,
-	id: int,
-	tipo: string,
-	descripcion: string,
+function Dieta({id, nombre, url_imagen, descripcion, tipo, activa}: Props) {
+	interface Props {
+		nombre: string,
+		url_imagen: string,
+		id: number,
+		tipo: string,
+		descripcion: string,
+		activa: Boolean
+	}
 	
-}
-
-function Dieta({nombre, url_imagen, descripcion, id, tipo}: Props) {
-  return(
-  <Link to="/recetas" className="dieta-container">
-  	<img className="dieta-imagen" src={url_imagen} alt={nombre}/>
-  	<div classname="dieta-info">
-  		<p classname="dieta-nombre"> {nombre} </p>
-  	</div>
-  </Link>
-
- );
+	
+	  return(
+	  <Link to={`../../../show/dieta/${id}`} className="dieta-container">
+	  	<img className="dieta-imagen" src={url_imagen} alt={nombre}/>
+	  	<div className="dieta-info">
+	  		<p className="dieta-nombre"> {nombre} </p>
+	  	</div>
+	  </Link>
+	
+	 );
 }
 export default Dieta;
