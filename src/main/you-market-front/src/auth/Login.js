@@ -4,17 +4,31 @@ import Logo from '../logo.png';
 import Header from '../Header';
 import { Formik } from 'formik';
 			
-function inicializa(){
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [erros, setErrors] = useState("");
-	const [status, setStatus] = useState("");
-	
-return(
+class Login extends React.Component{
+	 constructor(props) {
+		    super(props);
+		    this.state = { errors: "" };
+		    this.state = { status: "NotLogged" };
+		  }
+	 onChangeStatus() {        
+		    this.setState({ status: "Logged" });
+		  }
+	 
+	 onChangeErrors(Serrors) {        
+		    this.setState({ errors: Serrors });
+		  }
+
+		handleRedirect = () => {
+			console.log(this.props.history);
+		      this.props.history.push('/home');
+		    }
+		render(){
+			return(
+
 
 		<div>
 		  <Header/>
-		  {status}
+		  {this.state.errors}
 		  <div className="caja-form">
 		    <img src={Logo} className="logo-umarket"/>
 		    <Formik
@@ -29,13 +43,21 @@ return(
 		        			method:'POST',
 		        			body:JSON.stringify(values, null, 2)
 		        	}).then(response => {
-		                if (response.data.status="Logged") {
-		                    
+		                if (response.data.usuario!=null) {
+		                    {this.inicializa();}
+		                    this.onChangeStatus("Logged");
+		                    {this.handleRedirect('home');}
 		                  }
-		                })
-		                .catch(error => {
-		                  console.log("login error", error);
-		                })
+		                else{
+		                	if(response.data.errors){
+		                	this.onChangeErrors(response.data.errors);
+		                	}else{
+		                	this.onChangeErrors("Fallo de conexión");
+		                	console.log(this.state.errors)
+		                	}
+		                	
+		                }})
+		          
 		          alert(JSON.stringify(values, null, 2));
 		          setSubmitting(false);
 		        }, 400);
@@ -89,7 +111,7 @@ return(
 		    </Formik>
 		  </div>
 		 </div>
-		);
+		);}
 
 }
-export default inicializa;
+export default Login;
