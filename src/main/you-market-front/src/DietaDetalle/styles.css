@@ -1,11 +1,11 @@
-.producto-container{
+.dieta-container{
 	display: flex;
 	flex-direction: column;
 	border: 1px solid #aaaaaa;
-	
+	float:left;
 }
 
-.producto-imagen{
+.dieta-imagen{
 	height: 200px;
 	max-width: 240px;
 	display: block;
@@ -13,19 +13,23 @@
 	float: left;
 }
 
-.producto-info{
+.dieta-info{
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	max-width: 207px;
 	float: left;
 }
 
-.producto-precio{
+.dieta-precio{
 	margin: 0 0 12px 0;
 }
 
-.producto-nombre{
+.dieta-nombre{
 	margin: 0 0 8px 0;
 }
 
-.producto-supermercado{
+.dieta-supermercado{
 	margin:0;
 	
 }

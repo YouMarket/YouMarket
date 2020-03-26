@@ -21,7 +21,7 @@ public class Supermercado {
 	private int id;
 	
 	@Column(name="nombre", length=50)
-	private String name;
+	private String nombre;
 	
 	@Column(name="descripcion", length = 250)
 	private String descripcion;

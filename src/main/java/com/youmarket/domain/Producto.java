@@ -26,7 +26,7 @@ public class Producto {
 	private int id;
 	
 	@Column(name="nombre", length=50)
-	private String name;
+	private String nombre;
 	
 	@Positive
 	private double precio;
@@ -56,7 +56,7 @@ public class Producto {
 	private Supermercado supermercado;
 	
 	@Column(name="url_imagen")
-	private String imagen;
+	private String urlImagen;
 	
 	@JoinColumn(name="unidad")
 	private String unidad;
@@ -64,7 +64,7 @@ public class Producto {
 	public Producto(int id, String name, double precio) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.nombre = name;
 		this.precio = precio;
 	}
 

@@ -36,7 +36,7 @@ public class Pago {
 	@Column(name="caducidad", length=10)
 	private String caducidad;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
