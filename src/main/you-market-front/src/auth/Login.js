@@ -9,7 +9,12 @@ class Login extends React.Component{
 		    super(props);
 		    this.state = { errors: "" };
 		    this.state = { status: "NotLogged" };
+		    this.state = { usuario: []};
 		  }
+	 onChangeUsuario(Susuario) {        
+		    this.setState({ usuario: Susuario });
+		  }
+	 
 	 onChangeStatus() {        
 		    this.setState({ status: "Logged" });
 		  }
@@ -36,27 +41,32 @@ class Login extends React.Component{
 
 		      onSubmit={(values, { setSubmitting }) => {
 		        setTimeout(() => {
-		        	fetch('', {
+		        	fetch('../usuario/signIn', {
 		        			headers: {
 		        				"Content-Type": "application/json"
 		        			},
 		        			method:'POST',
 		        			body:JSON.stringify(values, null, 2)
-		        	}).then(response => {
-		                if (response.data.usuario!=null) {
-		                    {this.inicializa();}
+					}).then(response => response.json())
+						.then(data => {
+						console.log(data)
+						});
+					
+					
+				/*	.then(response => {
+						console.log(response)
+						console.log(response.json())
+						if (response.usuario!=null) {
 		                    this.onChangeStatus("Logged");
-		                    {this.handleRedirect('home');}
+		                    this.onChangeUsuario(response.json())
+		                    {this.handleRedirect('../');}
 		                  }
 		                else{
-		                	if(response.data.errors){
-		                	this.onChangeErrors(response.data.errors);
-		                	}else{
-		                	this.onChangeErrors("Fallo de conexión");
-		                	console.log(this.state.errors)
+		                	this.onChangeErrors("Contraseña incorrecta");
+	
 		                	}
 		                	
-		                }})
+		                })*/
 		          
 		          alert(JSON.stringify(values, null, 2));
 		          setSubmitting(false);
@@ -81,6 +91,7 @@ class Login extends React.Component{
 		            type="text"
 		            name="email"
 		            id="email"
+		            autoComplete="new-password"
 		            onChange={handleChange}
 		            onBlur={handleBlur}
 		            value={values.email}
@@ -94,6 +105,7 @@ class Login extends React.Component{
 		          id="password"
 		            type="password"
 		            name="password"
+		            autoComplete="new-password"
 		            onChange={handleChange}
 		            onBlur={handleBlur}
 		            value={values.name}
@@ -105,6 +117,7 @@ class Login extends React.Component{
 		          <button type="submit" disabled={isSubmitting} className="submit-login">
 		          Iniciar Sesión
 		          </button>
+		          <small style={{ color: 'red' }}>{this.state.errors}</small>
 
 		        </form>
 		      )}

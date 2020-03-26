@@ -62,12 +62,12 @@ function App() {
 				<Route path="/pedidos-usuario">
 					<PedidosUsuario/>
 				</Route>
-		        <Route path="/">
+				<Route path="/login">
+    				<Login />
+				</Route>
+				<Route path="/">
 		        	<Productos />
 		        </Route>
-				<Route path="/login">
-    			<Login />
-				</Route>
 		      </Switch>
         </Router>
         );
