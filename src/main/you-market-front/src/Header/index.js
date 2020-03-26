@@ -5,7 +5,6 @@ import carro from './shopping-cart.svg';
 import menu from './menu.svg';
 import {Link} from 'react-router-dom';
 import user from './user-circle-solid.svg';
-import config from 'react-global-configuration';
 
 window.onresize = hideMenuLinks;
 
@@ -48,7 +47,7 @@ function Header() {
 					<img src={carro} className="icon" alt="Carro"/>
 				</Link>
 				<div className="carro-contador-container">
-					<p id="carro-contador" className="carro-contador">{config.get('carroContador')}</p>
+					<p id="carro-contador" className="carro-contador">0</p>
 				</div>
 			</div>
 			<Link className="perfil" to="/perfil">

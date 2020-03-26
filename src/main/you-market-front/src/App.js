@@ -13,13 +13,7 @@ import PedidosUsuario from './Perfil/PedidosUsuario';
 import DatosUsuario from './Perfil/DatosUsuario';
 import DatosSubscripcion from './Perfil/DatosSubscripcion';
 import DatosEnvio from './Perfil/DatosEnvio';
-
-
 import Carro from './Carro';
-
-import config from 'react-global-configuration';
-
-config.set({ carroContador: 0 }, { freeze : false });
 
 function App() {
         return (

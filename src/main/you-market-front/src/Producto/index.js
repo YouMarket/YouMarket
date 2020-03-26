@@ -2,6 +2,7 @@ import React from 'react';
 import './styles.css';
 import plus from '../assets/plus.svg'
 import less from '../assets/less.svg'
+import Header from '../Header'
 import config from 'react-global-configuration';
 
 interface Props {
@@ -29,11 +30,6 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad, cantidad
 	function plusProduct() {
 		cantidad = cantidad + 1
 		document.getElementById(idContador).textContent = cantidad
-		console.log(config.get('carroContador'))
-		config.set({
-			'carroContador': config.carroContador + 1
-		})
-		
 	}
 
 	return(
