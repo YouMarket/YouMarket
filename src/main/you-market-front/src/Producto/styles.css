@@ -32,7 +32,8 @@
 	margin: 0 0 8px 0;
 	font-weight: bold;
     font-size: 15px;
-    font-family: 'Raleway', sans-serif;
+	font-family: 'Raleway', sans-serif;
+	color: black;
 }
 
 .producto-supermercado{
@@ -44,4 +45,8 @@
 
 .producto-editar-cantidad {
 	margin-top: 20px;
+}
+
+.link {
+	text-decoration: none;
 }
