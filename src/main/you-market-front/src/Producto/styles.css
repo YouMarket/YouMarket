@@ -34,6 +34,9 @@
     font-size: 15px;
 	font-family: 'Raleway', sans-serif;
 	color: black;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .producto-supermercado{

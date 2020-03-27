@@ -1,6 +1,7 @@
 package com.youmarket.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,12 @@ public class UsuarioService {
 		
 		return repo.findAll(); 
 	}
+	
+	public Optional<Usuario> findUsuarioByLogin(String email, String password){
+		return repo.findUsuarioByLogin(email, password);
+	}
 
+	
 	public Usuario showProduct(int id) {
 		// TODO Auto-generated method stub
 		return null;

@@ -32,3 +32,5 @@ build/
 
 ### Ignores del proyecto ###
 /src/main/resources/application.properties
+*.json
+src/main/you-market-front/yarn.lock
