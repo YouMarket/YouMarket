@@ -28,6 +28,8 @@ body {
   font-weight: bold;
   font-size: large;
   color: black;
+  width: 20px;
+  text-align: center;
 }
 
 .mas, .menos, .contador {
@@ -36,3 +38,4 @@ body {
 }
 
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One&display=swap');
