@@ -15,6 +15,7 @@ import DatosSubscripcion from './Perfil/DatosSubscripcion';
 import DatosEnvio from './Perfil/DatosEnvio';
 import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
+import PedidoForm from './PedidoForm';
 
 import Carro from './Carro';
 	
@@ -64,6 +65,10 @@ function App() {
 		        <Route path="/">
 		        	<Productos />
 		        </Route>
+		        
+    			<Route path="create/pedido">
+					<PedidoForm />
+				</Route>
 		      </Switch>
         </Router>
         );
