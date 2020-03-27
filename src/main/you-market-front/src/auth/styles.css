@@ -1,5 +1,9 @@
 @charset "ISO-8859-1";
 
+.error-login{
+	color: red;
+	padding-top:5%;
+}
 @media(min-width:800px){
 .logo-umarket{
 	display: block;
@@ -21,6 +25,11 @@
 	margin-top:0.5%;
 	border:0;
 	border-bottom: 3px solid #4CAF50; 
+}
+
+.error-login{
+	padding-left:32.5%;
+	font-size:120%;
 }
 
 .login-label{
@@ -70,6 +79,11 @@
 }
 
 .login-label{
+	padding-left:20%;
+	font-size:90%;
+}
+
+.error-login{
 	padding-left:20%;
 	font-size:90%;
 }

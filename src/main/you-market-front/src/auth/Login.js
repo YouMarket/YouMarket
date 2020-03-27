@@ -3,6 +3,10 @@ import style from './styles.css';
 import Logo from '../logo.png';
 import Header from '../Header';
 import { Formik } from 'formik';
+import {
+	  withRouter
+	} from 'react-router-dom';
+
 			
 class Login extends React.Component{
 	 constructor(props) {
@@ -25,7 +29,7 @@ class Login extends React.Component{
 
 		handleRedirect = () => {
 			console.log(this.props.history);
-		      this.props.history.push('/home');
+		      this.props.history.push('/cesta');
 		    }
 		render(){
 			return(
@@ -51,6 +55,16 @@ class Login extends React.Component{
 					}).then(response => response.json())
 						.then(data => {
 						console.log(data)
+						if (data.id!=null) {
+		                    this.onChangeStatus("Logged");
+		                    this.onChangeUsuario(data)
+		                    console.log(this.state.usuario)
+		                    {this.handleRedirect('home');}
+		                  }
+		                else{
+		                	this.onChangeErrors("Contraseña incorrecta");
+	
+		                	}
 						});
 					
 					
@@ -120,7 +134,8 @@ class Login extends React.Component{
 		          <button type="submit" disabled={isSubmitting} className="submit-login">
 		          Iniciar Sesión
 		          </button>
-		          <small style={{ color: 'red' }}>{this.state.errors}</small>
+		          <br/>
+		          <small className="error-login">{this.state.errors}</small>
 
 		        </form>
 		      )}
@@ -130,4 +145,4 @@ class Login extends React.Component{
 		);}
 
 }
-export default Login;
+export default withRouter(Login);
