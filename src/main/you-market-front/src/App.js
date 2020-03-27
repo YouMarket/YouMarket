@@ -23,6 +23,14 @@ function App() {
         return (
         <Router>
 	        <Switch>
+				<Route path="/pedido/create">
+					<PedidoForm />
+				</Route>
+	        
+    			<Route path="/create/dieta">
+					<DietaForm />
+				</Route>
+				
 		    	<Route path="/productos">
 		    		<Productos />
 		    	</Route>
@@ -38,10 +46,6 @@ function App() {
     			
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
-				</Route>
-				
-    			<Route path="create/dieta">
-					<DietaForm />
 				</Route>
 			
     			<Route path="/recetas">
@@ -66,9 +70,7 @@ function App() {
 		        	<Productos />
 		        </Route>
 		        
-    			<Route path="create/pedido">
-					<PedidoForm />
-				</Route>
+
 		      </Switch>
         </Router>
         );

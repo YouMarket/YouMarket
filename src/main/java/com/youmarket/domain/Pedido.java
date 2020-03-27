@@ -6,10 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,26 +27,35 @@ public class Pedido extends Cesta{
 	
 	private String direccion;
 	
-	/**
-	 * 
-	 */
-	@Column(name="fecha_hora_envio")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaHoraEnvio;
+
 	
 	/**
 	 * 
 	 */
 	@Column(name="fecha_hora_pedido")
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
 	private Date fechaHoraPedido;
+	
+	@Column(name="fecha_envio")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date fechaEnvio;
+	
+	@Column(name="hora_envio")
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "hh:mm")
+	private java.util.Date horaEnvio;
 	
 	/**
 	 * 
 	 */
 	@Column(name="fecha_hora_entrega")
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
 	private Date fechaHoraEntrega;
+	
+
 	
 	@Column(name="orden_entrega")
 	private int ordenEntrega;

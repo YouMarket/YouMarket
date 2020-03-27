@@ -17,16 +17,16 @@ const PedidoForm = () => (
       }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-        	fetch('pedido', {
+        	fetch('', {
         			headers: {
         				"Content-Type": "application/json"
         			},
         			method:'POST',
-        			body:JSON.stringify(values, null, 7)
+        			body:JSON.stringify(values, null, 5)
         	}).then(function(response) {
         	    return console.log(response.json());
         	  })
-          alert(JSON.stringify(values, null, 7));
+          alert(JSON.stringify(values, null, 5));
           
           setSubmitting(false);
         }, 400);
@@ -54,21 +54,30 @@ const PedidoForm = () => (
 		{errors.direccion && touched.direccion}
 		<br/><br/>
           
-		Fecha y hora del envío: <input
+		Fecha del envío: <input
 		type="text"
-		name="fechaHoraEnvio"
+		name="fechaEnvio"
 		onChange={handleChange}
 		onBlur={handleBlur}
-		value={values.fechaHoraEnvio}
+		value={values.fechaEnvio}
 		/>
-		{errors.fechaHoraEnvio && touched.fechaHoraEnvio}
+		{errors.fechaEnvio && touched.fechaEnvio}
 		<br/><br/>
-          
 		
-        		<div className="grid">
-          <button type="submit" disabled={isSubmitting}>
-          Submit
-          </button>
+		Hora del envío: <input
+		type="text"
+		name="horaEnvio"
+		onChange={handleChange}
+		onBlur={handleBlur}
+		value={values.horaEnvio}
+		/>
+		{errors.horaEnvio && touched.horaEnvio}
+		<br/><br/>
+		
+         <div className="grid">
+         <button type="submit" disabled={isSubmitting}>
+         	Enviar
+         </button>
 
           </div>
         </form>
