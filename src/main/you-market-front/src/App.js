@@ -15,6 +15,7 @@ import DatosSubscripcion from './Perfil/DatosSubscripcion';
 import DatosEnvio from './Perfil/DatosEnvio';
 import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
+import Login from './auth/Login'
 
 import Carro from './Carro';
 
@@ -61,7 +62,10 @@ function App() {
 				<Route path="/pedidos-usuario">
 					<PedidosUsuario/>
 				</Route>
-		        <Route path="/">
+				<Route path="/login">
+    				<Login />
+				</Route>
+				<Route path="/">
 		        	<Productos />
 		        </Route>
 		      </Switch>
