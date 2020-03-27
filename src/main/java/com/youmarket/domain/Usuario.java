@@ -1,17 +1,20 @@
 package com.youmarket.domain;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,5 +59,9 @@ public class Usuario {
 	@Column(name="telefono", length=20)
 	private String telefono;
 	
-	
+	 @ManyToMany(fetch = FetchType.LAZY)
+	    @JoinTable(name = "user_roles",
+	            joinColumns = @JoinColumn(name = "user_id"),
+	            inverseJoinColumns = @JoinColumn(name = "role_id"))
+	    private Set<Role> roles = new HashSet<>();
 }
