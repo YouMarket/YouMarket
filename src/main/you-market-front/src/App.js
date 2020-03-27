@@ -9,6 +9,7 @@ import {
 import Cestas from './Cestas'
 import ShowCesta from './ShowCesta'
 import FormCesta from './FormCesta'
+import Login from './auth/Login'
 import './App.css';
  
 function App() {
@@ -25,6 +26,9 @@ function App() {
 	    		<Route path="/show/cesta/:id">
 	    			<ShowCesta />
 	    		</Route>
+	    		<Route path="/login">
+    			<Login />
+    		</Route>
 		      </Switch>
         </Router>
         );

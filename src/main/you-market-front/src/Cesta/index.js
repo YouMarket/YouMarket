@@ -15,11 +15,11 @@ function Cesta({id, nombre, productos, total}: Props) {
   
   return (
 
-
+<div className="show-cesta-div">
 <div className="cesta-container">
   <h2 className="cesta-nombre">{nombre}</h2>
-	  <div className="cesta-icon">
-	  <Link to={`show/cesta/${id}`}><img className="cesta-imagen" src={cest} alt="Imagen de cesta"/></Link>
+	  <div className="cesta-icon-show">
+	  <Link to={`show/cesta/${id}`}><img className="cesta-imagen-show" src={cest} alt="Imagen de cesta"/></Link>
 		<a className="cesta-editar" href="../cesta/edit/">Editar</a>
 		
 		 <span className="cesta-info">
@@ -31,6 +31,7 @@ function Cesta({id, nombre, productos, total}: Props) {
 			</span>
   	</div>
   </div>	  
+  </div>
  );
 }
 export default Cesta;

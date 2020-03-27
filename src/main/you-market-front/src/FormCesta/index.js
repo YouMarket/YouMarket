@@ -4,13 +4,21 @@ import cest from './cesta2.png';
 import { Formik } from 'formik';
 import {Button} from 'primereact/button';
 import Header from '../Header';
+import { Redirect } from 'react-router-dom';
+import {
+	  withRouter
+	} from 'react-router-dom';
 
-
-const formCesta = () => (
-<div>
+class formCesta extends React.Component{
+	handleRedirect = () => {
+		console.log(this.props.history);
+	      this.props.history.push('/cesta');
+	    }
+	render(){
+		return(<div>
   <Header/>
-  <div className="titulo">
-    <h1>Crear cesta</h1>
+  <div>
+    <h1 className="titulo-create-cesta">Crear cesta</h1>
     <img src={cest} className="cesta-imagen-edit"/>
     <Formik
       initialValues={{ usuario: '1', name: 'nuevaCesta', productos:'' }}
@@ -33,11 +41,15 @@ const formCesta = () => (
         			},
         			method:'POST',
         			body:JSON.stringify(values, null, 2)
-        	}).then(function(response) {
-        	    return console.log(response.json());
-        	  })
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
+        	}).then((response)=> {
+        		setSubmitting=false;
+        		
+        	  
+        	}).then(() =>
+        	{this.handleRedirect();}
+            )
+        			
+        	  
         }, 400);
       }}
     >
@@ -64,7 +76,7 @@ const formCesta = () => (
            
         {errors.usuario && touched.usuario}
         	<span className="p-float-label">
-        	<label htmlFor="name">Nombre: </label>
+        	<label htmlFor="name" className="label-cesta-create">Nombre </label>
           <input
           id="name"
             type="text"
@@ -72,6 +84,8 @@ const formCesta = () => (
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.name}
+          	className="name-input-cesta"
+          	required
           />
           </span>
           <input
@@ -82,8 +96,8 @@ const formCesta = () => (
           value={values.productos}
           />
           {errors.name && touched.name}
-          <div className="grid2">
-          <button type="submit" disabled={isSubmitting} className="submit">
+          <div className="grid2-create-cesta">
+          <button type="submit" disabled={isSubmitting} className="submit-cesta-create">
           Enviar
           </button>
           </div>
@@ -93,6 +107,6 @@ const formCesta = () => (
     </Formik>
   </div>
  </div>
-);
-
-export default formCesta;
+);}
+}
+export default withRouter(formCesta);

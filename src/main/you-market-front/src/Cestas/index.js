@@ -1,4 +1,5 @@
 import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+
 import style from './styles.css';
 import Cesta from '../Cesta';
 import Header from '../Header';
@@ -34,13 +35,7 @@ const [total, setTotal] = useState(0);
 	  { cestas && cestas.map((cesta) => ( 
 			  
 			    <div key={cesta.id} className="grid-cesta">
-			    <Cesta nombre={cesta.nombre} id={cesta.id} productos= { cesta.productos && cesta.productos.map((p) => ( 
-			    		<div key={p.id} className="productos">  
-					    <a href="../producto/show">{p.nombre}</a>
-
-			            </div>
-//			          {setTotal=total + p.precioIva}
-			           ))} />
+			    <Cesta nombre={cesta.nombre} id={cesta.id} />
 
 	            </div>
 	          
@@ -53,3 +48,10 @@ const [total, setTotal] = useState(0);
  );
 }
 export default Cestas;
+
+//productos= { cesta.productos && cesta.productos.map((p) => ( 
+//		<div key={p.id} className="productos">  
+//	    <a href="../producto/show">{p.nombre}</a>
+//
+//        </div>
+//      {setTotal=total + p.precioIva}

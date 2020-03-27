@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-.cesta-icon{
+.cesta-icon-show{
 
 	float:left;
 	
@@ -19,8 +19,9 @@
 	display:block;
 }
 
-.cesta-imagen{
-
+.cesta-imagen-show{
+	display:block;
+	margin:auto;	
 	max-width: 65%;
 }
 
@@ -35,16 +36,3 @@
 	text-align:center;
 }
 
-.cesta-productos{
-	margin: 0 0 0px 0;
-}
-
-.cesta-id{
-	margin: 0 0 0px 0;
-}
-
-.nueva-cesta{
-	padding-top:2%;
-	text-align:center;
-	
-}
