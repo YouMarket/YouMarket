@@ -30,6 +30,7 @@ export default class RegistroUsuario extends React.Component{
 
 	handleSubmit = (e) => {
 	
+		console.log(e.target)
 		
 
 	}
@@ -59,14 +60,15 @@ export default class RegistroUsuario extends React.Component{
 								/>
 							</div>
 							<div className="row">
-								Apellidos: 
-								<input
-									type="text"
-									name="apellidos"
-									value={this.state.apellidos}
-									onChange={this.handleChange}
-									required
-								/>
+								<span className="p-float-label">
+									<InputText 
+										id="in"
+										value={this.state.apellidos} 
+										onChange={(e) => this.setState({apellidos: e.target.value})} 
+										required
+									/>
+									<label htmlFor="in">Apellidos: </label>
+								</span>
 							</div>
 							<div className="row">
 								DNI: 
@@ -75,7 +77,7 @@ export default class RegistroUsuario extends React.Component{
 									name="dni"
 									value={this.state.dni}
 									onChange={this.handleChange}
-									required
+									
 								/>
 							</div>
 							<div className="row">
@@ -85,7 +87,7 @@ export default class RegistroUsuario extends React.Component{
 									name="fechaNacimiento"
 									value={this.state.fechaNacimiento}
 									onChange={this.handleChange}
-									required
+									
 								/>
 							</div>
 							<div className="row">
@@ -95,7 +97,7 @@ export default class RegistroUsuario extends React.Component{
 									name="telefono"
 									value={this.state.telefono}
 									onChange={this.handleChange}
-									required
+									
 								/>
 							</div>
 
@@ -108,7 +110,7 @@ export default class RegistroUsuario extends React.Component{
 									placeholder="Email"
 									value={this.state.email}
 									onChange={this.handleChange}
-									required
+									
 								/>
 							</div>
 							<div className="row">
@@ -119,7 +121,7 @@ export default class RegistroUsuario extends React.Component{
 									placeholder="Password"
 									value={this.state.password}
 									onChange={this.handleChange}
-									required
+									
 								/>
 							</div>
 
