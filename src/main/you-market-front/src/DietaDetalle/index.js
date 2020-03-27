@@ -38,7 +38,9 @@ function DietaDetalle() {
 			  		<p> <b> Descripción: </b>  {dieta.descripcion} </p>
 			  		<p> <b> Activa: </b>  {dieta.activa} </p>
 			  	</div>
+			  	<button className="boton-perfil">Receta</button>
 	  	  	</div>
+	  	  	
 	 </div>
 	);
 
