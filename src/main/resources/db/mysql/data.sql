@@ -1,5 +1,5 @@
-insert into supermercado (id, nombre, descripcion, c_postal) values (1, 'Mercadona - Triana', 'Mercadona de calle Salado', '41010');
-insert into supermercado (id, nombre, descripcion, c_postal) values (2, 'Mercadona - centro', 'Mercadona de calle Torneo', '41001');
+insert into supermercado (id, nombre, descripcion, c_postal) values (1, 'Mercadona', 'Mercadona de calle Salado', '41010');
+insert into supermercado (id, nombre, descripcion, c_postal) values (2, 'Lidl', 'Lidl de calle Torneo', '41001');
 
 insert into marca (id, nombre) values (1, 'Hacendado');
 insert into marca (id, nombre) values (2, 'Danone');
@@ -23,6 +23,10 @@ insert into usuario (id, nombre, apellidos, dni, c_postal, rol, email, password,
 
 insert into factura (id, total, total_iva, usuario_id) values (1, 13.43, 17, 1);
 
+insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (123, 'Vegetariana de invierno', 'Vegetariana', True, 'https://static1.abc.es/media/salud/2019/05/17/brocoli-kOoH--620x349@abc.jpg', 'Esto es una dieta sin carne ni pescado');
+insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (234, 'Hiperproteica', 'Hiperproteica', True, 'https://www.aquiconfidencial.es/wp-content/uploads/2018/07/dieta-hiperproteica.jpg', 'Esto es una dieta alta en proteínas. Incluye grandes cantidades de legumbres, carne, pescado y huevo.');
+
+
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (1,'Pan de molde',0.79,1,'€','https://www.recetasdepan.net/wp-content/uploads/2019/12/Receta-de-pan-de-molde.jpg',1,1,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (2,'Pan de molde sin corteza',1.57,1.99,'€','https://www.panflor.es/wp-content/uploads/2018/04/Blanco-sin-corteza.jpg',1,1,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (3,'Pan integral',1.41,1.79,'€','https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/f1ec1b78-4db1-45ac-9189-40619b7fad74/Derivates/2c238c6b-e380-486e-b9dc-39e41695a5ba.jpg',1,2,1);
@@ -32,7 +36,7 @@ insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, depart
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (7,'Napolitana chocolate',0.23,0.3,'€','https://www.chocolatenegro.info/contenidos/imagenes/receta-de-napolitanas-de-chocolate.jpg',1,2,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (8,'Caña de chocolate',0.23,0.3,'€','https://www.alcampo.es/media/hdc/h03/9355443339294.gif',1,1,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (9,'Empanada pollo y champiñones',1.57,1.99,'€','https://s1.eestatic.com/2015/03/17/cocinillas/Cocinillas_18758272_116119786_1706x960.jpg',1,1,1);
-insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (10,'Palmera huevo',0.7,0.89,'€','https://lh3.googleusercontent.com/proxy/AokPmsrRdcI6tgnRnnt0qtYG_X7CzLyoTN6wuuQW-SjN7YJviOZiaJLiO68Gs35TMF7-Ye5ao9gm--cDceCZHguy',1,2,1);
+insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (10,'Palmera huevo',0.7,0.89,'€','https://hnaspuente.com/16/palmera-de-yema.jpg',1,2,1);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (11,'Yogour griego',0.9,1.15,'€','https://a0.soysuper.com/8089a31fe976d9621e7a6dd767f446b6.1500.0.0.0.wmark.fcd3354a.jpg',2,1,2);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (12,'Yogour griego trozos de fruta',1.22,1.55,'€','https://unimarc.vteximg.com.br/arquivos/ids/184144-1000-1000/000000000802977001-UN-01-27955.jpg?v=636954333238170000',2,1,2);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (13,'Pack 6 yogures fresa',0.94,1.19,'€','https://s1.eestatic.com/2019/04/16/ciencia/nutricion/Yogur-OCU_Organizacion_de_Consumidores_y_Usuarios-Seguridad_alimentaria-Nutricion_391472797_120594008_1706x960.jpg',2,2,2);

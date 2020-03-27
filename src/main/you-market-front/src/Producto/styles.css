@@ -23,14 +23,20 @@
 
 .producto-precio{
 	margin: 0 0 12px 0;
-	color: gray;
+	font-weight: 600;
+    font-size: 20px;
+    color: black;
 }
 
 .producto-nombre{
 	margin: 0 0 8px 0;
 	font-weight: bold;
     font-size: 15px;
-    font-family: 'Raleway', sans-serif;
+	font-family: 'Raleway', sans-serif;
+	color: black;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .producto-supermercado{
@@ -42,4 +48,8 @@
 
 .producto-editar-cantidad {
 	margin-top: 20px;
+}
+
+.link {
+	text-decoration: none;
 }
