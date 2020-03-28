@@ -28,7 +28,6 @@ public class UsuarioService {
 		return repo.findById(id);
 	}
 
-
 	
 	public Usuario showProduct(int id) {
 		// TODO Auto-generated method stub
