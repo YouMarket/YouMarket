@@ -34,12 +34,13 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 	
 	function sendToBack(id, cantidad) {
 		setCantidad(0);
-		fetch('../../carrito', {
+		fetch('/carrito', {
 			headers: {
-				"Content-Type": "application/json"
+				"Accept": "application/json",
+				"Content-Type": "application/json",
 			},
 			method:'POST',
-			body:JSON.stringify(id, cantidad)
+			body:JSON.stringify({postId: id, postCantidad: cantidad})
 		})
 		
 	}
@@ -61,7 +62,7 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 					<p id={idContador} className="contador">{cantidad}</p>
 					<img className="mas" src={plus} onClick={plusProduct}/>
 				</div>
-				<button className="boton-add-producto" onClick={sendToBack}>AÑADIR AL CARRO</button>
+				<button className="boton-add-producto" onClick={() => sendToBack(id, cantidad)}>AÑADIR AL CARRO</button>
 			</div>
   		</div>
 	  
