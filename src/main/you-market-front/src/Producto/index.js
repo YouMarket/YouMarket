@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './styles.css';
 import plus from '../assets/plus.svg'
 import less from '../assets/less.svg'
+import {NavLink} from 'react-router-dom';
 
 interface Props {
 	id: number,
@@ -10,40 +11,60 @@ interface Props {
 	supermercado: string,
 	precio: number,
 	unidad: string,
-	cantidad: number
 }
 
-function Producto({id, urlImagen, nombre, supermercado, precio, unidad, cantidad = 0}: Props) {
+function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) {
+	
+	const [cantidad, setCantidad] = useState(0);
 	
 	var idContador = "contador-"+id
 	var idMenos = "menos-"+id
 
 	function lessProduct(){
 		if(cantidad > 0){
-			cantidad = cantidad - 1
+			setCantidad(cantidad - 1)
 			document.getElementById(idContador).textContent = cantidad
 		}
 	}
 	
 	function plusProduct() {
-		cantidad = cantidad + 1
+		setCantidad(cantidad + 1)
 		document.getElementById(idContador).textContent = cantidad
+	}
+	
+	function sendToBack(id, cantidad) {
+		setCantidad(0);
+		fetch('../../carrito', {
+			headers: {
+				"Content-Type": "application/json"
+			},
+			method:'POST',
+			body:JSON.stringify(id, cantidad)
+		})
+		
 	}
 
   return(
-  <div className="producto-container">
-  	<img className="producto-imagen" src={urlImagen} alt="Imagen"/>
-  	<div className="producto-info">
-  		<p className="producto-precio">{precio} {unidad}</p>
-  		<p className="producto-nombre">{nombre}</p>
-  		<p className="producto-supermercado">{supermercado}</p>
-		<div className="producto-editar-cantidad">
-			<img id={idMenos} className="menos" src={less} onClick={lessProduct}/>
-			<p id={idContador} className="contador">{cantidad}</p>
-			<img className="mas" src={plus} onClick={plusProduct}/>
-		</div>
-  	</div>
-  </div>
+	  
+		<div className="producto-container">
+			<NavLink to={`../../../show/producto/${id}`} className="link">
+			<img className="producto-imagen" src={urlImagen} alt="Imagen"/>
+			<div className="producto-info">
+				<p className="producto-precio no-link">{precio} {unidad}</p>
+				<p className="producto-nombre no-link">{nombre}</p>
+				<p className="producto-supermercado no-link">{supermercado}</p>
+			</div>
+	        </NavLink>
+			<div className="container-cantidad">
+				<div className="producto-editar-cantidad">
+					<img id={idMenos} className="menos" src={less} onClick={lessProduct}/>
+					<p id={idContador} className="contador">{cantidad}</p>
+					<img className="mas" src={plus} onClick={plusProduct}/>
+				</div>
+				<button className="boton-add-producto" onClick={sendToBack}>AÑADIR AL CARRO</button>
+			</div>
+  		</div>
+	  
  );
 }
 

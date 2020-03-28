@@ -4,14 +4,32 @@
 	border: 1px solid #aaaaaa;
 	box-shadow: 0 1px 3px #aaaaaa;
 	cursor: pointer;
+	box-sizing: border-box;
 }
+
 
 .producto-imagen{
 	height: 200px;
+	width: 100%;
 	max-width: 240px;
 	display: block;
 	object-fit:cover;
 	border-bottom: 1px solid #aaaaaa;
+}
+
+.container-cantidad{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.boton-add-producto{
+	width: 100%;
+	background-color:  #779C3D;
+	border: none;
+	color: white;
+	height: 40px;
+	margin-top: 10px;
 }
 
 .producto-info{
@@ -23,14 +41,20 @@
 
 .producto-precio{
 	margin: 0 0 12px 0;
-	color: gray;
+	font-weight: 600;
+    font-size: 20px;
+    color: black;
 }
 
 .producto-nombre{
 	margin: 0 0 8px 0;
 	font-weight: bold;
     font-size: 15px;
-    font-family: 'Raleway', sans-serif;
+	font-family: 'Raleway', sans-serif;
+	color: black;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .producto-supermercado{
@@ -42,4 +66,8 @@
 
 .producto-editar-cantidad {
 	margin-top: 20px;
+}
+
+.link {
+	text-decoration: none;
 }
