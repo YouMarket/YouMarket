@@ -2,7 +2,6 @@ package com.youmarket.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,7 +18,10 @@ import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.JwtAuthenticationResponse;
 import com.youmarket.configuration.security.JwtTokenProvider;
 import com.youmarket.configuration.security.UserPrincipal;
+import com.youmarket.domain.Direccion;
+import com.youmarket.domain.Pago;
 import com.youmarket.domain.Usuario;
+import com.youmarket.domain.enums.RoleName;
 import com.youmarket.repositories.RoleRepository;
 import com.youmarket.services.UsuarioService;
 
@@ -44,6 +46,9 @@ public class UsuarioController {
 
 	@Autowired
 	JwtTokenProvider tokenProvider;
+	
+	@Autowired
+	DireccionController direccionController;
 
 	@PostMapping("/signIn")
 	public ResponseEntity<?> login(@RequestBody Usuario usuario) {
@@ -59,10 +64,9 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/user/me")
-    @PreAuthorize("hasRole('USER')")
     public Usuario getCurrentUser(@CurrentUser UserPrincipal currentUser) {
 		currentUser.getId();
-		Usuario userSummary = usuarioService.findById(currentUser.getId().intValue()).get();
+		Usuario userSummary = usuarioService.findById(currentUser.getId()).get();
         return userSummary;
     }
 
@@ -70,20 +74,34 @@ public class UsuarioController {
 	public Usuario signUp(@RequestBody Usuario usuario) {
 		
 		System.out.println("User pass: "+usuario.getPassword());
-
+//		if(usuario.getSubscripcion() == ) {
+//			
+//		}
+			
+//		usuario.setRoles(RoleName.CLIENTE);
 		usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
 		Usuario signUpped = usuarioService.save(usuario);
 		System.out.println("User encoded pass: "+usuario.getPassword());
 		return signUpped;
 	}
 
+	@PostMapping("/signUpAll")
+	public Usuario signUp(@RequestBody Usuario usuario, @RequestBody Direccion dir, @RequestBody Pago pago) {
+		
+		System.out.println("User pass: "+usuario.getPassword());
+
+		usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
+		Usuario signUpped = usuarioService.save(usuario);
+		
+		dir.setUsuario(signUpped);
+		direccionController.saveNewDir(dir);
+		
+		System.out.println("User encoded pass: "+usuario.getPassword());
+		return signUpped;
+	}
+
 	@GetMapping("/getUser")
 	public Usuario getUser(@CurrentUser UserPrincipal currentUser) {
-		
-		System.out.println("Usuario logged: "+currentUser.getEmail());
-		Usuario usu = usuarioService.findUsuarioByLogin("cliente@cliente.es", "1234asdf").get();
-		System.out.println(usu.getPassword());
-		System.out.println(sc.passwordEncoder().encode(usu.getPassword()));
-		return usu;
+		return usuarioService.findById(currentUser.getId()).get();
 	}
 }
