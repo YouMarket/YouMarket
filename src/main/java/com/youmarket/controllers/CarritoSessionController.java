@@ -73,9 +73,9 @@ public class CarritoSessionController {
 	}
 
 	@PostMapping("/carrito")
-	public List<ProductoCarrito> carritoPost(@RequestBody List<Integer> postProducto, HttpServletRequest request, HttpSession session){
-		Producto p = this.productoService.findById(postProducto.get(0));
-		int cantidad = postProducto.get(1);
+	public List<ProductoCarrito> carritoPost(@RequestBody Map<String,Integer> postProducto, HttpServletRequest request, HttpSession session){
+		Producto p = this.productoService.findById(postProducto.get("postId"));
+		int cantidad = postProducto.get("postCantidad");
 		@SuppressWarnings("unchecked")
 		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
 		if(carrito == null){
@@ -86,8 +86,19 @@ public class CarritoSessionController {
 		} else {
 			carrito.put(p, cantidad);
 		}
-		if(carrito != null){
-			List<Producto> keys = new ArrayList<>(carrito.keySet());
+		request.getSession().setAttribute("SESSION_CARRITO", carrito);
+		return this.listCarrito(carrito);
+	}
+
+	@PostMapping("/eliminarProducto")
+	public List<ProductoCarrito> eliminarProducto(@RequestBody Map<String, Integer> postProducto, HttpServletRequest request, HttpSession session){
+		Producto p = this.productoService.findById(postProducto.get("postId"));
+		@SuppressWarnings("unchecked")
+		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
+		if (carrito.keySet().contains(p)){
+			carrito.remove(p);
+		} else {
+			return null;
 		}
 		request.getSession().setAttribute("SESSION_CARRITO", carrito);
 		return this.listCarrito(carrito);
@@ -99,16 +110,5 @@ public class CarritoSessionController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/prueba")
-	public Map<Producto, Integer> prueba(){
-		Map<Producto, Integer> res = new HashMap<>();
-		Producto producto1 = new Producto(1,"droga", 23.0);
-		Producto producto2 = new Producto(1,"beber", 21.0);
-		Producto producto3 = new Producto(1,"juanla", 27.0);
-;		res.put(producto1, 4);
-		res.put(producto2, 6);
-		res.put(producto3, 12);
-		return res;
-	}
 }
 

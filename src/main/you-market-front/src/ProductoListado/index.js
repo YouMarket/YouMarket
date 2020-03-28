@@ -22,7 +22,7 @@ function ProductoListado({id, urlImagen, nombre, supermercado, precio, unidad, c
   		<p className="producto-list-nombre">{nombre}</p>
   		<p className="producto-list-precio">{precio} {unidad}</p>
   		<p className="producto-list-supermercado">{supermercado}</p>
-		<img className="borrar-producto" src={removeButton} />
+		<img className="borrar-producto" src={removeButton}/>
 		<div className="editar-cantidad">
 			<img className="menos" src={less}/>
 			<p className="contador">{cantidad}</p>
