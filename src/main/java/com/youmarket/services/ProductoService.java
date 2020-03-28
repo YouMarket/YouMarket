@@ -33,8 +33,8 @@ public class ProductoService {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public Producto findById(int idProducto) {
-		return repo.findById(idProducto).get();
+
+	public Producto findById(int id){
+		return this.repo.findById(id).orElse(null);
 	}
 }
