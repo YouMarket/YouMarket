@@ -59,7 +59,6 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/user/me")
-    @PreAuthorize("hasRole('USER')")
     public Usuario getCurrentUser(@CurrentUser UserPrincipal currentUser) {
 		currentUser.getId();
 		Usuario userSummary = usuarioService.findById(currentUser.getId().intValue()).get();

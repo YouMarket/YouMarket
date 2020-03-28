@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
 	  BrowserRouter as Router,
 	  Switch,
-	  Route
+	  Route,
+	  withRouter
 	} from "react-router-dom";
 import Productos from './Productos';
 import Dietas from './Dietas';
@@ -19,6 +20,9 @@ import DietaForm from './DietaForm';
 import Login from './auth/Login'
 
 import Carro from './Carro';
+import Cestas from './Cestas';
+import FormCesta from './FormCesta';
+import ShowCesta from './ShowCesta';
 	
 function App() {
         return (
@@ -68,6 +72,19 @@ function App() {
 				</Route>
 				<Route path="/login">
     				<Login />
+				</Route>
+				
+				<Route path="/cesta">
+		    		<Cestas />
+		    	</Route>
+		    	<Route path="/create/cesta">
+	    			<FormCesta />
+	    		</Route>
+	    		<Route path="/show/cesta/:id">
+	    			<ShowCesta />
+	    		</Route>
+	    		<Route path="/login">
+    			<Login />
 				</Route>
 				<Route path="/">
 		        	<Productos />

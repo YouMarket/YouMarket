@@ -11,33 +11,34 @@ import {
 class Login extends React.Component{
 	 constructor(props) {
 		    super(props);
-		    this.state = { errors: "" };
 		    this.state = { status: "NotLogged" };
-		    this.state = { usuario: []};
-		  }
-	 onChangeUsuario(Susuario) {        
-		    this.setState({ usuario: Susuario });
 		  }
 	 
 	 onChangeStatus() {        
 		    this.setState({ status: "Logged" });
 		  }
-	 
-	 onChangeErrors(Serrors) {        
+		  
+		onChangeStatus(Serrors) {        
 		    this.setState({ errors: Serrors });
 		  }
 
 		handleRedirect = () => {
-			console.log(this.props.history);
+			if(localStorage.getItem('auth')!=null){	
 		      this.props.history.push('/cesta');
+			}
 		    }
+			
+		 componentWillMount() {
+      this.handleRedirect();
+   }
+		
 		render(){
 			return(
 
 
 		<div>
 		  <Header/>
-		  {this.state.errors}
+
 		  <div className="caja-form">
 		    <img src={Logo} className="logo-umarket"/>
 		    <Formik
@@ -55,35 +56,19 @@ class Login extends React.Component{
 					}).then(response => response.json())
 						.then(data => {
 						console.log(data)
-						if (data.id!=null) {
+						if (data.accessToken!=null) {
 		                    this.onChangeStatus("Logged");
-		                    this.onChangeUsuario(data)
-		                    console.log(this.state.usuario)
-		                    {this.handleRedirect('home');}
+		                    localStorage.setItem('auth', data.accessToken);
+							
+		                    {this.handleRedirect();}
 		                  }
 		                else{
 		                	this.onChangeErrors("Contraseña incorrecta");
 	
 		                	}
 						});
-					
-					
-				/*	.then(response => {
-						console.log(response)
-						console.log(response.json())
-						if (response.usuario!=null) {
-		        	}).then(response => {
-		                if (response.data.usuario!=null) {
-		                    this.onChangeStatus("Logged");
-		                    this.onChangeUsuario(response.json())
-		                    {this.handleRedirect('home');}
-		                  }
-		                else{
-		                	this.onChangeErrors("Contraseña incorrecta");
-	
-		                	}
+
 		                	
-		                })*/
 		          
 		          alert(JSON.stringify(values, null, 2));
 		          setSubmitting(false);
