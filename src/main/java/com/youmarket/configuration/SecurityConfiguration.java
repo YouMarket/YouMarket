@@ -23,134 +23,70 @@ import com.youmarket.configuration.security.JwtAuthenticationFilter;
 /**
  * 
  * @author alvaroesteban
- *	
- * EnableWebSecurity: Habilita la seguridad web en el proyecto
- * EnableGlobalMethodSecurity: This is used to enable method level security based on annotations.
- * 		securedEnabled: It enables the @ Secured annotation using which you can protect your controller/service
- * 		jsr250Enabled: It enables the @RolesAllowed annotation that can be used 
- * 		prePostEnabled: It enables more complex expression based access control syntax with @ PreAuthorize and @ PostAuthorize annotations
+ * 
+ *         EnableWebSecurity: Habilita la seguridad web en el proyecto
+ *         EnableGlobalMethodSecurity: This is used to enable method level
+ *         security based on annotations. securedEnabled: It enables the @
+ *         Secured annotation using which you can protect your
+ *         controller/service jsr250Enabled: It enables the @RolesAllowed
+ *         annotation that can be used prePostEnabled: It enables more complex
+ *         expression based access control syntax with @ PreAuthorize and @
+ *         PostAuthorize annotations
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true
-)
+@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-    CustomUserDetailsService customUserDetailsService;
+	CustomUserDetailsService customUserDetailsService;
 
-    @Autowired
-    private JwtAuthenticationEntryPoint unauthorizedHandler;
+	@Autowired
+	private JwtAuthenticationEntryPoint unauthorizedHandler;
 
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter();
-    }
-    
-    @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder
-                .userDetailsService(customUserDetailsService);
-//                .passwordEncoder(passwordEncoder());
-    }
-    
-    /** 
-     *  AuthenticationManager instance is the main Spring Security interface for authenticating a user.
-     */
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).and().authorizeRequests()
+				.antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html",
+						"/**/*.css", "/**/*.js")
+				.permitAll()
+				.antMatchers("/usuario/*").permitAll()
+				.antMatchers("/usuario/signIn").permitAll()
+				.antMatchers("/usuario/signUp").permitAll()
+				.antMatchers("/direccion/dirs").permitAll()
+				.antMatchers("/usuario/signIn").permitAll()
+				.antMatchers("/usuario/signUp").permitAll()
+				.antMatchers("/suscripcion/all").permitAll()
+				.anyRequest().authenticated();
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .cors()
-                    .and()
-                .csrf()
-                    .disable()
-                .exceptionHandling()
-                    .authenticationEntryPoint(unauthorizedHandler)
-                    .and()
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                .authorizeRequests()
-                    .antMatchers("/",
-                        "/favicon.ico",
-                        "/**/*.png",
-                        "/**/*.gif",
-                        "/**/*.svg",
-                        "/**/*.jpg",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js")
-                        .permitAll()
-                    .antMatchers("/usuario/signIn")
-                        .permitAll()
-                    .antMatchers("/usuario/signUp")
-                    	.permitAll()
-                    .anyRequest()
-                        .authenticated();
+		// Add our custom JWT security filter
+		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+	}
 
-        // Add our custom JWT security filter
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+	@Bean
+	public JwtAuthenticationFilter jwtAuthenticationFilter() {
+		return new JwtAuthenticationFilter();
+	}
 
-    }
-	
-//	@Autowired
-//	DataSource dataSource;
-//	
-//	
-//	
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		
-//		http
-//			.authorizeRequests()
-//				.antMatchers("/", "/home").permitAll()
-//				.anyRequest().authenticated()
-//				.and()
-////			.formLogin()
-////				.loginPage("/login")
-////				.permitAll()
-////				.and()
-//			.logout()
-//				.permitAll();
-//	}
-//	
-//	
-//	@Override
-//	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-////		auth.userDet
-//		auth.jdbcAuthentication()
-//	      .dataSource(dataSource)
-//	      .usersByUsernameQuery(
-//	      "select username,password,true from (select username,password,true from propietario union select username,password,true from cliente) where username =?")    	      
-//	      .passwordEncoder(passwordEncoder());	
-//
-//	}
-//	
-//	/** 
-//	 * El bean ofrece las capacidades singleto para referenciarlo desde los controladores.
-//	 */
-//	@Bean
-//	public BCryptPasswordEncoder passwordEncoder() {
-//		
-//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//		
-//		return encoder;
-//	}
-	
-	
+	@Override
+	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+		authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+	}
+
+	/**
+	 * AuthenticationManager instance is the main Spring Security interface for
+	 * authenticating a user.
+	 */
+	@Bean(BeanIds.AUTHENTICATION_MANAGER)
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 }

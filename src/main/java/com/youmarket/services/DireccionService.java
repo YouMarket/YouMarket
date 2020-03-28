@@ -17,11 +17,19 @@ public class DireccionService {
 	@Autowired
 	private DireccionRepository repo;
 
-	public List<Direccion> findAllByUser(@Valid Usuario usuario) {
+	public List<Direccion> findAllByUser(Usuario usuario) {
 		return repo.findAllByUser(usuario);
 	}
 	
-	public Direccion save(Direccion dir) {
+	public Direccion findPrincipalByUser(Usuario usuario) {
+		return repo.findPrincipalByUser(usuario);
+	}
+	
+	public List<Direccion> findAll() {
+		return repo.findAll();
+	}
+	
+	public Direccion save(@Valid Direccion dir) {
 		return repo.save(dir);
 	}
 }

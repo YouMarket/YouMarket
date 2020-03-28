@@ -55,7 +55,7 @@ public class CestaController {
 	
 	@GetMapping("/user")
     public ResponseEntity<List<Cesta>> cestasPorUsuario(@CurrentUser UserPrincipal currentUser) {
-		Integer id=currentUser.getId().intValue();
+		Integer id=currentUser.getId();
         return ResponseEntity.ok(cestaService.cestasPorUsuario(id));
     }
 	

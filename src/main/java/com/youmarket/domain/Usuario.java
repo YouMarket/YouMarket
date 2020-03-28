@@ -40,7 +40,7 @@ public class Usuario {
 	private String dni;
 	
 	@Column(name="fecha_nacimiento")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	
 	@Column(name="subscripcion", length=20)
@@ -49,9 +49,6 @@ public class Usuario {
 	@Column(name="c_postal", length = 5)
 	private String cPostal;
 	
-	@Column(name="rol", length = 10)
-	private String rol;
-	
 	private String email;
 	
 	private String password;
@@ -59,9 +56,9 @@ public class Usuario {
 	@Column(name="telefono", length=20)
 	private String telefono;
 	
-	 @ManyToMany(fetch = FetchType.LAZY)
-	    @JoinTable(name = "user_roles",
-	            joinColumns = @JoinColumn(name = "user_id"),
-	            inverseJoinColumns = @JoinColumn(name = "role_id"))
-	    private Set<Role> roles = new HashSet<>();
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 }

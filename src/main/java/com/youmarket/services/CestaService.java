@@ -81,7 +81,6 @@ public class CestaService {
 		  User2.setNombre(u.getNombre());
 		  User2.setTelefono(u.getTelefono());
 		  User2.setEmail(u.getEmail());
-		  User2.setRol(u.getRol());
 		  User2.setSubscripcion(u.getSubscripcion());
 		});
 		
