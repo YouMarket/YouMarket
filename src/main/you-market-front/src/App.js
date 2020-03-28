@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
 	  BrowserRouter as Router,
 	  Switch,
-	  Route
+	  Route,
+	  withRouter
 	} from "react-router-dom";
 import Productos from './Productos';
 import Dietas from './Dietas';
 import Perfil from './Perfil';
 import RecetasListado from './RecetasListado';
 import ProductoDetalle from './ProductoDetalle';
+import RegistroUsuario from './Registro';
 import PedidosUsuario from './Perfil/PedidosUsuario';
 import DatosUsuario from './Perfil/DatosUsuario';
 import DatosSubscripcion from './Perfil/DatosSubscripcion';
@@ -17,8 +19,12 @@ import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import Login from './auth/Login'
 
+import RegistroDireccion from './Registro/Direccion';
 import Carro from './Carro';
-
+import Cestas from './Cestas';
+import FormCesta from './FormCesta';
+import ShowCesta from './ShowCesta';
+	
 function App() {
         return (
         <Router>
@@ -47,6 +53,12 @@ function App() {
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
+    			<Route path="/registro">
+					<RegistroUsuario/>
+				</Route> 
+				<Route path="/registro/direccion">
+					<RegistroDireccion/>
+				</Route> 
     			<Route path="/perfil">
 					<Perfil/>
 				</Route>
@@ -64,6 +76,19 @@ function App() {
 				</Route>
 				<Route path="/login">
     				<Login />
+				</Route>
+				
+				<Route path="/cesta">
+		    		<Cestas />
+		    	</Route>
+		    	<Route path="/create/cesta">
+	    			<FormCesta />
+	    		</Route>
+	    		<Route path="/show/cesta/:id">
+	    			<ShowCesta />
+	    		</Route>
+	    		<Route path="/login">
+    			<Login />
 				</Route>
 				<Route path="/">
 		        	<Productos />
