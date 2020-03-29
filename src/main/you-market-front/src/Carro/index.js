@@ -30,11 +30,8 @@ const[carrito, setCarrito] = useState([]);
 
 			<div className="products-container-list">
 				{carrito.map(cestaproducto => (
-					<ProductoListado id={cestaproducto.producto.id} nombre ={cestaproducto.producto.nombre} supermercado={cestaproducto.producto.supermercado.nombre} precio ={cestaproducto.producto.precio} urlImagen={cestaproducto.producto.urlImagen} unidad = {cestaproducto.producto.unidad} cantidad = {cestaproducto.cantidad} />
+					<ProductoListado id={cestaproducto.producto.id} nombre ={cestaproducto.producto.nombre} supermercado={cestaproducto.producto.supermercado.nombre} precio ={cestaproducto.producto.precioIva} urlImagen={cestaproducto.producto.urlImagen} unidad = {cestaproducto.producto.unidad} cantidad = {cestaproducto.cantidad} />
 				))}
-				{/*  <ProductoListado id="1" nombre="leche" supermercado="Mercadona" precio="1,3" imagen="https://cutt.ly/leche" unidad="€/litro" cantidad="1"/>
-				 <ProductoListado id="1" nombre="leche" supermercado="Mercadona" precio="1,3" imagen="https://cutt.ly/leche" unidad="€/litro" cantidad="1"/>
-				 <ProductoListado id="1" nombre="leche" supermercado="Mercadona" precio="1,3" imagen="https://cutt.ly/leche" unidad="€/litro" cantidad="1"/> */}
 
 				<div className="price"><b>Precio final:</b> 15€</div>
 				<div className="buttons">
