@@ -18,6 +18,7 @@ import DatosEnvio from './Perfil/DatosEnvio';
 import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import Login from './auth/Login'
+import Logout from './auth/Logout'
 
 import Carro from './Carro';
 import Cestas from './Cestas';
@@ -74,6 +75,10 @@ function App() {
     				<Login />
 				</Route>
 				
+				<Route path="/logout">
+				<Logout />
+			</Route>
+				
 				<Route path="/cesta">
 		    		<Cestas />
 		    	</Route>
@@ -82,9 +87,6 @@ function App() {
 	    		</Route>
 	    		<Route path="/show/cesta/:id">
 	    			<ShowCesta />
-	    		</Route>
-	    		<Route path="/login">
-    			<Login />
 				</Route>
 				<Route path="/">
 		        	<Productos />

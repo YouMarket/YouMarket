@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useCallback, useEffect } from 'react';
 import './styles.css';
 import logo from '../logo.png';
 import carro from './shopping-cart.svg';
@@ -31,8 +31,24 @@ function closeMenu() {
 	x.style.display = "none";
 }
 
-function Header() {
 
+function Header() {
+	const [login, setLogin]=useState('');
+
+	const loginCheck = useCallback(() => {
+		if(localStorage.getItem('auth')!=null){
+			setLogin('logout');
+		}else{
+			setLogin('login');
+	      }
+		return login;
+	  }, []);
+	  
+	  useEffect(() => {
+		    loginCheck();
+		  }, [loginCheck]);
+   
+	
 	return(
 		<div>
 		<div className="header-container">
@@ -52,12 +68,16 @@ function Header() {
 					<p id="carro-contador" className="carro-contador">0</p>
 				</div>
 			</div>
+		
 			<Link className="perfil" to="/perfil">
 				<img src={user} className="icon" alt="Mi Perfil"/>
 			</Link>
 			<a href="#" className="hamburger-menu" onClick={menuInteraction}>
 				<img src={menu} className="hamburger-icon" alt="Menu"/>
 			</a>
+			<Link className="login" to={login}>
+				{login}
+			</Link>
 		</div>
 		<div id="menuLinks">
 			<Link to="/" className="menuLink" onClick={closeMenu}>Productos</Link>

@@ -11,7 +11,7 @@
 	padding-bottom:2%;
 }
 
-.grid {
+.grid-form-cesta {
 	display: grid;
 	grid-column-gap: 10px;
 	grid-row-gap: 10%;
@@ -53,6 +53,7 @@ input[type=text]:focus {
   display: inline-block;
   font-size: 100%;
   cursor:pointer;
+  margin-bottom:2%;
 
 }
 
