@@ -46,8 +46,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).and().authorizeRequests()
+		http
+			.cors()
+			.and().csrf().disable()
+			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+			.and().authorizeRequests()
 				.antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html",
 						"/**/*.css", "/**/*.js")
 				.permitAll()
@@ -58,6 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/usuario/signIn").permitAll()
 				.antMatchers("/usuario/signUp").permitAll()
 				.antMatchers("/suscripcion/all").permitAll()
+				.antMatchers("/producto/*").permitAll()
 				.anyRequest().authenticated();
 
 		// Add our custom JWT security filter
