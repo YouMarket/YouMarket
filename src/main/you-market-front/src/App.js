@@ -19,7 +19,6 @@ import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import Login from './auth/Login'
 
-import RegistroDireccion from './Registro/Direccion';
 import Carro from './Carro';
 import Cestas from './Cestas';
 import FormCesta from './FormCesta';
@@ -55,9 +54,6 @@ function App() {
     			</Route>
     			<Route path="/registro">
 					<RegistroUsuario/>
-				</Route> 
-				<Route path="/registro/direccion">
-					<RegistroDireccion/>
 				</Route> 
     			<Route path="/perfil">
 					<Perfil/>
