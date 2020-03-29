@@ -42,10 +42,13 @@ public class Pedido extends Cesta{
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date fechaEnvio;
 	
-	@Column(name="hora_envio")
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "hh:mm")
-	private java.util.Date horaEnvio;
+	@Column(name="hora_envio_ini")
+	private int horaEnvioIni;
+	
+	@Column(name="hora_envio_fin")
+	private int horaEnvioFin;
+	
+	
 	
 	/**
 	 * 
