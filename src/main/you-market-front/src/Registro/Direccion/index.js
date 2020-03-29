@@ -1,24 +1,20 @@
 import React, { Component, useState } from 'react';
-import './styles.css';
-import Header from '../Header';
-import {InputText} from 'primereact/inputtext';
-import  {withFormik, Form, Field, ErrorMessage}  from 'formik';
+import '../styles.css';
+import Header from '../../Header';
 import {Card} from 'primereact/card';
 import {ProgressBar} from 'primereact/progressbar';
-import {Password} from 'primereact/password';
 import { Formik } from 'formik';
-import { withRouter } from 'react-router-dom';
 
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import { render } from 'react-dom';
 
 
-class RegistroUsuario extends React.Component{
-	constructor(props) {
-		super(props);
-	  }
+export default class RegistroDireccion extends React.Component{
+
+    constructor(props) {
+        super(props);
+    }
   	render(){
 		return (
 			<div>	  
@@ -46,9 +42,7 @@ class RegistroUsuario extends React.Component{
 								  .then(data => {
 									console.log(data)
 									if (data.id!=null) {
-										console.log("entra")
-										console.log(this.props.history)
-										this.props.history.push('/registro/direccion');
+										this.props.history.push('/cesta');
 									}else{
 										this.onChangeErrors("Contraseña incorrecta");
 									}
@@ -70,7 +64,7 @@ class RegistroUsuario extends React.Component{
 							/* and other goodies */
 						}) => (
 							<form onSubmit={handleSubmit}>
-							<Card title="Datos del usuario">
+							<Card title="Direccion del usuario">
 								<div className="row">
 									<span className="p-float-label">
 										<input
@@ -187,7 +181,7 @@ class RegistroUsuario extends React.Component{
 								Enviar
 							</button>
 							<br/>
-							<ProgressBar value='0' style={{margin: 20}}/>
+							<ProgressBar value='40' style={{margin: 20}}/>
 							</div>
 						</form>
 						)}
@@ -196,4 +190,4 @@ class RegistroUsuario extends React.Component{
 			</div>
 		)
  	}
-}export default withRouter(RegistroUsuario);
+}

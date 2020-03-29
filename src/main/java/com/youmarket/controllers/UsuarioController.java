@@ -1,5 +1,7 @@
 package com.youmarket.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,8 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
-import java.util.Optional;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +22,11 @@ import com.youmarket.configuration.security.JwtTokenProvider;
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Direccion;
 import com.youmarket.domain.Pago;
+import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
 import com.youmarket.domain.enums.RoleName;
 import com.youmarket.repositories.RoleRepository;
+import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
 
 @RestController
@@ -51,6 +53,9 @@ public class UsuarioController {
 	
 	@Autowired
 	DireccionController direccionController;
+	
+	@Autowired
+	private SuscripcionService suscripcionService;
 
 	@PostMapping("/signIn")
 	public ResponseEntity<?> login(@RequestBody Usuario usuario) {
@@ -75,11 +80,11 @@ public class UsuarioController {
 	@PostMapping("/signUp")
 	public Usuario signUp(@RequestBody Usuario usuario) {
 		
-		System.out.println("User pass: "+usuario.getPassword());
-//		if(usuario.getSubscripcion() == ) {
-//			
+		Suscripcion sus = suscripcionService.findById(usuario.getSuscripcion().getId());
+//		if(sus.isDietista()) {
+//			usuario.getRoles().add(RoleName.CLIENTE_CON_DIETAS);
 //		}
-			
+//			
 //		usuario.setRoles(RoleName.CLIENTE);
 		usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
 		Usuario signUpped = usuarioService.save(usuario);

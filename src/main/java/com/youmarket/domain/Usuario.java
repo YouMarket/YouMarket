@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -43,8 +44,10 @@ public class Usuario {
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	
-	@Column(name="subscripcion", length=20)
-	private String subscripcion;
+	
+	@ManyToOne(optional= true)
+	@JoinColumn(name="suscripcion_id")
+	private Suscripcion suscripcion;
 	
 	@Column(name="c_postal", length = 5)
 	private String cPostal;
