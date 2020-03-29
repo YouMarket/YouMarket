@@ -47,22 +47,13 @@ public class PedidoController {
 		p.setNombre("Pedido num. " + p.getId());
 		p.setOrdenEntrega(1);
 		p.setRetraso("No hubo retraso");
-		/*
-		Date horaEnvio = new Date();
-		Date horaEnvioForm = p.getHoraEnvio();
-		int horas = horaEnvioForm.getHours();
-		int mins = horaEnvioForm.getMinutes();
-		
-		horaEnvio.setHours(horas);
-		horaEnvio.setMinutes(mins);
-		
-		p.setHoraEnvio(horaEnvio);
-		*/
+
 		//TODO: CAMBIAR POR USUARIO LOGEADO
 		Usuario u = this.usuarioService.listaUsuarios().get(0);
 		p.setUsuario(u);
 		
-		System.out.println(p);
+		//TODO: COSTE DEL PEDIDO
+		
 		
 		Pedido pedidoGuardado = pedidoService.save(p);
 		

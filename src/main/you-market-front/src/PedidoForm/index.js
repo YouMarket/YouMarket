@@ -1,7 +1,19 @@
 import React,  { useFetch, useCallback, useState, useEffect } from 'react';
 import { Formik } from 'formik';
 
+function check() {
+	var x, text;
 
+	// Get the value of the input field with id="numb"
+	x = document.getElementById("minutosEnvio").value;
+
+	if (x > 10) {
+		    text = "Input not valid";
+		} else {
+		    text = "Input OK";
+		}
+	document.getElementById("demo").innerHTML = text;
+}
 
 const PedidoForm = () => (
   <div >
@@ -11,8 +23,14 @@ const PedidoForm = () => (
       validate={values => {
         const errors = {};
         if (!values.direccion) {
-          errors.direccion = 'Required';
+        	errors.direccion = 'Campo obligatorio';
         } 
+        if (!values.fechaEnvio) {
+        	errors.fechaEnvio = 'Campo obligatorio';
+        }
+        if (values.horaEnvioFin < values.horaEnvioIni) {
+        	errors.horaEnvioFin = 'La hora final no puede ser anterior a la inicial'
+        }
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
@@ -22,11 +40,11 @@ const PedidoForm = () => (
         				"Content-Type": "application/json"
         			},
         			method:'POST',
-        			body:JSON.stringify(values, null, 5)
+        			body:JSON.stringify(values, null, 2)
         	}).then(function(response) {
         	    return console.log(response.json());
         	  })
-          alert(JSON.stringify(values, null, 5));
+          alert(JSON.stringify(values, null, 2));
           
           setSubmitting(false);
         }, 400);
@@ -44,36 +62,84 @@ const PedidoForm = () => (
       }) => (
         <form onSubmit={handleSubmit}>
         
-		Dirección: <input
+        
+        <label for="direccion">Dirección*: </label>
+        <input
+		id="direccion"
 		type="text"
 		name="direccion"
 		onChange={handleChange}
 		onBlur={handleBlur}
 		value={values.direccion}
+        placeholder="c/Cisnes, 60, Sevilla"
+        pattern="c/([A-z]+), (\d+),\s([A-z\s]+)"
+        title="Debe ser de la forma: c/Cisnes, 60, Sevilla"
 		/>
-		{errors.direccion && touched.direccion}
+		{errors.direccion}
 		<br/><br/>
-          
-		Fecha del envío: <input
-		type="text"
-		name="fechaEnvio"
-		onChange={handleChange}
-		onBlur={handleBlur}
-		value={values.fechaEnvio}
-		/>
-		{errors.fechaEnvio && touched.fechaEnvio}
-		<br/><br/>
+         
+
 		
-		Hora del envío: <input
-		type="text"
-		name="horaEnvio"
-		onChange={handleChange}
-		onBlur={handleBlur}
-		value={values.horaEnvio}
-		/>
-		{errors.horaEnvio && touched.horaEnvio}
-		<br/><br/>
+		<fieldset> 
+		 	<legend>Envío** </legend>
+		 	
+			<label for="fechaEnvio">Fecha*: </label>
+			<input
+			id="fechaEnvio"
+			type="text"
+			name="fechaEnvio"
+			onChange={handleChange}
+			onBlur={handleBlur}
+			value={values.fechaEnvio}
+	        placeholder="2020-04-23"
+	        pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
+	        title="El formato debe ser aaaa-mm-dd (P. ej: 2020-04-23)"
+			/>
+			{errors.fechaEnvio}
+			<br/><br/>
+		 	
+			<br/>
+			<label for="horaEnvioIni">Hora inicial: </label>
+			<input
+			id="horaEnvioIni"
+			type="number"
+			name="horaEnvioIni"
+			onChange={handleChange}
+			onBlur={handleBlur}
+			value={values.horaEnvioIni}
+			min="9"
+			max="21"
+			/>
+			{errors.horaEnvioIni}
+			
+			<label for="horaEnvioFin">   Hora final: </label>
+			<input
+			type="number"
+			name="horaEnvioFin"
+			id="horaEnvioFin"
+			onChange={handleChange}
+			onBlur={handleBlur}
+			value={values.horaEnvioFin}
+			min="9"
+			max="21"
+			oninput="check()"
+			/>
+			{errors.horaEnvioFin}
+			<br/><br/>
+			
+			<p id="demo"></p>
+			
+		</fieldset>
+		<br/>
 		
+		<div>
+			* Campo obligatorio
+		</div>
+		<div>
+			** La entrega se realizará en la horquilla de horas indicada
+		</div>
+	
+		<br/><br/>
          <div className="grid">
          <button type="submit" disabled={isSubmitting}>
          	Enviar
