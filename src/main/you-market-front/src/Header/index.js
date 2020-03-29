@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 import logo from '../logo.png';
 import carro from './shopping-cart.svg';
 import menu from './menu.svg';
-import {Link} from 'react-router-dom';
-
+import {Link, NavLink} from 'react-router-dom';
+import user from './user-circle-solid.svg';
 
 window.onresize = hideMenuLinks;
 
@@ -31,32 +31,42 @@ function closeMenu() {
 	x.style.display = "none";
 }
 
-
-
 function Header() {
-  return(
-	<div>
-	  <div className="header-container">
-	  	<img className="logo" src={logo} alt="Logo"/>
-	  	<div className="header-links">
-		   	<Link to="/" className="header-link" >Productos</Link>
-		   	<Link className="header-link" to="/dieta/list">Dietas</Link>
-		   	<Link className="header-link" to="/products">Cestas</Link>
-	   	</div>
-		<Link className="carro" to="/carro">
-		  	<img src={carro} className="carro-icon" alt="Carro"/>
-		</Link>
-		<a href="#" className="hamburger-menu" onClick={menuInteraction}>
-	   		<img src={menu} className="hamburger-icon" alt="Menu"/>
-	    </a>
-	  </div>
-	  <div id="menuLinks">
-	  	<Link to="/" className="menuLink" onClick={closeMenu}>Productos</Link>
-	   	<Link className="menuLink" to="/products" onClick={closeMenu}>Dietas</Link>
-	   	<Link className="menuLink" to="/products" onClick={closeMenu}>Cestas</Link>
-	  </div>
-	</div>
- );
+
+	return(
+		<div>
+		<div className="header-container">
+			<NavLink to="/">
+				<img className="logo" src={logo} alt="Logo"/>
+			</NavLink>
+			<div className="header-links">
+				<Link to="/" className="header-link" >Productos</Link>
+				<Link className="header-link" to="/dieta/list">Dietas</Link>
+				<Link className="header-link" to="/products">Cestas</Link>
+			</div>
+			<div className="carro-menu-container">
+				<Link className="carro" to="/carro">
+					<img src={carro} className="icon" alt="Carro"/>
+				</Link>
+				<div className="carro-contador-container">
+					<p id="carro-contador" className="carro-contador">0</p>
+				</div>
+			</div>
+			<Link className="perfil" to="/perfil">
+				<img src={user} className="icon" alt="Mi Perfil"/>
+			</Link>
+			<a href="#" className="hamburger-menu" onClick={menuInteraction}>
+				<img src={menu} className="hamburger-icon" alt="Menu"/>
+			</a>
+		</div>
+		<div id="menuLinks">
+			<Link to="/" className="menuLink" onClick={closeMenu}>Productos</Link>
+			<Link className="menuLink" to="/dietas" onClick={closeMenu}>Dietas</Link>
+			<Link className="menuLink" to="/products" onClick={closeMenu}>Cestas</Link>
+			<Link className="menuLink" to="/perfil" onClick={closeMenu}>Mi perfil</Link>
+		</div>
+		</div>
+	);
 }
 
 export default Header;
