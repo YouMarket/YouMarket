@@ -56,9 +56,6 @@ function App() {
     			<Route path="/registro">
 					<RegistroUsuario/>
 				</Route> 
-				<Route path="/registro/direccion">
-					<RegistroDireccion/>
-				</Route> 
     			<Route path="/perfil">
 					<Perfil/>
 				</Route>
