@@ -49,7 +49,7 @@ const[carrito, setCarrito] = useState([]);
 				
 				<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} €</div>
 				<div className="buttons">
-					<button className="save-cesta">Guardar como cesta</button>
+					{/* <button className="save-cesta">Guardar como cesta</button> */}
 					<button className="button-finish">Terminar pedido</button>
 				</div>
 			</div>
