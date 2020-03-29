@@ -3,13 +3,14 @@ import './styles.css';
 import Header from '../Header';
 import ProductoListado from '../ProductoListado'
 
-var precioFinal = 0.0
-function updatePrecioFinal(cantidad: Number, precio: Number){
+const precioFinal = 0.00
+function updatePrecioFinal(cantidad, precio){
 	precioFinal += precio*cantidad
 	return precioFinal
 }
 
 function Carro() {
+precioFinal = 0.00
 const[carrito, setCarrito] = useState([]);
 	const fetchCarrito = useCallback(() => {
 		return fetch('carrito')
@@ -46,7 +47,7 @@ const[carrito, setCarrito] = useState([]);
 					</ProductoListado>
 				))}
 				
-				<div className="price"><b>Precio final: </b>{precioFinal} €</div>
+				<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} €</div>
 				<div className="buttons">
 					<button className="save-cesta">Guardar como cesta</button>
 					<button className="button-finish">Terminar pedido</button>
