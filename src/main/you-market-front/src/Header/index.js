@@ -34,12 +34,15 @@ function closeMenu() {
 
 function Header() {
 	const [login, setLogin]=useState('');
+	const [loginEsp, setLoginEsp]=useState('');
 
 	const loginCheck = useCallback(() => {
 		if(localStorage.getItem('auth')!=null){
-			setLogin('logout');
+			setLogin('/logout');
+			setLoginEsp('Salir');
 		}else{
-			setLogin('login');
+			setLogin('/login');
+			setLoginEsp('Iniciar Sesión');
 	      }
 		return login;
 	  }, []);
@@ -76,7 +79,7 @@ function Header() {
 				<img src={menu} className="hamburger-icon" alt="Menu"/>
 			</a>
 			<Link className="login" to={login}>
-				{login}
+				{loginEsp}
 			</Link>
 		</div>
 		<div id="menuLinks">
