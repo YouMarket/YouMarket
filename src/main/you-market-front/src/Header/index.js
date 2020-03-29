@@ -3,7 +3,7 @@ import './styles.css';
 import logo from '../logo.png';
 import carro from './shopping-cart.svg';
 import menu from './menu.svg';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import user from './user-circle-solid.svg';
 
 window.onresize = hideMenuLinks;
@@ -36,7 +36,9 @@ function Header() {
 	return(
 		<div>
 		<div className="header-container">
-			<img className="logo" src={logo} alt="Logo"/>
+			<NavLink to="/">
+				<img className="logo" src={logo} alt="Logo"/>
+			</NavLink>
 			<div className="header-links">
 				<Link to="/" className="header-link" >Productos</Link>
 				<Link className="header-link" to="/dieta/list">Dietas</Link>

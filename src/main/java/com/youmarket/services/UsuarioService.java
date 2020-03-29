@@ -23,6 +23,10 @@ public class UsuarioService {
 	public Optional<Usuario> findUsuarioByLogin(String email, String password){
 		return repo.findUsuarioByLogin(email, password);
 	}
+	
+	public Optional<Usuario> findById(int id){
+		return repo.findById(id);
+	}
 
 	
 	public Usuario showProduct(int id) {
@@ -30,9 +34,8 @@ public class UsuarioService {
 		return null;
 	}
 
-	public int save(Usuario p) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Usuario save(Usuario p) {
+		return repo.save(p);
 	}
 
 	public void delete() {
