@@ -48,9 +48,6 @@ function Header() {
 				<Link className="carro" to="/carro">
 					<img src={carro} className="icon" alt="Carro"/>
 				</Link>
-				<div className="carro-contador-container">
-					<p id="carro-contador" className="carro-contador">0</p>
-				</div>
 			</div>
 			<Link className="perfil" to="/perfil">
 				<img src={user} className="icon" alt="Mi Perfil"/>

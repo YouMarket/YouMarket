@@ -7,7 +7,8 @@ import less from '../assets/less.svg'
 
 function ProductoDetalle() {
 
-	const [ producto, setProducto] = useState();
+	const [producto, setProducto] = useState();
+	const [cantidad, setCantidad] = useState(0);
 	const { id } = useParams();
 	
 	const fetchProducto = useCallback(() => {
@@ -35,18 +36,30 @@ function ProductoDetalle() {
 
 	var idContador = "contador-"+id
 	var idMenos = "menos-"+id
-	var cantidad = 0
 
 	function lessProduct(){
-	   if(cantidad > 0){
-		   cantidad = cantidad - 1
-		   document.getElementById(idContador).textContent = cantidad
-	   }
+		if(cantidad > 0){
+			setCantidad(cantidad - 1)
+			document.getElementById(idContador).textContent = cantidad
+		}
 	}
 	
 	function plusProduct() {
-	   cantidad = cantidad + 1
-	   document.getElementById(idContador).textContent = cantidad
+		setCantidad(cantidad + 1)
+		document.getElementById(idContador).textContent = cantidad
+	}
+
+	function sendToBack(id, cantidad) {
+		setCantidad(0);
+		fetch('/carrito', {
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+			},
+			method:'POST',
+			body:JSON.stringify({postId: id, postCantidad: cantidad})
+		})
+		
 	}
 
 	return(
@@ -84,7 +97,7 @@ function ProductoDetalle() {
 									<p id={idContador} className="contador no-link">{cantidad}</p>
 									<img className="mas" src={plus} onClick={plusProduct}/>
 								</div>
-								<button className="producto-detalle-add">Añadir al carro</button>
+								<button className="producto-detalle-add" onClick={() => sendToBack(id, cantidad)}>AÑADIR AL CARRO</button>
 							</div>
 						</div>
 				</div>
