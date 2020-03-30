@@ -1,0 +1,47 @@
+.cesta-producto-container{
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #aaaaaa;
+	box-shadow: 0 1px 3px #aaaaaa;
+	cursor: pointer;
+}
+
+.cesta-producto-imagen{
+	height: 200px;
+	max-width: 240px;
+	display: block;
+	object-fit:cover;
+	border-bottom: 1px solid #aaaaaa;
+}
+
+.cesta-producto-info{
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	max-width: 207px;
+}
+
+.cesta-producto-precio{
+	margin: 0 0 12px 0;
+	font-weight: 600;
+    font-size: 20px;
+    color: black;
+}
+
+.cesta-producto-nombre{
+	margin: 0 0 8px 0;
+	font-weight: bold;
+    font-size: 15px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.cesta-producto-supermercado{
+	color: #779C3D;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cesta-producto-editar-cantidad {
+	margin-top: 20px;
+}

@@ -68,20 +68,13 @@ public class CestaService {
 		return res;
 	}
 
-	public Cesta creaCesta(FormCesta c) {
+	public Cesta creaCesta(FormCesta c, UserPrincipal cu) {
 		Usuario User2=new Usuario();
-		Optional<Usuario> user=usuarioService.findById(c.getUsuario());
-		user.ifPresent(u -> {
-		  User2.setApellidos(u.getApellidos());
-		  User2.setPassword(u.getPassword());
-		  User2.setCPostal(u.getCPostal());
-		  User2.setDni(u.getDni());
-		  User2.setFechaNacimiento(u.getFechaNacimiento());
-		  User2.setId(u.getId());
-		  User2.setNombre(u.getNombre());
-		  User2.setTelefono(u.getTelefono());
-		  User2.setEmail(u.getEmail());
-		});
+		Optional<Usuario> user=usuarioService.findById(cu.getId());
+		
+		if(user.isPresent()) {
+			User2=user.get();
+		}
 		
 		Cesta nc=new Cesta();
 		nc.setNombre(c.getName());

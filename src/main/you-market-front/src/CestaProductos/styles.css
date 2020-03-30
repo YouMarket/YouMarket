@@ -1,8 +1,15 @@
-.dietas-container{
+.productos-container{
 	padding: 40px 30px;
 	display: flex;
 	justify-content: center;
 	
+}
+
+.grid{
+	display: grid;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	grid-template-columns: 240px;
 }
 
 @media (min-width: 544px){
@@ -26,7 +33,7 @@
 }
 
 @media (min-width: 1100px){
-	.dietas-container{
+	.productos-container{
 		padding: 40px 60px;
 	}
 	

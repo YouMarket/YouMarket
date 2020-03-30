@@ -1,8 +1,8 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import Header from '../Header';
 import Dieta from '../Dieta';
-import { useParams } from "react-router-dom";
-
+import { useParams, Link } from "react-router-dom";
+import './styles.css';
 
 
 function DietaDetalle() {
@@ -34,10 +34,19 @@ function DietaDetalle() {
 	  			<h1> {dieta.nombre} </h1>
 	  			<img className="dieta-imagen" src={dieta.url_imagen} alt={dieta.nombre}/>
 			  	<div className="dieta-info">
-			  		<p> <b> Tipo: </b>  {dieta.tipo} </p>
-			  		<p> <b> Descripción: </b>  {dieta.descripcion} </p>
-			  		<p> <b> Activa: </b>  {dieta.activa} </p>
+		  		<div>
+	  				<b> Tipo: </b>{dieta.tipo}
+	  			</div>
+	  			<div>
+  					<b> Descripción: </b>{dieta.descripcion}
+  				</div>
+  				<div>
+  					<b> Activa: </b>{dieta.activa}
+				</div>
 			  	</div>
+			  	<Link to={`../../../cesta/productos/dieta/list/${dieta.id}`}>
+			  	Productos
+			  	</Link>
 	  	  	</div>
 	 </div>
 	);

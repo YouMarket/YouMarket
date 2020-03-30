@@ -55,7 +55,7 @@ class Login extends React.Component{
 
 					}).then(response => response.json())
 						.then(data => {
-						console.log(data)
+						
 						if (data.accessToken!=null) {
 		                    this.onChangeStatus("Logged");
 		                    localStorage.setItem('auth', data.accessToken);
@@ -68,9 +68,6 @@ class Login extends React.Component{
 		                	}
 						});
 
-		                	
-		          
-		          alert(JSON.stringify(values, null, 2));
 		          setSubmitting(false);
 		        }, 400);
 		      }}
