@@ -38,12 +38,6 @@ public class Pago {
 	
 	@Column(name="caducidad", length=10)
 	private String caducidad;
-	
-	@Column(name="tipo")
-	private TipoPago tipoPago;
-	
-	@Column(name="paypal")
-	private String emailPaypal;
 
 	@Column(nullable = false)
 	@Type(type = "org.hibernate.type.NumericBooleanType")
