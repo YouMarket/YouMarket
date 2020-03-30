@@ -21,7 +21,7 @@ import Login from './auth/Login'
 import Logout from './auth/Logout'
 
 import PedidoForm from './PedidoForm';
-import CestaProductos from './CestaProductos';
+import DietaProductos from './DietaProductos';
 
 import Carro from './Carro';
 import Cestas from './Cestas';
@@ -32,6 +32,10 @@ function App() {
         return (
         <Router>
 	        <Switch>
+				<Route path="/producto/dieta/list/:id">
+					<DietaProductos/>
+				</Route>
+	        
 				<Route path="/pedido/create">
 					<PedidoForm />
 				</Route>
@@ -98,9 +102,7 @@ function App() {
 
 				
 				
-				<Route path="/cesta/productos/dieta/list/:id">
-					<CestaProductos/>
-				</Route>
+
 			
 			
 		        <Route path="/">
