@@ -2,6 +2,7 @@ import React,  { useFetch, useCallback, useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import { withRouter	} from 'react-router-dom';
 import Header from '../Header';
+import { PayPalButton } from "react-paypal-button-v2";
 
 class PedidoForm extends React.Component{
 		
@@ -141,10 +142,29 @@ class PedidoForm extends React.Component{
 	
 		<br/><br/>
          <div className="grid">
-         <button type="submit" disabled={isSubmitting}>
-         	Enviar
-         </button>
-
+         <PayPalButton
+         amount={1}
+         buyerCountry="ES"
+         onSuccess={(values, { setSubmitting }) => {
+             setTimeout(() => {
+             	fetch('', {
+             			headers: {
+             				"Content-Type": "application/json"
+             			},
+             			method:'POST',
+             			body:JSON.stringify(values, null, 2)
+             	}).then(function(response) {
+             	    return console.log(response.json());
+             	}).then(() => 
+             	 {
+             		 this.handleRedirect();
+             	 })
+               alert(JSON.stringify(values, null, 2));
+               
+               setSubmitting(false);
+             }, 400);
+           }}
+       />
           </div>
         </form>
       )}
