@@ -86,4 +86,10 @@ public List<CestaProducto> cpPorCesta(int id){
 	return this.cprepo.findByCestaId(id);
 }
 
+
+    
+    public CestaProducto save(CestaProducto cp){
+        return this.cprepo.save(cp);
+    }
+    
 }
