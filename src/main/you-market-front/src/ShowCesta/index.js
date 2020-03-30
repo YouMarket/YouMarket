@@ -46,11 +46,9 @@ const { id } = useParams();
 	      .then(res => res.json())
 	      .then(productoCesta => {
 	        setProductoCesta(productoCesta)
-	        console.log(productoCesta)
 
 	      });
 	  }, []);
-	console.log(productoCesta)
 
 	useEffect(() => {
 		fetchProductoCesta(productoCesta);
@@ -65,11 +63,9 @@ const { id } = useParams();
 	      .then(res => res.json())
 	      .then(total1 => {
 	        setTotal(total1)
-	        console.log(total)
 
 	      });
 	  }, []);
-	console.log(total)
 
 	useEffect(() => {
 		fetchTotal(total);
@@ -97,6 +93,7 @@ if (!cesta){
 
 	  <Cesta nombre={cesta.nombre} id={cesta.id} total=""/>
 	<h2 className="show-cesta-h">Productos</h2>
+	  <div className="separador"></div>
 	  { productoCesta && productoCesta.map((productoC) => (
 
 			    <div key={productoC.producto.id} className="div-productos-cesta">
@@ -110,8 +107,7 @@ if (!cesta){
 			    </div>
 
 	           ))}
-	  
-	  <p>Total: {total}€</p>
+	  <p className="cesta-total">Total: {total}€</p>
 	    
 	    <Formik
          initialValues={{id}}
@@ -125,10 +121,7 @@ if (!cesta){
            			method:'POST',
            			body:JSON.stringify(values, null, 2)
            	}).then((response)=> {
-           		alert(JSON.stringify(values, null, 2))
-       
            		setSubmitting=false;
-
 
            	}).then(() =>
            	{history.push("/carro");}
@@ -157,13 +150,13 @@ if (!cesta){
                name="id"
                onChange={handleChange}
                onBlur={handleBlur}
-               value={values.name}
+               value={id}
              	className="id-input-cesta"
              />
 
              <div className="grid2-carrito-cesta">
              <button type="submit" disabled={isSubmitting} className="submit-cesta-carrito">
-             Meter en el carro
+             Añadir
              </button>
              </div>
              </div>

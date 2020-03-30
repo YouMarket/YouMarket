@@ -90,8 +90,8 @@ public class CarritoSessionController {
 	}
 
 	@PostMapping("/cestaACarrito")
-	public List<ProductoCarrito> cestaACarrito(@RequestBody Map<String,Integer> postCesta, HttpServletRequest request, HttpSession session){
-		List<CestaProducto> productos = this.cpService.cpPorCesta(postCesta.get("id"));
+	public List<ProductoCarrito> cestaACarrito(@RequestBody Map<String,String> postCesta, HttpServletRequest request, HttpSession session){
+		List<CestaProducto> productos = this.cpService.cpPorCesta(Integer.valueOf(postCesta.get("id")));
 		@SuppressWarnings("unchecked")
 		Map<Producto, Integer> carritoSession = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
 		if(carritoSession == null){
