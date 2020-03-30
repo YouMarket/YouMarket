@@ -1,22 +1,20 @@
 import React,  { useFetch, useCallback, useState, useEffect } from 'react';
 import { Formik } from 'formik';
+import { withRouter	} from 'react-router-dom';
+import Header from '../Header';
 
-function check() {
-	var x, text;
-
-	// Get the value of the input field with id="numb"
-	x = document.getElementById("minutosEnvio").value;
-
-	if (x > 10) {
-		    text = "Input not valid";
-		} else {
-		    text = "Input OK";
-		}
-	document.getElementById("demo").innerHTML = text;
-}
-
-const PedidoForm = () => (
-  <div >
+class PedidoForm extends React.Component{
+		
+	handleRedirect = () => {
+		console.log(this.props.history);
+		this.props.history.push('/pedido');
+	}
+	render(){
+		return(
+	<div>
+		<Header/>
+	<div>
+  	
     <h1>Crear pedido</h1>
     <Formik
       initialValues={{   }}
@@ -43,7 +41,10 @@ const PedidoForm = () => (
         			body:JSON.stringify(values, null, 2)
         	}).then(function(response) {
         	    return console.log(response.json());
-        	  })
+        	}).then(() => 
+        	 {
+        		 this.handleRedirect();
+        	 })
           alert(JSON.stringify(values, null, 2));
           
           setSubmitting(false);
@@ -72,7 +73,7 @@ const PedidoForm = () => (
 		onBlur={handleBlur}
 		value={values.direccion}
         placeholder="c/Cisnes, 60, Sevilla"
-        pattern="c/([A-z]+), (\d+),\s([A-z\s]+)"
+        pattern="c/([A-z\s]+), (\d+),\s([A-z\s]+)"
         title="Debe ser de la forma: c/Cisnes, 60, Sevilla"
 		/>
 		{errors.direccion}
@@ -127,7 +128,6 @@ const PedidoForm = () => (
 			{errors.horaEnvioFin}
 			<br/><br/>
 			
-			<p id="demo"></p>
 			
 		</fieldset>
 		<br/>
@@ -149,7 +149,9 @@ const PedidoForm = () => (
         </form>
       )}
     </Formik>
-  </div>
+    	</div>
+	</div>
 );
-
-export default PedidoForm;
+}
+}
+export default withRouter(PedidoForm);
