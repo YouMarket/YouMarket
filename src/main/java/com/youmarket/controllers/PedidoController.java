@@ -2,9 +2,21 @@ package com.youmarket.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import com.youmarket.domain.CestaProducto;
+import com.youmarket.domain.Pedido;
+import com.youmarket.domain.Producto;
+import com.youmarket.domain.Usuario;
+import com.youmarket.services.CestaProductoService;
+import com.youmarket.services.PedidoService;
+import com.youmarket.services.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.youmarket.domain.Pedido;
-import com.youmarket.domain.Usuario;
-import com.youmarket.services.PedidoService;
-import com.youmarket.services.UsuarioService;
-
 @RestController
 @RequestMapping("pedido")
 public class PedidoController {
@@ -29,6 +36,9 @@ public class PedidoController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+
+	@Autowired
+	private CestaProductoService cpService;
 	
 	@GetMapping("/{id}")
     public ResponseEntity<Object> pedidoPorId(@Valid @PathVariable Integer id) {
@@ -36,7 +46,7 @@ public class PedidoController {
     }
 	
 	@PostMapping("/create")
-    public ResponseEntity<Pedido> create(@RequestBody Pedido p) throws URISyntaxException {
+    public ResponseEntity<Pedido> create(@RequestBody Pedido p, HttpSession session) throws URISyntaxException {
 		
 		Date fechaHoraEntrega = new Date();
 		Date fechaHoraEnvio = new Date();
@@ -56,7 +66,19 @@ public class PedidoController {
 		
 		
 		Pedido pedidoGuardado = pedidoService.save(p);
-		
+		@SuppressWarnings("unchecked")
+		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
+		List<Producto> keys = new ArrayList<>(carrito.keySet());
+		for(Producto prod : keys){
+			CestaProducto cp = new CestaProducto();
+			cp.setProducto(prod);
+			cp.setCantidad(carrito.get(prod));
+			cp.setCesta(pedidoGuardado);
+			cp.setId(prod, pedidoGuardado);
+			System.out.println(cp.getCesta().getId());
+			this.cpService.save(cp);
+			
+		}
 		
 		
 		return ResponseEntity.created(new URI ("/pedido/)" + pedidoGuardado.getId())).body(pedidoGuardado);
