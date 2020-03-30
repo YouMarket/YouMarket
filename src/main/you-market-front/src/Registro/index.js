@@ -71,6 +71,9 @@ class RegistroUsuario extends React.Component{
 							if(!values.usuario.email || !/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.usuario.email)){
 								errors.email = 'Debe introducir un email válido' 
 							}
+							if(!values.usuario.fechaNacimiento || !/[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(values.usuario.fechaNacimiento)){
+								errors.fechaNacimiento = 'Debe introducir una fecha con formato Año - mes - dia' 
+							}
 							if(!values.usuario.password || !/^[a-zA-Z0-9]{6,20}$/.test(values.usuario.password)){
 								errors.password = 'La contraseña debe tener mínimo de 6 carácteres y pede contener letras y números' 
 							}
