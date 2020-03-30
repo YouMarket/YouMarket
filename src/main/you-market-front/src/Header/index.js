@@ -52,26 +52,6 @@ function Header() {
 		  }, [loginCheck]);
 
 
-function Header() {
-	const [login, setLogin]=useState('');
-	const [loginEsp, setLoginEsp]=useState('');
-
-	const loginCheck = useCallback(() => {
-		if(localStorage.getItem('auth')!=null){
-			setLogin('/logout');
-			setLoginEsp('Salir');
-		}else{
-			setLogin('/login');
-			setLoginEsp('Iniciar Sesión');
-	      }
-		return login;
-	  }, []);
-	  
-	  useEffect(() => {
-		    loginCheck();
-		  }, [loginCheck]);
-   
-	
 	return(
 		<div>
 		<div className="header-container">
