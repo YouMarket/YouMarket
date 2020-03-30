@@ -40,6 +40,10 @@ public class CestaProductoService{
   	public List<CestaProducto> listaProductosByDiet(int dietId){
 		
 		return this.cprepo.findAll(); 
-	}
+    }
+    
+    public CestaProducto save(CestaProducto cp){
+        return this.cprepo.save(cp);
+    }
     
 }
