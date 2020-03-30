@@ -9,7 +9,7 @@ import com.youmarket.domain.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
-	
+
 	@Query("select usuario from Usuario usuario where email = ?1 and password = ?2")
 	Optional<Usuario> findUsuarioByLogin(String email, String password);
 

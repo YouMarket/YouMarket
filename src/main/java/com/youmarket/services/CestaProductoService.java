@@ -4,6 +4,9 @@ package com.youmarket.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
+import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.CestaProducto;
 import com.youmarket.domain.Producto;
 import com.youmarket.repositories.CestaProductoRepository;
@@ -14,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CestaProductoService{
-    
+
     @Autowired
     private CestaProductoRepository cprepo;
 
@@ -42,4 +45,42 @@ public class CestaProductoService{
 		return this.cprepo.findAll(); 
 	}
     
+	public Object CestasProductoPorCestaId(@Valid Integer id, UserPrincipal currentUser) {
+		List<CestaProducto> cps = this.cprepo.findByCestaId(id);
+		Boolean noHayHack=true;
+		for(CestaProducto p:cps) {
+			if(p.getCesta().getUsuario().getId()!=currentUser.getId()) {
+				noHayHack=false;
+
+
+			}
+		}
+		if(noHayHack==false) {
+			cps=null;
+		}
+		return cps;
+	}
+
+	public Double totalPorCestaId(@Valid Integer id, UserPrincipal currentUser) {
+		List<CestaProducto> cps = this.cprepo.findByCestaId(id);
+		Boolean noHayHack=true;
+		Double total=0.0;
+		for(CestaProducto p:cps) {
+			total= total +p.getCantidad()*p.getProducto().getPrecioIva();
+			if(p.getCesta().getUsuario().getId()!=currentUser.getId()) {
+				noHayHack=false;
+
+
+			}
+		}
+		if(noHayHack==false) {
+			cps=null;
+		}
+		return total;
+	}
+
+
+	public List<CestaProducto> cpPorCesta(int id){
+		return this.cprepo.findByCestaId(id);
+	}
 }

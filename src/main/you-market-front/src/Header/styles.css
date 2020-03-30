@@ -47,6 +47,10 @@
 	display: none;
 }
 
+.perfil {
+	display: none;
+}
+
 .icon{
 	height: 40px;
 	width: 40px;
@@ -89,30 +93,24 @@
 	margin-left: 10px;
 }
 
-.carro-menu-container {
-	position: relative;
-	float: left;
-}
-
-
 @media (min-width: 600px){
 	.header-links {
 		display: flex;
 	}
-	
+
 	.hamburger-menu	{
 		display: none;
 	}
-	
+
 	.carro-menu-container {
 		margin-left: 0;
 		margin-right: 32px
 	}
-	
+
 	#menuLinks {
 		display: none;
 	}
-	
+
 	.perfil{
 		display: block;
 		margin-right: 32px;
@@ -123,3 +121,4 @@
 		margin-right: 20px;
 	}
 }
+

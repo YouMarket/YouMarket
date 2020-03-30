@@ -46,6 +46,26 @@ function Header() {
 	      }
 		return login;
 	  }, []);
+
+	  useEffect(() => {
+		    loginCheck();
+		  }, [loginCheck]);
+
+
+function Header() {
+	const [login, setLogin]=useState('');
+	const [loginEsp, setLoginEsp]=useState('');
+
+	const loginCheck = useCallback(() => {
+		if(localStorage.getItem('auth')!=null){
+			setLogin('/logout');
+			setLoginEsp('Salir');
+		}else{
+			setLogin('/login');
+			setLoginEsp('Iniciar Sesión');
+	      }
+		return login;
+	  }, []);
 	  
 	  useEffect(() => {
 		    loginCheck();
@@ -61,14 +81,14 @@ function Header() {
 			<div className="header-links">
 				<Link to="/" className="header-link" >Productos</Link>
 				<Link className="header-link" to="/dieta/list">Dietas</Link>
-				<Link className="header-link" to="/products">Cestas</Link>
+				<Link className="header-link" to="/cesta">Cestas</Link>
 			</div>
 			<div className="carro-menu-container">
 				<Link className="carro" to="/carro">
 					<img src={carro} className="icon" alt="Carro"/>
 				</Link>
 			</div>
-		
+
 			<Link className="perfil" to="/perfil">
 				<img src={user} className="icon" alt="Mi Perfil"/>
 			</Link>

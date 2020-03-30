@@ -27,19 +27,19 @@ import Carro from './Carro';
 import Cestas from './Cestas';
 import FormCesta from './FormCesta';
 import ShowCesta from './ShowCesta';
-	
+import EditCesta from './EditCesta';
+
 function App() {
+
         return (
         <Router>
 	        <Switch>
 				<Route path="/pedido/create">
 					<PedidoForm />
 				</Route>
-	        
     			<Route path="/create/dieta">
 					<DietaForm />
 				</Route>
-				
 		    	<Route path="/productos">
 		    		<Productos />
 		    	</Route>
@@ -52,17 +52,16 @@ function App() {
 		    	<Route path="/dieta/list">
     				<Dietas />
     			</Route>
-    			
+
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
 				</Route>
-			
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
     			<Route path="/registro">
 					<RegistroUsuario/>
-				</Route> 
+				</Route>
     			<Route path="/perfil">
 					<Perfil/>
 				</Route>
@@ -81,11 +80,13 @@ function App() {
 				<Route path="/login">
     				<Login />
 				</Route>
-				
+
 				<Route path="/logout">
 				<Logout />
 			</Route>
-				
+				<Route path="/cesta/edit/:id">
+				<EditCesta/>
+				</Route>
 				<Route path="/cesta">
 		    		<Cestas />
 		    	</Route>
@@ -95,18 +96,12 @@ function App() {
 	    		<Route path="/show/cesta/:id">
 	    			<ShowCesta />
 				</Route>
-
-				
-				
 				<Route path="/cesta/productos/dieta/list/:id">
 					<CestaProductos/>
 				</Route>
-			
-			
 		        <Route path="/">
 		        	<Productos />
 		        </Route>
-		        
 
 		      </Switch>
         </Router>

@@ -11,19 +11,19 @@ import com.youmarket.repositories.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-	
+
 	@Autowired
 	private UsuarioRepository repo;
 
 	public List<Usuario> listaUsuarios(){
-		
-		return repo.findAll(); 
+
+		return repo.findAll();
 	}
-	
+
 	public Optional<Usuario> findUsuarioByLogin(String email, String password){
 		return repo.findUsuarioByLogin(email, password);
 	}
-	
+
 	public Optional<Usuario> findById(int id){
 		return repo.findById(id);
 	}
@@ -43,6 +43,6 @@ public class UsuarioService {
 
 	public void delete() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
