@@ -1,3 +1,5 @@
+@charset "ISO-8859-1";
+
 .registro-container{
 	padding: 40px 30px;
 	width: 50%;
@@ -14,43 +16,135 @@
 	
 }
 
-.tarjeta{
-    margin-top: 20px;
+
+.error{
+	color: red;
+	padding-top:5%;
+}
+@media(min-width:800px){
+.logo-umarket{
+	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
+	padding-top:1%;
+	padding-bottom:1%;
+	width:25%;
+}
+.input{
+	font-size:150%;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	width:70%;
+	padding-bottom:0.5%;
+	padding-top:0.5%;
+	margin-bottom:2%;
+	margin-top:0.5%;
+	border:0;
+	border-bottom: 3px solid #4CAF50; 
 }
 
-.error {
-    padding: 0.5rem;
-    background-color: rgba(255, 0, 0, 0.5);
-    border: 1px solid red;
-    border-radius: 6px;
-    margin: 0.5rem 0 0 0;
+.input-select{
+	font-size:120%;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	width:70%;
+	padding-bottom:0.5%;
+	padding-top:0.5%;
+	margin-bottom:2%;
+	margin-top:0.5%;
+	border:0;
 }
 
-.row {
-    width: 300px;
-    padding: 0.5rem 0;
+.error{
+	padding-left:10%;
+	font-size:90%;
 }
 
-.input {
-    width: 100%;
-    border-radius: 6px;
-    border: 1px solid #777;
-    padding: .5rem;
-    box-sizing: border-box;
+.label{
+	padding-left:20%;
+	font-size:90%;
 }
 
-.submit {
-    padding: 0.5rem 0;
-    background-color: #00a6ff;
-    color: white;
-    font-weight: bold;
-    font-size: 1rem;
-    width: 100%;
-    box-shadow: 0 1px 4px 0 rgba(22, 24, 26, 0.15);
-
-    &.disabled {
-        background-color: #e6e6e6;
-        color: #292929;
-        box-shadow: inherit;
-    }
+.input:focus {
+	border:3px solid #4CAF50;
 }
+
+.submit{
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: #4CAF50; /* Green */
+  	border: none;
+  	color: white;
+  	text-align: center;
+  	padding: 1% 2%;	
+  	text-decoration: none;
+  	font-size:150%;
+
+}}
+
+@media(max-width:799px){
+.logo-umarket{
+	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
+	padding-top:1.5%;
+	padding-bottom:0%;
+	width:40%;
+}
+.input{
+	font-size:120%;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	width:60%;
+	padding-bottom:0.5%;
+	padding-top:0.5%;
+	margin-bottom:2%;
+	margin-top:0.5%;
+	border:0;
+	border-bottom: 3px solid #4CAF50; 
+}
+
+.input-select{
+	font-size:120%;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	width:60%;
+	padding-bottom:0.5%;
+	padding-top:0.5%;
+	margin-bottom:2%;
+	margin-top:0.5%;
+	border:0;
+}
+
+.label{
+	padding-left:20%;
+	font-size:90%;
+}
+
+.error{
+	padding-left:10%;
+	font-size:90%;
+}
+
+.input:focus {
+	border:3px solid #4CAF50;
+}
+
+.submit{
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: #4CAF50; /* Green */
+  	border: none;
+  	color: white;
+  	text-align: center;
+  	padding: 1% 2%;	
+  	text-decoration: none;
+  	font-size:120%;
+
+}}

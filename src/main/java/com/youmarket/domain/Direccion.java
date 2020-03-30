@@ -37,7 +37,7 @@ public class Direccion {
 	private String provincia;
 	
 	@Column(name="c_postal")
-	private String cposta;
+	private String cpostal;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name="usuario_id")

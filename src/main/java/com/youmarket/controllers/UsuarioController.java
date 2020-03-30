@@ -1,6 +1,8 @@
 package com.youmarket.controllers;
 
-import java.util.List;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +18,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.youmarket.configuration.SecurityConfiguration;
+import com.youmarket.configuration.response.ApiResponse;
 import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.JwtAuthenticationResponse;
 import com.youmarket.configuration.security.JwtTokenProvider;
 import com.youmarket.configuration.security.UserPrincipal;
-import com.youmarket.domain.Direccion;
-import com.youmarket.domain.Pago;
+import com.youmarket.domain.Role;
 import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
 import com.youmarket.domain.enums.RoleName;
+import com.youmarket.domain.form.SignUpForm;
 import com.youmarket.repositories.RoleRepository;
+import com.youmarket.services.PagoService;
+import com.youmarket.services.RoleService;
 import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
 
@@ -44,6 +49,9 @@ public class UsuarioController {
 
 	@Autowired
 	RoleRepository roleRepository;
+	
+	@Autowired
+	RoleService roleService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -53,7 +61,7 @@ public class UsuarioController {
 	
 	@Autowired
 	DireccionController direccionController;
-	
+
 	@Autowired
 	private SuscripcionService suscripcionService;
 
@@ -74,37 +82,63 @@ public class UsuarioController {
     public Usuario getCurrentUser(@CurrentUser UserPrincipal currentUser) {
 		currentUser.getId();
 		Usuario userSummary = usuarioService.findById(currentUser.getId()).get();
+		userSummary.setId(0);
+		userSummary.setPassword(null);
         return userSummary;
     }
 
-	@PostMapping("/signUp")
-	public Usuario signUp(@RequestBody Usuario usuario) {
-		
-		Suscripcion sus = suscripcionService.findById(usuario.getSuscripcion().getId());
+//	@PostMapping("/signUp")
+//	public Usuario signUp(@RequestBody Usuario usuario) {
+//		
+//		Suscripcion sus = suscripcionService.findById(usuario.getSuscripcion().getId());
+//		usuario.setSuscripcion(sus);
 //		if(sus.isDietista()) {
-//			usuario.getRoles().add(RoleName.CLIENTE_CON_DIETAS);
+//			Role userRole = roleService.findByName(RoleName.CLIENTE_CON_DIETAS).orElse(null);
+//			usuario.setRoles(Collections.singleton(userRole));
+//		}else {
+//			Role userRole = roleService.findByName(RoleName.CLIENTE).orElse(null);
+//			usuario.setRoles(Collections.singleton(userRole));
 //		}
-//			
-//		usuario.setRoles(RoleName.CLIENTE);
-		usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
-		Usuario signUpped = usuarioService.save(usuario);
-		System.out.println("User encoded pass: "+usuario.getPassword());
-		return signUpped;
-	}
+//		
+//		usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
+//		Usuario signUpped = usuarioService.save(usuario);
+//		return signUpped;
+//	}
 
 	@PostMapping("/signUpAll")
-	public Usuario signUp(@RequestBody Usuario usuario, @RequestBody Direccion dir, @RequestBody Pago pago) {
+	public ResponseEntity<ApiResponse> signUpAll(@RequestBody SignUpForm form) throws MalformedURLException, URISyntaxException {
 		
-		System.out.println("User pass: "+usuario.getPassword());
-
-		usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
-		Usuario signUpped = usuarioService.save(usuario);
-		
-		dir.setUsuario(signUpped);
-		direccionController.saveNewDir(dir);
-		
-		System.out.println("User encoded pass: "+usuario.getPassword());
-		return signUpped;
+		ApiResponse respuesta = new ApiResponse();
+		if(usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
+			Usuario usuario = form.getUsuario();
+			
+			Suscripcion sus = suscripcionService.findById(usuario.getSuscripcion().getId());
+			usuario.setSuscripcion(sus);
+			if(sus.isDietista()) {
+				Role userRole = roleService.findByName(RoleName.CLIENTE_CON_DIETAS).orElse(null);
+				usuario.setRoles(Collections.singleton(userRole));
+			}else {
+				Role userRole = roleService.findByName(RoleName.CLIENTE).orElse(null);
+				usuario.setRoles(Collections.singleton(userRole));
+			}
+			
+			usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
+			usuarioService.save(usuario);
+			
+			if(form.getDir() != null) {
+				form.getDir().setUsuario(usuario);
+				form.getDir().setPrincipal(true);
+				direccionController.saveNewDir(form.getDir());
+			}
+			
+			respuesta.setSuccess(true);
+			respuesta.setMessage("logado");
+		}else {
+			respuesta.setSuccess(false);
+			respuesta.setMessage("El usuario ya existe");
+		}
+			
+		return ResponseEntity.ok(respuesta);
 	}
 
 	@GetMapping("/getUser")
