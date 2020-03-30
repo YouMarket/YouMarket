@@ -38,6 +38,7 @@ function App() {
 					<PedidoForm />
 				</Route>
 
+
     			<Route path="/create/dieta">
 					<DietaForm />
 				</Route>
@@ -58,6 +59,7 @@ function App() {
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
 				</Route>
+
 
     			<Route path="/recetas">
     				<RecetasListado/>

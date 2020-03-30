@@ -26,23 +26,10 @@ public class DireccionController {
 	
 	@Autowired
 	UsuarioService usuarioService;
-	
-	private Usuario usuar;
 
 	@PostMapping("/save")
 	public Direccion saveNewDir(@RequestBody Direccion dir) {
 		return direccionService.save(dir);
-	}
-	
-	@GetMapping("/construir")
-	public ResponseEntity<?> construccion() {
-		if(usuar == null) {
-			System.out.println("se crea usuario");
-			usuar = new Usuario();
-		}else {
-			System.out.println("ya esta creado el usuario");
-		}
-		return ResponseEntity.ok(usuar);
 	}
 	
 	@GetMapping("/dirs")

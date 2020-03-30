@@ -28,7 +28,10 @@ public class UsuarioService {
 		return repo.findById(id);
 	}
 
-
+	public boolean checkUsuariAvailability(String email) {
+		return !repo.findByEmail(email).isPresent();
+	}
+	
 	public Usuario showProduct(int id) {
 		// TODO Auto-generated method stub
 		return null;
