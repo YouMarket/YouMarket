@@ -87,7 +87,7 @@ function App() {
 				<Route path="/logout">
 				<Logout />
 			</Route>
-				<Route path="/cesta/edit/1">
+				<Route path="/cesta/edit/:id">
 				<EditCesta/>
 				</Route>
 				<Route path="/cesta">
