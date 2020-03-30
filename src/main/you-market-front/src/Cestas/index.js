@@ -22,39 +22,39 @@ const [total, setTotal] = useState(0);
 	  }, []);
     console.log(cestas);
 
-	
+
 	useEffect(() => {
 	    fetchCestas(cestas);
 	  }, []);
 
-	
-  return(	
+
+  return(
 <div>
   <Header/>
-		  
+
   <div className="nueva-cesta">
   	<a href="/create/cesta">Nueva cesta</a>
-  
+
 	  <div className="cestas-container">
-	  { cestas && cestas.map((cesta) => ( 
-			  
+	  { cestas && cestas.map((cesta) => (
+
 			    <div key={cesta.id} className="grid-cesta">
 			    <Cesta nombre={cesta.nombre} id={cesta.id} />
 
 	            </div>
-	          
+
 	           ))}
-	  
+
 	  </div>
-	  		
+
   </div>
  </div>
  );
 }
 export default Cestas;
 
-//productos= { cesta.productos && cesta.productos.map((p) => ( 
-//		<div key={p.id} className="productos">  
+//productos= { cesta.productos && cesta.productos.map((p) => (
+//		<div key={p.id} className="productos">
 //	    <a href="../producto/show">{p.nombre}</a>
 //
 //        </div>

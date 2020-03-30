@@ -18,7 +18,9 @@ import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @NoArgsConstructor
@@ -29,33 +31,33 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name="nombre", length=100)
 	private String nombre;
-	
+
 	@Column(name="apellidos", length=150)
 	private String apellidos;
-	
+
 	@Column(name="dni", length=20)
 	private String dni;
-	
+
 	@Column(name="fecha_nacimiento")
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
-	
+
 	@Column(name="subscripcion", length=20)
 	private String subscripcion;
-	
+
 	@Column(name="c_postal", length = 5)
 	private String cPostal;
-	
+
 	private String email;
-	
+
 	private String password;
-	
+
 	@Column(name="telefono", length=20)
 	private String telefono;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
