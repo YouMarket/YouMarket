@@ -1,0 +1,40 @@
+.cestas-container-show{
+	display: flex;
+	flex-direction: column;
+	
+}
+
+.cesta-icon{
+	text-align:center;
+}
+
+
+.cesta-editar{
+	text-align:center;
+}
+
+.cesta-imagen{
+	
+	max-width: 65%;
+}
+
+
+.cesta-info{
+	text-align:center;
+	max-width: 300px;
+
+}
+
+
+.cesta-nombre{
+	text-align:center;
+}
+
+.cesta-productos{
+	margin: 0 0 0px 0;
+}
+
+.cesta-id{
+	margin: 0 0 0px 0;
+}
+
