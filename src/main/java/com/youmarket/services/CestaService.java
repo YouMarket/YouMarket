@@ -25,6 +25,9 @@ public class CestaService {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@Autowired
+	private CestaProductoService cestaProductoService;
+	
 	//Para dashboard
 	public Integer totalCestasCreadas(){
 		
@@ -82,4 +85,27 @@ public class CestaService {
 		
 	}
 
+<<<<<<< Updated upstream
+=======
+	public Cesta saveProductos(@Valid Cesta c, List<Producto> productos) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void borrarPorIdSeguro(Integer id, UserPrincipal cu)	 {
+		Optional<Cesta> c=this.cestaRepository.findById(id);
+		Boolean hacked=false;
+		
+		if(c.isPresent()) {
+			Cesta c1=c.get();
+			if(c1.getUsuario().getId()!=cu.getId()) {
+				hacked=true;
+			}
+		}
+		if(hacked==false) {
+		cestaRepository.deleteById(id);
+		}
+	}
+
+>>>>>>> Stashed changes
 }
