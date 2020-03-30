@@ -79,6 +79,11 @@ public class CestaProductoService{
 public List<CestaProducto> listaProductosByDiet(int dietId){
 
 return this.cprepo.findAll();
+
+}
+
+public List<CestaProducto> cpPorCesta(int id){
+	return this.cprepo.findByCestaId(id);
 }
 
 }
