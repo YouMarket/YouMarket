@@ -1,3 +1,4 @@
+
 package com.youmarket.services;
 
 import java.util.ArrayList;
@@ -36,5 +37,9 @@ public class CestaProductoService{
         return this.cprepo.findAll();
     }
 
+  	public List<CestaProducto> listaProductosByDiet(int dietId){
+		
+		return this.cprepo.findAll(); 
+	}
     
 }
