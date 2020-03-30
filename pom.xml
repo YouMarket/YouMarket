@@ -20,6 +20,12 @@
 		<node.version>v12.16.1</node.version>
 		<yarn.version>v1.22.1</yarn.version>
 		<frontend-maven-plugin.version>1.7.6</frontend-maven-plugin.version>
+		
+		<sonar.projectKey>YouMarket_YouMarket</sonar.projectKey>
+  <sonar.organization>youmarket</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  <sonar.login>c8a33cd0cd1888eb4702f515da95458355e5675f</sonar.login>
+  <sonar.sources>/</sonar.sources>
 	</properties>
 
 	<dependencies>
