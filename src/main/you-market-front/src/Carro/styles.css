@@ -69,7 +69,6 @@
 
 .price {
     float: right;
-    max-width: 200px;
     font-size: 18px;
     text-transform: uppercase;
     padding: 20px;
