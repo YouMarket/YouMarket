@@ -4,11 +4,18 @@ import {useParams} from "react-router-dom";
 import style from './styles.css';
 import Cesta from '../Cesta';
 import Header from '../Header';
+import { Redirect } from 'react-router-dom';
+import { Formik } from 'formik';
+import { useHistory } from "react-router-dom";
 
 function ShowCesta() {
 const [cesta, setCesta] = useState();
 const [productoCesta, setProductoCesta] = useState();
 const [total, setTotal] = useState(0.0);
+let history = useHistory();
+
+
+
 
 const { id } = useParams();
 
@@ -100,11 +107,70 @@ if (!cesta){
 
 
 			    <p>Total: {total}€</p>
+			    
+			    <Formik
+		           initialValues={{id}}
+
+		           onSubmit={(values, { setSubmitting }) => {
+		             setTimeout(() => {
+		             	fetch(`../../../cestaACarrito}`, {
+		             			headers: {
+		             				"Content-Type": "application/json"
+		             			},
+		             			method:'POST',
+		             			body:JSON.stringify(values, null, 2)
+		             	}).then((response)=> {
+		             		alert(JSON.stringify(values, null, 2))
+		         
+		             		setSubmitting=false;
+
+
+		             	}).then(() =>
+		             	{history.push("/carro");}
+		                 )
+
+
+		             }, 400);
+		           }}
+		         >
+		           {({
+		             values,
+		             errors,
+		             touched,
+		             handleChange,
+		             handleBlur,
+		             handleSubmit,
+		             isSubmitting,
+		             /* and other goodies */
+		           }) => (
+		             <form onSubmit={handleSubmit}>
+		             <div className="grid-form-cesta">
+		             
+		               <input
+		               id="id"
+		                 type="hidden"
+		                 name="id"
+		                 onChange={handleChange}
+		                 onBlur={handleBlur}
+		                 value={values.name}
+		               	className="id-input-cesta"
+		               />
+
+		               <div className="grid2-carrito-cesta">
+		               <button type="submit" disabled={isSubmitting} className="submit-cesta-carrito">
+		               Meter en el carro
+		               </button>
+		               </div>
+		               </div>
+		             </form>
+
+		           )}
+		         </Formik>
 			    </div>
 
 	           ))}
 
-
+	           
 	  </div>
 
   </div>
