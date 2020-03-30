@@ -56,6 +56,7 @@ class formCesta extends React.Component{
       }) => (
         <form onSubmit={handleSubmit}>
         <div className="grid-form-cesta">
+
         	<label htmlFor="name" className="label-cesta-create">Nombre </label>
           <input
           id="name"

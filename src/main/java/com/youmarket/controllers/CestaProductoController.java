@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,13 +47,6 @@ public class CestaProductoController {
 		return ResponseEntity.ok().body(res);
 	}
 	
-	@RequestMapping("/productos/dieta/list/{id}")
-	public List<CestaProducto> listProductosByDiet(@PathVariable Integer id){
-		List<CestaProducto> cestaProductos=cestaProductoService.listaProductosByDiet(id);
-		
-		return cestaProductos;
-	}
-
 	@GetMapping("/productos/{id}")
     public ResponseEntity<Object> cestaProductoPorId(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal currentUser) {
         return ResponseEntity.ok(cestaProductoService.CestasProductoPorCestaId(id, currentUser));
@@ -62,5 +56,12 @@ public class CestaProductoController {
     public ResponseEntity<Double> totalPorId(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal currentUser) {
         return ResponseEntity.ok(cestaProductoService.totalPorCestaId(id, currentUser));
     }
+
+	@RequestMapping("/productos/dieta/list/{id}")
+	public List<CestaProducto> listProductosByDiet(@PathVariable Integer id){
+		List<CestaProducto> cestaProductos=cestaProductoService.listaProductosByDiet(id);
+
+		return cestaProductos;
+	}
 
 }

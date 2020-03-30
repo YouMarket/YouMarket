@@ -74,11 +74,11 @@ public class CestaService {
 	public Cesta creaCesta(FormCesta c, UserPrincipal cu) {
 		Usuario User2=new Usuario();
 		Optional<Usuario> user=usuarioService.findById(cu.getId());
-		
+
 		if(user.isPresent()) {
 			User2=user.get();
 		}
-		
+
 		Cesta nc=new Cesta();
 		nc.setNombre(c.getName());
 		nc.setUsuario(User2);

@@ -2,7 +2,9 @@
 package com.youmarket.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -40,11 +42,6 @@ public class CestaProductoService{
         return this.cprepo.findAll();
     }
 
-  	public List<CestaProducto> listaProductosByDiet(int dietId){
-		
-		return this.cprepo.findAll(); 
-	}
-    
 	public Object CestasProductoPorCestaId(@Valid Integer id, UserPrincipal currentUser) {
 		List<CestaProducto> cps = this.cprepo.findByCestaId(id);
 		Boolean noHayHack=true;
@@ -80,7 +77,15 @@ public class CestaProductoService{
 	}
 
 
+	public List<CestaProducto> listaProductosByDiet(int dietId){
+	
+		return this.cprepo.findAll();
+	
+	}
+	
 	public List<CestaProducto> cpPorCesta(int id){
 		return this.cprepo.findByCestaId(id);
 	}
+
+
 }
