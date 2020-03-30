@@ -5,7 +5,6 @@ import Header from '../Header';
 	
 function Dietas() {
 	
-	
 	const [dietas, setDietas] = useState([]);
 	
 	const fetchDietas = useCallback(() => {

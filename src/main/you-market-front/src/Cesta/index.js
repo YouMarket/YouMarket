@@ -24,7 +24,6 @@ function Cesta({id, nombre, productos, total}: Props) {
 		 <span className="cesta-info">
 				
 				<p className="cesta-total">Total: 22e</p>
-				<p className="cesta-productos">Id: {id}</p>
 				<p className="cesta-productos">{productos}</p>
 				{total && <p className="cesta-productos">{total}e</p>}
 			</span>
