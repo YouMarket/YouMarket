@@ -1,38 +1,47 @@
-<<<<<<< Updated upstream
-import React from 'react';
-=======
 import React, { Component } from 'react';
->>>>>>> Stashed changes
-
 import {
 	  BrowserRouter as Router,
 	  Switch,
-	  Route
+	  Route,
+	  withRouter
 	} from "react-router-dom";
-
-<<<<<<< Updated upstream
-import Cestas from './Cestas'
-import ShowCesta from './ShowCesta'
-import FormCesta from './FormCesta'
+import Productos from './Productos';
+import Dietas from './Dietas';
+import Perfil from './Perfil';
+import RecetasListado from './RecetasListado';
+import ProductoDetalle from './ProductoDetalle';
+import RegistroUsuario from './Registro';
+import PedidosUsuario from './Perfil/PedidosUsuario';
+import DatosUsuario from './Perfil/DatosUsuario';
+import DatosSubscripcion from './Perfil/DatosSubscripcion';
+import DatosEnvio from './Perfil/DatosEnvio';
+import DietaDetalle from './DietaDetalle';
+import DietaForm from './DietaForm';
 import Login from './auth/Login'
-import './App.css';
- 
-=======
+import Logout from './auth/Logout'
+
+import PedidoForm from './PedidoForm';
+import CestaProductos from './CestaProductos';
+
 import Carro from './Carro';
 import Cestas from './Cestas';
 import FormCesta from './FormCesta';
 import ShowCesta from './ShowCesta';
 import EditCesta from './EditCesta';
-	
->>>>>>> Stashed changes
+
 function App() {
-	
+
         return (
         <Router>
 	        <Switch>
-<<<<<<< Updated upstream
-		    	<Route path="/cesta">
-=======
+				<Route path="/pedido/create">
+					<PedidoForm />
+				</Route>
+
+    			<Route path="/create/dieta">
+					<DietaForm />
+				</Route>
+
 		    	<Route path="/productos">
 		    		<Productos />
 		    	</Route>
@@ -45,21 +54,17 @@ function App() {
 		    	<Route path="/dieta/list">
     				<Dietas />
     			</Route>
-    			
+
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
 				</Route>
-				
-    			<Route path="create/dieta">
-					<DietaForm />
-				</Route>
-			
+
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
     			<Route path="/registro">
 					<RegistroUsuario/>
-				</Route> 
+				</Route>
     			<Route path="/perfil">
 					<Perfil/>
 				</Route>
@@ -78,7 +83,7 @@ function App() {
 				<Route path="/login">
     				<Login />
 				</Route>
-				
+
 				<Route path="/logout">
 				<Logout />
 			</Route>
@@ -86,7 +91,6 @@ function App() {
 				<EditCesta/>
 				</Route>
 				<Route path="/cesta">
->>>>>>> Stashed changes
 		    		<Cestas />
 		    	</Route>
 		    	<Route path="/create/cesta">
@@ -94,10 +98,20 @@ function App() {
 	    		</Route>
 	    		<Route path="/show/cesta/:id">
 	    			<ShowCesta />
-	    		</Route>
-	    		<Route path="/login">
-    			<Login />
-    		</Route>
+				</Route>
+
+
+
+				<Route path="/cesta/productos/dieta/list/:id">
+					<CestaProductos/>
+				</Route>
+
+
+		        <Route path="/">
+		        	<Productos />
+		        </Route>
+
+
 		      </Switch>
         </Router>
         );

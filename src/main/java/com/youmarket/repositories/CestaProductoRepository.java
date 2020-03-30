@@ -15,5 +15,5 @@ public interface CestaProductoRepository extends JpaRepository<CestaProducto, In
 	@Query("select c from CestaProducto c where c.cesta.id=?1")
 	List<CestaProducto> findByCestaId(int id);
 
-    
+
 }

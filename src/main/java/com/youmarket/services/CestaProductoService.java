@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CestaProductoService{
-    
+
     @Autowired
     private CestaProductoRepository cprepo;
 
@@ -47,8 +47,8 @@ public class CestaProductoService{
 		for(CestaProducto p:cps) {
 			if(p.getCesta().getUsuario().getId()!=currentUser.getId()) {
 				noHayHack=false;
-		
-				
+
+
 			}
 		}
 		if(noHayHack==false) {
@@ -65,8 +65,8 @@ public class CestaProductoService{
 			total= total +p.getCantidad()*p.getProducto().getPrecioIva();
 			if(p.getCesta().getUsuario().getId()!=currentUser.getId()) {
 				noHayHack=false;
-		
-				
+
+
 			}
 		}
 		if(noHayHack==false) {
@@ -75,5 +75,12 @@ public class CestaProductoService{
 		return total;
 	}
 
-    
+
+}
+
+public List<CestaProducto> listaProductosByDiet(int dietId){
+
+return this.cprepo.findAll();
+}
+
 }

@@ -21,18 +21,8 @@ class formCesta extends React.Component{
     <h1 className="titulo-create-cesta">Crear cesta</h1>
     <img src={cest} className="cesta-imagen-edit"/>
     <Formik
-      initialValues={{ usuario: '1', name: 'nuevaCesta', productos:'' }}
-      validate={values => {
-        const errors = {};
-        if (!values.usuario) {
-          errors.usuario = 'Required';
-        } else if (
-          !/^[0-9]{1,}$/i.test(values.usuario)
-        ) {
-          errors.usuario = 'Invalid usuario';
-        }
-        return errors;
-      }}
+      initialValues={{name: 'nuevaCesta'}}
+
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
         	fetch('../../cesta', {
@@ -43,13 +33,13 @@ class formCesta extends React.Component{
         			body:JSON.stringify(values, null, 2)
         	}).then((response)=> {
         		setSubmitting=false;
-        		
-        	  
+
+
         	}).then(() =>
         	{this.handleRedirect();}
             )
-        			
-        	  
+
+
         }, 400);
       }}
     >
@@ -64,18 +54,8 @@ class formCesta extends React.Component{
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit}>
-        <div className="grid">
-        <input
-            type="hidden"
-            name="usuario.id"
-            id="user"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.usuario}
-          />
-           
-        {errors.usuario && touched.usuario}
-        	<span className="p-float-label">
+        <div className="grid-form-cesta">
+
         	<label htmlFor="name" className="label-cesta-create">Nombre </label>
           <input
           id="name"
@@ -87,14 +67,7 @@ class formCesta extends React.Component{
           	className="name-input-cesta"
           	required
           />
-          </span>
-          <input
-          type="hidden"
-          name="productos"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.productos}
-          />
+
           {errors.name && touched.name}
           <div className="grid2-create-cesta">
           <button type="submit" disabled={isSubmitting} className="submit-cesta-create">
@@ -103,6 +76,7 @@ class formCesta extends React.Component{
           </div>
           </div>
         </form>
+
       )}
     </Formik>
   </div>

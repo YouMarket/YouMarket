@@ -1,0 +1,19 @@
+.seccion-perfil{
+	padding: 20px 60px;
+}
+
+.informacion-personal{
+	margin-bottom: 60px;
+}
+
+.informacion-usuario{
+	margin-bottom: 60px;
+}
+
+.boton-perfil{
+	border-radius: 10px;
+	background-color: #8bb547;
+	border: none;
+	padding: 10px 40px;
+	font-size:	16px;
+}
