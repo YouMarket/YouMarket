@@ -3,6 +3,8 @@ package com.youmarket.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,8 +87,6 @@ public class CestaService {
 		
 	}
 
-<<<<<<< Updated upstream
-=======
 	public Cesta saveProductos(@Valid Cesta c, List<Producto> productos) {
 		// TODO Auto-generated method stub
 		return null;
@@ -107,5 +107,4 @@ public class CestaService {
 		}
 	}
 
->>>>>>> Stashed changes
 }
