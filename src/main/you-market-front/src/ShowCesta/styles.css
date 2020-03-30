@@ -45,6 +45,10 @@
   background-color: #90EE90;
 }
 
+.show-cesta-h{
+	display:block;
+	margin:auto;	
+}
 .grid2-carrito-cesta button{
 	background-color: #4CAF50; /* Green */
   border: none;

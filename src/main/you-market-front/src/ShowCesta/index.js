@@ -96,79 +96,81 @@ if (!cesta){
 	  <div className="cesta-container-show">
 
 	  <Cesta nombre={cesta.nombre} id={cesta.id} total=""/>
-
+	<h2 className="show-cesta-h">Productos</h2>
 	  { productoCesta && productoCesta.map((productoC) => (
 
 			    <div key={productoC.producto.id} className="div-productos-cesta">
-			    <h2>Productos</h2>
+			    
 			    <Link to={`/show/producto/${productoC.producto.id}`}> {productoC.producto.nombre}
 			    </Link> x{productoC.cantidad}
 			    <img src={productoC.url}/>
 
 
-			    <p>Total: {total}€</p>
 			    
-			    <Formik
-		           initialValues={{id}}
-
-		           onSubmit={(values, { setSubmitting }) => {
-		             setTimeout(() => {
-		             	fetch(`../../../cestaACarrito}`, {
-		             			headers: {
-		             				"Content-Type": "application/json"
-		             			},
-		             			method:'POST',
-		             			body:JSON.stringify(values, null, 2)
-		             	}).then((response)=> {
-		             		alert(JSON.stringify(values, null, 2))
-		         
-		             		setSubmitting=false;
-
-
-		             	}).then(() =>
-		             	{history.push("/carro");}
-		                 )
-
-
-		             }, 400);
-		           }}
-		         >
-		           {({
-		             values,
-		             errors,
-		             touched,
-		             handleChange,
-		             handleBlur,
-		             handleSubmit,
-		             isSubmitting,
-		             /* and other goodies */
-		           }) => (
-		             <form onSubmit={handleSubmit}>
-		             <div className="grid-form-cesta">
-		             
-		               <input
-		               id="id"
-		                 type="hidden"
-		                 name="id"
-		                 onChange={handleChange}
-		                 onBlur={handleBlur}
-		                 value={values.name}
-		               	className="id-input-cesta"
-		               />
-
-		               <div className="grid2-carrito-cesta">
-		               <button type="submit" disabled={isSubmitting} className="submit-cesta-carrito">
-		               Meter en el carro
-		               </button>
-		               </div>
-		               </div>
-		             </form>
-
-		           )}
-		         </Formik>
 			    </div>
 
 	           ))}
+	  
+	  <p>Total: {total}€</p>
+	    
+	    <Formik
+         initialValues={{id}}
+
+         onSubmit={(values, { setSubmitting }) => {
+           setTimeout(() => {
+           	fetch(`/cestaACarrito`, {
+           			headers: {
+           				"Content-Type": "application/json"
+           			},
+           			method:'POST',
+           			body:JSON.stringify(values, null, 2)
+           	}).then((response)=> {
+           		alert(JSON.stringify(values, null, 2))
+       
+           		setSubmitting=false;
+
+
+           	}).then(() =>
+           	{history.push("/carro");}
+               )
+
+
+           }, 400);
+         }}
+       >
+         {({
+           values,
+           errors,
+           touched,
+           handleChange,
+           handleBlur,
+           handleSubmit,
+           isSubmitting,
+           /* and other goodies */
+         }) => (
+           <form onSubmit={handleSubmit}>
+           <div className="grid-form-cesta">
+           
+             <input
+             id="id"
+               type="hidden"
+               name="id"
+               onChange={handleChange}
+               onBlur={handleBlur}
+               value={values.name}
+             	className="id-input-cesta"
+             />
+
+             <div className="grid2-carrito-cesta">
+             <button type="submit" disabled={isSubmitting} className="submit-cesta-carrito">
+             Meter en el carro
+             </button>
+             </div>
+             </div>
+           </form>
+
+         )}
+       </Formik>
 
 	           
 	  </div>
