@@ -16,6 +16,7 @@ import DatosEnvio from './Perfil/DatosEnvio';
 import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import PedidoForm from './PedidoForm';
+import CestaProductos from './CestaProductos';
 
 import Carro from './Carro';
 	
@@ -66,6 +67,13 @@ function App() {
 				<Route path="/pedidos-usuario">
 					<PedidosUsuario/>
 				</Route>
+				
+				
+				<Route path="/cesta/productos/dieta/list/:id">
+					<CestaProductos/>
+				</Route>
+			
+			
 		        <Route path="/">
 		        	<Productos />
 		        </Route>

@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import Header from '../Header';
 import Dieta from '../Dieta';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import './styles.css';
 
 
@@ -44,6 +44,9 @@ function DietaDetalle() {
   					<b> Activa: </b>{dieta.activa}
 				</div>
 			  	</div>
+			  	<Link to={`../../../cesta/productos/dieta/list/${dieta.id}`}>
+			  	Productos
+			  	</Link>
 	  	  	</div>
 	 </div>
 	);
