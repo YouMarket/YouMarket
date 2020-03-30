@@ -44,7 +44,7 @@ if (!cesta){
   <h1 className="titulo-create-cesta">Editar cesta</h1>
   <img src={cest} className="cesta-imagen-edit"/>
   <Formik
-    initialValues={{name: `${cesta.nombre}`}}
+    initialValues={{nombre: `${cesta.nombre}`}}
 
     onSubmit={(values, { setSubmitting }) => {
       setTimeout(() => {
@@ -56,6 +56,7 @@ if (!cesta){
       			body:JSON.stringify(values, null, 2)
       	}).then((response)=> {
       		setSubmitting=false;
+      		alert(JSON.stringify(values, null, 2));
 
 
       	}).then(() =>
@@ -79,19 +80,18 @@ if (!cesta){
       <form onSubmit={handleSubmit}>
       <div className="grid-form-cesta">
 
-      	<label htmlFor="name" className="label-cesta-create">Nombre </label>
+      	<label htmlFor="nombre" className="label-cesta-create">Nombre </label>
         <input
-        id="name"
+        id="nombre"
           type="text"
-          name="name"
+          name="nombre"
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values.name}
+          value={values.nombre}
         	className="name-input-cesta"
         	required
         />
-
-        {errors.name && touched.name}
+        
         <div className="grid2-create-cesta">
         <button type="submit" disabled={isSubmitting} className="submit-cesta-create">
         Enviar
@@ -102,6 +102,51 @@ if (!cesta){
 
     )}
   </Formik>
+  
+  <Formik
+  initialValues={{id}}
+
+  onSubmit={(values, { setSubmitting }) => {
+    setTimeout(() => {
+    	fetch(`/cesta/${id}`, {
+    			headers: {
+    				"Content-Type": "application/json"
+    			},
+    			method:'DELETE'
+    	}).then((response)=> {
+    		setSubmitting=false;
+
+    	}).then(() =>
+    	{history.push("/cesta");}
+        )
+
+
+    }, 400);
+  }}
+>
+  {({
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+    /* and other goodies */
+  }) => (
+    <form onSubmit={handleSubmit}>
+    <div className="grid-form-cesta">
+
+      <div className="grid2-delete-cesta">
+      <button type="submit" disabled={isSubmitting} className="submit-cesta-delete">
+      Borrar
+      </button>
+      </div>
+      </div>
+    </form>
+
+  )}
+</Formik>
 
 	           
 	  </div>

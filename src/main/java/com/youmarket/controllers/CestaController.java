@@ -66,11 +66,22 @@ public class CestaController {
     }
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Cesta> update(@PathVariable Integer id, @Valid @RequestBody Cesta c) {
-
+	public ResponseEntity<Cesta> update(@PathVariable Integer id, @Valid @RequestBody Cesta c, @CurrentUser UserPrincipal currentUser) {
+		Boolean hacked=false;
+		Cesta cesta1=(Cesta) cestaService.findById(id, currentUser);
+		if(cesta1.getUsuario().getId()!=currentUser.getId()) {
+			hacked=true;
+		}
+		Optional<Usuario> user=usuarioService.findById(currentUser.getId());
+		if(user.isPresent()) {
+			Usuario user1= user.get();
+			c.setUsuario(user1);
+		}
 		 c.setId(id);
+		
+		 if(hacked==false) {
 		 cestaService.save(c);
-
+		 }
 
 
 		 return ResponseEntity.noContent().build();
