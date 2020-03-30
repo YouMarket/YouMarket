@@ -10,7 +10,6 @@ import Dietas from './Dietas';
 import Perfil from './Perfil';
 import RecetasListado from './RecetasListado';
 import ProductoDetalle from './ProductoDetalle';
-import RegistroUsuario from './Registro';
 import PedidosUsuario from './Perfil/PedidosUsuario';
 import DatosUsuario from './Perfil/DatosUsuario';
 import DatosSubscripcion from './Perfil/DatosSubscripcion';
@@ -18,11 +17,10 @@ import DatosEnvio from './Perfil/DatosEnvio';
 import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import Login from './auth/Login'
+import PedidoCompletado from './Pedido';
 
-import RegistroDireccion from './Registro/Direccion';
 import Carro from './Carro';
 import Cestas from './Cestas';
-import FormCesta from './FormCesta';
 import ShowCesta from './ShowCesta';
 	
 function App() {
@@ -53,12 +51,10 @@ function App() {
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
-    			<Route path="/registro">
-					<RegistroUsuario/>
-				</Route> 
-				<Route path="/registro/direccion">
-					<RegistroDireccion/>
-				</Route> 
+    			<Route path="/show/receta/:id">
+    				<ProductoDetalle />
+    			</Route>
+
     			<Route path="/perfil">
 					<Perfil/>
 				</Route>
@@ -74,6 +70,10 @@ function App() {
 				<Route path="/pedidos-usuario">
 					<PedidosUsuario/>
 				</Route>
+				<Route path="/pedido/:id">
+				<PedidoCompletado/>
+				</Route>
+				
 				<Route path="/login">
     				<Login />
 				</Route>
@@ -81,9 +81,7 @@ function App() {
 				<Route path="/cesta">
 		    		<Cestas />
 		    	</Route>
-		    	<Route path="/create/cesta">
-	    			<FormCesta />
-	    		</Route>
+		    	
 	    		<Route path="/show/cesta/:id">
 	    			<ShowCesta />
 	    		</Route>
