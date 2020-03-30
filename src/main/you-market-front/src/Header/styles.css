@@ -117,4 +117,9 @@
 		display: block;
 		margin-right: 32px;
 	}
+	
+	.login{
+		display: block;
+		margin-right: 20px;
+	}
 }

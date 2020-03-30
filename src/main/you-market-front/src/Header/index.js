@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useCallback, useEffect } from 'react';
 import './styles.css';
 import logo from '../logo.png';
 import carro from './shopping-cart.svg';
 import menu from './menu.svg';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import user from './user-circle-solid.svg';
 
 window.onresize = hideMenuLinks;
@@ -31,12 +31,33 @@ function closeMenu() {
 	x.style.display = "none";
 }
 
-function Header() {
 
+function Header() {
+	const [login, setLogin]=useState('');
+	const [loginEsp, setLoginEsp]=useState('');
+
+	const loginCheck = useCallback(() => {
+		if(localStorage.getItem('auth')!=null){
+			setLogin('/logout');
+			setLoginEsp('Salir');
+		}else{
+			setLogin('/login');
+			setLoginEsp('Iniciar Sesión');
+	      }
+		return login;
+	  }, []);
+	  
+	  useEffect(() => {
+		    loginCheck();
+		  }, [loginCheck]);
+   
+	
 	return(
 		<div>
 		<div className="header-container">
-			<img className="logo" src={logo} alt="Logo"/>
+			<NavLink to="/">
+				<img className="logo" src={logo} alt="Logo"/>
+			</NavLink>
 			<div className="header-links">
 				<Link to="/" className="header-link" >Productos</Link>
 				<Link className="header-link" to="/dieta/list">Dietas</Link>
@@ -46,16 +67,17 @@ function Header() {
 				<Link className="carro" to="/carro">
 					<img src={carro} className="icon" alt="Carro"/>
 				</Link>
-				<div className="carro-contador-container">
-					<p id="carro-contador" className="carro-contador">0</p>
-				</div>
 			</div>
+		
 			<Link className="perfil" to="/perfil">
 				<img src={user} className="icon" alt="Mi Perfil"/>
 			</Link>
 			<a href="#" className="hamburger-menu" onClick={menuInteraction}>
 				<img src={menu} className="hamburger-icon" alt="Menu"/>
 			</a>
+			<Link className="login" to={login}>
+				{loginEsp}
+			</Link>
 		</div>
 		<div id="menuLinks">
 			<Link to="/" className="menuLink" onClick={closeMenu}>Productos</Link>

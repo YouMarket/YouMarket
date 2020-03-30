@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
 	  BrowserRouter as Router,
 	  Switch,
-	  Route
+	  Route,
+	  withRouter
 	} from "react-router-dom";
 import Productos from './Productos';
 import Dietas from './Dietas';
 import Perfil from './Perfil';
 import RecetasListado from './RecetasListado';
 import ProductoDetalle from './ProductoDetalle';
+import RegistroUsuario from './Registro';
 import PedidosUsuario from './Perfil/PedidosUsuario';
 import DatosUsuario from './Perfil/DatosUsuario';
 import DatosSubscripcion from './Perfil/DatosSubscripcion';
@@ -16,13 +18,28 @@ import DatosEnvio from './Perfil/DatosEnvio';
 import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import Login from './auth/Login'
+import Logout from './auth/Logout'
+
+import PedidoForm from './PedidoForm';
+import CestaProductos from './CestaProductos';
 
 import Carro from './Carro';
-
+import Cestas from './Cestas';
+import FormCesta from './FormCesta';
+import ShowCesta from './ShowCesta';
+	
 function App() {
         return (
         <Router>
 	        <Switch>
+				<Route path="/pedido/create">
+					<PedidoForm />
+				</Route>
+	        
+    			<Route path="/create/dieta">
+					<DietaForm />
+				</Route>
+				
 		    	<Route path="/productos">
 		    		<Productos />
 		    	</Route>
@@ -39,14 +56,13 @@ function App() {
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
 				</Route>
-				
-    			<Route path="create/dieta">
-					<DietaForm />
-				</Route>
 			
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
+    			<Route path="/registro">
+					<RegistroUsuario/>
+				</Route> 
     			<Route path="/perfil">
 					<Perfil/>
 				</Route>
@@ -65,9 +81,33 @@ function App() {
 				<Route path="/login">
     				<Login />
 				</Route>
-				<Route path="/">
+				
+				<Route path="/logout">
+				<Logout />
+			</Route>
+				
+				<Route path="/cesta">
+		    		<Cestas />
+		    	</Route>
+		    	<Route path="/create/cesta">
+	    			<FormCesta />
+	    		</Route>
+	    		<Route path="/show/cesta/:id">
+	    			<ShowCesta />
+				</Route>
+
+				
+				
+				<Route path="/cesta/productos/dieta/list/:id">
+					<CestaProductos/>
+				</Route>
+			
+			
+		        <Route path="/">
 		        	<Productos />
 		        </Route>
+		        
+
 		      </Switch>
         </Router>
         );

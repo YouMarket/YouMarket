@@ -1,31 +1,36 @@
-.producto-container{
-	display: flex;
-	flex-direction: column;
-	border: 1px solid #aaaaaa;
-	
-}
 
-.producto-imagen{
-	height: 200px;
-	max-width: 240px;
-	display: block;
-	object-fit:cover;
+.producto-detalle-imagen {
+	width: 400px;
+	height: 400px;
 	float: left;
 }
 
-.producto-info{
+.producto-detalle-info {
 	float: left;
+	padding: 40px;
 }
 
-.producto-precio{
-	margin: 0 0 12px 0;
+.producto-detalle-field {
+	margin-bottom: 15px;
 }
 
-.producto-nombre{
-	margin: 0 0 8px 0;
+.producto-detalle-nombre {
+	font-family: 'Fredoka One', cursive;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: rgb(148,194,76);
+	text-shadow: 2px 0 2px black;
 }
 
-.producto-supermercado{
-	margin:0;
-	
+.producto-detalle-add {
+	background-color:  #779C3D;
+	border: none;
+	color: white;
+	height: 40px;
+	margin-top: 20px;
+    text-transform: uppercase;
+	cursor: pointer;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-size: 12px;
 }
