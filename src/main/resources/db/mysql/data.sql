@@ -6,6 +6,9 @@ insert into marca (id, nombre) values (2, 'Danone');
 insert into marca (id, nombre) values (3, 'Don simon');
 insert into marca (id, nombre) values (4, 'Axe');
 insert into marca (id, nombre) values (5, 'Nestle');
+insert into marca (id, nombre) values (6, 'Apis'); 
+insert into marca (id, nombre) values (7, 'Alsur'); 
+insert into marca (id, nombre) values (8, 'Fresco');
 
 insert into departamento (id, nombre) values (1, 'Panadería');
 insert into departamento (id, nombre) values (2, 'Lácteos');
@@ -23,7 +26,7 @@ insert into role(id, name) value (2, 'CLIENTE_CON_DIETAS');
 insert into role(id, name) value (3, 'DIETISTA');
 insert into role(id, name) value (4, 'ADMIN');
 
-insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, telefono, subscripcion) 
+insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, telefono, suscripcion_id) 
 	values (1, 'Primer', 'Usuario', '00000000T', '41001', 'cliente@cliente.es', '1234asdf', '666999888', 4);
 
 insert into factura (id, total, total_iva, usuario_id) values (1, 13.43, 17, 1);
