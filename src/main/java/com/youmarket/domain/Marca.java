@@ -25,13 +25,10 @@ public class Marca {
 	private int id;
 	
 	@Column(name="nombre", length=100)
-	private String name;
+	private String nombre;
 	
 	@Column(name="descripcion")
-	private String description;
-	
-	@OneToMany(mappedBy="marca")
-	private List<Producto> productos;
+	private String descripcion;
 	
 	
 }

@@ -1,0 +1,54 @@
+.dietas-container{
+	padding: 40px 30px;
+	display: flex;
+	justify-content: center;
+
+}
+
+.dietas-title {
+	padding-top: 0 !important;
+}
+
+@media (min-width: 544px){
+
+	.grid{
+		display: grid;
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		grid-template-columns: 240px 240px;
+	}
+}
+
+@media (min-width: 794px){
+	
+	.grid{
+		display: grid;
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		grid-template-columns: 240px 240px 240px;
+	}
+}
+
+@media (min-width: 1100px){
+	.dietas-container{
+		padding: 40px 60px;
+	}
+	
+	.grid{
+		display: grid;
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		grid-template-columns: 240px 240px 240px 240px;
+	}
+}
+
+@media (min-width: 1350px){
+	
+	.grid{
+		display: grid;
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		grid-template-columns: 240px 240px 240px 240px 240px;
+	}
+}
+

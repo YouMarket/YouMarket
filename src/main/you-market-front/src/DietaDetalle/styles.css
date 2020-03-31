@@ -1,0 +1,48 @@
+
+
+.dieta-detalle-imagen {
+	width: 400px;
+	height: 400px;
+	float: left;
+}
+
+.dieta-detalle-info {
+	float: left;
+	padding: 30px;
+	position: relative;
+	width: calc(100% - 400px);
+}
+
+.dieta-detalle-field {
+	margin-bottom: 15px;
+}
+
+.dieta-detalle-nombre {
+	font-family: 'Fredoka One', cursive;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: rgb(148,194,76);
+	text-shadow: 2px 0 2px black;
+}
+
+.dieta-detalle-productos {
+	position: absolute;
+	bottom: 0;
+}
+
+.dieta-detalle-info p {
+	margin-top: 40px;
+}
+
+@media only screen and (max-width: 700px) {
+	.dieta-detalle-info {
+		width: 100%;
+		float: none;
+	}
+
+	.dieta-detalle-imagen {
+		width: 100%;
+		float: none;
+	}
+
+}

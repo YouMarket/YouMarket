@@ -1,0 +1,68 @@
+.titulo-create-cesta{
+	padding:2% 5%;
+	font-size:200%;
+	text-align:center;
+}
+.cesta-imagen-edit{
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	max-width: 25%;
+	padding-bottom:2%;
+}
+
+.grid-form-cesta {
+	display: grid;
+	grid-column-gap: 10px;
+	grid-row-gap: 10%;
+	grid-template-columns: 35%;
+	padding-left:39%;
+	width:100%;
+}
+
+.name-input-cesta{
+	margin-top:2%;
+	padding-bottom:5%;
+	margin-bottom:5%;
+	width:100%;
+	font-size:20px;
+
+}
+
+.label-cesta-create{
+	text-align:left;
+	font-size:16px;
+}
+
+input[type=text]:focus {
+	border:3px solid #4CAF50;
+}
+
+.grid2-create-cesta {
+	text-align:center;
+	max-width:100%;
+
+}
+
+.grid2-create-cesta button{
+	background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  padding: 3% 15%;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 100%;
+  cursor:pointer;
+  margin-bottom:2%;
+
+}
+
+.grid2-create-cesta button:focus {
+  background-color: #90EE90;
+}
+
+.submit-cesta-create{
+	backgroung-color:green;
+
+}
