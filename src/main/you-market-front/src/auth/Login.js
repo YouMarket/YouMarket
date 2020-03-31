@@ -22,6 +22,10 @@ class Login extends React.Component{
 		onChangeStatus(Serrors) {        
 		    this.setState({ errors: Serrors });
 		  }
+		
+		onChangeErrors(Serrors) {        
+		    this.setState({ errors: Serrors });
+		  }
 
 		handleRedirect = () => {
 			if(localStorage.getItem('auth')!=null){	

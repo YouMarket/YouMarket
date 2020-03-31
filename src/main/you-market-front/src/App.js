@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
 	  BrowserRouter as Router,
 	  Switch,
@@ -21,19 +22,26 @@ import Login from './auth/Login'
 import Logout from './auth/Logout'
 
 import PedidoForm from './PedidoForm';
-import CestaProductos from './CestaProductos';
+import DietaProductos from './DietaProductos';
 
 import Carro from './Carro';
 import Cestas from './Cestas';
 import FormCesta from './FormCesta';
 import ShowCesta from './ShowCesta';
 import EditCesta from './EditCesta';
+import Error from './Misc';
+import CestaProductos from './CestaProductos';
 
 function App() {
 
         return (
         <Router>
 	        <Switch>
+
+				<Route path="/producto/dieta/list/:id">
+					<DietaProductos/>
+				</Route>
+
 				<Route path="/pedido/create">
 					<PedidoForm />
 				</Route>
@@ -107,6 +115,10 @@ function App() {
 				<Route path="/cesta/productos/dieta/list/:id">
 					<CestaProductos/>
 				</Route>
+
+				<Route path="/404">
+				<Error/>
+			</Route>
 
 
 		        <Route path="/">

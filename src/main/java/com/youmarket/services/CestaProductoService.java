@@ -76,21 +76,25 @@ public class CestaProductoService{
 		return total;
 	}
 
+	public List<CestaProducto> listaProductosByDiet(int dietId){
 
-public List<CestaProducto> listaProductosByDiet(int dietId){
+		return this.cprepo.findAll();
 
-return this.cprepo.findAll();
+	}
 
-}
-
-public List<CestaProducto> cpPorCesta(int id){
-	return this.cprepo.findByCestaId(id);
-}
+	public List<CestaProducto> cpPorCesta(int id){
+		return this.cprepo.findByCestaId(id);
+	}
 
 
-    
+	public void deleteByCestaId(int id){
+		this.cprepo.deleteByCestaId(id);
+	}
+
+
     public CestaProducto save(CestaProducto cp){
         return this.cprepo.save(cp);
     }
-    
+
+
 }

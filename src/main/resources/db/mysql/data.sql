@@ -61,3 +61,14 @@ insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, depart
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (27,'Chocolate blanco',0.78,0.99,'€','https://supercostablanca.es/4366-thickbox_default/milka-choco-weisse-schokolade-100g--chocolate-blanco.jpg',1,2,5);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (28,'Chocolate negro 70%',0.94,1.2,'€','https://www.valor.es/wp-content/uploads/2016/05/chocolate-70-negro-sin-azucar.png',1,2,5);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (29,'Chocolate negro 85%',0.94,1.2,'€','https://yourspanishcorner.com/4637-thickbox_default/chocolate-negro-85-sin-azucar-valor-.jpg',1,2,5);
+insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (30,'Tomate natural triturado 800 g.',1.15,1.2,'€','https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA02/CONTENIDOS/201408/20/00118027500182____1__600x600.jpg',1,2,6);
+insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (31,'Habas cocidas 425 g. escurrido',1.85,1.2,'€','https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201909/26/00118029902709____1__600x600.jpg',1,2,7);
+insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (32,'Brócoli 500g.',0.99,1.2,'€','https://static1.abc.es/media/salud/2019/05/17/brocoli-kOoH--620x349@abc.jpg',1,2,8);
+
+insert into dieta_productos (dieta_id, productos_id) values (123, 30);
+insert into dieta_productos (dieta_id, productos_id) values (123, 31);
+insert into dieta_productos (dieta_id, productos_id) values (123, 32);
+
+insert into dieta_productos (dieta_id, productos_id) values (234, 31);
+insert into dieta_productos (dieta_id, productos_id) values (234, 11);
+insert into dieta_productos (dieta_id, productos_id) values (234, 19);

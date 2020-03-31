@@ -44,7 +44,7 @@ function DietaDetalle() {
   					<b> Activa: </b>{dieta.activa}
 				</div>
 			  	</div>
-			  	<Link to={`../../../cesta/productos/dieta/list/${dieta.id}`}>
+			  	<Link to={`../../../producto/dieta/list/${dieta.id}`}>
 			  	Productos
 			  	</Link>
 	  	  	</div>

@@ -39,6 +39,7 @@ function Dietas() {
 			      ))}
 			    </div>
 			</div>
+			<a href="../create/dieta"> Crear nueva dieta </a>
 	 </div>
 	);
 	
