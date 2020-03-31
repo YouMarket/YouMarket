@@ -4,7 +4,31 @@ import { withRouter	} from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
 
+
+
 class PedidoForm extends React.Component{
+	
+	precio(){
+		const [total, setTotal] = useState(0.0);
+		const fetchTotal = useCallback(() => {
+		     return fetch('../precioTotalCarrito', {headers:{
+		  'Content-Type' : 'application/json',
+		  'Accept' : 'application/json',
+		  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+		  method:'GET'})
+		       .then(res => res.json())
+		       .then(total => {
+		         setTotal(total)
+
+		       });
+		   }, []);
+
+		 useEffect(() => {
+		  fetchTotal(total);
+		   }, []);
+		 console.log(total);
+		 return total;
+	}
 		
 	handleRedirect = () => {
 		console.log(this.props.history);
@@ -140,9 +164,12 @@ class PedidoForm extends React.Component{
 		</div>
 	
 		<br/><br/>
+		
          <div className="grid">
+         
+         
          <PayPalButton
-			 amount={1}
+			 amount={this.precio()}
          onSuccess={(values, { setSubmitting }) => {
              setTimeout(() => {
              	fetch('', {
@@ -175,6 +202,8 @@ class PedidoForm extends React.Component{
     	</div>
 	</div>
 );
+		
+		
 }
 }
 export default withRouter(PedidoForm);
