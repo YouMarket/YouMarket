@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -55,7 +56,7 @@ public class PedidoController {
 	}
 	
 	@PostMapping("/create")
-    public ResponseEntity<Pedido> create(@RequestBody Pedido p, HttpSession session) throws URISyntaxException {
+    public ResponseEntity<Pedido> create(@RequestBody Pedido p, HttpSession session, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
 		
 		Date fechaHoraEntrega = new Date();
 		Date fechaHoraEnvio = new Date();
@@ -66,10 +67,13 @@ public class PedidoController {
 		p.setNombre("Pedido num. " + p.getId());
 		p.setOrdenEntrega(1);
 		p.setRetraso("No hubo retraso");
-
-		//TODO: CAMBIAR POR USUARIO LOGEADO
-		Usuario u = this.usuarioService.listaUsuarios().get(0);
-		p.setUsuario(u);
+		Optional<Usuario> user=this.usuarioService.findById(currentUser.getId());
+		
+		Usuario user2=null;
+		if(user.isPresent()) {
+			user2=user.get();
+		}
+		p.setUsuario(user2);
 		
 		//TODO: COSTE DEL PEDIDO
 		
@@ -84,7 +88,7 @@ public class PedidoController {
 			cp.setCantidad(carrito.get(prod));
 			cp.setCesta(pedidoGuardado);
 			cp.setId(prod, pedidoGuardado);
-			System.out.println(cp.getCesta().getId());
+
 			this.cpService.save(cp);
 		}
 		
