@@ -140,6 +140,18 @@ public class CarritoSessionController {
 		request.getSession().setAttribute("SESSION_CARRITO", carrito);
 		return c;
 	}
+
+	@GetMapping("/precioTotalCarrito")
+	public Double precioTotal(HttpServletRequest request, HttpSession session){
+		Double precio = 0.0;
+		@SuppressWarnings("unchecked")
+		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
+		List<Producto> productos = new ArrayList<>(carrito.keySet());
+		for(Producto p: productos){
+			precio+= p.getPrecio() * carrito.get(p);
+		}
+		return precio;
+	}
 	
 
 }
