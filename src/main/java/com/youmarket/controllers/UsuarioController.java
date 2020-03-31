@@ -23,13 +23,14 @@ import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.JwtAuthenticationResponse;
 import com.youmarket.configuration.security.JwtTokenProvider;
 import com.youmarket.configuration.security.UserPrincipal;
+import com.youmarket.domain.Direccion;
 import com.youmarket.domain.Role;
 import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
 import com.youmarket.domain.enums.RoleName;
 import com.youmarket.domain.form.SignUpForm;
 import com.youmarket.repositories.RoleRepository;
-import com.youmarket.services.PagoService;
+import com.youmarket.services.DireccionService;
 import com.youmarket.services.RoleService;
 import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
@@ -61,6 +62,9 @@ public class UsuarioController {
 	
 	@Autowired
 	DireccionController direccionController;
+	
+	@Autowired
+	DireccionService dirService;
 
 	@Autowired
 	private SuscripcionService suscripcionService;
@@ -145,5 +149,36 @@ public class UsuarioController {
 	public Usuario getUser(@CurrentUser UserPrincipal currentUser) {
 		return usuarioService.findById(currentUser.getId()).get();
 	}
+	
+	@GetMapping("/getSuscripcion")
+	public Suscripcion getUserSuscrip(@CurrentUser UserPrincipal currentUser) {
+		return usuarioService.findById(currentUser.getId()).get().getSuscripcion();
+	}
 
+	@PostMapping("/updateUser")
+	public ResponseEntity<ApiResponse> updateUser(@CurrentUser UserPrincipal curr, @RequestBody SignUpForm form){
+		ApiResponse respuesta = new ApiResponse();
+		
+		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
+		Direccion dir = dirService.findPrincipalByUser(user);
+		
+		user.setNombre(form.getUsuario().getNombre());
+		user.setApellidos(form.getUsuario().getApellidos());
+		user.setDni(form.getUsuario().getDni());
+		user.setFechaNacimiento(form.getUsuario().getFechaNacimiento());
+		user.setTelefono(form.getUsuario().getTelefono());
+		user.setCPostal(form.getUsuario().getCPostal());
+		
+		dir.setDireccion(form.getDir().getDireccion());
+		dir.setPoblacion(form.getDir().getPoblacion());
+		dir.setProvincia(form.getDir().getProvincia());
+		dir.setCpostal(form.getDir().getCpostal());
+		
+		usuarioService.save(user);
+		dirService.save(dir);
+		
+		
+		
+		return ResponseEntity.ok(respuesta);
+	}
 }
