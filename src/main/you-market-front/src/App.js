@@ -37,7 +37,6 @@ function App() {
         return (
         <Router>
 	        <Switch>
-
 				<Route path="/producto/dieta/list/:id">
 					<DietaProductos/>
 				</Route>

@@ -46,7 +46,6 @@ class PedidoForm extends React.Component{
         	 {
         		 this.handleRedirect();
         	 })
-
           
           setSubmitting(false);
         }, 400);

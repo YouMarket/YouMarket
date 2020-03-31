@@ -62,10 +62,10 @@ public class UsuarioController {
 	
 	@Autowired
 	DireccionController direccionController;
-	
+
 	@Autowired
 	DireccionService dirService;
-
+	
 	@Autowired
 	private SuscripcionService suscripcionService;
 
@@ -181,4 +181,5 @@ public class UsuarioController {
 		
 		return ResponseEntity.ok(respuesta);
 	}
+
 }

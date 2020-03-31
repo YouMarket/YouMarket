@@ -81,6 +81,7 @@ public class PedidoController {
 		}
 		
 		session.setAttribute("SESSION_CARRITO", new HashMap<Producto, Integer>());
+
 		return ResponseEntity.created(new URI ("/pedido/)" + pedidoGuardado.getId())).body(pedidoGuardado);
 		
     }
