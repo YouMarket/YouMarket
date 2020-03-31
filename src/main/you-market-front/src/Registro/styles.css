@@ -147,4 +147,15 @@
   	text-decoration: none;
   	font-size:120%;
 
+
 }}
+
+.boton{
+	border-radius: 10px;
+	background-color: #8bb547;
+	border: none;
+	padding: 10px 40px;
+	font-size:	16px;
+}
+
+
