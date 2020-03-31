@@ -30,4 +30,8 @@ public class CestaProducto {
 	Cesta cesta;
 
 	int cantidad;
+
+	public void setId(Producto producto, Cesta cesta){
+		this.id = new CestaProductoKey(producto, cesta);
+	}
 }

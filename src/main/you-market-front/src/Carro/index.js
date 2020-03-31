@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './styles.css';
 import Header from '../Header';
-import ProductoListado from '../ProductoListado'
+import ProductoListado from '../ProductoListado';
 
 const precioFinal = 0.00
 function updatePrecioFinal(cantidad, precio){
@@ -50,7 +50,9 @@ const[carrito, setCarrito] = useState([]);
 				<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} €</div>
 				<div className="buttons">
 					{/* <button className="save-cesta">Guardar como cesta</button> */}
+					<a href="/pedido/create">
 					<button className="button-finish">Terminar pedido</button>
+					</a>
 				</div>
 			</div>
 		</div>

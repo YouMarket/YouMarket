@@ -1,3 +1,4 @@
+
 package com.youmarket.services;
 
 import java.util.ArrayList;
@@ -86,7 +87,15 @@ public class CestaProductoService{
 		return this.cprepo.findByCestaId(id);
 	}
 
+
 	public void deleteByCestaId(int id){
 		this.cprepo.deleteByCestaId(id);
 	}
+
+
+    public CestaProducto save(CestaProducto cp){
+        return this.cprepo.save(cp);
+    }
+
+
 }

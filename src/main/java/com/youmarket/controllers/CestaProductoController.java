@@ -46,7 +46,7 @@ public class CestaProductoController {
 		Cesta res = cestaService.saveProductos(c, productos);
 		return ResponseEntity.ok().body(res);
 	}
-
+	
 	@GetMapping("/productos/{id}")
     public ResponseEntity<Object> cestaProductoPorId(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal currentUser) {
         return ResponseEntity.ok(cestaProductoService.CestasProductoPorCestaId(id, currentUser));
@@ -56,6 +56,7 @@ public class CestaProductoController {
     public ResponseEntity<Double> totalPorId(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal currentUser) {
         return ResponseEntity.ok(cestaProductoService.totalPorCestaId(id, currentUser));
     }
+
 	@RequestMapping("/productos/dieta/list/{id}")
 	public List<CestaProducto> listProductosByDiet(@PathVariable Integer id){
 		List<CestaProducto> cestaProductos=cestaProductoService.listaProductosByDiet(id);
