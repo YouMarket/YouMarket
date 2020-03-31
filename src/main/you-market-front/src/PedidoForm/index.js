@@ -3,8 +3,33 @@ import { Formik } from 'formik';
 
 import { withRouter	} from 'react-router-dom';
 import Header from '../Header';
+import { PayPalButton } from "react-paypal-button-v2";
+
+
 
 class PedidoForm extends React.Component{
+	
+	precio(){
+		const [total, setTotal] = useState(0.0);
+		const fetchTotal = useCallback(() => {
+		     return fetch('../precioTotalCarrito', {headers:{
+		  'Content-Type' : 'application/json',
+		  'Accept' : 'application/json',
+		  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+		  method:'GET'})
+		       .then(res => res.json())
+		       .then(total => {
+		         setTotal(total)
+
+		       });
+		   }, []);
+
+		 useEffect(() => {
+		  fetchTotal(total);
+		   }, []);
+		 console.log(total);
+		 return total;
+	}
 		
 	handleRedirect = () => {
 		console.log(this.props.history);
@@ -65,7 +90,7 @@ class PedidoForm extends React.Component{
         <form onSubmit={handleSubmit}>
         
         
-        <label for="direccion">Dirección*: </label>
+        <label htmlFor="direccion">Dirección*: </label>
         <input
 		id="direccion"
 		type="text"
@@ -85,7 +110,7 @@ class PedidoForm extends React.Component{
 		<fieldset> 
 		 	<legend>Envío** </legend>
 		 	
-			<label for="fechaEnvio">Fecha*: </label>
+			<label htmlFor="fechaEnvio">Fecha*: </label>
 			<input
 			id="fechaEnvio"
 			type="text"
@@ -101,7 +126,7 @@ class PedidoForm extends React.Component{
 			<br/><br/>
 		 	
 			<br/>
-			<label for="horaEnvioIni">Hora inicial: </label>
+			<label htmlFor="horaEnvioIni">Hora inicial: </label>
 			<input
 			id="horaEnvioIni"
 			type="number"
@@ -114,7 +139,7 @@ class PedidoForm extends React.Component{
 			/>
 			{errors.horaEnvioIni}
 			
-			<label for="horaEnvioFin">   Hora final: </label>
+			<label htmlFor="horaEnvioFin">   Hora final: </label>
 			<input
 			type="number"
 			name="horaEnvioFin"
@@ -124,7 +149,6 @@ class PedidoForm extends React.Component{
 			value={values.horaEnvioFin}
 			min="9"
 			max="21"
-			oninput="check()"
 			/>
 			{errors.horaEnvioFin}
 			<br/><br/>
@@ -141,11 +165,37 @@ class PedidoForm extends React.Component{
 		</div>
 	
 		<br/><br/>
+		
          <div className="grid">
-         <button type="submit" disabled={isSubmitting}>
-         	Enviar
-         </button>
-
+         
+         
+         <PayPalButton
+			 amount={this.precio()}
+         onSuccess={(values, { setSubmitting }) => {
+             setTimeout(() => {
+             	fetch('', {
+             			headers: {
+             				"Content-Type": "application/json"
+             			},
+             			method:'POST',
+             			body:JSON.stringify(values, null, 2)
+             	}).then(function(response) {
+             	    return console.log(response.json());
+             	}).then(() => 
+             	 {
+             		 this.handleRedirect();
+             	 })
+               alert(JSON.stringify(values, null, 2));
+               
+               setSubmitting(false);
+             }, 400);
+		   }}
+		   
+		   options={{
+			clientId: "AQ1wSRRux5eVDHDZia2gH5NfFd_dO2-mooYqs-CdF3E53DIHclXqJlDI_2I2vtfIeQi5qVQTciRnOS9Y",
+			currency: "EUR"
+		  }}
+       />
           </div>
         </form>
       )}
@@ -153,6 +203,8 @@ class PedidoForm extends React.Component{
     	</div>
 	</div>
 );
+		
+		
 }
 }
 export default withRouter(PedidoForm);
