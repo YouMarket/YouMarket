@@ -13,10 +13,6 @@ const [cesta, setCesta] = useState();
 const [productoCesta, setProductoCesta] = useState();
 const [total, setTotal] = useState(0.0);
 let history = useHistory();
-
-
-
-
 const { id } = useParams();
 
 	const fetchCesta = useCallback(() => {
@@ -74,16 +70,7 @@ const { id } = useParams();
 
 
 if (!cesta){
-	return (
-<div>
-  <Header/>
-
-	  <div className="cesta-container-show">
-	  <p>Ups! Parece que esta no es tu página</p>
-	  </div>
-
-  </div>
- );
+	return null;
 }
   return(
 <div>

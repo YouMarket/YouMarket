@@ -36,8 +36,9 @@ class PedidoForm extends React.Component{
         setTimeout(() => {
         	fetch('', {
         			headers: {
-        				"Content-Type": "application/json"
-        			},
+        				"Content-Type": "application/json",
+        				'Accept' : 'application/json',
+        				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
         			method:'POST',
         			body:JSON.stringify(values, null, 2)
         	}).then(function(response) {

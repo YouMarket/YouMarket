@@ -22,10 +22,8 @@ let history = useHistory();
 			.then(res => res.json())
 			.then(carrito => {
 				setCarrito(carrito)
-				console.log(carrito);
 			});
 	}, []);
-	console.log(carrito);
 
 	useEffect(() => {
 		fetchCarrito(carrito);
@@ -40,10 +38,8 @@ let history = useHistory();
 	      .then(res => res.json())
 	      .then(cestas => {
 	        setCestas(cestas)
-	        console.log(cestas);
 	      });
 	  }, []);
-    console.log(cestas);
 
 
 	useEffect(() => {
@@ -56,7 +52,48 @@ let history = useHistory();
 
 		<div className="container clearfix">
 		<p className="introduction">Este es tu carrito de la compra</p>
+			<div className="vaciar-carrito">
+			<Formik
+	         onSubmit={(values, { setSubmitting }) => {
+	           setTimeout(() => {
+	           	fetch('/carritoDestroy', {headers: {
+	        		'Content-Type' : 'application/json',
+	        		'Accept' : 'application/json',
+	        		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+	           			method:'POST'
+	           	}).then((response)=> {
+	           		setSubmitting=false;
 
+	           	}).then(() =>
+	           	{window.location.reload(false);}
+	               )
+
+
+	           }, 400);
+	         }}
+	       >
+	         {({
+	           values,
+	           errors,
+	           touched,
+	           handleChange,
+	           handleBlur,
+	           handleSubmit,
+	           isSubmitting,
+	           /* and other goodies */
+	         }) => (
+	           <Form onSubmit={handleSubmit}>
+	           
+	             <div className="button-carrito-a-cesta">
+	             <button type="submit" disabled={isSubmitting} className="button-vaciar">
+	             Vaciar
+	             </button>
+	             </div>
+	          </Form>
+
+	         )}
+	       </Formik>
+			</div>
 			<div className="products-container-list">
 				{carrito.map((cestaproducto) => (
 					<ProductoListado 
@@ -73,7 +110,19 @@ let history = useHistory();
 				
 				<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} €</div>
 				<div className="buttons">
+				
+					<a href="/pedido/create">
+					<button className="button-finish">Terminar pedido</button>
+					</a>
+				</div>
 
+				 { localStorage.getItem('auth') ? (
+				<div className="guardar-carrito-a-cesta">
+				<h2>¿Quieres guardar tu carrito como cesta?</h2>
+				<p>Elige la cesta en la que quieres guardar el carrito:</p>
+				<p>(Si guardas este carrito dentro de una cesta que hayas creado, 
+					  podrás volver a cargar esta cesta como carrito desde la vista 
+					  de detalle de la cesta que quieras cargar cuando quieras)</p>
 				<Formik
 		         initialValues={{id: ''}}
 				 validate={values => {
@@ -124,10 +173,10 @@ let history = useHistory();
 		        		   			<option value={cesta.id}>{cesta.nombre}</option>
 		        		   			))}
 		           </select>
-		           {errors.id && touched.id && errors.id}
+		           <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
 
-		             <div className="grid2-carrito-cesta">
-		             <button type="submit" disabled={isSubmitting} className="">
+		             <div className="button-carrito-a-cesta">
+		             <button type="submit" disabled={isSubmitting} className="button-finish">
 		             Guardar como cesta
 		             </button>
 		             </div>
@@ -136,11 +185,9 @@ let history = useHistory();
 
 		         )}
 		       </Formik>
-				
-					<a href="/pedido/create">
-					<button className="button-finish">Terminar pedido</button>
-					</a>
-				</div>
+		       
+		       </div>
+		       ): (<div></div>)}
 			</div>
 		</div>
 	</div>
