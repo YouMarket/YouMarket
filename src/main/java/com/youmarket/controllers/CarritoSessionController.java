@@ -13,6 +13,7 @@ import com.youmarket.domain.ProductoCarrito;
 import com.youmarket.services.ProductoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -110,5 +111,41 @@ public class CarritoSessionController {
 		return "redirect:/";
 	}
 
+<<<<<<< Updated upstream
+=======
+	@PostMapping("/cestaACarrito")
+	public List<ProductoCarrito> cestaACarrito(@RequestBody Map<String,String> postCesta, HttpServletRequest request, HttpSession session){
+		List<CestaProducto> productos = this.cpService.cpPorCesta(Integer.valueOf(postCesta.get("id")));
+		@SuppressWarnings("unchecked")
+		Map<Producto, Integer> carritoSession = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
+		if(carritoSession == null){
+			carritoSession = new HashMap<>();
+		}
+		for(CestaProducto cp : productos){
+			Producto p = cp.getProducto();
+			int cantidad = cp.getCantidad();
+			if (carritoSession.keySet().contains(p)){
+				carritoSession.put(p, carritoSession.get(p) + cantidad);
+			} else {
+				carritoSession.put(p, cantidad);
+			}
+		}
+		request.getSession().setAttribute("SESSION_CARRITO", carritoSession);
+		return this.listCarrito(carritoSession);
+	}
+
+	@GetMapping("/precioTotalCarrito")
+	public Double precioTotal(HttpServletRequest request, HttpSession session){
+		Double precio = 0.0;
+		@SuppressWarnings("unchecked")
+		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
+		List<Producto> productos = new ArrayList<>(carrito.keySet());
+		for(Producto p: productos){
+			precio+= p.getPrecio() * carrito.get(p);
+		}
+		return precio;
+	}
+
+>>>>>>> Stashed changes
 }
 
