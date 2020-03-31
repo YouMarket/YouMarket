@@ -11,10 +11,19 @@ import {
 	} from 'react-router-dom';
 
 class formCesta extends React.Component{
+	compruebaAuth(){
+		if (localStorage.getItem('auth')==null){
+			this.props.history.push('/login');
+		}		
+	}
+	
 	handleRedirect = () => {
 	      this.props.history.push('/cesta');
 	    }
-	render(){
+	
+	render(){ 
+		{this.compruebaAuth();}
+		
 		return(<div>
   <Header/>
   <div>

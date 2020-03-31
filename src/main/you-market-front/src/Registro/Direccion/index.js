@@ -47,7 +47,6 @@ export default class RegistroDireccion extends React.Component{
 										this.onChangeErrors("Contraseña incorrecta");
 									}
 								  });
-							alert(JSON.stringify(values, null, 7));
 							
 							setSubmitting(false);
 							}, 400);
