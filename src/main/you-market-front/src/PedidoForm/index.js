@@ -65,7 +65,7 @@ class PedidoForm extends React.Component{
         <form onSubmit={handleSubmit}>
         
         
-        <label for="direccion">Dirección*: </label>
+        <label htmlFor="direccion">Dirección*: </label>
         <input
 		id="direccion"
 		type="text"
@@ -85,7 +85,7 @@ class PedidoForm extends React.Component{
 		<fieldset> 
 		 	<legend>Envío** </legend>
 		 	
-			<label for="fechaEnvio">Fecha*: </label>
+			<label htmlFor="fechaEnvio">Fecha*: </label>
 			<input
 			id="fechaEnvio"
 			type="text"
@@ -101,7 +101,7 @@ class PedidoForm extends React.Component{
 			<br/><br/>
 		 	
 			<br/>
-			<label for="horaEnvioIni">Hora inicial: </label>
+			<label htmlFor="horaEnvioIni">Hora inicial: </label>
 			<input
 			id="horaEnvioIni"
 			type="number"
@@ -114,7 +114,7 @@ class PedidoForm extends React.Component{
 			/>
 			{errors.horaEnvioIni}
 			
-			<label for="horaEnvioFin">   Hora final: </label>
+			<label htmlFor="horaEnvioFin">   Hora final: </label>
 			<input
 			type="number"
 			name="horaEnvioFin"
@@ -124,7 +124,6 @@ class PedidoForm extends React.Component{
 			value={values.horaEnvioFin}
 			min="9"
 			max="21"
-			oninput="check()"
 			/>
 			{errors.horaEnvioFin}
 			<br/><br/>
@@ -143,8 +142,7 @@ class PedidoForm extends React.Component{
 		<br/><br/>
          <div className="grid">
          <PayPalButton
-         amount={1}
-         buyerCountry="ES"
+			 amount={1}
          onSuccess={(values, { setSubmitting }) => {
              setTimeout(() => {
              	fetch('', {
@@ -163,7 +161,12 @@ class PedidoForm extends React.Component{
                
                setSubmitting(false);
              }, 400);
-           }}
+		   }}
+		   
+		   options={{
+			clientId: "AQ1wSRRux5eVDHDZia2gH5NfFd_dO2-mooYqs-CdF3E53DIHclXqJlDI_2I2vtfIeQi5qVQTciRnOS9Y",
+			currency: "EUR"
+		  }}
        />
           </div>
         </form>
