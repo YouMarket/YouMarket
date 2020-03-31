@@ -14,7 +14,7 @@ public interface CestaRepository extends JpaRepository<Cesta, Integer> {
 	@Query("select count(c) from Cesta c")
 	Integer totalCestas();
 	
-	@Query("select c from Cesta c where c.usuario.id=?1")
+	@Query("select c from Cesta c where c.usuario.id=?1 and c not in (select p from Pedido p where p.usuario.id=?1)")
 	List<Cesta> cestaPorUsuario(int id);
 
 }

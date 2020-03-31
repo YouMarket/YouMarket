@@ -171,7 +171,6 @@ class PedidoForm extends React.Component{
          
          <PayPalButton
 			 amount={this.precio()}
-         	 currency="EUR"
          onSuccess={(values, { setSubmitting }) => {
              setTimeout(() => {
              	fetch('', {
