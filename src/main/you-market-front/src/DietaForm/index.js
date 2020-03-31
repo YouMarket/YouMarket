@@ -15,6 +15,8 @@ class DietaForm extends React.Component{
 		return(
 	
 		<div >
+			<Header/>
+			<div class="container">
 			<h1>Crear dieta</h1>
 			<Formik
 			initialValues={{   }}
@@ -156,7 +158,10 @@ class DietaForm extends React.Component{
         </form>
       )}
     </Formik>
-  </div>
+  
+			</div>
+			</div>
 );}
 }	
+
 export default withRouter(DietaForm);

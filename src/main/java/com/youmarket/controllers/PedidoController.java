@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,10 +78,10 @@ public class PedidoController {
 			cp.setId(prod, pedidoGuardado);
 			System.out.println(cp.getCesta().getId());
 			this.cpService.save(cp);
-			
 		}
 		
-		
+		session.setAttribute("SESSION_CARRITO", new HashMap<Producto, Integer>());
+
 		return ResponseEntity.created(new URI ("/pedido/)" + pedidoGuardado.getId())).body(pedidoGuardado);
 		
     }

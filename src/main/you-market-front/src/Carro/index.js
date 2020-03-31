@@ -16,7 +16,7 @@ precioFinal = 0.00
 const[carrito, setCarrito] = useState([]);
 const[cestas, setCestas] = useState([]);
 let history = useHistory();
-	
+
 	const fetchCarrito = useCallback(() => {
 		return fetch('carrito')
 			.then(res => res.json())
@@ -28,7 +28,7 @@ let history = useHistory();
 	useEffect(() => {
 		fetchCarrito(carrito);
 	},[]);
-	
+
 	const fetchCestas = useCallback(() => {
 	    return fetch('cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
@@ -45,13 +45,13 @@ let history = useHistory();
 	useEffect(() => {
 	    fetchCestas(cestas);
 	  }, []);
-	
+
   return(
 	<div>
 		<Header/>
 
 		<div className="container clearfix">
-		<p className="introduction">Este es tu carrito de la compra</p>
+		<p className="introduction">Este es tu carrito. ¡Estás a pocos pasos de completar tu compra! 👍</p>
 			<div className="vaciar-carrito">
 			<Formik
 	         onSubmit={(values, { setSubmitting }) => {
@@ -83,7 +83,7 @@ let history = useHistory();
 	           /* and other goodies */
 	         }) => (
 	           <Form onSubmit={handleSubmit}>
-	           
+
 	             <div className="button-carrito-a-cesta">
 	             <button type="submit" disabled={isSubmitting} className="button-vaciar">
 	             Vaciar
@@ -96,21 +96,21 @@ let history = useHistory();
 			</div>
 			<div className="products-container-list">
 				{carrito.map((cestaproducto) => (
-					<ProductoListado 
-						id={cestaproducto.producto.id} 
-						nombre ={cestaproducto.producto.nombre} 
-						supermercado={cestaproducto.producto.supermercado.nombre} 
+					<ProductoListado
+						id={cestaproducto.producto.id}
+						nombre ={cestaproducto.producto.nombre}
+						supermercado={cestaproducto.producto.supermercado.nombre}
 						precioIva ={cestaproducto.producto.precioIva}
-						urlImagen={cestaproducto.producto.urlImagen} 
-						unidad = {cestaproducto.producto.unidad} 
+						urlImagen={cestaproducto.producto.urlImagen}
+						unidad = {cestaproducto.producto.unidad}
 						cantidad = {cestaproducto.cantidad}>
 							{updatePrecioFinal(cestaproducto.cantidad, cestaproducto.producto.precioIva)}
 					</ProductoListado>
 				))}
-				
+
 				<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} €</div>
 				<div className="buttons">
-				
+
 					<a href="/pedido/create">
 					<button className="button-finish">Terminar pedido</button>
 					</a>
@@ -120,8 +120,8 @@ let history = useHistory();
 				<div className="guardar-carrito-a-cesta">
 				<h2>¿Quieres guardar tu carrito como cesta?</h2>
 				<p>Elige la cesta en la que quieres guardar el carrito:</p>
-				<p>(Si guardas este carrito dentro de una cesta que hayas creado, 
-					  podrás volver a cargar esta cesta como carrito desde la vista 
+				<p>(Si guardas este carrito dentro de una cesta que hayas creado,
+					  podrás volver a cargar esta cesta como carrito desde la vista
 					  de detalle de la cesta que quieras cargar cuando quieras)</p>
 				<Formik
 		         initialValues={{id: ''}}
@@ -164,12 +164,12 @@ let history = useHistory();
 		         }) => (
 		           <Form onSubmit={handleSubmit}>
 		           <div className="">
-		           
+
 		           <select name="id" id="id" onChange={handleChange}
 		           onBlur={handleBlur} value={values.id}>
 		           <option value=""></option>
 		           { cestas && cestas.map((cesta) => (
-		        		   
+
 		        		   			<option value={cesta.id}>{cesta.nombre}</option>
 		        		   			))}
 		           </select>
@@ -185,7 +185,7 @@ let history = useHistory();
 
 		         )}
 		       </Formik>
-		       
+
 		       </div>
 		       ): (<div></div>)}
 			</div>

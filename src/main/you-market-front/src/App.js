@@ -30,6 +30,7 @@ import FormCesta from './FormCesta';
 import ShowCesta from './ShowCesta';
 import EditCesta from './EditCesta';
 import Error from './Misc';
+import CestaProductos from './CestaProductos';
 
 function App() {
 

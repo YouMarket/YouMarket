@@ -62,6 +62,9 @@ public class CarritoSessionController {
 	public List<ProductoCarrito> carritoPost(@RequestBody Map<String,Integer> postProducto, HttpServletRequest request, HttpSession session){
 		Producto p = this.productoService.findById(postProducto.get("postId"));
 		int cantidad = postProducto.get("postCantidad");
+		if(cantidad == 0){
+			return null;
+		}
 		@SuppressWarnings("unchecked")
 		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
 		if(carrito == null){

@@ -6,6 +6,9 @@ insert into marca (id, nombre) values (2, 'Danone');
 insert into marca (id, nombre) values (3, 'Don simon');
 insert into marca (id, nombre) values (4, 'Axe');
 insert into marca (id, nombre) values (5, 'Nestle');
+insert into marca (id, nombre) values (6, 'Apis'); 
+insert into marca (id, nombre) values (7, 'Alsur'); 
+insert into marca (id, nombre) values (8, 'Fresco');
 
 insert into departamento (id, nombre) values (1, 'Panadería');
 insert into departamento (id, nombre) values (2, 'Lácteos');
@@ -18,13 +21,13 @@ insert into suscripcion (id, nombre, precio, envios, dietista) values (3, 'Tres 
 insert into suscripcion (id, nombre, precio, envios, dietista) values (4, 'Cuatro envío sin dietista', 17, 4, false);
 insert into suscripcion (id, nombre, precio, envios, dietista) values (5, 'Cuatro envío con dietista', 20, 4, true);
 
-insert into role(id, name) value (1, 'CLIENTE');
-insert into role(id, name) value (2, 'CLIENTE_CON_DIETAS');
-insert into role(id, name) value (3, 'DIETISTA');
-insert into role(id, name) value (4, 'ADMIN');
+insert into role(id, name) values (1, 'CLIENTE');
+insert into role(id, name) values (2, 'CLIENTE_CON_DIETAS');
+insert into role(id, name) values (3, 'DIETISTA');
+insert into role(id, name) values (4, 'ADMIN');
 
-insert into usuario (id, nombre, apellidos, dni, c_postal, rol, email, password, telefono, subscripcion) 
-	values (1, 'Primer', 'Usuario', '00000000T', '41001', 'Cliente', 'cliente@cliente.es', '1234asdf', '666999888', 4);
+insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, telefono, suscripcion_id) 
+	values (1, 'Primer', 'Usuario', '00000000T', '41001', 'cliente@cliente.es', '1234asdf', '666999888', 4);
 
 insert into factura (id, total, total_iva, usuario_id) values (1, 13.43, 17, 1);
 
@@ -61,3 +64,14 @@ insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, depart
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (27,'Chocolate blanco',0.78,0.99,'€','https://supercostablanca.es/4366-thickbox_default/milka-choco-weisse-schokolade-100g--chocolate-blanco.jpg',1,2,5);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (28,'Chocolate negro 70%',0.94,1.2,'€','https://www.valor.es/wp-content/uploads/2016/05/chocolate-70-negro-sin-azucar.png',1,2,5);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (29,'Chocolate negro 85%',0.94,1.2,'€','https://yourspanishcorner.com/4637-thickbox_default/chocolate-negro-85-sin-azucar-valor-.jpg',1,2,5);
+insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (30,'Tomate natural triturado 800 g.',1.15,1.2,'€','https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA02/CONTENIDOS/201408/20/00118027500182____1__600x600.jpg',1,2,6);
+insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (31,'Habas cocidas 425 g. escurrido',1.85,1.2,'€','https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201909/26/00118029902709____1__600x600.jpg',1,2,7);
+insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (32,'Brócoli 500g.',0.99,1.2,'€','https://static1.abc.es/media/salud/2019/05/17/brocoli-kOoH--620x349@abc.jpg',1,2,8);
+
+insert into dieta_productos (dieta_id, productos_id) values (123, 30);
+insert into dieta_productos (dieta_id, productos_id) values (123, 31);
+insert into dieta_productos (dieta_id, productos_id) values (123, 32);
+
+insert into dieta_productos (dieta_id, productos_id) values (234, 31);
+insert into dieta_productos (dieta_id, productos_id) values (234, 11);
+insert into dieta_productos (dieta_id, productos_id) values (234, 19);
