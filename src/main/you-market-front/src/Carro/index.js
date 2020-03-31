@@ -31,7 +31,7 @@ const[carrito, setCarrito] = useState([]);
 		<Header/>
 
 		<div className="container clearfix">
-		<p className="introduction">Este es tu carrito de la compra</p>
+		<h1 className="introduction">Este es tu carrito. ¡Estás a pocos pasos de completar tu compra! 👍</h1>
 
 			<div className="products-container-list">
 				{carrito.map((cestaproducto) => (
