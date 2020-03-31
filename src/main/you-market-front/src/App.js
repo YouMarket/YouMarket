@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
 	  BrowserRouter as Router,
 	  Switch,
@@ -28,6 +29,7 @@ import Cestas from './Cestas';
 import FormCesta from './FormCesta';
 import ShowCesta from './ShowCesta';
 import EditCesta from './EditCesta';
+import Error from './Misc';
 
 function App() {
 
@@ -107,6 +109,10 @@ function App() {
 				<Route path="/cesta/productos/dieta/list/:id">
 					<CestaProductos/>
 				</Route>
+				
+				<Route path="/404">
+				<Error/>
+			</Route>
 
 
 		        <Route path="/">
