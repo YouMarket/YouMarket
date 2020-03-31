@@ -95,7 +95,7 @@ const[cestas, setCestas] = useState([]);
 		           		alert(JSON.stringify(values, null, 2));
 
 		           	}).then(() =>
-		           	{history.push(`/cesta/${values.id}`);}
+		           	{history.push('/cesta');}
 		               )
 
 
