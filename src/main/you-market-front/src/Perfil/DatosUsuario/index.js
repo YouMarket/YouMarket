@@ -32,7 +32,6 @@ function DatosUsuario() {
 			.then(res => res.json())
 			.then(suscripcion => {
 				setSuscripcion(suscripcion)
-				console.log(suscripcion)
 			});
 		}, []);		
 
