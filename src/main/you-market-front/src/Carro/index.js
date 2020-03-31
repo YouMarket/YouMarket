@@ -111,10 +111,15 @@ let history = useHistory();
 				<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} €</div>
 				<div className="buttons">
 
+				 { localStorage.getItem('auth') ? (
 					<a href="/pedido/create">
 					<button className="button-finish">Terminar pedido</button>
 					</a>
-				</div>
+				
+				 ): (<a href="/login">
+					<button className="button-finish">Terminar pedido</button>
+					</a>)}
+				 </div>
 
 				 { localStorage.getItem('auth') ? (
 				<div className="guardar-carrito-a-cesta">
