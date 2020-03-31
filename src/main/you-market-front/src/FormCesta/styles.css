@@ -19,13 +19,14 @@
 	padding-left:39%;
 	width:100%;
 }
+
 .name-input-cesta{
 	margin-top:2%;
 	padding-bottom:5%;
 	margin-bottom:5%;
 	width:100%;
 	font-size:20px;
-	
+
 }
 
 .label-cesta-create{
@@ -40,7 +41,7 @@ input[type=text]:focus {
 .grid2-create-cesta {
 	text-align:center;
 	max-width:100%;
-	
+
 }
 
 .grid2-create-cesta button{
@@ -48,7 +49,7 @@ input[type=text]:focus {
   border: none;
   color: white;
   text-align: center;
-  padding: 3% 15%;	
+  padding: 3% 15%;
   text-decoration: none;
   display: inline-block;
   font-size: 100%;

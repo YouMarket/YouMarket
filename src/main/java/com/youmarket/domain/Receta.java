@@ -20,17 +20,17 @@ public class Receta {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String url_imagen;
-	
+
 	private String nombre;
-	
+
 	private String descripcion;
-	
+
 	private Integer personas;
-	
+
 	private Integer tiempo;
-	
+
 	private Integer calorias;
-	
+
 }

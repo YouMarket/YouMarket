@@ -1,11 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './styles.css';
 import Header from '../Header';
-import ProductoListado from '../ProductoListado'
+import ProductoListado from '../ProductoListado';
 
-
+const precioFinal = 0.00
+function updatePrecioFinal(cantidad, precio){
+	precioFinal += precio*cantidad
+	return precioFinal
+}
 
 function Carro() {
+precioFinal = 0.00
 const[carrito, setCarrito] = useState([]);
 	const fetchCarrito = useCallback(() => {
 		return fetch('carrito')
@@ -20,7 +25,7 @@ const[carrito, setCarrito] = useState([]);
 	useEffect(() => {
 		fetchCarrito(carrito);
 	},[]);
-
+	
   return(
 	<div>
 		<Header/>
@@ -29,17 +34,25 @@ const[carrito, setCarrito] = useState([]);
 		<p className="introduction">Este es tu carrito de la compra</p>
 
 			<div className="products-container-list">
-				{carrito.map(cestaproducto => (
-					<ProductoListado id={cestaproducto.producto.id} nombre ={cestaproducto.producto.nombre} supermercado={cestaproducto.producto.supermercado.nombre} precio ={cestaproducto.producto.precio} urlImagen={cestaproducto.producto.urlImagen} unidad = {cestaproducto.producto.unidad} cantidad = {cestaproducto.cantidad} />
+				{carrito.map((cestaproducto) => (
+					<ProductoListado 
+						id={cestaproducto.producto.id} 
+						nombre ={cestaproducto.producto.nombre} 
+						supermercado={cestaproducto.producto.supermercado.nombre} 
+						precioIva ={cestaproducto.producto.precioIva}
+						urlImagen={cestaproducto.producto.urlImagen} 
+						unidad = {cestaproducto.producto.unidad} 
+						cantidad = {cestaproducto.cantidad}>
+							{updatePrecioFinal(cestaproducto.cantidad, cestaproducto.producto.precioIva)}
+					</ProductoListado>
 				))}
-				{/*  <ProductoListado id="1" nombre="leche" supermercado="Mercadona" precio="1,3" imagen="https://cutt.ly/leche" unidad="€/litro" cantidad="1"/>
-				 <ProductoListado id="1" nombre="leche" supermercado="Mercadona" precio="1,3" imagen="https://cutt.ly/leche" unidad="€/litro" cantidad="1"/>
-				 <ProductoListado id="1" nombre="leche" supermercado="Mercadona" precio="1,3" imagen="https://cutt.ly/leche" unidad="€/litro" cantidad="1"/> */}
-
-				<div className="price"><b>Precio final:</b> 15€</div>
+				
+				<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} €</div>
 				<div className="buttons">
-					<button className="save-cesta">Guardar como cesta</button>
+					{/* <button className="save-cesta">Guardar como cesta</button> */}
+					<a href="/pedido/create">
 					<button className="button-finish">Terminar pedido</button>
+					</a>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,5 @@
 import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+
 import style from './styles.css';
 import cest from './cesta2.png';
 import { Formik } from 'formik';
@@ -33,13 +34,13 @@ class formCesta extends React.Component{
         			body:JSON.stringify(values, null, 2)
         	}).then((response)=> {
         		setSubmitting=false;
-        		
-        	  
+
+
         	}).then(() =>
         	{this.handleRedirect();}
             )
-        			
-        	  
+
+
         }, 400);
       }}
     >
@@ -55,7 +56,7 @@ class formCesta extends React.Component{
       }) => (
         <form onSubmit={handleSubmit}>
         <div className="grid-form-cesta">
-      
+
         	<label htmlFor="name" className="label-cesta-create">Nombre </label>
           <input
           id="name"
@@ -67,7 +68,7 @@ class formCesta extends React.Component{
           	className="name-input-cesta"
           	required
           />
-   
+
           {errors.name && touched.name}
           <div className="grid2-create-cesta">
           <button type="submit" disabled={isSubmitting} className="submit-cesta-create">

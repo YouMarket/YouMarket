@@ -11,7 +11,8 @@ import {
 class Login extends React.Component{
 	 constructor(props) {
 		    super(props);
-		    this.state = { status: "NotLogged" };
+			this.state = { status: "NotLogged" };
+			this.state = { signup: ""};
 		  }
 	 
 	 onChangeStatus() {        
@@ -29,8 +30,12 @@ class Login extends React.Component{
 		    }
 			
 		 componentWillMount() {
-      this.handleRedirect();
-   }
+			if(localStorage.registroOK){
+				this.state.signup = localStorage.registroOK;
+				localStorage.registroOK = ''
+			}
+      		this.handleRedirect();
+   		}
 		
 		render(){
 			return(
@@ -41,6 +46,7 @@ class Login extends React.Component{
 
 		  <div className="caja-form">
 		    <img src={Logo} className="logo-umarket"/>
+			<span className="p-float-label" className="span-login">{this.state.signup}</span>
 		    <Formik
 		      initialValues={{ email: '', password: '' }}
 

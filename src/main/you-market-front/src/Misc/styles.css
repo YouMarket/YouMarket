@@ -1,0 +1,107 @@
+@charset "ISO-8859-1";
+
+.error-login{
+	color: red;
+	padding-top:5%;
+}
+@media(min-width:800px){
+.logo-umarket{
+	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
+	padding-top:1%;
+	padding-bottom:1%;
+	width:25%;
+}
+.input-login{
+	font-size:150%;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	width:35%;
+	padding-bottom:0.5%;
+	padding-top:0.5%;
+	margin-bottom:2%;
+	margin-top:0.5%;
+	border:0;
+	border-bottom: 3px solid #4CAF50; 
+}
+
+.error-login{
+	padding-left:32.5%;
+	font-size:120%;
+}
+
+.login-label{
+	padding-left:32.5%;
+	font-size:90%;
+}
+
+.input-login:focus {
+	border:3px solid #4CAF50;
+}
+
+.submit-login{
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: #4CAF50; /* Green */
+  	border: none;
+  	color: white;
+  	text-align: center;
+  	padding: 1% 2%;	
+  	text-decoration: none;
+  	font-size:150%;
+
+}}
+
+@media(max-width:799px){
+.logo-umarket{
+	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
+	padding-top:1.5%;
+	padding-bottom:0%;
+	width:40%;
+}
+.input-login{
+	font-size:120%;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	width:60%;
+	padding-bottom:0.5%;
+	padding-top:0.5%;
+	margin-bottom:2%;
+	margin-top:0.5%;
+	border:0;
+	border-bottom: 3px solid #4CAF50; 
+}
+
+.login-label{
+	padding-left:20%;
+	font-size:90%;
+}
+
+.error-login{
+	padding-left:20%;
+	font-size:90%;
+}
+
+.input-login:focus {
+	border:3px solid #4CAF50;
+}
+
+.submit-login{
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: #4CAF50; /* Green */
+  	border: none;
+  	color: white;
+  	text-align: center;
+  	padding: 1% 2%;	
+  	text-decoration: none;
+  	font-size:120%;
+
+}}
