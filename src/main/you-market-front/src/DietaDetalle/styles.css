@@ -1,35 +1,48 @@
-.dieta-container{
-	display: flex;
-	flex-direction: column;
-	border: 1px solid #aaaaaa;
-	float:left;
-}
 
-.dieta-imagen{
-	height: 200px;
-	max-width: 240px;
-	display: block;
-	object-fit:cover;
+
+.dieta-detalle-imagen {
+	width: 400px;
+	height: 400px;
 	float: left;
 }
 
-.dieta-info{
-	display: flex;
-	flex-direction: column;
-	padding: 16px;
-	max-width: 207px;
+.dieta-detalle-info {
 	float: left;
+	padding: 30px;
+	position: relative;
+	width: calc(100% - 400px);
 }
 
-.dieta-precio{
-	margin: 0 0 12px 0;
+.dieta-detalle-field {
+	margin-bottom: 15px;
 }
 
-.dieta-nombre{
-	margin: 0 0 8px 0;
+.dieta-detalle-nombre {
+	font-family: 'Fredoka One', cursive;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: rgb(148,194,76);
+	text-shadow: 2px 0 2px black;
 }
 
-.dieta-supermercado{
-	margin:0;
-	
+.dieta-detalle-productos {
+	position: absolute;
+	bottom: 0;
+}
+
+.dieta-detalle-info p {
+	margin-top: 40px;
+}
+
+@media only screen and (max-width: 700px) {
+	.dieta-detalle-info {
+		width: 100%;
+		float: none;
+	}
+
+	.dieta-detalle-imagen {
+		width: 100%;
+		float: none;
+	}
+
 }

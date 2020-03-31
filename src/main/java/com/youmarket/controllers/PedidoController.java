@@ -4,19 +4,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import com.youmarket.domain.CestaProducto;
-import com.youmarket.domain.Pedido;
-import com.youmarket.domain.Producto;
-import com.youmarket.domain.Usuario;
-import com.youmarket.services.CestaProductoService;
-import com.youmarket.services.PedidoService;
-import com.youmarket.services.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +20,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.youmarket.configuration.security.CurrentUser;
+import com.youmarket.configuration.security.UserPrincipal;
+import com.youmarket.domain.CestaProducto;
+import com.youmarket.domain.Pedido;
+import com.youmarket.domain.Producto;
+import com.youmarket.domain.Usuario;
+import com.youmarket.services.CestaProductoService;
+import com.youmarket.services.PedidoService;
+import com.youmarket.services.UsuarioService;
 
 @RestController
 @RequestMapping("pedido")
@@ -45,8 +49,14 @@ public class PedidoController {
         return ResponseEntity.ok(pedidoService.findById(id));
     }
 	
+	@GetMapping("/getAll")
+	public List<Pedido> getAll(@CurrentUser UserPrincipal principal){
+		List<Pedido> pedidos = pedidoService.findAllByUser(principal.getId());
+		return pedidos;
+	}
+	
 	@PostMapping("/create")
-    public ResponseEntity<Pedido> create(@RequestBody Pedido p, HttpSession session) throws URISyntaxException {
+    public ResponseEntity<Pedido> create(@RequestBody Pedido p, HttpSession session, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
 		
 		Date fechaHoraEntrega = new Date();
 		Date fechaHoraEnvio = new Date();
@@ -57,10 +67,13 @@ public class PedidoController {
 		p.setNombre("Pedido num. " + p.getId());
 		p.setOrdenEntrega(1);
 		p.setRetraso("No hubo retraso");
-
-		//TODO: CAMBIAR POR USUARIO LOGEADO
-		Usuario u = this.usuarioService.listaUsuarios().get(0);
-		p.setUsuario(u);
+		Optional<Usuario> user=this.usuarioService.findById(currentUser.getId());
+		
+		Usuario user2=null;
+		if(user.isPresent()) {
+			user2=user.get();
+		}
+		p.setUsuario(user2);
 		
 		//TODO: COSTE DEL PEDIDO
 		
@@ -75,14 +88,12 @@ public class PedidoController {
 			cp.setCantidad(carrito.get(prod));
 			cp.setCesta(pedidoGuardado);
 			cp.setId(prod, pedidoGuardado);
-			System.out.println(cp.getCesta().getId());
-			this.cpService.save(cp);
-			
-		}
 
+			this.cpService.save(cp);
+		}
 		
-		
-		
+		session.setAttribute("SESSION_CARRITO", new HashMap<Producto, Integer>());
+
 		return ResponseEntity.created(new URI ("/pedido/)" + pedidoGuardado.getId())).body(pedidoGuardado);
 		
     }

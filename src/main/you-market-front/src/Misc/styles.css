@@ -1,0 +1,28 @@
+@charset "ISO-8859-1";
+
+.disculpa{
+	text-align:center;
+}
+
+@media(min-width:800px){
+.error404{
+	display: block;
+ 	margin:auto;
+	padding-top:2%;
+	padding-bottom:1%;
+	width:35%;
+}
+
+}
+
+
+@media(max-width:799px){
+.error404{
+	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
+	padding-top:1.5%;
+	padding-bottom:0%;
+	width:50%;
+}
+}

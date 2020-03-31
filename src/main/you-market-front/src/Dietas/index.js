@@ -25,20 +25,24 @@ function Dietas() {
 	return(
 	  <div>
 	  	  <Header/>
-	  	  	<div className="dietas-container">
-		  	  	<div className="grid">
-			      {dietas && dietas.map(dieta => (
-			    		  <div key={dieta.nombre}>
-					          <Dieta nombre={dieta.nombre}
-					          url_imagen={dieta.url_imagen}
-					          id={dieta.id}
-					          tipo={dieta.tipo}
-					          descripcion={dieta.descripcion}
-					          activa={dieta.activa}/>
-					      </div>
-			      ))}
-			    </div>
-			</div>
+			<div className="dietas-page-container container">
+			<h1 className="container dietas-title">Estas son las dietas que tenemos disponibles actualmente, ¡disfrútalas! 🥳</h1>
+				{/* <a href="../create/dieta" className="link-button"> Crear nueva dieta </a> */}
+				<div className="dietas-container">
+					<div className="grid">
+					{dietas && dietas.map(dieta => (
+							<div key={dieta.nombre}>
+								<Dieta nombre={dieta.nombre}
+								url_imagen={dieta.url_imagen}
+								id={dieta.id}
+								tipo={dieta.tipo}
+								descripcion={dieta.descripcion}
+								activa={dieta.activa}/>
+							</div>
+					))}
+					</div>
+				</div>
+			</div>		
 	 </div>
 	);
 	

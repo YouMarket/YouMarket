@@ -1,5 +1,6 @@
 import React,  { useFetch, useCallback, useState, useEffect } from 'react';
 import { Formik } from 'formik';
+
 import { withRouter	} from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
@@ -60,8 +61,9 @@ class PedidoForm extends React.Component{
         setTimeout(() => {
         	fetch('', {
         			headers: {
-        				"Content-Type": "application/json"
-        			},
+        				"Content-Type": "application/json",
+        				'Accept' : 'application/json',
+        				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
         			method:'POST',
         			body:JSON.stringify(values, null, 2)
         	}).then(function(response) {
@@ -70,7 +72,6 @@ class PedidoForm extends React.Component{
         	 {
         		 this.handleRedirect();
         	 })
-          alert(JSON.stringify(values, null, 2));
           
           setSubmitting(false);
         }, 400);
