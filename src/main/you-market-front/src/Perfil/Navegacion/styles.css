@@ -11,6 +11,7 @@
 
 .separador{
 	display: none;
+	border-bottom: none !important;
 }
 
 .perfil-link{
