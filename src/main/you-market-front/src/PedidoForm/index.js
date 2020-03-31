@@ -28,12 +28,19 @@ class PedidoForm extends React.Component{
 		 console.log(total);
 		 return total;
 	}
-		
+	
+	redirecc = () => {
+		if(localStorage.getItem('auth')==null){
+			this.props.history.push('/login');
+		}
+	}
+	
 	handleRedirect = () => {
 		console.log(this.props.history);
 		this.props.history.push('/pedido');
 	}
 	render(){
+		this.redirecc();
 		return(
 	<div>
 		<Header/>
