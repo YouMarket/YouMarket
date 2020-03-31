@@ -320,7 +320,7 @@ class RegistroUsuario extends React.Component{
 
 							
 							<div className="row">
-							<button type="submit" disabled={isSubmitting}>
+							<button type="submit" className="boton" disabled={isSubmitting}>
 								Enviar
 							</button>
 							
