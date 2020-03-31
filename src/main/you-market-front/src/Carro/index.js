@@ -3,6 +3,7 @@ import './styles.css';
 import Header from '../Header';
 import ProductoListado from '../ProductoListado';
 import { Formik,Field, Form } from 'formik';
+import { useHistory } from "react-router-dom";
 
 const precioFinal = 0.00
 function updatePrecioFinal(cantidad, precio){
@@ -14,6 +15,7 @@ function Carro() {
 precioFinal = 0.00
 const[carrito, setCarrito] = useState([]);
 const[cestas, setCestas] = useState([]);
+let history = useHistory();
 	
 	const fetchCarrito = useCallback(() => {
 		return fetch('carrito')
@@ -84,18 +86,17 @@ const[cestas, setCestas] = useState([]);
 
 		         onSubmit={(values, { setSubmitting }) => {
 		           setTimeout(() => {
-		           	fetch(`/carritoACesta`, {
-		           			headers: {
-		           				"Content-Type": "application/json"
-		           			},
+		           	fetch(`/carritoACesta`, {headers: {
+		        		'Content-Type' : 'application/json',
+		        		'Accept' : 'application/json',
+		        		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 		           			method:'POST',
 		           			body:JSON.stringify(values, null, 2)
 		           	}).then((response)=> {
 		           		setSubmitting=false;
-		           		alert(JSON.stringify(values, null, 2));
 
 		           	}).then(() =>
-		           	{history.push('/cesta');}
+		           	{history.push(`/show/cesta/${values.id}`);}
 		               )
 
 
@@ -127,7 +128,7 @@ const[cestas, setCestas] = useState([]);
 
 		             <div className="grid2-carrito-cesta">
 		             <button type="submit" disabled={isSubmitting} className="">
-		             Añadir carrito a la cesta
+		             Guardar como cesta
 		             </button>
 		             </div>
 		            </div>

@@ -114,10 +114,10 @@ if (!cesta){
 
          onSubmit={(values, { setSubmitting }) => {
            setTimeout(() => {
-           	fetch(`/cestaACarrito`, {
-           			headers: {
-           				"Content-Type": "application/json"
-           			},
+           	fetch(`/cestaACarrito`, {headers: {
+        		'Content-Type' : 'application/json',
+        		'Accept' : 'application/json',
+        		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
            			method:'POST',
            			body:JSON.stringify(values, null, 2)
            	}).then((response)=> {

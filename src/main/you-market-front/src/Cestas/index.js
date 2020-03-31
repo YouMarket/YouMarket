@@ -11,7 +11,7 @@ const [total, setTotal] = useState(0);
 	const fetchCestas = useCallback(() => {
 	    return fetch('cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
-  'Accept' : 'application/json',
+		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 		method:'GET'})
 	      .then(res => res.json())
