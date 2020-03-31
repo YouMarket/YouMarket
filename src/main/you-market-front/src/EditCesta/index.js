@@ -1,7 +1,7 @@
 import React,  { useFetch, useCallback, useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
-import cest from './cesta.png';
+import cestaEdit from './cesta.png';
 import style from './styles.css';
 import Cesta from '../Cesta';
 import Header from '../Header';
@@ -42,7 +42,7 @@ if (!cesta){
   <Header/>
 
   <h1 className="titulo-create-cesta">Editar cesta</h1>
-  <img src={cest} className="cesta-imagen-edit"/>
+  <img src={cestaEdit} className="cesta-imagen-edit"/>
   <Formik
     initialValues={{nombre: `${cesta.nombre}`}}
 

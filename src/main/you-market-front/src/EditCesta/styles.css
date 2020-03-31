@@ -7,7 +7,7 @@
 	display: block;
 	margin-left:auto;
 	margin-right:auto;
-	max-width: 25%;
+	max-width: 30%;
 	padding-bottom:2%;
 }
 
@@ -66,6 +66,11 @@ input[type=text]:focus {
 
 }
 
+.grid2-delete-cesta button:focus {
+  background-color: #FF4040;
+}
+
+
 .grid2-delete-cesta button{
 	margin:auto;
 	background-color: red;
@@ -80,4 +85,23 @@ input[type=text]:focus {
   margin-bottom:2%;
   margin-top:10%;
 
+}
+
+@media(min-width:200px){
+	.grid2-delete-cesta button{
+  margin-top:25%;
+  
+}}
+
+@media(min-width:350px){
+	.grid2-delete-cesta button{
+  margin-top:20%;
+  
+}}
+
+@media(min-width:850px){
+	.grid2-delete-cesta button{
+  margin-top:10%;
+  
+}
 }

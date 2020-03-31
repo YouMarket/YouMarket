@@ -3,13 +3,16 @@ package com.youmarket.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.PreRemove;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Cesta;
+import com.youmarket.domain.CestaProducto;
 import com.youmarket.domain.Producto;
 import com.youmarket.domain.Usuario;
 import com.youmarket.domain.form.FormCesta;
@@ -102,8 +105,16 @@ public class CestaService {
 			}
 		}
 		if(hacked==false) {
-		cestaRepository.deleteById(id);
-		}
+			List<CestaProducto> cestasProductos=(List<CestaProducto>) cestaProductoService.CestasProductoPorCestaId(id, cu);
+			if(cestasProductos.size()!=0) {
+				cestaProductoService.deleteByCestaId(id);
+			}
+			cestasProductos=(List<CestaProducto>) cestaProductoService.CestasProductoPorCestaId(id, cu);
+			System.out.println("Anvorguesa");
+			System.out.println(cestasProductos.size());
+			if(cestasProductos.size()==0) {
+				cestaRepository.deleteById(id);
+		}}
 	}
 
 }
