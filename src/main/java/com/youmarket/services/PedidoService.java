@@ -19,6 +19,10 @@ public class PedidoService {
 		return repo.findAll(); 
 	}
 
+	public List<Pedido> findAllByUser(int idUsuario){
+		return repo.findPedidoUsuario(idUsuario);
+	}
+	
 	public Pedido save(Pedido p) {
 		return repo.save(p);
 	}
