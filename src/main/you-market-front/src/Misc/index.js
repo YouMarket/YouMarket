@@ -1,6 +1,7 @@
 import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+
 import style from './styles.css';
-import Logo from '../logo.png';
+import img from './404.png';
 import Header from '../Header';
 import { Formik } from 'formik';
 import {
@@ -8,7 +9,7 @@ import {
 	} from 'react-router-dom';
 
 			
-class 404 extends React.Component{
+class Error extends React.Component{
 	 constructor(props) {
 		    super(props);
 
@@ -21,12 +22,17 @@ class 404 extends React.Component{
 		<div>
 		  <Header/>
 
-		  <div className="caja-form">
-		    <img src={Logo} className="logo-umarket"/>
+		  <div className="caja-404">
+		    <img src={img} className="error404"/>
+		     <div className="disculpa">
+		    	<p>Pongase en contacto con el administrador del sistema si el error persiste.</p>
+		    		<p>Disculpe las molestias.</p>
+		    		
+		    </div>
 		   
 		  </div>
 		 </div>
 		);}
 
 }
-export default withRouter(404);
+export default withRouter(Error);
