@@ -12,7 +12,6 @@ import {
 
 class formCesta extends React.Component{
 	handleRedirect = () => {
-		console.log(this.props.history);
 	      this.props.history.push('/cesta');
 	    }
 	render(){

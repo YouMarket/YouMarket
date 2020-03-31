@@ -1,33 +1,37 @@
 import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 
 import style from './styles.css';
 import Cesta from '../Cesta';
 import Header from '../Header';
 
 function Cestas() {
+let history = useHistory();
 const [cestas, setCestas] = useState([]);
 const [total, setTotal] = useState(0);
+
+	if(localStorage.getItem('auth')==null){
+		history.push('/login');
+	}
 
 	const fetchCestas = useCallback(() => {
 	    return fetch('cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
-  'Accept' : 'application/json',
+		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 		method:'GET'})
 	      .then(res => res.json())
 	      .then(cestas => {
 	        setCestas(cestas)
-	        console.log(cestas);
+	        
 	      });
 	  }, []);
-    console.log(cestas);
 
 
 	useEffect(() => {
 	    fetchCestas(cestas);
 	  }, []);
-
-
+	
   return(
 <div>
   <Header/>

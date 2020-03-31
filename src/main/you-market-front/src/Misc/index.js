@@ -25,7 +25,7 @@ class Error extends React.Component{
 		  <div className="caja-404">
 		    <img src={img} className="error404"/>
 		     <div className="disculpa">
-		    	<p>Pongase en contacto con el administrador del sistema si el error persiste.</p>
+		    	<p>Póngase en contacto con el administrador del sistema, <a href="#"> you.market.0@gmail.com</a>, si el error persiste.</p>
 		    		<p>Disculpe las molestias.</p>
 		    		
 		    </div>
