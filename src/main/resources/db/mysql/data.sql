@@ -21,10 +21,10 @@ insert into suscripcion (id, nombre, precio, envios, dietista) values (3, 'Tres 
 insert into suscripcion (id, nombre, precio, envios, dietista) values (4, 'Cuatro envío sin dietista', 17, 4, false);
 insert into suscripcion (id, nombre, precio, envios, dietista) values (5, 'Cuatro envío con dietista', 20, 4, true);
 
-insert into role(id, name) value (1, 'CLIENTE');
-insert into role(id, name) value (2, 'CLIENTE_CON_DIETAS');
-insert into role(id, name) value (3, 'DIETISTA');
-insert into role(id, name) value (4, 'ADMIN');
+insert into role(id, name) values (1, 'CLIENTE');
+insert into role(id, name) values (2, 'CLIENTE_CON_DIETAS');
+insert into role(id, name) values (3, 'DIETISTA');
+insert into role(id, name) values (4, 'ADMIN');
 
 insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, telefono, suscripcion_id) 
 	values (1, 'Primer', 'Usuario', '00000000T', '41001', 'cliente@cliente.es', '1234asdf', '666999888', 4);

@@ -40,6 +40,7 @@ function DietaDetalle() {
 					<div className="dieta-detalle-field">
 						<b> Descripción: </b>{dieta.descripcion}
 					</div>
+
 					<p>Puedes ver los productos de esta dieta en el siguiente enlace:</p>
 					<NavLink to={`../../../producto/dieta/list/${dieta.id}`} className="dieta-detalle-productos link-button">
 					Productos
