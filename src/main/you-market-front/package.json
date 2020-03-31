@@ -1,7 +1,7 @@
 {
   "name": "you-market-front",
   "version": "0.1.0",
-  "proxy": "https://youmarket.herokuapp.com/",
+  "proxy": "https://youmarket-entrega2.herokuapp.com/",
   "private": true,
    "engines": {
     "npm": "5.7.1",
