@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<frontend-src-dir>${project.basedir}/src/main/you-market-front</frontend-src-dir>
-		<node.version>v12.16.1</node.version>
+		<node.version>v9.5.0</node.version>
 		<yarn.version>v1.22.1</yarn.version>
 		<frontend-maven-plugin.version>1.7.6</frontend-maven-plugin.version>
 		<sonar.projectKey>YouMarket_YouMarket</sonar.projectKey>
@@ -127,25 +127,8 @@
         <installDirectory>target</installDirectory>
     </configuration>
     <executions>
-        <execution>
-            <id>install node and npm</id>
-            <goals>
-                <goal>install-node-and-npm</goal>
-            </goals>
-            <configuration>
-                <nodeVersion>v12.16.1</nodeVersion>
-                <npmVersion>6.9.2</npmVersion>
-            </configuration>
-        </execution>
-         <execution>
-            <id>npm start</id>
-            <goals>
-                <goal>npm</goal>
-            </goals>
-            <configuration>
-                <arguments>start</arguments>
-            </configuration>
-        </execution>
+       
+       
     </executions>
         
    
