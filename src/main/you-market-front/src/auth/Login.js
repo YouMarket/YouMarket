@@ -132,6 +132,7 @@ class Login extends React.Component{
 		        </form>
 		      )}
 		    </Formik>
+		    <p className="registry-in-login">¿Aún no tienes cuenta?, <a href="/registro">Registrate</a></p>
 		  </div>
 		 </div>
 		);}

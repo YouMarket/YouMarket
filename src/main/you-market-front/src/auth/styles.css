@@ -1,9 +1,15 @@
+
 @charset "ISO-8859-1";
 
 .error-login{
 	color: red;
 	padding-top:5%;
 }
+
+.registry-in-login{
+	text-align:center;	
+}
+
 @media(min-width:800px){
 .logo-umarket{
 	display: block;
