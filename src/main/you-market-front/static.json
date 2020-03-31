@@ -5,7 +5,7 @@
   },
   "proxies": {
     "/": {
-      "origin": "https://youmarket-entrega2.herokuapp.com/"
+      "origin": "https://youmarket-entrega2.herokuapp.com"
     }
   }
 }
