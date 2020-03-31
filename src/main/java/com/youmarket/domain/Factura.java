@@ -39,12 +39,12 @@ public class Factura {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaFactura;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(optional = true)
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name="pedido_id")
-//	private Pedido pedido;
+	@ManyToOne(optional = true)
+	@JoinColumn(name="pedido_id")
+	private Pedido pedido;
 	
 }

@@ -1,35 +1,40 @@
 package com.youmarket.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.youmarket.domain.Cesta;
 import com.youmarket.domain.Dieta;
 import com.youmarket.repositories.DietaRepository;
 
 @Service
 public class DietaService {
-	
-	@Autowired
-	private DietaRepository repo;
 
-	public List<Dieta> listaDietas(){
-		
-		return repo.findAll(); 
+	@Autowired
+	private DietaRepository dietaRepository;
+	
+	
+	public List<Dieta> findAll(){
+		return this.dietaRepository.findAll();
 	}
 
 	public Dieta save(Dieta d) {
-		return repo.save(d);
+		return dietaRepository.save(d);
 	}
 
-	public void delete() {
-		// TODO Auto-generated method stub
-		
+	public void delete(Dieta d) {
+		this.dietaRepository.delete(d);
 	}
 
-	public Cesta findById(int idDieta) {
-		return repo.findById(idDieta).get();
+	public Dieta findById(int idDieta) {
+		return dietaRepository.findById(idDieta).get();
+	}
+
+
+	public Dieta deleteById(int id) {
+		this.dietaRepository.deleteById(id);
+		return null;
 	}
 }

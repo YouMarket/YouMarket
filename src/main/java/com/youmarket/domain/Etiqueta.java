@@ -24,7 +24,7 @@ public class Etiqueta {
 	private int id;
 	
 	@Column(name="nombre")
-	private String name;
+	private String nombre;
 	
 	
 	

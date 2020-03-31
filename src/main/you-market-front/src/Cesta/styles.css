@@ -1,0 +1,38 @@
+.cesta-container{
+	display: flex;
+	flex-direction: column;
+	
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.cesta-icon-show{
+
+	float:left;
+	
+	
+}
+
+.cesta-editar{
+	display:block;
+}
+
+.cesta-imagen-show{
+	display:block;
+	margin:auto;	
+	max-width: 65%;
+}
+
+.cesta-info{
+	text-align:center;
+	max-width: 207px;
+
+}
+
+
+.cesta-nombre{
+	text-align:center;
+}
+

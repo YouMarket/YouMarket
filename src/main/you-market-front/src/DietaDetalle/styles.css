@@ -1,0 +1,35 @@
+.dieta-container{
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #aaaaaa;
+	float:left;
+}
+
+.dieta-imagen{
+	height: 200px;
+	max-width: 240px;
+	display: block;
+	object-fit:cover;
+	float: left;
+}
+
+.dieta-info{
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	max-width: 207px;
+	float: left;
+}
+
+.dieta-precio{
+	margin: 0 0 12px 0;
+}
+
+.dieta-nombre{
+	margin: 0 0 8px 0;
+}
+
+.dieta-supermercado{
+	margin:0;
+	
+}

@@ -2,12 +2,15 @@ package com.youmarket.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Type;
+
+import com.youmarket.domain.enums.TipoPago;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +39,11 @@ public class Pago {
 	@Column(name="caducidad", length=10)
 	private String caducidad;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(nullable = false)
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean principal;
+	
+	@ManyToOne(optional = false)
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	

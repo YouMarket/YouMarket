@@ -24,9 +24,9 @@ public class Departamento {
 	private int id;
 	
 	@Column(name="nombre", length=100)
-	private String name;
+	private String nombre;
 	
 	@Column(name="descripcion")
-	private String description;
+	private String descripcion;
 	
 }

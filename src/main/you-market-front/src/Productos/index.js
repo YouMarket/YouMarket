@@ -6,8 +6,7 @@ import Header from '../Header';
 function Productos() {
 	
 const [productos, setProductos] = useState([]);
-	
-	
+
 	const fetchProductos = useCallback(() => {
 	    return fetch('producto/list')
 	      .then(res => res.json())
@@ -30,9 +29,9 @@ const [productos, setProductos] = useState([]);
 	  		{productos.map(producto => (
 	  			<Producto 
 	  				id={producto.id}  
-	  				imagen={producto.imagen} 
-	  				nombre={producto.name} 
-	  				supermercado={producto.supermercado.name} 
+	  				urlImagen={producto.urlImagen} 
+	  				nombre={producto.nombre} 
+	  				supermercado={producto.supermercado.nombre} 
 	  				precio={producto.precioIva} 
 	  				unidad={producto.unidad}
 	  				key={producto.id}

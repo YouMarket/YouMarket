@@ -1,52 +1,109 @@
 package com.youmarket.services;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Cesta;
 import com.youmarket.domain.Producto;
+import com.youmarket.domain.Usuario;
+import com.youmarket.domain.form.FormCesta;
 import com.youmarket.repositories.CestaRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+
+@RequiredArgsConstructor
 public class CestaService {
-	
+
 	@Autowired
-	private CestaRepository repo;
+	private CestaRepository cestaRepository;
 
-	public List<Cesta> listaCestas(){
-		
-		return repo.findAll(); 
+	@Autowired
+	private UsuarioService usuarioService;
+
+	@Autowired
+	private CestaProductoService cestaProductoService;
+
+	//Para dashboard
+	public Integer totalCestasCreadas(){
+
+		return cestaRepository.totalCestas();
 	}
 
-	public Cesta findById(int id) {
-		
-		return repo.findById(id).get();
+	public List<Cesta> cestasPorUsuario(int userId){
+
+		return cestaRepository.cestaPorUsuario(userId);
 	}
 
-	public Cesta save(Cesta p) {
-		
-		return repo.save(p);
-	}
-
-	public void delete() {
+	public Optional<Cesta> muestraCesta(int id) {
 		// TODO Auto-generated method stub
-		
+		return cestaRepository.findById(id);
 	}
 
-	public Cesta findCesta(int id) {
-		return this.repo.findById(id).orElse(null);
+	public Cesta save(Cesta c) {
+
+		cestaRepository.save(c);
+
+		return c;
 	}
 
+	public void deleteById(Cesta c)	 {
 
-	public void delete(Cesta c) {
-		this.repo.delete(c);
+		cestaRepository.deleteById(c.getId());
 	}
-	
-	public Cesta saveProductos(Cesta c, List<Producto> lp){
-		
-//		c.setProductos(lp);
-		return this.save(c);
+
+	public Object findById(Integer id, UserPrincipal currentUser) {
+		Cesta res=null;
+		Optional<Cesta> c=cestaRepository.findById(id);
+		if(c.isPresent()) {
+			Cesta c1=c.get();
+			if(c1.getUsuario().getId()==currentUser.getId()) {
+				res=c1;
+			}
+		}
+		return res;
 	}
+
+	public Cesta creaCesta(FormCesta c, UserPrincipal cu) {
+		Usuario User2=new Usuario();
+		Optional<Usuario> user=usuarioService.findById(cu.getId());
+
+		if(user.isPresent()) {
+			User2=user.get();
+		}
+
+		Cesta nc=new Cesta();
+		nc.setNombre(c.getName());
+		nc.setUsuario(User2);
+		return nc;
+
+	}
+
+	public Cesta saveProductos(@Valid Cesta c, List<Producto> productos) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void borrarPorIdSeguro(Integer id, UserPrincipal cu)	 {
+		Optional<Cesta> c=this.cestaRepository.findById(id);
+		Boolean hacked=false;
+
+		if(c.isPresent()) {
+			Cesta c1=c.get();
+			if(c1.getUsuario().getId()!=cu.getId()) {
+				hacked=true;
+			}
+		}
+		if(hacked==false) {
+		cestaRepository.deleteById(id);
+		}
+	}
+
 }

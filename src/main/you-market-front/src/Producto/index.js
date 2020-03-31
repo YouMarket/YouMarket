@@ -1,25 +1,71 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './styles.css';
+import plus from '../assets/plus.svg'
+import less from '../assets/less.svg'
+import {NavLink} from 'react-router-dom';
 
 interface Props {
 	id: number,
-	imagen: string,
+	urlImagen: string,
 	nombre: string,
 	supermercado: string,
 	precio: number,
-	unidad: string
+	unidad: string,
 }
 
-function Producto({id, imagen, nombre, supermercado, precio, unidad}: Props) {
+function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) {
+	
+	const [cantidad, setCantidad] = useState(0);
+	
+	var idContador = "contador-"+id
+	var idMenos = "menos-"+id
+
+	function lessProduct(){
+		if(cantidad > 0){
+			setCantidad(cantidad - 1)
+			document.getElementById(idContador).textContent = cantidad
+		}
+	}
+	
+	function plusProduct() {
+		setCantidad(cantidad + 1)
+		document.getElementById(idContador).textContent = cantidad
+	}
+	
+	function sendToBack(id, cantidad) {
+		setCantidad(0);
+		fetch('/carrito', {
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+			},
+			method:'POST',
+			body:JSON.stringify({postId: id, postCantidad: cantidad})
+		})
+		
+	}
+
   return(
-  <div className="producto-container">
-  	<img className="producto-imagen" src={imagen} alt="Imagen"/>
-  	<div className="producto-info">
-  		<p className="producto-precio">{precio} {unidad}</p>
-  		<p className="producto-nombre">{nombre}</p>
-  		<p className="producto-supermercado">{supermercado}</p>
-  	</div>
-  </div>
+	  
+		<div className="producto-container">
+			<NavLink to={`../../../show/producto/${id}`} className="link">
+			<img className="producto-imagen" src={urlImagen} alt="Imagen"/>
+			<div className="producto-info">
+				<p className="producto-precio no-link">{precio} {unidad}</p>
+				<p className="producto-nombre no-link">{nombre}</p>
+				<p className="producto-supermercado no-link">{supermercado}</p>
+			</div>
+	        </NavLink>
+			<div className="container-cantidad">
+				<div className="producto-editar-cantidad">
+					<img id={idMenos} className="menos" src={less} onClick={lessProduct}/>
+					<p id={idContador} className="contador">{cantidad}</p>
+					<img className="mas" src={plus} onClick={plusProduct}/>
+				</div>
+				<button className="boton-add-producto" onClick={() => sendToBack(id, cantidad)}>AÑADIR AL CARRO</button>
+			</div>
+  		</div>
+	  
  );
 }
 
