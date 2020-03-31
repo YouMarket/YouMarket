@@ -23,8 +23,8 @@ insert into role(id, name) value (2, 'CLIENTE_CON_DIETAS');
 insert into role(id, name) value (3, 'DIETISTA');
 insert into role(id, name) value (4, 'ADMIN');
 
-insert into usuario (id, nombre, apellidos, dni, c_postal, rol, email, password, telefono, subscripcion) 
-	values (1, 'Primer', 'Usuario', '00000000T', '41001', 'Cliente', 'cliente@cliente.es', '1234asdf', '666999888', 4);
+insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, telefono, subscripcion) 
+	values (1, 'Primer', 'Usuario', '00000000T', '41001', 'cliente@cliente.es', '1234asdf', '666999888', 4);
 
 insert into factura (id, total, total_iva, usuario_id) values (1, 13.43, 17, 1);
 
