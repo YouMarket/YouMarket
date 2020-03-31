@@ -79,8 +79,6 @@ public class PedidoController {
 			this.cpService.save(cp);
 			
 		}
-
-		
 		
 		
 		return ResponseEntity.created(new URI ("/pedido/)" + pedidoGuardado.getId())).body(pedidoGuardado);

@@ -17,7 +17,7 @@
 	grid-row-gap: 10px;
 	grid-template-columns: 240px;
 }
-	
+
 }
 
 @media (min-width: 544px){
@@ -39,7 +39,7 @@
 		grid-row-gap: 10px;
 		grid-template-columns: 240px 240px 240px;
 	}
-	
+
 }
 
 @media (min-width: 1100px){
@@ -65,7 +65,7 @@
 }
 
 @media (min-width: 1350px){
-	
+
 	.cestas-container{
 	padding: 2% 3.2%;
 	grid-template-columns: 240px 240px 240px 240px 240px;
@@ -73,12 +73,12 @@
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
 	}
-	
-	
+
+
 }
 
 @media (min-width: 1450px){
-	
+
 	.cestas-container{
 	padding: 1% 7%;
 	grid-template-columns: 240px 240px 240px 240px 240px;
@@ -86,4 +86,3 @@
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
 	}}
-

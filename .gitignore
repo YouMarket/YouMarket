@@ -31,7 +31,7 @@ build/
 .vscode/
 
 ### Ignores del proyecto ###
-#/src/main/resources/application.properties
-##/pom.xml
+/src/main/resources/application.properties
+/pom.xml
 /src/main/you-market-front/yarn.lock
 /src/main/you-market-front/package-lock.json
