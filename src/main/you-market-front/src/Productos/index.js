@@ -24,6 +24,7 @@ const [productos, setProductos] = useState([]);
   return(
 	<div>	  
 	  <Header/>
+	  <h1 className="container productos-title">¡Bienvenido a YouMarket!</h1>
 	  <h1 className="container productos-title">Aquí tienes los productos disponibles 🤙</h1>
 	  <div className="productos-container">
 	  	<div className="grid">

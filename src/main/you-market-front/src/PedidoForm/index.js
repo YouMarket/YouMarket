@@ -1,11 +1,9 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React,  { useCallback, useState, useEffect } from 'react';
 import { Formik } from 'formik';
-
+import './styles.css'
 import { withRouter	} from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
-
-
 
 class PedidoForm extends React.Component{
 	
@@ -41,7 +39,8 @@ class PedidoForm extends React.Component{
 		<Header/>
 	<div>
   	
-    <h1>Crear pedido</h1>
+	  <div class="pedido-container container">
+	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos 🙏</h1>
     <Formik
       initialValues={{   }}
       validate={values => {
@@ -106,9 +105,9 @@ class PedidoForm extends React.Component{
 		<br/><br/>
          
 
-		
+		<div className="pedido-form-envio-container">
 		<fieldset> 
-		 	<legend>Envío** </legend>
+		 	<legend><h2>Envío**</h2> </legend>
 		 	
 			<label htmlFor="fechaEnvio">Fecha*: </label>
 			<input
@@ -153,8 +152,9 @@ class PedidoForm extends React.Component{
 			{errors.horaEnvioFin}
 			<br/><br/>
 			
-			
 		</fieldset>
+		
+		</div>
 		<br/>
 		
 		<div>
@@ -166,9 +166,8 @@ class PedidoForm extends React.Component{
 	
 		<br/><br/>
 		
+		<h2>Elige tu método de pago 👇</h2>
          <div className="grid">
-         
-         
          <PayPalButton
 			 amount={this.precio()}
          onSuccess={(values, { setSubmitting }) => {
@@ -200,7 +199,9 @@ class PedidoForm extends React.Component{
         </form>
       )}
     </Formik>
-    	</div>
+    	
+	  </div>
+    </div>
 	</div>
 );
 		

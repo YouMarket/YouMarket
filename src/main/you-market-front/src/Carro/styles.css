@@ -140,3 +140,13 @@ select {
         margin: auto;
         display: block;
 }
+
+.carrito-empty-image {
+    margin-top: 50px;
+}
+
+.empty-view-text {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
