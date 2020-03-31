@@ -1,11 +1,17 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { PayPalButton } from "react-paypal-button-v2";
+
 import './styles.css';
 import {Link} from 'react-router-dom';
 import Header from '../../Header';
 import Navegacion from '../Navegacion';
+import { useHistory } from "react-router-dom";
+
 import {Card} from 'primereact/card';
 
 function DatosUsuario() {
+	let history = useHistory();
+
 
 	const [usuario, setUsuario] = useState([]);
 	const [direccion, setDireccion] = useState([]);
@@ -69,6 +75,37 @@ function DatosUsuario() {
 					<p>Suscripción: {suscripcion.nombre} </p>
 					<p>Precio: {suscripcion.precio} €</p>
 				</div>
+				<p>Pagar subscripción</p>
+				
+				<PayPalButton
+				 amount={suscripcion.precio}
+	         	 currency="EUR"
+	         onSuccess={(values, { setSubmitting }) => {
+	             setTimeout(() => {
+	             	fetch('/factura/create', {
+	             			headers: {
+	             				"Content-Type": "application/json"
+	             			},
+	             			method:'POST',
+	             			body:JSON.stringify(values, null, 2)
+	             	}).then(function(response) {
+	             	    return console.log(response.json());
+	             	}).then(() => 
+	             	 {
+	             		history.push('/');
+
+	             	 })
+	             
+	               
+	               setSubmitting(false);
+	             }, 400);
+			   }}
+			   
+			   options={{
+				clientId: "AQ1wSRRux5eVDHDZia2gH5NfFd_dO2-mooYqs-CdF3E53DIHclXqJlDI_2I2vtfIeQi5qVQTciRnOS9Y",
+				currency: "EUR"
+			  }}
+	       />
 			</Card>
 			<Card title="Información de Usuario" style={{margin: 20}} >
 				<div>
