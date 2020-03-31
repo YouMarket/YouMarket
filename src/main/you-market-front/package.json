@@ -1,7 +1,6 @@
 {
   "name": "you-market-front",
   "version": "0.1.0",
-  "proxy": "https://youmarket-entrega2.herokuapp.com/",
   "private": true,
    "engines": {
     "npm": "5.7.1",
@@ -30,5 +29,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "https://youmarket-entrega2.herokuapp.com/"
 }
