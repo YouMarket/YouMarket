@@ -111,8 +111,6 @@ public class CarritoSessionController {
 		return "redirect:/";
 	}
 
-<<<<<<< Updated upstream
-=======
 	@PostMapping("/cestaACarrito")
 	public List<ProductoCarrito> cestaACarrito(@RequestBody Map<String,String> postCesta, HttpServletRequest request, HttpSession session){
 		List<CestaProducto> productos = this.cpService.cpPorCesta(Integer.valueOf(postCesta.get("id")));
@@ -145,7 +143,5 @@ public class CarritoSessionController {
 		}
 		return precio;
 	}
-
->>>>>>> Stashed changes
 }
 
