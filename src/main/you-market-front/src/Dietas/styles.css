@@ -2,7 +2,11 @@
 	padding: 40px 30px;
 	display: flex;
 	justify-content: center;
-	
+
+}
+
+.dietas-title {
+	padding-top: 0 !important;
 }
 
 @media (min-width: 544px){

@@ -13,10 +13,6 @@ const [cesta, setCesta] = useState();
 const [productoCesta, setProductoCesta] = useState();
 const [total, setTotal] = useState(0.0);
 let history = useHistory();
-
-
-
-
 const { id } = useParams();
 
 	const fetchCesta = useCallback(() => {
@@ -74,16 +70,7 @@ const { id } = useParams();
 
 
 if (!cesta){
-	return (
-<div>
-  <Header/>
-
-	  <div className="cesta-container-show">
-	  <p>Ups! Parece que esta no es tu página</p>
-	  </div>
-
-  </div>
- );
+	return null;
 }
   return(
 <div>
@@ -114,10 +101,10 @@ if (!cesta){
 
          onSubmit={(values, { setSubmitting }) => {
            setTimeout(() => {
-           	fetch(`/cestaACarrito`, {
-           			headers: {
-           				"Content-Type": "application/json"
-           			},
+           	fetch(`/cestaACarrito`, {headers: {
+        		'Content-Type' : 'application/json',
+        		'Accept' : 'application/json',
+        		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
            			method:'POST',
            			body:JSON.stringify(values, null, 2)
            	}).then((response)=> {

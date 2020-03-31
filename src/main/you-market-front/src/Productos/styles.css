@@ -5,6 +5,10 @@
 	
 }
 
+.productos-title {
+	padding-bottom: 0 !important;
+}
+
 @media (min-width: 544px){
 
 	.grid{

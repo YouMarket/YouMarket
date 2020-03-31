@@ -32,7 +32,6 @@ const { id } = useParams();
 	useEffect(() => {
 	    fetchCesta(cesta);
 	  }, []);
-	console.log(cesta);
 
 if (!cesta){
 	return null;
@@ -56,8 +55,6 @@ if (!cesta){
       			body:JSON.stringify(values, null, 2)
       	}).then((response)=> {
       		setSubmitting=false;
-      		alert(JSON.stringify(values, null, 2));
-
 
       	}).then(() =>
       	{history.push("/cesta");}

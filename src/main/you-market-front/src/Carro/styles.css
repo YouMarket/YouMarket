@@ -5,6 +5,55 @@
     padding: 50px 20px;
 }
 
+.vaciar-carrito{
+	padding-bottom:3.5%;
+	text-align:center;
+}
+
+.button-vaciar{
+	display: inline-block;
+    border: none;
+    color: white;
+    margin-top: 20px;
+    padding: 15px 32px;
+    clear: both;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: red;
+	
+}
+.guardar-carrito-a-cesta{
+	padding-top:26%;
+	display:block;
+	font-size:80%;
+}
+
+.button-carrito-a-cesta{
+	float: none !important;
+        width: 90%;
+        margin-top: 2%;
+        margin-left:2%;
+        display: block;
+}
+
+.error-required-cesta-a-carrito{
+	color:red;
+}
+
+select {
+  margin-bottom: 1em;
+  padding: 2% 10%;
+  font-size:110%;
+  text-align:center;
+  margin:auto;
+  border: 0;
+  border-bottom: 2px solid green; 
+  font-weight: bold;
+  border-radius: 0;
+}
+
 @media only screen and (max-width: 500px) {
 
     .container {
@@ -30,6 +79,10 @@
         padding: 0;
         text-align: center;
     }
+    
+    .guardar-carrito-a-cesta{
+	padding-top:2%;
+}
 
 }
 
@@ -41,7 +94,7 @@
 .introduction {
     text-align: center;
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 1%;
 }
 
 .buttons {
@@ -73,4 +126,17 @@
     text-transform: uppercase;
     padding: 20px;
     clear: both;
+}
+
+.guardar-carrito-a-cesta{
+	text-align:center;
+	font-size:80%;
+	margin:auto;
+}
+
+.button-carrito-a-cesta{
+	float: none !important;
+        width: 90%;
+        margin: auto;
+        display: block;
 }
