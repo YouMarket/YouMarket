@@ -8,7 +8,7 @@ function Productos() {
 const [productos, setProductos] = useState([]);
 
 	const fetchProductos = useCallback(() => {
-	    return fetch('producto/list')
+	    return fetch('https://youmarket-entrega2.herokuapp.com/producto/list')
 	      .then(res => res.json())
 	      .then(productos => {
 	        setProductos(productos);
