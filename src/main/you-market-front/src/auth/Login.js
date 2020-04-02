@@ -50,7 +50,7 @@ class Login extends React.Component{
 
 		  <div className="caja-form">
 		    <img src={Logo} className="logo-umarket"/>
-			<span className="p-float-label" className="span-login">{this.state.signup}</span>
+			<span className="p-float-label" className="span-login"><p className="registrado-p">{this.state.signup}</p></span>
 		    <Formik
 		      initialValues={{ email: '', password: '' }}
 
