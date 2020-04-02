@@ -8,7 +8,6 @@ import Header from '../Header';
 function Cestas() {
 let history = useHistory();
 const [cestas, setCestas] = useState([]);
-const [total, setTotal] = useState(0);
 
 	if(localStorage.getItem('auth')==null){
 		history.push('/login');
@@ -32,14 +31,15 @@ const [total, setTotal] = useState(0);
 	    fetchCestas(cestas);
 	  }, []);
 	
+	await new Promise(r => setTimeout(r, 300));
   return(
 <div>
   <Header/>
 
   <div className="nueva-cesta">
   	<a href="/create/cesta">Nueva cesta</a>
-
-	  <div className="cestas-container">
+  	{cestas.length > 0 ?
+	  (<div className="cestas-container">
 	  { cestas && cestas.map((cesta) => (
 
 			    <div key={cesta.id} className="grid-cesta">
@@ -49,7 +49,7 @@ const [total, setTotal] = useState(0);
 
 	           ))}
 
-	  </div>
+	  </div>) : (<div><p>No hay cestas</p></div>)}
 
   </div>
  </div>

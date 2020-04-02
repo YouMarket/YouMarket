@@ -68,14 +68,15 @@ const { id } = useParams();
 	  }, []);
 
 
+	if (!cesta){
+		return null;
+	}
 
-if (!cesta){
-	return null;
-}
+	if (localStorage.getItem('auth')==null){
+		history.push('/login');
+	}
 
-if (localStorage.getItem('auth')==null){
-	history.push('/login');
-}
+
   return(
 <div>
   <Header/>

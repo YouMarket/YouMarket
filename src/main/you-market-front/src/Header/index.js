@@ -70,7 +70,7 @@ function Header() {
 			</div>
 
 			{localStorage.getItem('auth')!=null ? (<Link className="perfil" to="/perfil">
-				<img src={user} className="icon" alt="Mi Perfil"/>)
+				<img src={user} className="icon" alt="Mi Perfil"/>
 			</Link>) : <div></div>}
 			<a href="#" className="hamburger-menu" onClick={menuInteraction}>
 				<img src={menu} className="hamburger-icon" alt="Menu"/>
