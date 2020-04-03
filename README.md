@@ -58,13 +58,13 @@ Ejemplo: para el sprint 1 la tarea de login de usuario
 _Estas indicaciones nos permitirán abrir issues detalladas, donde se debatirán los problemas que vayan surgiendo en las implementaciones y se intentarán solucionar._
 
 ### Título de las issues
-Las issues deberán tener un título que pueda entender cualquier miembro del grupo, este o no relacionado con la tarea que se este llevando a cabo, por lo tanto deberá componerse de unas etiquetas que ayuden al lector de la issue a situarse y entender la magnitud del problema y un nombre que describa en pocas palabras cual es el problema.
+Las issues deberán tener un título que pueda entender cualquier miembro del grupo, este o no relacionado con la tarea que se este llevando a cabo, por lo tanto deberá componerse de unas etiquetas que ayuden al lector de la issue a situarse, y entender la magnitud del problema y un nombre que lo describa en pocas palabras.
 
 #### · Etiquetas
 ##### Indicando la magnitud del error🤯
 Estas etiquetas servirán para priorizar algunas issues con respecto a otras:
-    ·[Error]:Cuando el problema asociado en la tarea cause un comportamiento que lejos de ser el esperado, hace que el cumplimiento de                la funcionalidad que se esperaba conseguir no se de.
-    .[Bug]:Cuando el problema asociado en la tarea cause un comportamiento cercano al esperado, pero se desvíe de la funcionalidad que              se pensaba conseguir con dicha implementación, provocando algún tipo de error molesto o indeseado.
+    ·[Error]:Cuando el problema asociado a la tarea cause un comportamiento, que lejos de ser el esperado, hace que el cumplimiento de                la funcionalidad que se esperaba conseguir no se de.
+    .[Bug]:Cuando el problema asociado a la tarea cause un comportamiento cercano al esperado, pero se desvíe de la funcionalidad que              se pensaba conseguir con dicha implementación, provocando algún tipo de error molesto o indeseado.
     
 ##### Aportando información adicional💁‍
 Estas etiquetas darán información complementaria a la primera, situando al lector en un área del proyecto. Podrán referirse a un caso de uso en concreto, o a una funcionalidad dentro del mismo.
@@ -76,7 +76,7 @@ Con esta etiqueta se puede indicar si el error o bug pertenece al desarrollo fro
 
 ### Descripción de las issues🤓
 Primero explicaremos el problema que hemos observado en nuestra implementación, detallando si es necesario que era lo que se esperaba obtener si este bug o error no se hubiera presentado, luego enumeraremos los pasos a seguir para reproducir dicho error y, por último, 
-especificaremos en que rama esta el código donde se produce la issue y si se está usando alguna variación en el entorno de desarrollo a la propuesta por el equipo, por ejemplo bases de datos remotas.
+especificaremos en que rama esta el código donde se produce el error o bug y si se está usando alguna variación en el entorno de desarrollo a la propuesta por el equipo, por ejemplo bases de datos remotas.
 
 ###Ejemplo de issue
 `[Error] [Crear pedido][Back/Front] Formulario de pedido nuevo`
