@@ -320,6 +320,19 @@ class RegistroUsuario extends React.Component{
 
 							
 							<div className="row">
+							
+							
+							<input
+							id="terms"
+							type="checkbox"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							required
+							/>
+							<label htmlFor="terms"> He leido y acepto los terminos y condiciones </label>
+
+							<br/><br/>
+							
 							<button type="submit" className="boton" disabled={isSubmitting}>
 								Enviar
 							</button>
