@@ -327,9 +327,10 @@ class RegistroUsuario extends React.Component{
 							type="checkbox"
 							onChange={handleChange}
 							onBlur={handleBlur}
+							text = "Debe aceptar los terminos y condiciones"
 							required
 							/>
-							<label htmlFor="terms"> He leido y acepto los terminos y condiciones </label>
+							<label htmlFor="terms"> He leido y acepto los <a href="/terminosycondiciones"> terminos y condiciones </a> </label>
 
 							<br/><br/>
 							
