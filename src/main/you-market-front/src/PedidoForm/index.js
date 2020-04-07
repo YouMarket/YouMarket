@@ -76,8 +76,7 @@ class PedidoForm extends React.Component{
         	}).then(function(response) {
         	    return console.log(response.json());
          	}).then(() =>{
-         		var x = document.getElementsByClassName("form-pedido");
-         		x[0].submit();
+				{handleSubmit}
         	}).then(() => 
         	 {
         		 this.handleRedirect();
@@ -230,10 +229,42 @@ class PedidoForm extends React.Component{
 		<br/><br/>
 		
 		
-        <button type="submit" disabled={isSubmitting} className="submit-cesta-create">
-        	Enviar
-        </button>
+
 		
+		<h2>Elige tu método de pago 👇</h2>
+         <div className="grid">
+         <PayPalButton
+			 amount={this.precio()}
+         onSuccess={(values, { setSubmitting }) => {
+             setTimeout(() => {
+             	fetch('', {
+             			headers: {
+             				"Content-Type": "application/json"
+             			},
+             			method:'POST',
+             			body:JSON.stringify(values, null, 2)
+             	}).then(function(response) {
+             	    return console.log(response.json());
+             	}).then(() =>{
+             		{handleSubmit}
+             	})
+             	
+             	.then(() => 
+             	 {
+             		 this.handleRedirect();
+             	 })
+               alert(JSON.stringify(values, null, 2));
+               
+               setSubmitting(false);
+             }, 400);
+		   }}
+		   
+		   options={{
+			clientId: "AQ1wSRRux5eVDHDZia2gH5NfFd_dO2-mooYqs-CdF3E53DIHclXqJlDI_2I2vtfIeQi5qVQTciRnOS9Y",
+			currency: "EUR"
+		  }}
+       />
+          </div>
         </form>
       )}
     </Formik>
