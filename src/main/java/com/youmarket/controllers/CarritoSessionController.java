@@ -77,6 +77,7 @@ public class CarritoSessionController {
 			carrito.put(p, cantidad);
 		}
 		request.getSession().setAttribute("SESSION_CARRITO", carrito);
+		System.out.println(this.listCarrito(carrito));
 		return this.listCarrito(carrito);
 	}
 

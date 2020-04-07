@@ -36,9 +36,6 @@ import com.youmarket.services.UsuarioService;
 public class PedidoController {
 	
 	@Autowired
-	private UsuarioController usuCtrl;
-	
-	@Autowired
 	private PedidoService pedidoService;
 	
 	@Autowired
@@ -53,10 +50,9 @@ public class PedidoController {
     }
 	
 	@GetMapping("/getAll")
-	public List<Pedido> getAll(@CurrentUser UserPrincipal currentUser){
-		
-		System.out.println(this.usuCtrl.getCurrentUser(currentUser));
-		List<Pedido> pedidos = pedidoService.findAllByUser(this.usuCtrl.getCurrentUser(currentUser).getId());
+	public List<Pedido> getAll(@CurrentUser UserPrincipal principal){
+		System.out.println(principal);
+		List<Pedido> pedidos = pedidoService.findAllByUser(principal.getId());
 		return pedidos;
 	}
 	
