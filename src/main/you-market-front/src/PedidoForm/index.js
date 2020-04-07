@@ -189,8 +189,7 @@ class PedidoForm extends React.Component{
              	}).then(function(response) {
              	    return console.log(response.json());
              	}).then(() =>{
-             		var x = document.getElementsByClassName("form-pedido");
-             		x[0].submit();
+             		{handleSubmit}
              	})
              	
              	.then(() => 
