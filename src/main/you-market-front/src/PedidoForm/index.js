@@ -37,7 +37,7 @@ class PedidoForm extends React.Component{
 	
 	handleRedirect = () => {
 		console.log(this.props.history);
-		this.props.history.push('/pedido');
+		this.props.history.push('/pedidoexito');
 	}
 	render(){
 		this.redirecc();
@@ -47,10 +47,11 @@ class PedidoForm extends React.Component{
 	<div>
   	
 	  <div class="pedido-container container">
-	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos 🙏</h1>
-    <Formik
-      initialValues={{   }}
-      validate={values => {
+	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
+    <Formik validateOnChange={false} validateOnBlur={false}
+    	className="formulario-pedido"
+    	initialValues={{   }}
+     	validate={values => {
         const errors = {};
         if (!values.direccion) {
         	errors.direccion = 'Campo obligatorio';
@@ -74,6 +75,9 @@ class PedidoForm extends React.Component{
         			body:JSON.stringify(values, null, 2)
         	}).then(function(response) {
         	    return console.log(response.json());
+         	}).then(() =>{
+         		var x = document.getElementsByClassName("form-pedido");
+         		x[0].submit();
         	}).then(() => 
         	 {
         		 this.handleRedirect();
@@ -95,45 +99,97 @@ class PedidoForm extends React.Component{
       }) => (
         <form onSubmit={handleSubmit}>
         
-        
-        <label htmlFor="direccion">Dirección*: </label>
-        <input
-		id="direccion"
-		type="text"
-		name="direccion"
-		onChange={handleChange}
-		onBlur={handleBlur}
-		value={values.direccion}
-        placeholder="c/Cisnes, 60, Sevilla"
-        pattern="c/([A-z\s]+), (\d+),\s([A-z\s]+)"
-        title="Debe ser de la forma: c/Cisnes, 60, Sevilla"
-		/>
-		{errors.direccion}
-		<br/><br/>
-         
-
 		<div className="pedido-form-envio-container">
 		<fieldset> 
-		 	<legend><h2>Envío**</h2> </legend>
-		 	
-			<label htmlFor="fechaEnvio">Fecha*: </label>
-			<input
-			id="fechaEnvio"
+		 	<legend><h2>Pedido número []**</h2> </legend>
+        
+        <label htmlFor="poblacion">Población*: </label>
+        <input
+			id="poblacion"
 			type="text"
+			name="poblacion"
+			onChange={handleChange}
+			onBlur={handleBlur}
+			value={values.poblacion}
+	        placeholder="Los Palacios y Villafranca"
+	        required
+			/>
+		{errors.poblacion}
+		<br/><br/>
+        
+		<label htmlFor="cpostal">Código postal*: </label>
+        <input
+			id="cpostal"
+			type="text"
+			name="cpostal"
+			onChange={handleChange}
+			onBlur={handleBlur}
+			value={values.cpostal}
+	        placeholder="41720"
+	        required
+			/>
+			{errors.cpostal}
+			<br/><br/>
+		
+		<label htmlFor="provincia">Provincia*: </label>
+        <input
+			id="provincia"
+			type="text"
+			name="provincia"
+			onChange={handleChange}
+			onBlur={handleBlur}
+			value={values.provincia}
+	        placeholder="Sevilla"
+	        required
+			/>
+			{errors.provincia}
+			<br/><br/>
+		
+		
+        <label htmlFor="direccion">Calle*: </label>
+        <input
+			id="direccion"
+			type="text"
+			name="direccion"
+			onChange={handleChange}
+			onBlur={handleBlur}
+			value={values.direccion}
+	        placeholder="c/Cisnes"
+	        required
+			/>
+			{errors.direccion}
+			<br/><br/>
+		
+		<label htmlFor="numero">Número*: </label>
+        <input
+			id="numero"
+			type="number"
+			name="numero"
+			onChange={handleChange}
+			onBlur={handleBlur}
+			value={values.numero}
+	        required
+			/>
+			{errors.numero}
+			<br/><br/>
+		
+		 	
+		<label htmlFor="fechaEnvio">Fecha*: </label>	
+		<input
+			id="fechaEnvio"
+			type="date"
 			name="fechaEnvio"
 			onChange={handleChange}
 			onBlur={handleBlur}
 			value={values.fechaEnvio}
-	        placeholder="2020-04-23"
-	        pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
-	        title="El formato debe ser aaaa-mm-dd (P. ej: 2020-04-23)"
+	        required
 			/>
 			{errors.fechaEnvio}
 			<br/><br/>
 		 	
 			<br/>
-			<label htmlFor="horaEnvioIni">Hora inicial: </label>
-			<input
+		<label htmlFor="horaEnvioIni">Hora inicial: </label>
+		<input
 			id="horaEnvioIni"
 			type="number"
 			name="horaEnvioIni"
@@ -145,8 +201,8 @@ class PedidoForm extends React.Component{
 			/>
 			{errors.horaEnvioIni}
 			
-			<label htmlFor="horaEnvioFin">   Hora final: </label>
-			<input
+		<label htmlFor="horaEnvioFin">   Hora final: </label>
+		<input
 			type="number"
 			name="horaEnvioFin"
 			id="horaEnvioFin"
@@ -173,36 +229,11 @@ class PedidoForm extends React.Component{
 	
 		<br/><br/>
 		
-		<h2>Elige tu método de pago 👇</h2>
-         <div className="grid">
-         <PayPalButton
-			 amount={this.precio()}
-         onSuccess={(values, { setSubmitting }) => {
-             setTimeout(() => {
-             	fetch('', {
-             			headers: {
-             				"Content-Type": "application/json"
-             			},
-             			method:'POST',
-             			body:JSON.stringify(values, null, 2)
-             	}).then(function(response) {
-             	    return console.log(response.json());
-             	}).then(() => 
-             	 {
-             		 this.handleRedirect();
-             	 })
-               alert(JSON.stringify(values, null, 2));
-               
-               setSubmitting(false);
-             }, 400);
-		   }}
-		   
-		   options={{
-			clientId: "AQ1wSRRux5eVDHDZia2gH5NfFd_dO2-mooYqs-CdF3E53DIHclXqJlDI_2I2vtfIeQi5qVQTciRnOS9Y",
-			currency: "EUR"
-		  }}
-       />
-          </div>
+		
+        <button type="submit" disabled={isSubmitting} className="submit-cesta-create">
+        	Enviar
+        </button>
+		
         </form>
       )}
     </Formik>
