@@ -49,6 +49,7 @@ class PedidoForm extends React.Component{
 	  <div class="pedido-container container">
 	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos 🙏</h1>
     <Formik
+      className="formulario-pedido"
       initialValues={{   }}
       validate={values => {
         const errors = {};
@@ -187,7 +188,12 @@ class PedidoForm extends React.Component{
              			body:JSON.stringify(values, null, 2)
              	}).then(function(response) {
              	    return console.log(response.json());
-             	}).then(() => 
+             	}).then(() =>{
+             		var x = document.getElementsByClassName("form-pedido");
+             		x[0].submit();
+             	})
+             	
+             	.then(() => 
              	 {
              		 this.handleRedirect();
              	 })
