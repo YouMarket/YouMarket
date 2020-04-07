@@ -11,7 +11,7 @@ const [productos, setProductos] = useState([]);
 	const { id } = useParams();
 
 	const fetchDietaProductos = useCallback(() => {
-	    return fetch(`../../../producto/dieta/list/${id}`)
+	    return fetch(`https://youmarket-entrega2.herokuapp.com/producto/dieta/list/${id}`)
 	      .then(res => res.json())
 	      .then(productos => {
 	        setProductos(productos);

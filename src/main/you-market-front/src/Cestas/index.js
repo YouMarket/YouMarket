@@ -15,7 +15,7 @@ const [total, setTotal] = useState(0);
 	}
 
 	const fetchCestas = useCallback(() => {
-	    return fetch('cesta/user' , {headers: {
+	    return fetch('https://youmarket-entrega2.herokuapp.com/cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},

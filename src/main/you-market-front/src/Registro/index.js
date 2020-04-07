@@ -96,7 +96,7 @@ class RegistroUsuario extends React.Component{
 							values.usuario.suscripcion.id = document.getElementById('selectSuscripciones').value
 							console.log(values.usuario.suscripcion.id)
 							setTimeout(() => {
-								fetch('../usuario/signUpAll', {
+								fetch('https://youmarket-entrega2.herokuapp.com/usuario/signUpAll', {
 										headers: {
 											"Content-Type": "application/json"
 										},

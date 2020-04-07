@@ -18,7 +18,7 @@ function DatosUsuario() {
 	const [suscripcion, setSuscripcion] = useState([]);
 		
 	const fetchUsuario = useCallback(() => {
-		return fetch('usuario/getUser' , {headers: {
+		return fetch('https://youmarket-entrega2.herokuapp.com/usuario/getUser' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -30,7 +30,7 @@ function DatosUsuario() {
 		}, []);		
 	
 	const fetchSuscripcion = useCallback(() => {
-		return fetch('usuario/getSuscripcion' , {headers: {
+		return fetch('https://youmarket-entrega2.herokuapp.com/usuario/getSuscripcion' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -42,7 +42,7 @@ function DatosUsuario() {
 		}, []);		
 
 	const fetchDireccion = useCallback(() => {
-		return fetch('direccion/principal' , {headers: {
+		return fetch('https://youmarket-entrega2.herokuapp.com/direccion/principal' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -82,7 +82,7 @@ function DatosUsuario() {
 	         	 currency="EUR"
 	         onSuccess={(values, { setSubmitting }) => {
 	             setTimeout(() => {
-	             	fetch('/factura/create', {
+	             	fetch('https://youmarket-entrega2.herokuapp.com/factura/create', {
 	             			headers: {
 	             				"Content-Type": "application/json"
 	             			},

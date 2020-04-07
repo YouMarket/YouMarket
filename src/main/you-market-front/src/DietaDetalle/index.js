@@ -12,7 +12,7 @@ function DietaDetalle() {
 	const { id } = useParams();
 	
 	const fetchDieta = useCallback(() => {
-	    return fetch(`../../../dieta/${id}`)
+	    return fetch(`https://youmarket-entrega2.herokuapp.com/dieta/${id}`)
 	      .then(res => res.json())
 	      .then(dieta => {
 	        setDieta(dieta)

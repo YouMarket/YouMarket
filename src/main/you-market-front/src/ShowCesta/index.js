@@ -16,7 +16,7 @@ let history = useHistory();
 const { id } = useParams();
 
 	const fetchCesta = useCallback(() => {
-	    return fetch(`../../../cesta/${id}`, {headers:{
+	    return fetch(`https://youmarket-entrega2.herokuapp.com/cesta/${id}`, {headers:{
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -34,7 +34,7 @@ const { id } = useParams();
 	  }, []);
 
 	const fetchProductoCesta = useCallback(() => {
-	    return fetch(`../../../cesta/productos/${id}`, {headers:{
+	    return fetch(`https://youmarket-entrega2.herokuapp.com/cesta/productos/${id}`, {headers:{
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -51,7 +51,7 @@ const { id } = useParams();
 	  }, []);
 
 	const fetchTotal = useCallback(() => {
-	    return fetch(`../../../cesta/productos/total/${id}`, {headers:{
+	    return fetch(`https://youmarket-entrega2.herokuapp.com/cesta/productos/total/${id}`, {headers:{
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -105,7 +105,7 @@ if (localStorage.getItem('auth')==null){
 
          onSubmit={(values, { setSubmitting }) => {
            setTimeout(() => {
-           	fetch(`/cestaACarrito`, {headers: {
+           	fetch(`https://youmarket-entrega2.herokuapp.com/cestaACarrito`, {headers: {
         		'Content-Type' : 'application/json',
         		'Accept' : 'application/json',
         		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},

@@ -8,7 +8,7 @@ function Dietas() {
 	const [dietas, setDietas] = useState([]);
 	
 	const fetchDietas = useCallback(() => {
-	    return fetch('list')
+	    return fetch('https://youmarket-entrega2.herokuapp.com/dieta/list')
 	      .then(res => res.json())
 	      .then(dietas => {
 	        setDietas(dietas)

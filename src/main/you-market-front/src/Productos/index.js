@@ -12,7 +12,6 @@ const [productos, setProductos] = useState([]);
 	      .then(res => res.json())
 	      .then(productos => {
 	        setProductos(productos);
-	        console.log(productos);
 	      });
 	  }, []);
 	

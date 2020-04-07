@@ -10,7 +10,7 @@ function PedidosUsuario() {
 	const [pedidos, setPedidos] = useState([]);
 		
 	const fetchPedidos = useCallback(() => {
-		return fetch('pedido/getAll' , {headers: {
+		return fetch('https://youmarket-entrega2.herokuapp.com/pedido/getAll' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json'},
 		method:'GET'})

@@ -10,7 +10,7 @@ class PedidoForm extends React.Component{
 	precio(){
 		const [total, setTotal] = useState(0.0);
 		const fetchTotal = useCallback(() => {
-		     return fetch('../precioTotalCarrito', {headers:{
+		     return fetch('https://youmarket-entrega2.herokuapp.com/precioTotalCarrito', {headers:{
 		  'Content-Type' : 'application/json',
 		  'Accept' : 'application/json',
 		  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},

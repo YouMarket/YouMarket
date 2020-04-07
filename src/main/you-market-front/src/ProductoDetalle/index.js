@@ -12,7 +12,7 @@ function ProductoDetalle() {
 	const { id } = useParams();
 	
 	const fetchProducto = useCallback(() => {
-	    return fetch(`../../../producto/${id}`)
+	    return fetch(`https://youmarket-entrega2.herokuapp.com/producto/${id}`)
 	      .then(res => res.json())
 	      .then(producto => {
 	        setProducto(producto)
@@ -51,7 +51,7 @@ function ProductoDetalle() {
 
 	function sendToBack(id, cantidad) {
 		setCantidad(0);
-		fetch('/carrito', {
+		fetch('https://youmarket-entrega2.herokuapp.com/carrito', {
 			headers: {
 				"Accept": "application/json",
 				"Content-Type": "application/json",

@@ -34,7 +34,7 @@ class formCesta extends React.Component{
 
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-        	fetch('../../cesta', {
+        	fetch('https://youmarket-entrega2.herokuapp.com/cesta', {
         			headers: {
         				"Content-Type": "application/json"
         			},

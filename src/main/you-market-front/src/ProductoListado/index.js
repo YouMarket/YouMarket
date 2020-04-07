@@ -13,7 +13,7 @@ interface Props {
 }
 
 function eliminarProducto(id) {
-	fetch('/eliminarProducto', {
+	fetch('https://youmarket-entrega2.herokuapp.com/eliminarProducto', {
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",

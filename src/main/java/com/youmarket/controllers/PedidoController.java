@@ -51,6 +51,7 @@ public class PedidoController {
 	
 	@GetMapping("/getAll")
 	public List<Pedido> getAll(@CurrentUser UserPrincipal principal){
+		System.out.println(principal);
 		List<Pedido> pedidos = pedidoService.findAllByUser(principal.getId());
 		return pedidos;
 	}

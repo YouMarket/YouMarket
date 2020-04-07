@@ -17,21 +17,21 @@ precioFinal = 0.00
 const[carrito, setCarrito] = useState([]);
 const[cestas, setCestas] = useState([]);
 let history = useHistory();
-
+	
 	const fetchCarrito = useCallback(() => {
-		return fetch('carrito')
+		return fetch('https://youmarket-entrega2.herokuapp.com/carrito')
 			.then(res => res.json())
 			.then(carrito => {
-				setCarrito(carrito)
+				setCarrito(carrito);
+				console.log(carrito);
 			});
 	}, []);
 
 	useEffect(() => {
 		fetchCarrito(carrito);
 	},[]);
-
 	const fetchCestas = useCallback(() => {
-	    return fetch('cesta/user' , {headers: {
+	    return fetch('https://youmarket-entrega2.herokuapp.com/cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -58,7 +58,7 @@ let history = useHistory();
 				<Formik
 				 onSubmit={(values, { setSubmitting }) => {
 				   setTimeout(() => {
-					   fetch('/carritoDestroy', {headers: {
+					   fetch('https://youmarket-entrega2.herokuapp.com/carritoDestroy', {headers: {
 						'Content-Type' : 'application/json',
 						'Accept' : 'application/json',
 						'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -142,7 +142,7 @@ let history = useHistory();
 	
 					 onSubmit={(values, { setSubmitting }) => {
 					   setTimeout(() => {
-						   fetch(`/carritoACesta`, {headers: {
+						   fetch(`https://youmarket-entrega2.herokuapp.com/carritoACesta`, {headers: {
 							'Content-Type' : 'application/json',
 							'Accept' : 'application/json',
 							'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -199,7 +199,7 @@ let history = useHistory();
 			</div>
 		</div>
 	 : (
-	 <div class="container">
+	 <div className="container">
 		<h1 className="introduction introduction-empty">Vaya.. parece que aún no tienes productos añadidos</h1>
 	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad}></img></div>
 		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/products">aquí</NavLink></p>
