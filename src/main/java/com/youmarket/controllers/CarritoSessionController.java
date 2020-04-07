@@ -53,6 +53,8 @@ public class CarritoSessionController {
 	public ResponseEntity<List<ProductoCarrito>> carritoGet(HttpSession session){
 		@SuppressWarnings("unchecked")
 		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
+		System.out.println(session.getAttribute("SESSION_CARRITO"));
+
 		System.out.println(session);
 		if(carrito == null){
 			carrito = new HashMap<>();
