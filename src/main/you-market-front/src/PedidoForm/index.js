@@ -478,8 +478,8 @@ class PedidoForm extends React.Component{
 				<div className="errores">
 				{errors.horaEnvioFin2}
 				<br/><br/>
-
-				<label htmlFor="id">   Elige tu cesta: </label>
+				</div>
+				<label htmlFor="">   Elige tu cesta: </label>
 				   <select name="id" id="id" onChange={handleChange}
 				   onBlur={handleBlur} value={values.id}>
 				   <option value=""></option>
@@ -490,7 +490,6 @@ class PedidoForm extends React.Component{
 				   <option value="0">Carrito</option>
 				   </select>
 				   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
-	</div>
 
 			</fieldset>
 			</div>
