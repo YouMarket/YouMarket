@@ -1,3 +1,11 @@
+#pedido2 {
+	display:none;
+}
+
+#pedido3 {
+	display:none;
+}
+
 .pedido-container label {
     font-weight: bold;
 }

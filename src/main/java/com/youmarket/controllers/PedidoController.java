@@ -27,6 +27,7 @@ import com.youmarket.domain.CestaProducto;
 import com.youmarket.domain.Pedido;
 import com.youmarket.domain.Producto;
 import com.youmarket.domain.Usuario;
+import com.youmarket.domain.form.FormPedidos;
 import com.youmarket.services.CestaProductoService;
 import com.youmarket.services.PedidoService;
 import com.youmarket.services.UsuarioService;
@@ -55,8 +56,8 @@ public class PedidoController {
 		return pedidos;
 	}
 	
-	@PostMapping("/create")
-    public ResponseEntity<Pedido> create(@RequestBody Pedido p, HttpSession session, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
+	@PostMapping("/create2")
+    public ResponseEntity<Pedido> create2(@RequestBody Pedido p, HttpSession session, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
 		
 		Date fechaHoraEntrega = new Date();
 		Date fechaHoraEnvio = new Date();
@@ -94,6 +95,78 @@ public class PedidoController {
 		
 		session.setAttribute("SESSION_CARRITO", new HashMap<Producto, Integer>());
 
+		return ResponseEntity.created(new URI ("/pedido/)" + pedidoGuardado.getId())).body(pedidoGuardado);
+		
+    }
+	
+	@PostMapping("/create")
+    public ResponseEntity<Pedido> create(@RequestBody FormPedidos pedidos, HttpSession session, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
+		
+		
+		Date fechaHoraEntrega = new Date();
+		Date fechaHoraEnvio = new Date();
+		Date fechaHoraPedido = new Date();
+		
+		Pedido p = new Pedido();
+		p.setCpostal(pedidos.getCpostal1());
+		p.setDireccion(pedidos.getDireccion1());
+		p.setFechaEnvio(pedidos.getFechaEnvio1());
+		p.setHoraEnvioFin(pedidos.getHoraEnvioFin1());
+		p.setHoraEnvioIni(pedidos.getHoraEnvioIni1());
+		p.setPoblacion(pedidos.getPoblacion1());
+		p.setProvincia(pedidos.getProvincia1());
+		
+		p.setFechaHoraEntrega(fechaHoraEntrega);
+		p.setFechaHoraPedido(fechaHoraPedido);
+		p.setNombre("Pedido num. " + p.getId());
+		p.setOrdenEntrega(1);
+		p.setRetraso("No hubo retraso");
+		Optional<Usuario> user=this.usuarioService.findById(currentUser.getId());
+		
+		Usuario user2=null;
+		if(user.isPresent()) {
+			user2=user.get();
+		}
+		p.setUsuario(user2);
+		Pedido pedidoGuardado = this.pedidoService.save(p);
+		
+		Pedido p2 = new Pedido();
+		p2.setCpostal(pedidos.getCpostal2());
+		p2.setDireccion(pedidos.getDireccion2());
+		p2.setFechaEnvio(pedidos.getFechaEnvio2());
+		p2.setHoraEnvioFin(pedidos.getHoraEnvioFin2());
+		p2.setHoraEnvioIni(pedidos.getHoraEnvioIni2());
+		p2.setPoblacion(pedidos.getPoblacion2());
+		p2.setProvincia(pedidos.getProvincia2());
+		
+		p2.setFechaHoraEntrega(fechaHoraEntrega);
+		p2.setFechaHoraPedido(fechaHoraPedido);
+		p2.setNombre("Pedido num. " + p.getId());
+		p2.setOrdenEntrega(2);
+		p2.setRetraso("No hubo retraso");
+		p2.setUsuario(user2);
+		this.pedidoService.save(p2);
+		
+		//TODO: COSTE DEL PEDIDO
+		
+		
+		//Pedido pedidoGuardado = pedidoService.save(p);
+		@SuppressWarnings("unchecked")
+		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
+		List<Producto> keys = new ArrayList<>(carrito.keySet());
+		for(Producto prod : keys){
+			CestaProducto cp = new CestaProducto();
+			cp.setProducto(prod);
+			cp.setCantidad(carrito.get(prod));
+			cp.setCesta(pedidoGuardado);
+			cp.setId(prod, pedidoGuardado);
+
+			this.cpService.save(cp);
+		}
+		
+		
+		session.setAttribute("SESSION_CARRITO", new HashMap<Producto, Integer>());
+		
 		return ResponseEntity.created(new URI ("/pedido/)" + pedidoGuardado.getId())).body(pedidoGuardado);
 		
     }

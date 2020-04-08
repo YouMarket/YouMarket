@@ -5,6 +5,26 @@ import { withRouter	} from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
 
+function mostrarPedido2() {
+	  var x = document.getElementById("pedido2");
+	  if (x.style.display === "flex") {
+		    x.style.display = "none";
+	  } else {
+		    x.style.display = "flex";
+	  }
+	  return false;
+};
+
+function mostrarPedido3() {
+	  var x = document.getElementById("pedido3");
+	  if (x.style.display === "flex") {
+		    x.style.display = "none";
+	  } else {
+		    x.style.display = "flex";
+	  }
+	  return false;
+};
+
 class PedidoForm extends React.Component{
 	
 	precio(){
@@ -18,7 +38,9 @@ class PedidoForm extends React.Component{
 		       .then(res => res.json())
 		       .then(total => {
 		         setTotal(total)
-
+		       }).then(function(response) {
+            	    return console.log(response.json());
+            	
 		       });
 		   }, []);
 
@@ -53,14 +75,14 @@ class PedidoForm extends React.Component{
     	initialValues={{   }}
      	validate={values => {
         const errors = {};
-        if (!values.direccion) {
+        if (!values.direccion1) {
         	errors.direccion = 'Campo obligatorio';
         } 
-        if (!values.fechaEnvio) {
+        if (!values.fechaEnvio1) {
         	errors.fechaEnvio = 'Campo obligatorio';
         }
-        if (values.horaEnvioFin < values.horaEnvioIni) {
-        	errors.horaEnvioFin = 'La hora final no puede ser anterior a la inicial'
+        if (values.horaEnvioFin1 < values.horaEnvioIni1) {
+        	errors.horaEnvioFin1 = 'La hora final no puede ser anterior a la inicial'
         }
         return errors;
       }}
@@ -75,8 +97,7 @@ class PedidoForm extends React.Component{
         			body:JSON.stringify(values, null, 2)
         	}).then(function(response) {
         	    return console.log(response.json());
-         	}).then(() =>{
-				{handleSubmit}
+         	
         	}).then(() => 
         	 {
         		 this.handleRedirect();
@@ -98,125 +119,385 @@ class PedidoForm extends React.Component{
       }) => (
         <form onSubmit={handleSubmit}>
         
-		<div className="pedido-form-envio-container">
+        <div id="pedido1">
+			<div className="pedido-form-envio-container">
+			<fieldset> 
+			 	<legend><h2>Pedido número 1**</h2> </legend>
+	        
+	        <label htmlFor="poblacion1">Población*: </label>
+	        <input
+				id="poblacion1"
+				type="text"
+				name="poblacion1"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.poblacion1}
+		        placeholder="Los Palacios y Villafranca"
+		        
+				/>
+			{errors.poblacion1}
+			<br/><br/>
+	        
+			<label htmlFor="cpostal1">Código postal*: </label>
+	        <input
+				id="cpostal1"
+				type="text"
+				name="cpostal1"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.cpostal1}
+		        placeholder="41720"
+		        
+				/>
+				{errors.cpostal1}
+				<br/><br/>
+			
+			<label htmlFor="provincia1">Provincia*: </label>
+	        <input
+				id="provincia1"
+				type="text"
+				name="provincia1"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.provincia1}
+		        placeholder="Sevilla"
+		        
+				/>
+				{errors.provincia1}
+				<br/><br/>
+			
+			
+	        <label htmlFor="direccion1">Calle*: </label>
+	        <input
+				id="direccion1"
+				type="text"
+				name="direccion1"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.direccion1}
+		        placeholder="c/Cisnes"
+		        
+				/>
+				{errors.direccion1}
+				<br/><br/>
+			
+			<label htmlFor="numero1">Número*: </label>
+	        <input
+				id="numero1"
+				type="number"
+				name="numero1"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.numero1}
+		        
+				/>
+				{errors.numero1}
+				<br/><br/>
+			
+			 	
+			<label htmlFor="fechaEnvio1">Fecha*: </label>	
+			<input
+				id="fechaEnvio1"
+				type="date"
+				name="fechaEnvio1"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.fechaEnvio1}
+		        
+				/>
+				{errors.fechaEnvio1}
+				<br/><br/>
+			 	
+				<br/>
+			<label htmlFor="horaEnvioIni1">Hora inicial: </label>
+			<input
+				id="horaEnvioIni1"
+				type="number"
+				name="horaEnvioIni1"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.horaEnvioIni1}
+				min="9"
+				max="21"
+				/>
+				{errors.horaEnvioIni1}
+				
+			<label htmlFor="horaEnvioFin1">   Hora final: </label>
+			<input
+				type="number"
+				name="horaEnvioFin1"
+				id="horaEnvioFin1"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.horaEnvioFin1}
+				min="9"
+				max="21"
+				/>
+				{errors.horaEnvioFin1}
+				<br/><br/>
+				
+			</fieldset>
+			</div>
+		</div>
+		<br/><br/>
+		<a href="#"  onClick={mostrarPedido2}>
+		+ Añadir pedido número 2
+		</a>
+		<br/><br/>
+		
+		
+		<div id="pedido2">
+				<div className="pedido-form-envio-container" >
+			<fieldset> 
+			 	<legend><h2>Pedido número 2**</h2> </legend>
+			 	
+			 <label htmlFor="poblacion2">Población*: </label>
+			 <input
+				id="poblacion2"
+				type="text"
+				name="poblacion2"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.poblacion2}
+		        placeholder="Los Palacios y Villafranca"
+		        
+				/>
+			{errors.poblacion2}
+			<br/><br/>
+	        
+			<label htmlFor="cpostal2">Código postal*: </label>
+	        <input
+				id="cpostal2"
+				type="text"
+				name="cpostal2"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.cpostal2}
+		        placeholder="41720"
+		        
+				/>
+				{errors.cpostal2}
+				<br/><br/>
+			
+			<label htmlFor="provincia2">Provincia*: </label>
+	        <input
+				id="provincia2"
+				type="text"
+				name="provincia2"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.provincia2}
+		        placeholder="Sevilla"
+		        
+				/>
+				{errors.provincia2}
+				<br/><br/>
+			
+			
+	        <label htmlFor="direccion2">Calle*: </label>
+	        <input
+				id="direccio2n"
+				type="text"
+				name="direccion2"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.direccion2}
+		        placeholder="c/Cisnes"
+		        
+				/>
+				{errors.direccion2}
+				<br/><br/>
+			
+			<label htmlFor="numero2">Número*: </label>
+	        <input
+				id="numero2"
+				type="number"
+				name="numero2"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.numero2}
+		        
+				/>
+				{errors.numero2}
+				<br/><br/>
+			
+			 	
+			<label htmlFor="fechaEnvio2">Fecha*: </label>	
+			<input
+				id="fechaEnvio2"
+				type="date"
+				name="fechaEnvio2"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.fechaEnvio2}
+		        
+				/>
+				{errors.fechaEnvio2}
+				<br/><br/>
+			 	
+				<br/>
+			<label htmlFor="horaEnvioIni2">Hora inicial: </label>
+			<input
+				id="horaEnvioIni2"
+				type="number"
+				name="horaEnvioIni2"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.horaEnvioIni2}
+				min="9"
+				max="21"
+				/>
+				{errors.horaEnvioIni2}
+				
+			<label htmlFor="horaEnvioFin2">   Hora final: </label>
+			<input
+				type="number"
+				name="horaEnvioFin2"
+				id="horaEnvioFin2"
+				onChange={handleChange}
+				onBlur={handleBlur}
+				value={values.horaEnvioFin2}
+				min="9"
+				max="21"
+				/>
+				{errors.horaEnvioFin2}
+				<br/><br/><br/>
+	
+
+			</fieldset>
+			</div>
+			<br/>
+			<a href="#"  onClick={mostrarPedido3}>
+			+ Añadir pedido número 3
+			</a>
+			<br/><br/>
+		</div>	
+		<br/><br/>
+
+		
+		<div className="pedido-form-envio-container" id="pedido3">
+
+		<br/><br/>
 		<fieldset> 
-		 	<legend><h2>Pedido número []**</h2> </legend>
-        
-        <label htmlFor="poblacion">Población*: </label>
-        <input
-			id="poblacion"
+		 	<legend><h2>Pedido número 3**</h2> </legend>
+		 	
+		 <label htmlFor="poblacion3">Población*: </label>
+		 <input
+			id="poblacion3"
 			type="text"
-			name="poblacion"
+			name="poblacion3"
 			onChange={handleChange}
 			onBlur={handleBlur}
-			value={values.poblacion}
+			value={values.poblacion3}
 	        placeholder="Los Palacios y Villafranca"
-	        required
+	        
 			/>
-		{errors.poblacion}
+		{errors.poblacion3}
 		<br/><br/>
         
-		<label htmlFor="cpostal">Código postal*: </label>
+		<label htmlFor="cpostal3">Código postal*: </label>
         <input
-			id="cpostal"
+			id="cpostal3"
 			type="text"
-			name="cpostal"
+			name="cpostal3"
 			onChange={handleChange}
 			onBlur={handleBlur}
-			value={values.cpostal}
+			value={values.cpostal3}
 	        placeholder="41720"
-	        required
+	        
 			/>
-			{errors.cpostal}
+			{errors.cpostal3}
 			<br/><br/>
 		
-		<label htmlFor="provincia">Provincia*: </label>
+		<label htmlFor="provincia3">Provincia*: </label>
         <input
-			id="provincia"
+			id="provincia3"
 			type="text"
-			name="provincia"
+			name="provincia3"
 			onChange={handleChange}
 			onBlur={handleBlur}
-			value={values.provincia}
+			value={values.provincia3}
 	        placeholder="Sevilla"
-	        required
+	        
 			/>
-			{errors.provincia}
+			{errors.provincia3}
 			<br/><br/>
 		
 		
-        <label htmlFor="direccion">Calle*: </label>
+        <label htmlFor="direccion3">Calle*: </label>
         <input
-			id="direccion"
+			id="direccio3n"
 			type="text"
-			name="direccion"
+			name="direccion3"
 			onChange={handleChange}
 			onBlur={handleBlur}
-			value={values.direccion}
+			value={values.direccion3}
 	        placeholder="c/Cisnes"
-	        required
+	        
 			/>
-			{errors.direccion}
+			{errors.direccion3}
 			<br/><br/>
 		
-		<label htmlFor="numero">Número*: </label>
+		<label htmlFor="numero3">Número*: </label>
         <input
-			id="numero"
+			id="numero3"
 			type="number"
-			name="numero"
+			name="numero3"
 			onChange={handleChange}
 			onBlur={handleBlur}
-			value={values.numero}
-	        required
+			value={values.numero3}
+	        
 			/>
-			{errors.numero}
+			{errors.numero3}
 			<br/><br/>
 		
 		 	
-		<label htmlFor="fechaEnvio">Fecha*: </label>	
+		<label htmlFor="fechaEnvio3">Fecha*: </label>	
 		<input
-			id="fechaEnvio"
+			id="fechaEnvio3"
 			type="date"
-			name="fechaEnvio"
+			name="fechaEnvio3"
 			onChange={handleChange}
 			onBlur={handleBlur}
-			value={values.fechaEnvio}
-	        required
+			value={values.fechaEnvio3}
+	        
 			/>
-			{errors.fechaEnvio}
+			{errors.fechaEnvio3}
 			<br/><br/>
 		 	
 			<br/>
-		<label htmlFor="horaEnvioIni">Hora inicial: </label>
+		<label htmlFor="horaEnvioIni3">Hora inicial: </label>
 		<input
-			id="horaEnvioIni"
+			id="horaEnvioIni3"
 			type="number"
-			name="horaEnvioIni"
+			name="horaEnvioIni3"
 			onChange={handleChange}
 			onBlur={handleBlur}
-			value={values.horaEnvioIni}
+			value={values.horaEnvioIni3}
 			min="9"
 			max="21"
 			/>
-			{errors.horaEnvioIni}
+			{errors.horaEnvioIni3}
 			
-		<label htmlFor="horaEnvioFin">   Hora final: </label>
+		<label htmlFor="horaEnvioFin3">   Hora final: </label>
 		<input
 			type="number"
-			name="horaEnvioFin"
-			id="horaEnvioFin"
+			name="horaEnvioFin3"
+			id="horaEnvioFin3"
 			onChange={handleChange}
 			onBlur={handleBlur}
-			value={values.horaEnvioFin}
+			value={values.horaEnvioFin3}
 			min="9"
 			max="21"
 			/>
-			{errors.horaEnvioFin}
+			{errors.horaEnvioFin3}
 			<br/><br/>
 			
 		</fieldset>
-		
 		</div>
+		
+		
+		
 		<br/>
 		
 		<div>
@@ -228,41 +509,41 @@ class PedidoForm extends React.Component{
 	
 		<br/><br/>
 		
-		
+        <button type="submit" disabled={isSubmitting} onclick="mostrar()">
+        	Enviar
+        </button>
 
-		
-		<h2>Elige tu método de pago 👇</h2>
-         <div className="grid">
-         <PayPalButton
-			 amount={this.precio()}
-         onSuccess={(values, { setSubmitting }) => {
-             setTimeout(() => {
-             	fetch('', {
-             			headers: {
-             				"Content-Type": "application/json"
-             			},
-             			method:'POST',
-             			body:JSON.stringify(values, null, 2)
-             	}).then(function(response) {
-             	    return console.log(response.json());
-             	}).then(() =>{
-             		{handleSubmit}
-             	})
-             	
-             	.then(() => 
-             	 {
-             		 this.handleRedirect();
-             	 })
-               alert(JSON.stringify(values, null, 2));
-               
-               setSubmitting(false);
-             }, 400);
-		   }}
-		   
-		   options={{
-			clientId: "AQ1wSRRux5eVDHDZia2gH5NfFd_dO2-mooYqs-CdF3E53DIHclXqJlDI_2I2vtfIeQi5qVQTciRnOS9Y",
-			currency: "EUR"
-		  }}
+			<h2>Elige tu método de pago 👇</h2>
+	         <div className="grid">
+	         <PayPalButton
+				 amount={this.precio()}
+	         onSuccess={(values, { setSubmitting }) => {
+	             setTimeout(() => {
+	             	fetch('', {
+	             			headers: {
+	             				"Content-Type": "application/json"
+	             			},
+	             			method:'POST',
+	             			body:JSON.stringify(values, null, 2)
+	             	}).then(function(response) {
+	             	    return console.log(response.json());
+	             	}).then(() =>
+	    				{handleSubmit}             	
+	             	).then(() => 
+	             	 {
+	             		 this.handleRedirect();
+	             	 })
+	               alert(JSON.stringify(values, null, 2));
+	               
+	               setSubmitting(false);
+	             }, 400);
+			   }}
+			   
+			   options={{
+				clientId: "AQ1wSRRux5eVDHDZia2gH5NfFd_dO2-mooYqs-CdF3E53DIHclXqJlDI_2I2vtfIeQi5qVQTciRnOS9Y",
+				currency: "EUR"
+			  }}
+	     
        />
           </div>
         </form>
@@ -271,6 +552,8 @@ class PedidoForm extends React.Component{
     	
 	  </div>
     </div>
+    
+		
 	</div>
 );
 		
