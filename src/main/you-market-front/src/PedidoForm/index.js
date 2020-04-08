@@ -50,6 +50,31 @@ class PedidoForm extends React.Component{
 		 console.log(total);
 		 return total;
 	}
+	cestas(){
+		const[cestas, setCestas] = useState([]);
+
+	const fetchCestas = useCallback(() => {
+	    return fetch('/cesta/user' , {headers: {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json',
+		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+		method:'GET'})
+	      .then(res => res.json())
+	      .then(cestas => {
+	        setCestas(cestas)
+	      });
+	  }, []);
+
+
+	useEffect(() => {
+	    fetchCestas(cestas);
+	  }, []);
+	if(cestas==null){
+		return [];
+	}
+	return cestas;
+	
+	}
 	
 	redirecc = () => {
 		if(localStorage.getItem('auth')==null){
@@ -61,14 +86,16 @@ class PedidoForm extends React.Component{
 		console.log(this.props.history);
 		this.props.history.push('/pedidoexito');
 	}
+	
 	render(){
 		this.redirecc();
+		
 		return(
 	<div>
 		<Header/>
 	<div>
   	
-	  <div class="pedido-container container">
+	  <div className="pedido-container container">
 	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
     <Formik validateOnChange={false} validateOnBlur={false}
     	className="formulario-pedido"
@@ -235,10 +262,23 @@ class PedidoForm extends React.Component{
 				/>
 				{errors.horaEnvioFin1}
 				<br/><br/>
+				<label htmlFor="id">   Elige tu cesta: </label>
+			   <select name="id" id="id" onChange={handleChange}
+			   onBlur={handleBlur} value={values.id}>
+			   <option value=""></option>
+			   { this.cestas().map((cesta) => (
+
+								   <option value={cesta.id}>{cesta.nombre}</option>
+								   ))}
+			   <option value="0">Carrito</option>
+			   </select>
+			   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
+			   
 				
 			</fieldset>
 			</div>
 		</div>
+		   
 		<br/><br/>
 		<a href="#"  onClick={mostrarPedido2}>
 		+ Añadir pedido número 2
@@ -361,7 +401,19 @@ class PedidoForm extends React.Component{
 				max="21"
 				/>
 				{errors.horaEnvioFin2}
-				<br/><br/><br/>
+				<br/><br/>
+				
+				<label htmlFor="id">   Elige tu cesta: </label>
+				   <select name="id" id="id" onChange={handleChange}
+				   onBlur={handleBlur} value={values.id}>
+				   <option value=""></option>
+				   { this.cestas().map((cesta) => (
+
+									   <option value={cesta.id}>{cesta.nombre}</option>
+									   ))}
+				   <option value="0">Carrito</option>
+				   </select>
+				   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
 	
 
 			</fieldset>
@@ -493,6 +545,19 @@ class PedidoForm extends React.Component{
 			{errors.horaEnvioFin3}
 			<br/><br/>
 			
+			<label htmlFor="id">   Elige tu cesta: </label>
+			   <select name="id" id="id" onChange={handleChange}
+			   onBlur={handleBlur} value={values.id}>
+			   <option value=""></option>
+			   { this.cestas().map((cesta) => (
+
+								   <option value={cesta.id}>{cesta.nombre}</option>
+								   ))}
+			   <option value="0">Carrito</option>
+			   </select>
+			   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
+			   
+			
 		</fieldset>
 		</div>
 		
@@ -509,7 +574,7 @@ class PedidoForm extends React.Component{
 	
 		<br/><br/>
 		
-        <button type="submit" disabled={isSubmitting} onclick="mostrar()">
+        <button type="submit" disabled={isSubmitting} onClick="mostrar()">
         	Enviar
         </button>
 
