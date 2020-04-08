@@ -2,7 +2,14 @@ package com.youmarket.controllers;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +31,7 @@ import com.youmarket.configuration.security.JwtAuthenticationResponse;
 import com.youmarket.configuration.security.JwtTokenProvider;
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Direccion;
+import com.youmarket.domain.Producto;
 import com.youmarket.domain.Role;
 import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
@@ -181,5 +189,19 @@ public class UsuarioController {
 		
 		return ResponseEntity.ok(respuesta);
 	}
-
+	
+	@GetMapping("/envios")
+	public ResponseEntity<Integer> enviosRestantes(@CurrentUser UserPrincipal curr){
+		Integer envios = 0;
+		Usuario usuario1=null;
+		
+		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		
+		if(user.isPresent()) {
+			usuario1 = user.get();
+		}
+		
+		return ResponseEntity.ok(this.usuarioService.enviosRestantes(usuario1));
+		
+	}
 }
