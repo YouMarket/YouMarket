@@ -323,7 +323,7 @@ class PedidoForm extends React.Component{
 					{errors.horaEnvioFin1}
 				</div>
 				<br/><br/>
-				<label htmlFor="id">   Elige tu cesta: </label>
+				<label htmlFor="id" className="s">   Elige tu cesta: </label>
 			   <select name="id" id="id" onChange={handleChange}
 			   onBlur={handleBlur} value={values.id}>
 			   <option value=""></option>
@@ -345,13 +345,6 @@ class PedidoForm extends React.Component{
 		+ Añadir pedido número 2
 		</a>
 		<br/><br/>
-
-			<br/><br/>
-			<a href="#"  onClick={mostrarPedido2}>
-			+ Añadir pedido número 2
-			</a>
-			<br/><br/>
-		</div>
 
 		<div id="pedido2">
 			<div className="pedido-form-envio-container" >
@@ -638,7 +631,20 @@ class PedidoForm extends React.Component{
 				<div className="errores">
 					{errors.horaEnvioFin3}
 				</div>
-				<br/><br/><br/>
+				<br/><br/>
+				
+				<label htmlFor="id" className="s">   Elige tu cesta: </label>
+				   <select name="id" id="id" onChange={handleChange}
+				   onBlur={handleBlur} value={values.id}>
+				   <option value=""></option>
+				   { this.cestas().map((cesta) => (
+
+									   <option value={cesta.id}>{cesta.nombre}</option>
+									   ))}
+				   <option value="0">Carrito</option>
+				   </select>
+				   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
+
 			</fieldset>
 			</div>
 			<br/><br/>

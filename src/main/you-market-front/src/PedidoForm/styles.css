@@ -69,6 +69,10 @@
     margin-top: 50px;
 }
 
+.pedido-form-envio-container{
+	width:100%;
+}
+
 .pedido-form-envio-container {
     border: 2px solid rgb(148,194,76, 0.75);
     padding: 10px 30px;
