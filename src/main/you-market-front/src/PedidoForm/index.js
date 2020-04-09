@@ -1,7 +1,7 @@
-import React,  { useCallback, useState, useEffect } from 'react';
+import React,  { useCallback, useState, useEffect} from 'react';
 import { Formik } from 'formik';
 import './styles.css'
-import { withRouter	} from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
 
@@ -9,20 +9,9 @@ var pedido2mostrado;
 var pedido3mostrado;
 var pedido4mostrado;
 
-function mostrarPedido2() {
-	  var x = document.getElementById("pedido2");
-	  var y = document.getElementById("enlace2")
-	  if (x.style.display === "flex") {
-		  	pedido2mostrado = "no";
-		    x.style.display = "none";
-		    y.style.display = "none";
-	  } else {
-		  	pedido2mostrado = "si";
-		    x.style.display = "flex";
-		    y.style.display = "flex";
-	  }
-	  return false;
-};
+
+
+
 
 function mostrarPedido3() {
 	  var x = document.getElementById("pedido3");
@@ -144,16 +133,32 @@ function validDate4(){
 }
 
 
-class PedidoForm extends React.Component{
+export function PedidoForm() {
 
-	componentDidMount() {
+	let history = useHistory();
+
+	const [envioTomas, setEnvioTomas] = useState(0);
+	
+	useEffect(() => {
 		validDate1();
 		validDate2();
 		validDate3();
-		validDate4();
-       }
+		validDate4(); 
+		fetch('/usuario/envios', {
+			headers:{
+			  'Content-Type' : 'application/json',
+			  'Accept' : 'application/json',
+			  'Authorization' : 'Bearer ' + localStorage.getItem('auth')
+			  		},
+			  method:'GET'})
+			       .then(res => res.json())
+			       .then(envios1 => {
+			    	   setEnvioTomas(envios1);
+			       });
+		  }, []);
 	
-	precio(){
+	
+	const precio = () => {
 		const [total, setTotal] = useState(0.0);
 		const fetchTotal = useCallback(() => {
 		     return fetch('../precioTotalCarrito', {headers:{
@@ -177,28 +182,33 @@ class PedidoForm extends React.Component{
 		 return total;
 	}
 	
-	envios(){
-		const [envios, setEnvios] = useState(0);
-		
-		const fetchEnvios = useCallback(() => {
-		     return fetch('/usuario/envios', {headers:{
-		  'Content-Type' : 'application/json',
-		  'Accept' : 'application/json',
-		  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		  method:'GET'})
-		       .then(res => res.json())
-		       .then(envios => {
-		         setEnvios(envios)
-		       })
-		   }, []);
+	
+	const mostrarPedido2 = () => {
 
-		 useEffect(() => {
-		  fetchEnvios(envios);
-		   }, []);
-		 return envios;
+		
+		
+		var x = document.getElementById("pedido2");
+		var y = document.getElementById("enlace2");
+		
+		//window.alert(z);
+		console.log("ESTO VALE LA Z: " + envioTomas);
+		
+		if (x.style.display === "flex") {
+			 pedido2mostrado = "no";
+			 x.style.display = "none";
+			 y.style.display = "none";
+		} else {
+			 pedido2mostrado = "si";
+			 x.style.display = "flex";
+			 //if(envioTomas > 1){
+				 y.style.display = "flex";
+			 //}
+		}
+
+		return false;
 	}
 	
-	cestas(){
+	const cestas = () => {
 		const[cestas, setCestas] = useState([]);
 
 	const fetchCestas = useCallback(() => {
@@ -215,34 +225,40 @@ class PedidoForm extends React.Component{
 
 
 	useEffect(() => {
-	    fetchCestas(cestas);
-	  }, []);
-	if(cestas==null){
-		return [];
-	}
-	return cestas;
+		    fetchCestas(cestas);
+		  }, []);
+		if(cestas==null){
+			return [];
+		}
+		return cestas;
 
 	}
-
-	redirecc = () => {
+	
+/*
+	const redirecc = () => {
 		if(localStorage.getItem('auth')==null){
 			this.props.history.push('/login');
 		}
 	}
 
-	handleRedirect = () => {
-		console.log(this.props.history);
-		this.props.history.push('/pedidoexito');
+*/
+	const handleRedirect = () => {
+		history.push('/pedidoexito');
 	}
 
-	render(){
-		this.redirecc();
-
+		if(localStorage.getItem('auth')==null){
+			this.props.history.push('/login');
+		}
+		
 		return(
+				
+				
 	<div>
 		<Header/>
 	<div>
 
+
+	
 	  <div className="pedido-container container">
 	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
     <Formik validateOnChange={false} validateOnBlur={false}
@@ -368,7 +384,7 @@ class PedidoForm extends React.Component{
 
         	}).then(() =>
         	 {
-        		 this.handleRedirect();
+        		 handleRedirect();
         	 })
         	 alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
@@ -386,7 +402,6 @@ class PedidoForm extends React.Component{
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit}>
-        {this.envios()}
         <div id="pedido1">
 			<div className="pedido-form-envio-container">
 			<fieldset>
@@ -521,7 +536,7 @@ class PedidoForm extends React.Component{
 			   <select name="cestaId1" id="cestaId1" onChange={handleChange}
 			   onBlur={handleBlur} value={values.id}>
 			   
-			   { this.cestas().map((cesta) => (
+			   { cestas().map((cesta) => (
 
 								   <option value={cesta.id}>{cesta.nombre}</option>
 								   ))}
@@ -534,17 +549,21 @@ class PedidoForm extends React.Component{
 			</div>
 		</div>
 
-		<br/><br/>
-		<a href="#enlaceMostrarPedido2"  onClick={mostrarPedido2} id="enlaceMostrarPedido2">
-		+ Añadir/eliminar pedido número 2
-		</a>
-		<br/><br/>
+        
+        		<div>
+				<br/><br/>
+					<a href="#enlaceMostrarPedido2"  onClick={mostrarPedido2} id="enlaceMostrarPedido2">
+					+ Añadir/eliminar pedido número 2
+					</a>
+				<br/><br/>
+        		</div>
+
 
 		<div id="pedido2">
 			<div className="pedido-form-envio-container" >
 			<fieldset>
-				<div>
-				 	<h2>Pedido número 2**</h2>
+				<div className="mismaLinea">
+				 	<h2 className="tituloPedido">Pedido número 2**</h2>
 
 				    <button className="botonCopiar" onClick={copiarDir12}>
 		        		Copiar dirección
@@ -678,7 +697,7 @@ class PedidoForm extends React.Component{
 				<label htmlFor="cestaId2">   Elige tu cesta: </label>
 				   <select name="cestaId2" id="cestaId2" onChange={handleChange}
 				   onBlur={handleBlur} value={values.id}>
-				   { this.cestas().map((cesta) => (
+				   { cestas().map((cesta) => (
 
 									   <option value={cesta.id}>{cesta.nombre}</option>
 									   ))}
@@ -691,6 +710,9 @@ class PedidoForm extends React.Component{
 			<br/><br/>
 		</div>
 		<br/><br/>
+		
+		
+		
 		<div id="enlace2">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido3"  onClick={mostrarPedido3} id = "enlaceMostrarPedido3">
@@ -838,7 +860,7 @@ class PedidoForm extends React.Component{
 				<label htmlFor="cestaId3" className="s">   Elige tu cesta: </label>
 				   <select name="cestaId3" id="cestaId3" onChange={handleChange}
 				   onBlur={handleBlur} value={values.id}>
-				   { this.cestas().map((cesta) => (
+				   { cestas().map((cesta) => (
 
 									   <option value={cesta.id}>{cesta.nombre}</option>
 									   ))}
@@ -995,7 +1017,7 @@ class PedidoForm extends React.Component{
 			<label htmlFor="cestaId4">   Elige tu cesta: </label>
 			   <select name="cestaId4" id="cestaId4" onChange={handleChange}
 			   onBlur={handleBlur} value={values.id}>
-			   { this.cestas().map((cesta) => (
+			   { cestas().map((cesta) => (
 
 								   <option value={cesta.id}>{cesta.nombre}</option>
 								   ))}
@@ -1030,7 +1052,7 @@ class PedidoForm extends React.Component{
 			<h2>Elige tu método de pago 👇</h2>
 	         <div className="grid">
 	         <PayPalButton
-				 amount={this.precio()}
+				 amount={precio()}
 	         onSuccess={(values, { setSubmitting }) => {
 	             setTimeout(() => {
 	             	fetch('', {
@@ -1045,7 +1067,7 @@ class PedidoForm extends React.Component{
 	    				{handleSubmit}
 	             	).then(() =>
 	             	 {
-	             		 this.handleRedirect();
+	             		 handleRedirect();
 	             	 })
 	               alert(JSON.stringify(values, null, 2));
 
@@ -1072,6 +1094,6 @@ class PedidoForm extends React.Component{
 );
 
 
-}
+
 }
 export default withRouter(PedidoForm);

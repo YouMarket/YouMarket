@@ -1,3 +1,12 @@
+.tituloPedido{
+	margin-right:auto;
+}
+
+.mismaLinea{
+	display:flex;
+	
+}
+
 #antonios {
 	float:left;
 }
