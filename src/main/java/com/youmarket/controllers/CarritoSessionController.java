@@ -59,7 +59,6 @@ public class CarritoSessionController {
 		if(carrito == null){
 			carrito = new HashMap<>();
 		}
-		
 		return ResponseEntity.ok(this.listCarrito(carrito));
 	}
 
@@ -80,6 +79,8 @@ public class CarritoSessionController {
 		} else {
 			carrito.put(p, cantidad);
 		}
+		System.out.println(session.getId());
+
 		session.setAttribute("SESSION_CARRITO", carrito);
 		
 		return this.listCarrito(carrito);
