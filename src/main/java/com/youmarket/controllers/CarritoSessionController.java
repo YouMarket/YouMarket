@@ -54,16 +54,17 @@ public class CarritoSessionController {
 		@SuppressWarnings("unchecked")
 		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
 		System.out.println(session.getAttribute("SESSION_CARRITO"));
-
-		System.out.println(session);
+		
+		System.out.println(session.getId());
 		if(carrito == null){
 			carrito = new HashMap<>();
 		}
+		
 		return ResponseEntity.ok(this.listCarrito(carrito));
 	}
 
 	@PostMapping("/carrito")
-	public List<ProductoCarrito> carritoPost(@RequestBody Map<String,Integer> postProducto, HttpServletRequest request, HttpSession session){
+	public List<ProductoCarrito> carritoPost(@RequestBody Map<String,Integer> postProducto, HttpSession session){
 		Producto p = this.productoService.findById(postProducto.get("postId"));
 		int cantidad = postProducto.get("postCantidad");
 		if(cantidad == 0){
@@ -79,10 +80,8 @@ public class CarritoSessionController {
 		} else {
 			carrito.put(p, cantidad);
 		}
-		request.getSession().setAttribute("SESSION_CARRITO", carrito);
-		System.out.println(this.listCarrito(carrito));
-		System.out.println(request.getSession().getAttribute("SESSION_CARRITO"));
-		System.out.println(request.getSession());
+		session.setAttribute("SESSION_CARRITO", carrito);
+		
 		return this.listCarrito(carrito);
 	}
 
