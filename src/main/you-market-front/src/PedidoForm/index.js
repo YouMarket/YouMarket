@@ -495,10 +495,10 @@ class PedidoForm extends React.Component{
 					{errors.horaEnvioFin1}
 				</div>
 				<br/><br/>
-				<label htmlFor="id" className="s">   Elige tu cesta: </label>
-			   <select name="id" id="id" onChange={handleChange}
+				<label htmlFor="cestaId1" className="s">   Elige tu cesta: </label>
+			   <select name="cestaId1" id="cestaId1" onChange={handleChange}
 			   onBlur={handleBlur} value={values.id}>
-			   <option value=""></option>
+			   
 			   { this.cestas().map((cesta) => (
 
 								   <option value={cesta.id}>{cesta.nombre}</option>
@@ -653,10 +653,9 @@ class PedidoForm extends React.Component{
 				{errors.horaEnvioFin2}
 				<br/><br/>
 				</div>
-				<label htmlFor="">   Elige tu cesta: </label>
-				   <select name="id" id="id" onChange={handleChange}
+				<label htmlFor="cestaId2">   Elige tu cesta: </label>
+				   <select name="cestaId2" id="cestaId2" onChange={handleChange}
 				   onBlur={handleBlur} value={values.id}>
-				   <option value=""></option>
 				   { this.cestas().map((cesta) => (
 
 									   <option value={cesta.id}>{cesta.nombre}</option>
@@ -814,10 +813,9 @@ class PedidoForm extends React.Component{
 				</div>
 				<br/><br/>
 				
-				<label htmlFor="id" className="s">   Elige tu cesta: </label>
-				   <select name="id" id="id" onChange={handleChange}
+				<label htmlFor="cestaId3" className="s">   Elige tu cesta: </label>
+				   <select name="cestaId3" id="cestaId3" onChange={handleChange}
 				   onBlur={handleBlur} value={values.id}>
-				   <option value=""></option>
 				   { this.cestas().map((cesta) => (
 
 									   <option value={cesta.id}>{cesta.nombre}</option>
@@ -972,10 +970,9 @@ class PedidoForm extends React.Component{
 	{errors.horaEnvioFin4}
 </div>
 				<br/><br/>
-			<label htmlFor="id">   Elige tu cesta: </label>
-			   <select name="id" id="id" onChange={handleChange}
+			<label htmlFor="cestaId4">   Elige tu cesta: </label>
+			   <select name="cestaId4" id="cestaId4" onChange={handleChange}
 			   onBlur={handleBlur} value={values.id}>
-			   <option value=""></option>
 			   { this.cestas().map((cesta) => (
 
 								   <option value={cesta.id}>{cesta.nombre}</option>
