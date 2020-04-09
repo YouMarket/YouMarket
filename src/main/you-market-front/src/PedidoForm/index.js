@@ -176,6 +176,28 @@ class PedidoForm extends React.Component{
 		 console.log(total);
 		 return total;
 	}
+	
+	envios(){
+		const [envios, setEnvios] = useState(0);
+		
+		const fetchEnvios = useCallback(() => {
+		     return fetch('/usuario/envios', {headers:{
+		  'Content-Type' : 'application/json',
+		  'Accept' : 'application/json',
+		  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+		  method:'GET'})
+		       .then(res => res.json())
+		       .then(envios => {
+		         setEnvios(envios)
+		       })
+		   }, []);
+
+		 useEffect(() => {
+		  fetchEnvios(envios);
+		   }, []);
+		 return envios;
+	}
+	
 	cestas(){
 		const[cestas, setCestas] = useState([]);
 
@@ -364,7 +386,7 @@ class PedidoForm extends React.Component{
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit}>
-
+        {this.envios()}
         <div id="pedido1">
 			<div className="pedido-form-envio-container">
 			<fieldset>
