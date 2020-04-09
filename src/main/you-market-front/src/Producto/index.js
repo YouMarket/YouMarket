@@ -34,7 +34,8 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 	
 	function sendToBack(id, cantidad) {
 		setCantidad(0);
-		fetch('https://youmarket-entrega2.herokuapp.com/carrito', {
+		fetch('https://youmarket-entrega2.herokuapp.com/carrito',{credentials: 'same-origin'}
+, {
 			headers: {
 				"Accept": "application/json",
 				"Content-Type": "application/json",
