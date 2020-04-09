@@ -19,7 +19,12 @@ const[cestas, setCestas] = useState([]);
 let history = useHistory();
 
 	const fetchCarrito = useCallback(() => {
-		return fetch('carrito')
+		return fetch('carrito', 
+				{headers: {
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+			method:'GET'})
 			.then(res => res.json())
 			.then(carrito => {
 				setCarrito(carrito)

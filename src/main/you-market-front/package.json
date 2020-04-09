@@ -1,7 +1,7 @@
 {
   "name": "you-market-front",
   "version": "0.1.0",
-  "proxy": "http://localhost:8081",
+  "proxy": "https://youmarket-entrega2.herokuapp.com/",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",

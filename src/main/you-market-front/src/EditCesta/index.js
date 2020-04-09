@@ -53,7 +53,8 @@ if (localStorage.getItem('auth')==null){
       setTimeout(() => {
       	fetch(`../../cesta/${id}`, {
       			headers: {
-      				"Content-Type": "application/json"
+      				'Content-Type': 'application/json',
+      					'Authorization' : 'Bearer ' + localStorage.getItem('auth')
       			},
       			method:'PUT',
       			body:JSON.stringify(values, null, 2)
@@ -111,7 +112,8 @@ if (localStorage.getItem('auth')==null){
     setTimeout(() => {
     	fetch(`/cesta/${id}`, {
     			headers: {
-    				"Content-Type": "application/json"
+    				'Content-Type': 'application/json',
+    				'Authorization' : 'Bearer ' + localStorage.getItem('auth')
     			},
     			method:'DELETE'
     	}).then((response)=> {
