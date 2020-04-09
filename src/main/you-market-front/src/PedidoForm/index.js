@@ -5,13 +5,19 @@ import { withRouter	} from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
 
+var pedido2mostrado;
+var pedido3mostrado;
+var pedido4mostrado;
+
 function mostrarPedido2() {
 	  var x = document.getElementById("pedido2");
 	  var y = document.getElementById("enlace2")
 	  if (x.style.display === "flex") {
+		  	pedido2mostrado = "no";
 		    x.style.display = "none";
 		    y.style.display = "none";
 	  } else {
+		  	pedido2mostrado = "si";
 		    x.style.display = "flex";
 		    y.style.display = "flex";
 	  }
@@ -22,9 +28,11 @@ function mostrarPedido3() {
 	  var x = document.getElementById("pedido3");
 	  var y = document.getElementById("enlace3")
 	  if (x.style.display === "flex") {
+		  	pedido3mostrado = "no";
 		    x.style.display = "none";
 		    y.style.display = "none";
 	  } else {
+		  	pedido3mostrado = "si";
 		    x.style.display = "flex";
 		    y.style.display = "flex";
 	  }
@@ -35,9 +43,11 @@ function mostrarPedido4() {
 	  var x = document.getElementById("pedido4");
 	  var y = document.getElementById("enlace4")
 	  if (x.style.display === "flex") {
+		  	pedido4mostrado = "no";
 		    x.style.display = "none";
 		    y.style.display = "none";
 	  } else {
+		  	pedido4mostrado = "si";
 		    x.style.display = "flex";
 		    y.style.display = "flex";
 	  }
@@ -57,9 +67,6 @@ function copiarDir12() {
 	  var numero2 = document.getElementById("numero2");
 	  var provincia2 = document.getElementById("provincia2");
 
-	  //document.getElementById("provincia1").value= "tusmuert";
-	  //document.getElementById("cpostal1").setAttribute('value','My default value');
-
 
 	  document.getElementById("poblacion2").value= poblacion1.value;
 	  document.getElementById("cpostal2").value= cpostal1.value;
@@ -70,6 +77,56 @@ function copiarDir12() {
 
 	  return false;
 };
+
+function copiarDir13() {
+	  var direccion1 = document.getElementById("direccion1");
+	  var poblacion1 = document.getElementById("poblacion1");
+	  var cpostal1 = document.getElementById("cpostal1");
+	  var numero1 = document.getElementById("numero1");
+	  var provincia1 = document.getElementById("provincia1");
+
+	  var direccion3 = document.getElementById("direccion3");
+	  var poblacion3 = document.getElementById("poblacion3");
+	  var cpostal3 = document.getElementById("cpostal3");
+	  var numero3 = document.getElementById("numero3");
+	  var provincia3 = document.getElementById("provincia3");
+
+
+	  document.getElementById("poblacion3").value= poblacion1.value;
+	  document.getElementById("cpostal3").value= cpostal1.value;
+	  document.getElementById("numero3").value= numero1.value;
+	  document.getElementById("provincia3").value= provincia1.value;
+	  document.getElementById("direccion3").value= direccion1.value;
+
+
+	  return false;
+};
+
+function copiarDir14() {
+	  var direccion1 = document.getElementById("direccion1");
+	  var poblacion1 = document.getElementById("poblacion1");
+	  var cpostal1 = document.getElementById("cpostal1");
+	  var numero1 = document.getElementById("numero1");
+	  var provincia1 = document.getElementById("provincia1");
+
+	  var direccion4 = document.getElementById("direccion4");
+	  var poblacion4 = document.getElementById("poblacion4");
+	  var cpostal4 = document.getElementById("cpostal4");
+	  var numero4 = document.getElementById("numero4");
+	  var provincia4 = document.getElementById("provincia4");
+
+
+	  document.getElementById("poblacion4").value= poblacion1.value;
+	  document.getElementById("cpostal4").value= cpostal1.value;
+	  document.getElementById("numero4").value= numero1.value;
+	  document.getElementById("provincia4").value= provincia1.value;
+	  document.getElementById("direccion4").value= direccion1.value;
+
+
+	  return false;
+};
+
+
 
 
 class PedidoForm extends React.Component{
@@ -149,15 +206,108 @@ class PedidoForm extends React.Component{
     	initialValues={{   }}
      	validate={values => {
         const errors = {};
+        //Pedido 1
         if (!values.direccion1) {
-        	errors.direccion = 'Campo obligatorio';
+        	errors.direccion1 = 'Campo obligatorio';
+        }
+        if (!values.poblacion1) {
+        	errors.poblacion1 = 'Campo obligatorio';
+        }
+        if (!values.cpostal1) {
+        	errors.cpostal1 = 'Campo obligatorio';
+        }
+        if (!values.provincia1) {
+        	errors.provincia1 = 'Campo obligatorio';
+        }
+        if (!values.numero1) {
+        	errors.numero1 = 'Campo obligatorio';
         }
         if (!values.fechaEnvio1) {
-        	errors.fechaEnvio = 'Campo obligatorio';
+        	errors.fechaEnvio1 = 'Campo obligatorio';
         }
+        
         if (values.horaEnvioFin1 < values.horaEnvioIni1) {
         	errors.horaEnvioFin1 = 'La hora final no puede ser anterior a la inicial'
         }
+        
+        //Pedido 2
+        if (pedido2mostrado === "si"){
+	        if (!values.direccion2) {
+	        	errors.direccion2 = 'Campo obligatorio';
+	        }
+	        if (!values.poblacion2) {
+	        	errors.poblacion2 = 'Campo obligatorio';
+	        }
+	        if (!values.cpostal2) {
+	        	errors.cpostal2 = 'Campo obligatorio';
+	        }
+	        if (!values.provincia2) {
+	        	errors.provincia2 = 'Campo obligatorio';
+	        }
+	        if (!values.numero2) {
+	        	errors.numero2 = 'Campo obligatorio';
+	        }
+	        if (!values.fechaEnvio2) {
+	        	errors.fechaEnvio2 = 'Campo obligatorio';
+	        }
+	        if (values.horaEnvioFin2 < values.horaEnvioIni2) {
+	        	errors.horaEnvioFin2 = 'La hora final no puede ser anterior a la inicial'
+	        }
+        }
+        
+               
+        //Pedido 3
+        if (pedido3mostrado === "si"){
+	        if (!values.direccion3) {
+	        	errors.direccion3 = 'Campo obligatorio';
+	        }
+	        if (!values.poblacion3) {
+	        	errors.poblacion3 = 'Campo obligatorio';
+	        }
+	        if (!values.cpostal3) {
+	        	errors.cpostal3 = 'Campo obligatorio';
+	        }
+	        if (!values.provincia3) {
+	        	errors.provincia3 = 'Campo obligatorio';
+	        }
+	        if (!values.numero3) {
+	        	errors.numero3 = 'Campo obligatorio';
+	        }
+	        if (!values.fechaEnvio3) {
+	        	errors.fechaEnvio3 = 'Campo obligatorio';
+	        }
+	        if (values.horaEnvioFin3 < values.horaEnvioIni3) {
+	        	errors.horaEnvioFin3 = 'La hora final no puede ser anterior a la inicial'
+	        }
+        }
+        
+        
+        //Pedido 4
+        if (pedido4mostrado === "si"){
+	        if (!values.direccion4) {
+	        	errors.direccion4 = 'Campo obligatorio';
+	        }
+	        if (!values.poblacion4) {
+	        	errors.poblacion4 = 'Campo obligatorio';
+	        }
+	        if (!values.cpostal4) {
+	        	errors.cpostal4 = 'Campo obligatorio';
+	        }
+	        if (!values.provincia4) {
+	        	errors.provincia4 = 'Campo obligatorio';
+	        }
+	        if (!values.numero4) {
+	        	errors.numero4 = 'Campo obligatorio';
+	        }
+	        if (!values.fechaEnvio4) {
+	        	errors.fechaEnvio4 = 'Campo obligatorio';
+	        }
+	        if (values.horaEnvioFin4 < values.horaEnvioIni4) {
+	        	errors.horaEnvioFin4 = 'La hora final no puede ser anterior a la inicial'
+	        }
+        }
+        
+        
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
@@ -176,7 +326,7 @@ class PedidoForm extends React.Component{
         	 {
         		 this.handleRedirect();
         	 })
-
+        	 alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
         }, 400);
       }}
@@ -222,7 +372,7 @@ class PedidoForm extends React.Component{
 				onBlur={handleBlur}
 				value={values.cpostal1}
 		        placeholder="41720"
-
+		        pattern="^\d{5}$"
 				/>
 		        <div className="errores">
 		        	{errors.cpostal1}
@@ -244,7 +394,7 @@ class PedidoForm extends React.Component{
 		        </div>
 				<br/><br/>
 
-
+			
 	        <label htmlFor="direccion1">Calle*: </label>
 	        <input
 				id="direccion1"
@@ -269,7 +419,7 @@ class PedidoForm extends React.Component{
 				onChange={handleChange}
 				onBlur={handleBlur}
 				value={values.numero1}
-
+	        	min="0"
 				/>
 	        	<div className="errores">
 	        	{errors.numero1}
@@ -341,8 +491,8 @@ class PedidoForm extends React.Component{
 		</div>
 
 		<br/><br/>
-		<a href="#"  onClick={mostrarPedido2}>
-		+ Añadir pedido número 2
+		<a href="#enlaceMostrarPedido2"  onClick={mostrarPedido2} id="enlaceMostrarPedido2">
+		+ Añadir/eliminar pedido número 2
 		</a>
 		<br/><br/>
 
@@ -350,7 +500,7 @@ class PedidoForm extends React.Component{
 			<div className="pedido-form-envio-container" >
 			<fieldset>
 				<div>
-				 	<h2 id="antonios">Pedido número 2**</h2>
+				 	<h2>Pedido número 2**</h2>
 
 				    <button className="botonCopiar" onClick={copiarDir12}>
 		        		Copiar dirección
@@ -381,6 +531,7 @@ class PedidoForm extends React.Component{
 				onBlur={handleBlur}
 				value={values.cpostal2}
 		        placeholder="41720"
+		        pattern="^\d{5}$"
 				/>
 		     <div className="errores">
 		     	{errors.cpostal2}
@@ -427,6 +578,7 @@ class PedidoForm extends React.Component{
 				onChange={handleChange}
 				onBlur={handleBlur}
 				value={values.numero2}
+	        	min="0"
 				/>
 	        	<div className="errores">
 	        		{errors.numero2}
@@ -498,8 +650,8 @@ class PedidoForm extends React.Component{
 		<br/><br/>
 		<div id="enlace2">
 			<br/><br/>
-			<a href="#"  onClick={mostrarPedido3}>
-				+ Añadir pedido número 3
+			<a href="#enlaceMostrarPedido3"  onClick={mostrarPedido3} id = "enlaceMostrarPedido3">
+				+ Añadir/Eliminar pedido número 3
 			</a>
 			<br/><br/>
 		</div>
@@ -507,7 +659,13 @@ class PedidoForm extends React.Component{
 		<div id="pedido3">
 			<div className="pedido-form-envio-container" >
 			<fieldset>
-			 	<legend><h2>Pedido número 3**</h2> </legend>
+				<div>
+				 	<h2>Pedido número 3**</h2> 
+	
+				    <button className="botonCopiar" onClick={copiarDir13}>
+		        		Copiar dirección
+		        	</button>
+	        	</div>
 
 			 <label htmlFor="poblacion3">Población*: </label>
 			 <input
@@ -534,6 +692,7 @@ class PedidoForm extends React.Component{
 				onBlur={handleBlur}
 				value={values.cpostal3}
 		        placeholder="41720"
+			    pattern="^\d{5}$"
 				/>
 		        <div className="errores">
 		        	{errors.cpostal3}
@@ -579,6 +738,7 @@ class PedidoForm extends React.Component{
 				onChange={handleChange}
 				onBlur={handleBlur}
 				value={values.numero3}
+	        	min="0"
 				/>
 	        	<div className="errores">
 	        		{errors.numero3}
@@ -651,8 +811,8 @@ class PedidoForm extends React.Component{
 		<br/><br/>
 		<div id="enlace3">
 			<br/><br/>
-			<a href="#"  onClick={mostrarPedido4}>
-				+ Añadir pedido número 4
+			<a href="#enlaceMostrarPedido4"  onClick={mostrarPedido4} id="enlaceMostrarPedido4">
+				+ Añadir/Eliminar pedido número 4
 			</a>
 			<br/><br/>
 		</div>
@@ -660,7 +820,12 @@ class PedidoForm extends React.Component{
 		<div id="pedido4">
 		<div className="pedido-form-envio-container" >
 		<fieldset>
-		 	<legend><h2>Pedido número 4**</h2> </legend>
+			<div>
+		 		<h2>Pedido número 4**</h2>
+			    <button className="botonCopiar" onClick={copiarDir13}>
+        			Copiar dirección
+        		</button>
+        	</div>
 
 		 <label htmlFor="poblacion4">Población*: </label>
 		 <input
@@ -686,7 +851,7 @@ class PedidoForm extends React.Component{
 			onBlur={handleBlur}
 			value={values.cpostal4}
 	        placeholder="41720"
-
+	        pattern="^\d{5}$"
 			/>
 	    <div className="errores">
 	        {errors.cpostal4}
@@ -732,6 +897,7 @@ class PedidoForm extends React.Component{
 			onChange={handleChange}
 			onBlur={handleBlur}
 			value={values.numero4}
+        	min="0"
 			/>
         	<div className="errores">
         		{errors.numero4}
