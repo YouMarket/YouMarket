@@ -126,11 +126,33 @@ function copiarDir14() {
 	  return false;
 };
 
-
+function validDate1(){
+	var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("fechaEnvio1")[0].setAttribute('min', today);
+}
+function validDate2(){
+	var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("fechaEnvio2")[0].setAttribute('min', today);
+}
+function validDate3(){
+	var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("fechaEnvio3")[0].setAttribute('min', today);
+}
+function validDate4(){
+	var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("fechaEnvio4")[0].setAttribute('min', today);
+}
 
 
 class PedidoForm extends React.Component{
 
+	componentDidMount() {
+		validDate1();
+		validDate2();
+		validDate3();
+		validDate4();
+       }
+	
 	precio(){
 		const [total, setTotal] = useState(0.0);
 		const fetchTotal = useCallback(() => {
