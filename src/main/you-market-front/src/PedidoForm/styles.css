@@ -60,6 +60,15 @@
     font-weight: bold;
 }
 
+.pedido-0-container{
+	text-align:center;	
+}
+
+.imagen-0-pedidos{
+	width:40%;
+	margin:auto;
+}
+
 .pedido-container input {
     padding: 8px 5px;
     margin-right: 20px;

@@ -1,6 +1,7 @@
 import React,  { useCallback, useState, useEffect} from 'react';
 import { Formik } from 'formik';
 import './styles.css'
+import noPedido from "./no-del.png";
 import { withRouter, useHistory } from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
@@ -111,11 +112,6 @@ export function PedidoForm() {
 	const [envioTomas, setEnvioTomas] = useState(0);
 	
 	useEffect(() => {
-		validDate1();
-		validDate2();
-		validDate3();
-		validDate4();
-		
 		fetch('/usuario/envios', {
 			headers:{
 			  'Content-Type' : 'application/json',
@@ -127,7 +123,14 @@ export function PedidoForm() {
 			       .then(envios1 => {
 			    	   setEnvioTomas(envios1);
 			       });
-		  }, []);
+		if(envioTomas!=0){
+			validDate1();
+			validDate2();
+			validDate3();
+			validDate4();
+		}
+		
+	}, []);
 	
 	
 	const precio = () => {
@@ -170,7 +173,7 @@ export function PedidoForm() {
 		} else {
 			 pedido2mostrado = "si";
 			 x.style.display = "flex";
-			 //Si tiene m�s de 2, se muestra el enlace de mostrar tercer pedido
+			 //Si tiene m�s de 2, se muestra el enlace de mostrar tercer pedido
 			 if(envioTomas > 2){
 				 y.style.display = "flex";
 			 }
@@ -190,7 +193,7 @@ export function PedidoForm() {
 		  } else {
 			  	pedido3mostrado = "si";
 			    x.style.display = "flex";
-				//Si tiene m�s de 3, se muestra el enlace de mostrar cuarto pedido
+				//Si tiene m�s de 3, se muestra el enlace de mostrar cuarto pedido
 				if(envioTomas > 3){
 					y.style.display = "flex";
 				}
@@ -264,11 +267,11 @@ export function PedidoForm() {
 	<div>
 
 
-	
-	  <div className="pedido-container container">
+	{envioTomas > 0 ? 
+	  (<div className="pedido-container container">
 	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
 	  <br/>
-	  <h3> Te queda/n {envioTomas} env�os por realizar de tu suscripci�n. </h3>
+	  <h3> Te queda/n {envioTomas} env�os por realizar de tu suscripción. </h3>
     <Formik validateOnChange={false} validateOnBlur={false}
     	className="formulario-pedido"
     	initialValues={{   }}
@@ -579,11 +582,11 @@ export function PedidoForm() {
 				<div className="mismaLinea">
 				 	<h2 className="tituloPedido">Pedido número 2**</h2>
 
-		        	<a className="botonCopiar" href="#" onClick={copiarDir12}>  Copiar direcci�n </a>
+		        	<a className="botonCopiar" href="#" onClick={copiarDir12}>  Copiar direcci�n </a>
 			 	</div>
 			 <label htmlFor="poblacion2">Población*: </label>
 
-			 <Field
+			 <input
 				id="poblacion2"
 				type="text"
 				name="poblacion2"
@@ -1098,10 +1101,17 @@ export function PedidoForm() {
         </form>
       )}
     </Formik>
-
-	  </div>
     </div>
 
+
+		 ):(<div className="pedido-0-container">
+		 <h3> No te quedan envíos por realizar de tu suscripción. </h3>
+		 <img src={noPedido} className="imagen-0-pedidos"/>
+		 <p>Vuelve cuando hayas renovado tu suscripción.</p>
+		 
+		 </div>)}
+	  
+    </div>
 
 	</div>
 );
