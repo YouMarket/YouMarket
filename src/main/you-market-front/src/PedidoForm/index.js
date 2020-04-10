@@ -5,43 +5,13 @@ import { withRouter, useHistory } from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
 
+
+
+var pedido1mostrado;
 var pedido2mostrado;
 var pedido3mostrado;
 var pedido4mostrado;
 
-
-
-
-
-function mostrarPedido3() {
-	  var x = document.getElementById("pedido3");
-	  var y = document.getElementById("enlace3")
-	  if (x.style.display === "flex") {
-		  	pedido3mostrado = "no";
-		    x.style.display = "none";
-		    y.style.display = "none";
-	  } else {
-		  	pedido3mostrado = "si";
-		    x.style.display = "flex";
-		    y.style.display = "flex";
-	  }
-	  return false;
-};
-
-function mostrarPedido4() {
-	  var x = document.getElementById("pedido4");
-	  var y = document.getElementById("enlace4")
-	  if (x.style.display === "flex") {
-		  	pedido4mostrado = "no";
-		    x.style.display = "none";
-		    y.style.display = "none";
-	  } else {
-		  	pedido4mostrado = "si";
-		    x.style.display = "flex";
-		    y.style.display = "flex";
-	  }
-	  return false;
-};
 
 function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");
@@ -133,6 +103,7 @@ function validDate4(){
 }
 
 
+
 export function PedidoForm() {
 
 	let history = useHistory();
@@ -143,7 +114,8 @@ export function PedidoForm() {
 		validDate1();
 		validDate2();
 		validDate3();
-		validDate4(); 
+		validDate4();
+		
 		fetch('/usuario/envios', {
 			headers:{
 			  'Content-Type' : 'application/json',
@@ -184,8 +156,6 @@ export function PedidoForm() {
 	
 	
 	const mostrarPedido2 = () => {
-
-		
 		
 		var x = document.getElementById("pedido2");
 		var y = document.getElementById("enlace2");
@@ -200,13 +170,49 @@ export function PedidoForm() {
 		} else {
 			 pedido2mostrado = "si";
 			 x.style.display = "flex";
-			 //if(envioTomas > 1){
+			 //Si tiene m醩 de 2, se muestra el enlace de mostrar tercer pedido
+			 if(envioTomas > 2){
 				 y.style.display = "flex";
-			 //}
+			 }
 		}
 
 		return false;
 	}
+	
+	const mostrarPedido3 = () => {
+		  var x = document.getElementById("pedido3");
+		  var y = document.getElementById("enlace3")
+		  
+		  if (x.style.display === "flex") {
+			  	pedido3mostrado = "no";
+			    x.style.display = "none";
+			    y.style.display = "none";
+		  } else {
+			  	pedido3mostrado = "si";
+			    x.style.display = "flex";
+				//Si tiene m醩 de 3, se muestra el enlace de mostrar cuarto pedido
+				if(envioTomas > 3){
+					y.style.display = "flex";
+				}
+		  }
+		  return false;
+	};
+	
+	const mostrarPedido4 = () => {
+		  var x = document.getElementById("pedido4");
+		  var y = document.getElementById("enlace4")
+		  if (x.style.display === "flex") {
+			  	pedido4mostrado = "no";
+			    x.style.display = "none";
+			    y.style.display = "none";
+		  } else {
+			  	pedido4mostrado = "si";
+			    x.style.display = "flex";
+			    y.style.display = "flex";
+		  }
+		  return false;
+	};
+	
 	
 	const cestas = () => {
 		const[cestas, setCestas] = useState([]);
@@ -261,6 +267,8 @@ export function PedidoForm() {
 	
 	  <div className="pedido-container container">
 	  <h1>隆Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos 冒鸥鈩拷</h1>
+	  <br/>
+	  <h3> Te queda/n {envioTomas} env韔s por realizar de tu suscripci髇. </h3>
     <Formik validateOnChange={false} validateOnBlur={false}
     	className="formulario-pedido"
     	initialValues={{   }}
@@ -401,7 +409,8 @@ export function PedidoForm() {
         isSubmitting,
         /* and other goodies */
       }) => (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>	
+
         <div id="pedido1">
 			<div className="pedido-form-envio-container">
 			<fieldset>
@@ -548,30 +557,33 @@ export function PedidoForm() {
 			</fieldset>
 			</div>
 		</div>
-
-        
-        		<div>
-				<br/><br/>
-					<a href="#enlaceMostrarPedido2"  onClick={mostrarPedido2} id="enlaceMostrarPedido2">
-					+ A帽adir/eliminar pedido n煤mero 2
-					</a>
-				<br/><br/>
-        		</div>
-
-
+		
+		{envioTomas > 1 ? 
+	        <div id="enlace1">
+	        		<div>
+					<br/><br/>
+						<a href="#enlaceMostrarPedido2"  onClick={mostrarPedido2} id="enlaceMostrarPedido2">
+						+ A帽adir/eliminar pedido n煤mero 2
+						</a>
+					<br/><br/>
+	        		</div>
+	        </div>
+		:
+			<div>
+	        
+	        </div>
+	    }
 		<div id="pedido2">
 			<div className="pedido-form-envio-container" >
 			<fieldset>
 				<div className="mismaLinea">
 				 	<h2 className="tituloPedido">Pedido n煤mero 2**</h2>
 
-				    <button className="botonCopiar" onClick={copiarDir12}>
-		        		Copiar direcci贸n
-		        	</button>
+		        	<a className="botonCopiar" href="#" onClick={copiarDir12}>  Copiar direcci髇 </a>
 			 	</div>
 			 <label htmlFor="poblacion2">Poblaci贸n*: </label>
 
-			 <input
+			 <Field
 				id="poblacion2"
 				type="text"
 				name="poblacion2"
@@ -724,13 +736,13 @@ export function PedidoForm() {
 		<div id="pedido3">
 			<div className="pedido-form-envio-container" >
 			<fieldset>
-				<div>
-				 	<h2>Pedido n煤mero 3**</h2> 
+			<div className="mismaLinea">
+			 	<h2 className="tituloPedido">Pedido n煤mero 3**</h2>
 	
-				    <button className="botonCopiar" onClick={copiarDir13}>
-		        		Copiar direcci贸n
-		        	</button>
-	        	</div>
+			    <button className="botonCopiar" onClick={copiarDir13}>
+	        		Copiar direcci贸n
+	        	</button>
+        	</div>
 
 			 <label htmlFor="poblacion3">Poblaci贸n*: </label>
 			 <input
@@ -884,12 +896,13 @@ export function PedidoForm() {
 		<div id="pedido4">
 		<div className="pedido-form-envio-container" >
 		<fieldset>
-			<div>
-		 		<h2>Pedido n煤mero 4**</h2>
-			    <button className="botonCopiar" onClick={copiarDir13}>
-        			Copiar direcci贸n
-        		</button>
-        	</div>
+			<div className="mismaLinea">
+		 	<h2 className="tituloPedido">Pedido n煤mero 4**</h2>
+	
+		    <button className="botonCopiar" onClick={copiarDir14}>
+	    		Copiar direcci贸n
+	    	</button>
+    	</div>
 
 		 <label htmlFor="poblacion4">Poblaci贸n*: </label>
 		 <input
