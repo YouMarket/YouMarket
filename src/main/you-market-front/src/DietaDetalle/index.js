@@ -12,7 +12,11 @@ function DietaDetalle() {
 	const { id } = useParams();
 	
 	const fetchDieta = useCallback(() => {
-	    return fetch(`../../../dieta/${id}`)
+	    return fetch(`../../../dieta/${id}`, {headers: {
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+			'Authorization' : 'Bearer ' + localStorage.getItem('auth')}
+			})
 	      .then(res => res.json())
 	      .then(dieta => {
 	        setDieta(dieta)

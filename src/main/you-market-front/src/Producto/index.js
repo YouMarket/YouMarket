@@ -38,6 +38,7 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 			headers: {
 				"Accept": "application/json",
 				"Content-Type": "application/json",
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth'),
 			},
 			method:'POST',
 			body:JSON.stringify({postId: id, postCantidad: cantidad})

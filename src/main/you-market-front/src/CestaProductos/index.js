@@ -11,7 +11,11 @@ const [cestaproductos, setCestaproductos] = useState();
 	const { id } = useParams();
 	
 	const fetchCestaProductos = useCallback(() => {
-	    return fetch(`/cesta/productos/dieta/list/${id}`)
+	    return fetch(`/cesta/productos/dieta/list/${id}`, {headers: {
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+			'Authorization' : 'Bearer ' + localStorage.getItem('auth')}
+			})
 	      .then(res => res.json())
 	      .then(cestaproductos => {
 	        setCestaproductos(cestaproductos);
