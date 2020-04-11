@@ -1,18 +1,15 @@
 import React,  { useCallback, useState, useEffect} from 'react';
-import { Formik } from 'formik';
+import { Formik, Field, Button, useFormikContext, setFieldValue} from 'formik';
 import './styles.css'
-import noPedido from "./no-del.png";
 import { withRouter, useHistory } from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
-
 
 
 var pedido1mostrado;
 var pedido2mostrado;
 var pedido3mostrado;
 var pedido4mostrado;
-
 
 function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");
@@ -31,10 +28,12 @@ function copiarDir12() {
 	  document.getElementById("poblacion2").value= poblacion1.value;
 	  document.getElementById("cpostal2").value= cpostal1.value;
 	  document.getElementById("numero2").value= numero1.value;
-	  document.getElementById("provincia2").value= provincia1.value;
-	  document.getElementById("direccion2").value= direccion1.value;
+	  document.getElementById("provincia2").value = provincia1.value;
+	  document.getElementById("direccion2").value = cpostal1.value;
 
 
+	  document.getElementsByName("poblacion2")[0].setAttribute('value', "esto es una prueba");
+	  
 	  return false;
 };
 
@@ -75,13 +74,11 @@ function copiarDir14() {
 	  var numero4 = document.getElementById("numero4");
 	  var provincia4 = document.getElementById("provincia4");
 
-
 	  document.getElementById("poblacion4").value= poblacion1.value;
 	  document.getElementById("cpostal4").value= cpostal1.value;
 	  document.getElementById("numero4").value= numero1.value;
 	  document.getElementById("provincia4").value= provincia1.value;
 	  document.getElementById("direccion4").value= direccion1.value;
-
 
 	  return false;
 };
@@ -112,6 +109,11 @@ export function PedidoForm() {
 	const [envioTomas, setEnvioTomas] = useState(0);
 	
 	useEffect(() => {
+		validDate1();
+		validDate2();
+		validDate3();
+		validDate4();
+		
 		fetch('/usuario/envios', {
 			headers:{
 			  'Content-Type' : 'application/json',
@@ -123,14 +125,7 @@ export function PedidoForm() {
 			       .then(envios1 => {
 			    	   setEnvioTomas(envios1);
 			       });
-		if(envioTomas!=0){
-			validDate1();
-			validDate2();
-			validDate3();
-			validDate4();
-		}
-		
-	}, []);
+		  }, []);
 	
 	
 	const precio = () => {
@@ -157,6 +152,29 @@ export function PedidoForm() {
 		 return total;
 	}
 	
+	const mostrarPedido1 = () => {
+		
+		var x = document.getElementById("pedido1");
+		var y = document.getElementById("enlace1");
+		
+		//window.alert(z);
+		console.log("ESTO VALE LA Z: " + envioTomas);
+		
+		if (x.style.display === "flex") {
+			 pedido1mostrado = "no";
+			 x.style.display = "none";
+			 y.style.display = "none";
+		} else {
+			 pedido1mostrado = "si";
+			 x.style.display = "flex";
+			 //Si tiene más de 1, se muestra el enlace de mostrar tercer pedido
+			 if(envioTomas > 2){
+				 y.style.display = "flex";
+			 }
+		}
+
+		return false;
+	}
 	
 	const mostrarPedido2 = () => {
 		
@@ -170,10 +188,22 @@ export function PedidoForm() {
 			 pedido2mostrado = "no";
 			 x.style.display = "none";
 			 y.style.display = "none";
+			 document.getElementById("poblacion2").enabled = "";
+			 document.getElementById("cpostal2").value = "";
+			 document.getElementById("numero2").value = "";
+			 document.getElementById("provincia2").value = "";
+			 document.getElementById("direccion2").value = "";
+			 
+			 
 		} else {
+			 document.getElementById("poblacion2").value = "";
+			 document.getElementById("cpostal2").value = "";
+			 document.getElementById("numero2").value = "";
+			 document.getElementById("provincia2").value = "";
+			 document.getElementById("direccion2").value = "";
 			 pedido2mostrado = "si";
 			 x.style.display = "flex";
-			 //Si tiene m�s de 2, se muestra el enlace de mostrar tercer pedido
+			 //Si tiene más de 2, se muestra el enlace de mostrar tercer pedido
 			 if(envioTomas > 2){
 				 y.style.display = "flex";
 			 }
@@ -193,7 +223,7 @@ export function PedidoForm() {
 		  } else {
 			  	pedido3mostrado = "si";
 			    x.style.display = "flex";
-				//Si tiene m�s de 3, se muestra el enlace de mostrar cuarto pedido
+				//Si tiene más de 3, se muestra el enlace de mostrar cuarto pedido
 				if(envioTomas > 3){
 					y.style.display = "flex";
 				}
@@ -243,6 +273,8 @@ export function PedidoForm() {
 
 	}
 	
+
+	
 /*
 	const redirecc = () => {
 		if(localStorage.getItem('auth')==null){
@@ -251,6 +283,7 @@ export function PedidoForm() {
 	}
 
 */
+	
 	const handleRedirect = () => {
 		history.push('/pedidoexito');
 	}
@@ -267,12 +300,12 @@ export function PedidoForm() {
 	<div>
 
 
-	{envioTomas > 0 ? 
-	  (<div className="pedido-container container">
-	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
+	
+	  <div className="pedido-container container">
+	  <h1>Â¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos Ã°Å¸â„¢ï¿½</h1>
 	  <br/>
-	  <h3> Te queda/n {envioTomas} env�os por realizar de tu suscripción. </h3>
-    <Formik validateOnChange={false} validateOnBlur={false}
+	  <h3> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>
+	  <Formik validateOnChange={false} validateOnBlur={false} id="formikito"
     	className="formulario-pedido"
     	initialValues={{   }}
      	validate={values => {
@@ -318,6 +351,7 @@ export function PedidoForm() {
 	        if (!values.numero2) {
 	        	errors.numero2 = 'Campo obligatorio';
 	        }
+	        
 	        if (!values.fechaEnvio2) {
 	        	errors.fechaEnvio2 = 'Campo obligatorio';
 	        }
@@ -382,6 +416,7 @@ export function PedidoForm() {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
+    	  alert(JSON.stringify(values, null, 2));
         setTimeout(() => {
         	fetch('', {
         			headers: {
@@ -417,25 +452,28 @@ export function PedidoForm() {
         <div id="pedido1">
 			<div className="pedido-form-envio-container">
 			<fieldset>
-			 	<legend><h2>Pedido número 1**</h2> </legend>
+			 	<legend><h2>Pedido nÃºmero 1**</h2> </legend>
 
-	        <label htmlFor="poblacion1">Población*: </label>
-	        <input
+	        <label htmlFor="poblacion1">PoblaciÃ³n*: </label>
+	     	        
+	        
+	        
+	        <Field
 				id="poblacion1"
 				type="text"
 				name="poblacion1"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.poblacion1}
 		        placeholder="Los Palacios y Villafranca"
+				onChange={handleChange}
+				onBlur={handleBlur}
 				/>
 		        <div className="errores">
 		        	{errors.poblacion1}
 		        </div>
 			<br/><br/>
 
-			<label htmlFor="cpostal1">Código postal*: </label>
-	        <input
+			<label htmlFor="cpostal1">CÃ³digo postal*: </label>
+	        <Field
 				id="cpostal1"
 				type="text"
 				name="cpostal1"
@@ -451,7 +489,7 @@ export function PedidoForm() {
 				<br/><br/>
 
 			<label htmlFor="provincia1">Provincia*: </label>
-	        <input
+	        <Field
 				id="provincia1"
 				type="text"
 				name="provincia1"
@@ -467,23 +505,24 @@ export function PedidoForm() {
 
 			
 	        <label htmlFor="direccion1">Calle*: </label>
-	        <input
+	        <Field
 				id="direccion1"
 				type="text"
-				name="direccion1"
-				onChange={handleChange}
-				onBlur={handleBlur}
+				name="direccion1"			
 				value={values.direccion1}
 		        placeholder="c/Cisnes"
+				onChange={handleChange}
+				onBlur={handleBlur}
 		      	/>
 
+		        	
 		        <div className="errores">
 		        	{errors.direccion1}
 		        </div>
 				<br/><br/>
 
-			<label htmlFor="numero1">Número*: </label>
-	        <input
+			<label htmlFor="numero1">NÃºmero*: </label>
+	        <Field
 				id="numero1"
 				type="number"
 				name="numero1"
@@ -499,14 +538,13 @@ export function PedidoForm() {
 
 
 			<label htmlFor="fechaEnvio1">Fecha*: </label>
-			<input
+			<Field
 				id="fechaEnvio1"
 				type="date"
 				name="fechaEnvio1"
 				onChange={handleChange}
 				onBlur={handleBlur}
 				value={values.fechaEnvio1}
-
 				/>
 				<div className="errores">
 				{errors.fechaEnvio1}
@@ -515,7 +553,7 @@ export function PedidoForm() {
 
 				<br/>
 			<label htmlFor="horaEnvioIni1">Hora inicial: </label>
-			<input
+			<Field
 				id="horaEnvioIni1"
 				type="number"
 				name="horaEnvioIni1"
@@ -530,7 +568,7 @@ export function PedidoForm() {
 				</div>
 
 			<label htmlFor="horaEnvioFin1">   Hora final: </label>
-			<input
+			<Field
 				type="number"
 				name="horaEnvioFin1"
 				id="horaEnvioFin1"
@@ -545,9 +583,10 @@ export function PedidoForm() {
 				</div>
 				<br/><br/>
 				<label htmlFor="cestaId1" className="s">   Elige tu cesta: </label>
-			   <select name="cestaId1" id="cestaId1" onChange={handleChange}
-			   onBlur={handleBlur} value={values.id}>
-			   
+			   <select name="cestaId1" id="cestaId1" 
+			    value={values.id} onChange={handleChange}
+				onBlur={handleBlur}>
+
 			   { cestas().map((cesta) => (
 
 								   <option value={cesta.id}>{cesta.nombre}</option>
@@ -566,7 +605,7 @@ export function PedidoForm() {
 	        		<div>
 					<br/><br/>
 						<a href="#enlaceMostrarPedido2"  onClick={mostrarPedido2} id="enlaceMostrarPedido2">
-						+ Añadir/eliminar pedido número 2
+						+ AÃ±adir/eliminar pedido nÃºmero 2
 						</a>
 					<br/><br/>
 	        		</div>
@@ -580,51 +619,51 @@ export function PedidoForm() {
 			<div className="pedido-form-envio-container" >
 			<fieldset>
 				<div className="mismaLinea">
-				 	<h2 className="tituloPedido">Pedido número 2**</h2>
+				 	<h2 className="tituloPedido">Pedido nÃºmero 2**</h2>
 
-		        	<a className="botonCopiar" href="#" onClick={copiarDir12}>  Copiar direcci�n </a>
 			 	</div>
-			 <label htmlFor="poblacion2">Población*: </label>
+			 <label htmlFor="poblacion2">PoblaciÃ³n*: </label>
 
-			 <input
+			 <Field
 				id="poblacion2"
 				type="text"
 				name="poblacion2"
 				onChange={handleChange}
 				onBlur={handleBlur}
-				value={values.poblacion2}
 		        placeholder="Los Palacios y Villafranca"
 				/>
-		    <div className="errores">
+		    
+		       	<div className="errores">
 		        {errors.poblacion2}
 		    </div>
 			<br/><br/>
 
-			<label htmlFor="cpostal2">Código postal*: </label>
-	        <input
+			<label htmlFor="cpostal2">CÃ³digo postal*: </label>
+	        <Field
 				id="cpostal2"
 				type="text"
 				name="cpostal2"
 				onChange={handleChange}
 				onBlur={handleBlur}
-				value={values.cpostal2}
 		        placeholder="41720"
 		        pattern="^\d{5}$"
 				/>
+		     
+		        	
 		     <div className="errores">
 		     	{errors.cpostal2}
 		     </div>
 				<br/><br/>
 
 			<label htmlFor="provincia2">Provincia*: </label>
-	        <input
+	        <Field
 				id="provincia2"
 				type="text"
 				name="provincia2"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.provincia2}
 		        placeholder="Sevilla"
+		    	onChange={handleChange}
+				onBlur={handleBlur}
 		        				/>
 		        <div className="errores">
 		        {errors.provincia2}
@@ -633,30 +672,29 @@ export function PedidoForm() {
 
 
 	        <label htmlFor="direccion2">Calle*: </label>
-	        <input
+	        <Field
 				id="direccion2"
 				type="text"
 				name="direccion2"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.direccion2}
 		        placeholder="c/Cisnes"
-
+		    	onChange={handleChange}
+				onBlur={handleBlur}
 				/>
 		        <div className="errores">
 		        {errors.direccion2}
 		        </div>
 				<br/><br/>
 
-			<label htmlFor="numero2">Número*: </label>
-	        <input
+			<label htmlFor="numero2">NÃºmero*: </label>
+	        <Field
 				id="numero2"
 				type="number"
 				name="numero2"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.numero2}
 	        	min="0"
+	        	onChange={handleChange}
+	    		onBlur={handleBlur}
 				/>
 	        	<div className="errores">
 	        		{errors.numero2}
@@ -665,13 +703,13 @@ export function PedidoForm() {
 
 
 			<label htmlFor="fechaEnvio2">Fecha*: </label>
-			<input
+			<Field
 				id="fechaEnvio2"
 				type="date"
 				name="fechaEnvio2"
+				value={values.fechaEnvio2}
 				onChange={handleChange}
 				onBlur={handleBlur}
-				value={values.fechaEnvio2}
 				/>
 				<div className="errores">
 				{errors.fechaEnvio2}
@@ -680,38 +718,38 @@ export function PedidoForm() {
 
 				<br/>
 			<label htmlFor="horaEnvioIni2">Hora inicial: </label>
-			<input
+			<Field
 				id="horaEnvioIni2"
 				type="number"
 				name="horaEnvioIni2"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.horaEnvioIni2}
 				min="9"
 				max="21"
+				onChange={handleChange}
+				onBlur={handleBlur}
 				/>
 				<div className="errores">
 					{errors.horaEnvioIni2}
 				</div>
 
 			<label htmlFor="horaEnvioFin2">Hora final: </label>
-			<input
+			<Field
 				type="number"
 				name="horaEnvioFin2"
 				id="horaEnvioFin2"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.horaEnvioFin2}
 				min="9"
 				max="21"
+				onChange={handleChange}
+				onBlur={handleBlur}
 				/>
 				<div className="errores">
 				{errors.horaEnvioFin2}
 				<br/><br/>
 				</div>
 				<label htmlFor="cestaId2">   Elige tu cesta: </label>
-				   <select name="cestaId2" id="cestaId2" onChange={handleChange}
-				   onBlur={handleBlur} value={values.id}>
+				   <select name="cestaId2" id="cestaId2" value={values.id} 	onChange={handleChange}
+					onBlur={handleBlur}>
 				   { cestas().map((cesta) => (
 
 									   <option value={cesta.id}>{cesta.nombre}</option>
@@ -731,7 +769,7 @@ export function PedidoForm() {
 		<div id="enlace2">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido3"  onClick={mostrarPedido3} id = "enlaceMostrarPedido3">
-				+ Añadir/Eliminar pedido número 3
+				+ AÃ±adir/Eliminar pedido nÃºmero 3
 			</a>
 			<br/><br/>
 		</div>
@@ -740,15 +778,13 @@ export function PedidoForm() {
 			<div className="pedido-form-envio-container" >
 			<fieldset>
 			<div className="mismaLinea">
-			 	<h2 className="tituloPedido">Pedido número 3**</h2>
+			 	<h2 className="tituloPedido">Pedido nÃºmero 3**</h2>
 	
-			    <button className="botonCopiar" onClick={copiarDir13}>
-	        		Copiar dirección
-	        	</button>
+			 	
         	</div>
 
-			 <label htmlFor="poblacion3">Población*: </label>
-			 <input
+			 <label htmlFor="poblacion3">PoblaciÃ³n*: </label>
+			 <Field
 				id="poblacion3"
 				type="text"
 				name="poblacion3"
@@ -763,7 +799,7 @@ export function PedidoForm() {
 		    </div>
 			<br/><br/>
 
-			<label htmlFor="cpostal3">Código postal*: </label>
+			<label htmlFor="cpostal3">CÃ³digo postal*: </label>
 	        <input
 				id="cpostal3"
 				type="text"
@@ -780,7 +816,7 @@ export function PedidoForm() {
 				<br/><br/>
 
 			<label htmlFor="provincia3">Provincia*: </label>
-	        <input
+	        <Field
 				id="provincia3"
 				type="text"
 				name="provincia3"
@@ -796,7 +832,7 @@ export function PedidoForm() {
 
 
 	        <label htmlFor="direccion3">Calle*: </label>
-	        <input
+	        <Field
 				id="direccio3n"
 				type="text"
 				name="direccion3"
@@ -810,8 +846,8 @@ export function PedidoForm() {
 		        </div>
 				<br/><br/>
 
-			<label htmlFor="numero3">Número*: </label>
-	        <input
+			<label htmlFor="numero3">NÃºmero*: </label>
+	        <Field
 				id="numero3"
 				type="number"
 				name="numero3"
@@ -827,7 +863,7 @@ export function PedidoForm() {
 
 
 			<label htmlFor="fechaEnvio3">Fecha*: </label>
-			<input
+			<Field
 				id="fechaEnvio3"
 				type="date"
 				name="fechaEnvio3"
@@ -842,7 +878,7 @@ export function PedidoForm() {
 
 				<br/>
 			<label htmlFor="horaEnvioIni3">Hora inicial: </label>
-			<input
+			<Field
 				id="horaEnvioIni3"
 				type="number"
 				name="horaEnvioIni3"
@@ -857,7 +893,7 @@ export function PedidoForm() {
 				</div>
 
 			<label htmlFor="horaEnvioFin3">Hora final: </label>
-			<input
+			<Field
 				type="number"
 				name="horaEnvioFin3"
 				id="horaEnvioFin3"
@@ -873,8 +909,9 @@ export function PedidoForm() {
 				<br/><br/>
 				
 				<label htmlFor="cestaId3" className="s">   Elige tu cesta: </label>
-				   <select name="cestaId3" id="cestaId3" onChange={handleChange}
-				   onBlur={handleBlur} value={values.id}>
+				   <select name="cestaId3" id="cestaId3" 
+				    value={values.id} onChange={handleChange}
+					onBlur={handleBlur}>
 				   { cestas().map((cesta) => (
 
 									   <option value={cesta.id}>{cesta.nombre}</option>
@@ -891,7 +928,7 @@ export function PedidoForm() {
 		<div id="enlace3">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido4"  onClick={mostrarPedido4} id="enlaceMostrarPedido4">
-				+ Añadir/Eliminar pedido número 4
+				+ AÃ±adir/Eliminar pedido nÃºmero 4
 			</a>
 			<br/><br/>
 		</div>
@@ -900,15 +937,13 @@ export function PedidoForm() {
 		<div className="pedido-form-envio-container" >
 		<fieldset>
 			<div className="mismaLinea">
-		 	<h2 className="tituloPedido">Pedido número 4**</h2>
+		 	<h2 className="tituloPedido">Pedido nÃºmero 4**</h2>
 	
-		    <button className="botonCopiar" onClick={copiarDir14}>
-	    		Copiar dirección
-	    	</button>
+
     	</div>
 
-		 <label htmlFor="poblacion4">Población*: </label>
-		 <input
+		 <label htmlFor="poblacion4">PoblaciÃ³n*: </label>
+		 <Field
 			id="poblacion4"
 			type="text"
 			name="poblacion4"
@@ -922,8 +957,8 @@ export function PedidoForm() {
 	    </div>
 		<br/><br/>
 
-		<label htmlFor="cpostal4">Código postal*: </label>
-        <input
+		<label htmlFor="cpostal4">CÃ³digo postal*: </label>
+        <Field
 			id="cpostal4"
 			type="text"
 			name="cpostal4"
@@ -939,7 +974,7 @@ export function PedidoForm() {
 			<br/><br/>
 
 		<label htmlFor="provincia4">Provincia*: </label>
-        <input
+        <Field
 			id="provincia4"
 			type="text"
 			name="provincia4"
@@ -955,7 +990,7 @@ export function PedidoForm() {
 
 
         <label htmlFor="direccion4">Calle*: </label>
-        <input
+        <Field
 			id="direccio4n"
 			type="text"
 			name="direccion4"
@@ -969,8 +1004,8 @@ export function PedidoForm() {
 	        </div>
 			<br/><br/>
 
-		<label htmlFor="numero4">Número*: </label>
-        <input
+		<label htmlFor="numero4">NÃºmero*: </label>
+        <Field
 			id="numero4"
 			type="number"
 			name="numero4"
@@ -986,7 +1021,7 @@ export function PedidoForm() {
 
 
 		<label htmlFor="fechaEnvio4">Fecha*: </label>
-		<input
+		<Field
 			id="fechaEnvio4"
 			type="date"
 			name="fechaEnvio4"
@@ -1001,7 +1036,7 @@ export function PedidoForm() {
 
 			<br/>
 		<label htmlFor="horaEnvioIni4">Hora inicial: </label>
-		<input
+		<Field
 			id="horaEnvioIni4"
 			type="number"
 			name="horaEnvioIni4"
@@ -1016,7 +1051,7 @@ export function PedidoForm() {
 			</div>
 
 		<label htmlFor="horaEnvioFin4">Hora final: </label>
-		<input
+		<Field
 			type="number"
 			name="horaEnvioFin4"
 			id="horaEnvioFin4"
@@ -1026,13 +1061,14 @@ export function PedidoForm() {
 			min="9"
 			max="21"
 			/>
-<div className="errores">
-	{errors.horaEnvioFin4}
-</div>
+			<div className="errores">
+				{errors.horaEnvioFin4}
+			</div>
 				<br/><br/>
 			<label htmlFor="cestaId4">   Elige tu cesta: </label>
-			   <select name="cestaId4" id="cestaId4" onChange={handleChange}
-			   onBlur={handleBlur} value={values.id}>
+			   <select name="cestaId4" id="cestaId4" 
+			    value={values.id} onChange={handleChange}
+				onBlur={handleBlur}>
 			   { cestas().map((cesta) => (
 
 								   <option value={cesta.id}>{cesta.nombre}</option>
@@ -1041,13 +1077,12 @@ export function PedidoForm() {
 			   </select>
 			   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
 
-
+		<input id="mentira" value="si" />
+		
 		</fieldset>
 		</div>
 		<br/><br/>
 	</div>
-	<br/><br/>
-
 
 
 		<br/>
@@ -1056,7 +1091,7 @@ export function PedidoForm() {
 			* Campo obligatorio
 		</div>
 		<div>
-			** La entrega se realizará en la horquilla de horas indicada
+			** La entrega se realizarÃ¡ en la horquilla de horas indicada
 		</div>
 
 		<br/><br/>
@@ -1065,7 +1100,7 @@ export function PedidoForm() {
         	Enviar
         </button>
 
-			<h2>Elige tu método de pago 👇</h2>
+			<h2>Elige tu mÃ©todo de pago ðŸ‘‡</h2>
 	         <div className="grid">
 	         <PayPalButton
 				 amount={precio()}
@@ -1101,17 +1136,10 @@ export function PedidoForm() {
         </form>
       )}
     </Formik>
+
+	  </div>
     </div>
 
-
-		 ):(<div className="pedido-0-container">
-		 <h3> No te quedan envíos por realizar de tu suscripción. </h3>
-		 <img src={noPedido} className="imagen-0-pedidos"/>
-		 <p>Vuelve cuando hayas renovado tu suscripción.</p>
-		 
-		 </div>)}
-	  
-    </div>
 
 	</div>
 );
