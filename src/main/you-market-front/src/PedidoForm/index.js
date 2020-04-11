@@ -11,6 +11,11 @@ var pedido2mostrado;
 var pedido3mostrado;
 var pedido4mostrado;
 
+var pedido2copiado = false;
+var pedido3copiado = false;
+var pedido4copiado = false;
+
+
 function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");
 	  var poblacion1 = document.getElementById("poblacion1");
@@ -29,11 +34,10 @@ function copiarDir12() {
 	  document.getElementById("cpostal2").value= cpostal1.value;
 	  document.getElementById("numero2").value= numero1.value;
 	  document.getElementById("provincia2").value = provincia1.value;
-	  document.getElementById("direccion2").value = cpostal1.value;
+	  document.getElementById("direccion2").value = direccion1.value;
 
 
-	  document.getElementsByName("poblacion2")[0].setAttribute('value', "esto es una prueba");
-	  
+	  pedido2copiado = true;
 	  return false;
 };
 
@@ -58,8 +62,10 @@ function copiarDir13() {
 	  document.getElementById("direccion3").value= direccion1.value;
 
 
+	  pedido3copiado = true;
+
 	  return false;
-};
+}; 
 
 function copiarDir14() {
 	  var direccion1 = document.getElementById("direccion1");
@@ -80,6 +86,8 @@ function copiarDir14() {
 	  document.getElementById("provincia4").value= provincia1.value;
 	  document.getElementById("direccion4").value= direccion1.value;
 
+	  pedido4copiado = true;
+	  
 	  return false;
 };
 
@@ -89,7 +97,8 @@ function validDate1(){
 }
 function validDate2(){
 	var today = new Date().toISOString().split('T')[0];
-    document.getElementsByName("fechaEnvio2")[0].setAttribute('min', today);
+	document.getElementsByName("fechaEnvio2")[0].setAttribute('min', today);
+    
 }
 function validDate3(){
 	var today = new Date().toISOString().split('T')[0];
@@ -175,6 +184,8 @@ export function PedidoForm() {
 
 		return false;
 	}
+	
+	
 	
 	const mostrarPedido2 = () => {
 		
@@ -273,16 +284,6 @@ export function PedidoForm() {
 
 	}
 	
-
-	
-/*
-	const redirecc = () => {
-		if(localStorage.getItem('auth')==null){
-			this.props.history.push('/login');
-		}
-	}
-
-*/
 	
 	const handleRedirect = () => {
 		history.push('/pedidoexito');
@@ -334,6 +335,39 @@ export function PedidoForm() {
         	errors.horaEnvioFin1 = 'La hora final no puede ser anterior a la inicial'
         }
         
+
+        if(pedido2copiado = true){
+        	values.direccion2 = values.direccion1;
+        	values.poblacion2 = values.poblacion1;
+        	values.cpostal2 = 	values.cpostal1;
+        	values.provincia2 = values.provincia1;
+        	values.numero2	  = values.numero1;
+        	
+        	pedido2copiado = false;
+        }
+
+        if(pedido3copiado == true){
+        	values.direccion3 = values.direccion1;
+        	values.poblacion3 = values.poblacion1;
+        	values.cpostal3 = 	values.cpostal1;
+        	values.provincia3 = values.provincia1;
+        	values.numero3	  = values.numero1;
+        	
+        	pedido3copiado = false;
+        }
+        
+        if(pedido4copiado == true){
+        	values.direccion4 = values.direccion1;
+        	values.poblacion4 = values.poblacion1;
+        	values.cpostal4 = 	values.cpostal1;
+        	values.provincia4 = values.provincia1;
+        	values.numero4	  = values.numero1;
+        	
+        	pedido4copiado = false;
+        }
+        
+        
+        
         //Pedido 2
         if (pedido2mostrado === "si"){
 	        if (!values.direccion2) {
@@ -358,6 +392,15 @@ export function PedidoForm() {
 	        if (values.horaEnvioFin2 < values.horaEnvioIni2) {
 	        	errors.horaEnvioFin2 = 'La hora final no puede ser anterior a la inicial'
 	        }
+        } else {
+        	values.direccion2 = null;
+        	values.poblacion2 = null;
+        	values.cpostal2 = null;
+        	values.provincia2 = null;
+        	values.numero2 = null;
+        	values.fechaEnvio2 = null;
+        	values.horaEnvioFin2 = null;
+        	values.horaEnvioIni2 = null;
         }
         
                
@@ -384,6 +427,15 @@ export function PedidoForm() {
 	        if (values.horaEnvioFin3 < values.horaEnvioIni3) {
 	        	errors.horaEnvioFin3 = 'La hora final no puede ser anterior a la inicial'
 	        }
+        } else {
+        	values.direccion3 = null;
+        	values.poblacion3 = null;
+        	values.cpostal3 = null;
+        	values.provincia3 = null;
+        	values.numero3 = null;
+        	values.fechaEnvio3 = null;
+        	values.horaEnvioFin3 = null;
+        	values.horaEnvioIni3 = null;
         }
         
         
@@ -410,6 +462,15 @@ export function PedidoForm() {
 	        if (values.horaEnvioFin4 < values.horaEnvioIni4) {
 	        	errors.horaEnvioFin4 = 'La hora final no puede ser anterior a la inicial'
 	        }
+        } else {
+        	values.direccion4 = null;
+        	values.poblacion4 = null;
+        	values.cpostal4 = null;
+        	values.provincia4 = null;
+        	values.numero4 = null;
+        	values.fechaEnvio4 = null;
+        	values.horaEnvioFin4 = null;
+        	values.horaEnvioIni4 = null;
         }
         
         
@@ -621,10 +682,11 @@ export function PedidoForm() {
 				<div className="mismaLinea">
 				 	<h2 className="tituloPedido">Pedido nÃºmero 2**</h2>
 
+				 	<a className="botonCopiar" href="#pedido2" onClick={copiarDir12}>  Copiar dirección </a>
 			 	</div>
 			 <label htmlFor="poblacion2">PoblaciÃ³n*: </label>
 
-			 <Field
+			 <input
 				id="poblacion2"
 				type="text"
 				name="poblacion2"
@@ -639,7 +701,7 @@ export function PedidoForm() {
 			<br/><br/>
 
 			<label htmlFor="cpostal2">CÃ³digo postal*: </label>
-	        <Field
+	        <input
 				id="cpostal2"
 				type="text"
 				name="cpostal2"
@@ -656,7 +718,7 @@ export function PedidoForm() {
 				<br/><br/>
 
 			<label htmlFor="provincia2">Provincia*: </label>
-	        <Field
+	        <input
 				id="provincia2"
 				type="text"
 				name="provincia2"
@@ -672,7 +734,7 @@ export function PedidoForm() {
 
 
 	        <label htmlFor="direccion2">Calle*: </label>
-	        <Field
+	        <input
 				id="direccion2"
 				type="text"
 				name="direccion2"
@@ -687,7 +749,7 @@ export function PedidoForm() {
 				<br/><br/>
 
 			<label htmlFor="numero2">NÃºmero*: </label>
-	        <Field
+	        <input
 				id="numero2"
 				type="number"
 				name="numero2"
@@ -703,7 +765,7 @@ export function PedidoForm() {
 
 
 			<label htmlFor="fechaEnvio2">Fecha*: </label>
-			<Field
+			<input
 				id="fechaEnvio2"
 				type="date"
 				name="fechaEnvio2"
@@ -718,7 +780,7 @@ export function PedidoForm() {
 
 				<br/>
 			<label htmlFor="horaEnvioIni2">Hora inicial: </label>
-			<Field
+			<input
 				id="horaEnvioIni2"
 				type="number"
 				name="horaEnvioIni2"
@@ -733,7 +795,7 @@ export function PedidoForm() {
 				</div>
 
 			<label htmlFor="horaEnvioFin2">Hora final: </label>
-			<Field
+			<input
 				type="number"
 				name="horaEnvioFin2"
 				id="horaEnvioFin2"
@@ -780,17 +842,17 @@ export function PedidoForm() {
 			<div className="mismaLinea">
 			 	<h2 className="tituloPedido">Pedido nÃºmero 3**</h2>
 	
-			 	
+			 	<a className="botonCopiar" href="#pedido3" onClick={copiarDir13}>  Copiar dirección </a>
         	</div>
 
 			 <label htmlFor="poblacion3">PoblaciÃ³n*: </label>
-			 <Field
+			 <input
 				id="poblacion3"
 				type="text"
 				name="poblacion3"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.poblacion3}
+			 	onChange={handleChange}
+				onBlur={handleBlur}
 		        placeholder="Los Palacios y Villafranca"
 
 				/>
@@ -804,11 +866,11 @@ export function PedidoForm() {
 				id="cpostal3"
 				type="text"
 				name="cpostal3"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.cpostal3}
 		        placeholder="41720"
 			    pattern="^\d{5}$"
+				onChange={handleChange}
+				onBlur={handleBlur}
 				/>
 		        <div className="errores">
 		        	{errors.cpostal3}
@@ -816,14 +878,14 @@ export function PedidoForm() {
 				<br/><br/>
 
 			<label htmlFor="provincia3">Provincia*: </label>
-	        <Field
+	        <input
 				id="provincia3"
 				type="text"
 				name="provincia3"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.provincia3}
 		        placeholder="Sevilla"
+		        onChange={handleChange}
+				onBlur={handleBlur}
 				/>
 		        <div className="errores">
 	        		{errors.provincia3}
@@ -832,14 +894,14 @@ export function PedidoForm() {
 
 
 	        <label htmlFor="direccion3">Calle*: </label>
-	        <Field
-				id="direccio3n"
+	        <input
+				id="direccion3"
 				type="text"
 				name="direccion3"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.direccion3}
 		        placeholder="c/Cisnes"
+				onChange={handleChange}
+				onBlur={handleBlur}
 				/>
 				<div className="errores">
 		        {errors.direccion3}
@@ -847,14 +909,14 @@ export function PedidoForm() {
 				<br/><br/>
 
 			<label htmlFor="numero3">NÃºmero*: </label>
-	        <Field
+	        <input
 				id="numero3"
 				type="number"
 				name="numero3"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.numero3}
 	        	min="0"
+				onChange={handleChange}
+				onBlur={handleBlur}
 				/>
 	        	<div className="errores">
 	        		{errors.numero3}
@@ -863,13 +925,13 @@ export function PedidoForm() {
 
 
 			<label htmlFor="fechaEnvio3">Fecha*: </label>
-			<Field
+			<input
 				id="fechaEnvio3"
 				type="date"
 				name="fechaEnvio3"
+				value={values.fechaEnvio3}
 				onChange={handleChange}
 				onBlur={handleBlur}
-				value={values.fechaEnvio3}
 				/>
 				<div className="errores">
 					{errors.fechaEnvio3}
@@ -878,13 +940,13 @@ export function PedidoForm() {
 
 				<br/>
 			<label htmlFor="horaEnvioIni3">Hora inicial: </label>
-			<Field
+			<input
 				id="horaEnvioIni3"
 				type="number"
 				name="horaEnvioIni3"
+				value={values.horaEnvioIni3}
 				onChange={handleChange}
 				onBlur={handleBlur}
-				value={values.horaEnvioIni3}
 				min="9"
 				max="21"
 				/>
@@ -893,15 +955,15 @@ export function PedidoForm() {
 				</div>
 
 			<label htmlFor="horaEnvioFin3">Hora final: </label>
-			<Field
+			<input
 				type="number"
 				name="horaEnvioFin3"
 				id="horaEnvioFin3"
-				onChange={handleChange}
-				onBlur={handleBlur}
 				value={values.horaEnvioFin3}
 				min="9"
 				max="21"
+				onChange={handleChange}
+				onBlur={handleBlur}
 				/>
 				<div className="errores">
 					{errors.horaEnvioFin3}
@@ -938,19 +1000,19 @@ export function PedidoForm() {
 		<fieldset>
 			<div className="mismaLinea">
 		 	<h2 className="tituloPedido">Pedido nÃºmero 4**</h2>
-	
 
+		 	<a className="botonCopiar" href="#pedido4" onClick={copiarDir14}>  Copiar dirección </a>
     	</div>
 
 		 <label htmlFor="poblacion4">PoblaciÃ³n*: </label>
-		 <Field
+		 <input
 			id="poblacion4"
 			type="text"
 			name="poblacion4"
-			onChange={handleChange}
-			onBlur={handleBlur}
 			value={values.poblacion4}
 	        placeholder="Los Palacios y Villafranca"
+			onChange={handleChange}
+			onBlur={handleBlur}
 			/>
 	    <div className="errores">
 	        {errors.poblacion4}
@@ -958,15 +1020,15 @@ export function PedidoForm() {
 		<br/><br/>
 
 		<label htmlFor="cpostal4">CÃ³digo postal*: </label>
-        <Field
+        <input
 			id="cpostal4"
 			type="text"
 			name="cpostal4"
-			onChange={handleChange}
-			onBlur={handleBlur}
 			value={values.cpostal4}
 	        placeholder="41720"
 	        pattern="^\d{5}$"
+			onChange={handleChange}
+			onBlur={handleBlur}
 			/>
 	    <div className="errores">
 	        {errors.cpostal4}
@@ -974,14 +1036,14 @@ export function PedidoForm() {
 			<br/><br/>
 
 		<label htmlFor="provincia4">Provincia*: </label>
-        <Field
+        <input
 			id="provincia4"
 			type="text"
 			name="provincia4"
-			onChange={handleChange}
-			onBlur={handleBlur}
 			value={values.provincia4}
 	        placeholder="Sevilla"
+			onChange={handleChange}
+			onBlur={handleBlur}
 			/>
 	        <div className="errores">
 	        	{errors.provincia4}
@@ -990,14 +1052,14 @@ export function PedidoForm() {
 
 
         <label htmlFor="direccion4">Calle*: </label>
-        <Field
-			id="direccio4n"
+        <input
+			id="direccion4"
 			type="text"
 			name="direccion4"
-			onChange={handleChange}
-			onBlur={handleBlur}
 			value={values.direccion4}
 	        placeholder="c/Cisnes"
+			onChange={handleChange}
+			onBlur={handleBlur}
 			/>
 	        <div className="errores">
 	        	{errors.direccion4}
@@ -1005,14 +1067,14 @@ export function PedidoForm() {
 			<br/><br/>
 
 		<label htmlFor="numero4">NÃºmero*: </label>
-        <Field
+        <input
 			id="numero4"
 			type="number"
 			name="numero4"
-			onChange={handleChange}
-			onBlur={handleBlur}
 			value={values.numero4}
         	min="0"
+    		onChange={handleChange}
+			onBlur={handleBlur}
 			/>
         	<div className="errores">
         		{errors.numero4}
@@ -1021,13 +1083,13 @@ export function PedidoForm() {
 
 
 		<label htmlFor="fechaEnvio4">Fecha*: </label>
-		<Field
+		<input
 			id="fechaEnvio4"
 			type="date"
 			name="fechaEnvio4"
+			value={values.fechaEnvio4}
 			onChange={handleChange}
 			onBlur={handleBlur}
-			value={values.fechaEnvio4}
 			/>
 			<div className="errores">
 				{errors.fechaEnvio4}
@@ -1036,30 +1098,30 @@ export function PedidoForm() {
 
 			<br/>
 		<label htmlFor="horaEnvioIni4">Hora inicial: </label>
-		<Field
+		<input
 			id="horaEnvioIni4"
 			type="number"
 			name="horaEnvioIni4"
-			onChange={handleChange}
-			onBlur={handleBlur}
 			value={values.horaEnvioIni4}
 			min="9"
 			max="21"
+			onChange={handleChange}
+			onBlur={handleBlur}
 			/>
 			<div className="errores">
 				{errors.horaEnvioIni4}
 			</div>
 
 		<label htmlFor="horaEnvioFin4">Hora final: </label>
-		<Field
+		<input
 			type="number"
 			name="horaEnvioFin4"
 			id="horaEnvioFin4"
-			onChange={handleChange}
-			onBlur={handleBlur}
 			value={values.horaEnvioFin4}
 			min="9"
 			max="21"
+			onChange={handleChange}
+			onBlur={handleBlur}
 			/>
 			<div className="errores">
 				{errors.horaEnvioFin4}
@@ -1077,8 +1139,6 @@ export function PedidoForm() {
 			   </select>
 			   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
 
-		<input id="mentira" value="si" />
-		
 		</fieldset>
 		</div>
 		<br/><br/>
