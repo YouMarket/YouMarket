@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import {
 	  BrowserRouter as Router,
 	  Switch,
-	  Route,
-	  withRouter
+	  Route
 	} from "react-router-dom";
 import Productos from './Productos';
 import Dietas from './Dietas';
@@ -32,6 +31,7 @@ import EditCesta from './EditCesta';
 import Error from './Misc';
 import CestaProductos from './CestaProductos';
 import TerminosYCondiciones from './TerminosCondiciones';
+import Facturas from './Perfil/Facturas';
 
 
 function App() {
@@ -97,7 +97,7 @@ function App() {
 
 				<Route path="/logout">
 				<Logout />
-			</Route>
+				</Route>
 				<Route path="/cesta/edit/:id">
 				<EditCesta/>
 				</Route>
@@ -110,9 +110,9 @@ function App() {
 	    		<Route path="/show/cesta/:id">
 	    			<ShowCesta />
 				</Route>
-
-
-
+				<Route path="/facturas-usuario">
+	    			<Facturas />
+				</Route>
 				<Route path="/cesta/productos/dieta/list/:id">
 					<CestaProductos/>
 				</Route>

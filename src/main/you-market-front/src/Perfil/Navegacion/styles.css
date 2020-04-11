@@ -12,6 +12,7 @@
 .separador{
 	display: none;
 	border-bottom: none !important;
+	text-align: center;
 }
 
 .perfil-link{

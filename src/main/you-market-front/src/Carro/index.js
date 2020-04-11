@@ -1,49 +1,49 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './styles.css';
 import Header from '../Header';
-import ProductoListado from '../ProductoListado';
-import { Formik,Field, Form } from 'formik';
+import ProductoListado from '../ProductoCarro';
+import { Formik, Form } from 'formik';
 import { useHistory, NavLink } from "react-router-dom";
 import shoppingSad from '../assets/shopping-cart-sad.png'
 
-const precioFinal = 0.00
+var precioFinal=0.00
 function updatePrecioFinal(cantidad, precio){
-	precioFinal += precio*cantidad
+	precioFinal +=precio*cantidad
 	return precioFinal
 }
 
 function Carro() {
-precioFinal = 0.00
-const[carrito, setCarrito] = useState([]);
-const[cestas, setCestas] = useState([]);
-let history = useHistory();
+precioFinal=0.00
+const[carrito, setCarrito]=useState([]);
+const[cestas, setCestas]=useState([]);
+let history=useHistory();
 
-	const fetchCarrito = useCallback(() => {
+	const fetchCarrito=useCallback(()=> {
 		return fetch('carrito')
-			.then(res => res.json())
-			.then(carrito => {
+			.then(res=> res.json())
+			.then(carrito=> {
 				setCarrito(carrito)
 			});
 	}, []);
 
-	useEffect(() => {
+	useEffect(()=> {
 		fetchCarrito(carrito);
 	},[]);
 
-	const fetchCestas = useCallback(() => {
+	const fetchCestas=useCallback(()=> {
 	    return fetch('cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 		method:'GET'})
-	      .then(res => res.json())
-	      .then(cestas => {
+	      .then(res=> res.json())
+	      .then(cestas=> {
 	        setCestas(cestas)
 	      });
 	  }, []);
 
 
-	useEffect(() => {
+	useEffect(()=> {
 	    fetchCestas(cestas);
 	  }, []);
 
@@ -56,8 +56,8 @@ let history = useHistory();
 			<h1 className="introduction">Este es tu carrito. ¡Estás a pocos pasos de completar tu compra! 👍</h1>
 				<div className="vaciar-carrito">
 				<Formik
-				 onSubmit={(values, { setSubmitting }) => {
-				   setTimeout(() => {
+				 onSubmit={(values, { setSubmitting })=> {
+				   setTimeout(()=> {
 					   fetch('/carritoDestroy', {headers: {
 						'Content-Type' : 'application/json',
 						'Accept' : 'application/json',
@@ -66,7 +66,7 @@ let history = useHistory();
 					   }).then((response)=> {
 						   setSubmitting=false;
 	
-					   }).then(() =>
+					   }).then(()=>
 					   {window.location.reload(false);}
 					   )
 	
@@ -83,7 +83,7 @@ let history = useHistory();
 				   handleSubmit,
 				   isSubmitting,
 				   /* and other goodies */
-				 }) => (
+				 })=> (
 				   <Form onSubmit={handleSubmit}>
 	
 					 <div className="button-carrito-a-cesta">
@@ -97,15 +97,15 @@ let history = useHistory();
 			   </Formik>
 				</div>
 				<div className="products-container-list">
-					{carrito.map((cestaproducto) => (
+					{carrito.map((cestaproducto)=> (
 						<ProductoListado
 							id={cestaproducto.producto.id}
-							nombre ={cestaproducto.producto.nombre}
+							nombre={cestaproducto.producto.nombre}
 							supermercado={cestaproducto.producto.supermercado.nombre}
-							precioIva ={cestaproducto.producto.precioIva}
+							precioIva={cestaproducto.producto.precioIva}
 							urlImagen={cestaproducto.producto.urlImagen}
-							unidad = {cestaproducto.producto.unidad}
-							cantidad = {cestaproducto.cantidad}>
+							unidad={cestaproducto.producto.unidad}
+							cantidad={cestaproducto.cantidad}>
 								{updatePrecioFinal(cestaproducto.cantidad, cestaproducto.producto.precioIva)}
 						</ProductoListado>
 					))}
@@ -132,16 +132,16 @@ let history = useHistory();
 						  de detalle de la cesta que quieras cargar cuando quieras)</p>
 					<Formik
 					 initialValues={{id: ''}}
-					 validate={values => {
-						const errors = {};
+					 validate={values=> {
+						const errors={};
 						if (values.id=="") {
-						  errors.id = 'No puede estar vacío';
+						  errors.id='No puede estar vacío';
 						}
 						return errors;
 					  }}
 	
-					 onSubmit={(values, { setSubmitting }) => {
-					   setTimeout(() => {
+					 onSubmit={(values, { setSubmitting })=> {
+					   setTimeout(()=> {
 						   fetch(`/carritoACesta`, {headers: {
 							'Content-Type' : 'application/json',
 							'Accept' : 'application/json',
@@ -151,7 +151,7 @@ let history = useHistory();
 						   }).then((response)=> {
 							   setSubmitting=false;
 	
-						   }).then(() =>
+						   }).then(()=>
 						   {history.push(`/show/cesta/${values.id}`);}
 						   )
 	
@@ -168,14 +168,14 @@ let history = useHistory();
 					   handleSubmit,
 					   isSubmitting,
 					   /* and other goodies */
-					 }) => (
+					 })=> (
 					   <Form onSubmit={handleSubmit}>
 					   <div className="">
 	
 					   <select name="id" id="id" onChange={handleChange}
 					   onBlur={handleBlur} value={values.id}>
 					   <option value=""></option>
-					   { cestas && cestas.map((cesta) => (
+					   { cestas && cestas.map((cesta)=> (
 	
 										   <option value={cesta.id}>{cesta.nombre}</option>
 										   ))}
@@ -199,7 +199,7 @@ let history = useHistory();
 			</div>
 		</div>
 	 : (
-	 <div class="container">
+	 <div className="container">
 		<h1 className="introduction introduction-empty">Vaya.. parece que aún no tienes productos añadidos</h1>
 	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad}></img></div>
 		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/products">aquí</NavLink></p>

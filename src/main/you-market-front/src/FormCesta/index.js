@@ -1,11 +1,8 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React from 'react';
 
-import style from './styles.css';
 import cest from './cesta2.png';
 import { Formik } from 'formik';
-import {Button} from 'primereact/button';
 import Header from '../Header';
-import { Redirect } from 'react-router-dom';
 import {
 	  withRouter
 	} from 'react-router-dom';
@@ -28,7 +25,7 @@ class formCesta extends React.Component{
   <Header/>
   <div>
     <h1 className="titulo-create-cesta">Crear cesta</h1>
-    <img src={cest} className="cesta-imagen-edit"/>
+    <img src={cest} className="cesta-imagen-edit" alt="Cesta"/>
     <Formik
       initialValues={{name: 'nuevaCesta'}}
 
