@@ -1,9 +1,11 @@
 package com.youmarket.controllers;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,5 +45,23 @@ public class FacturaController {
 		
 		
 		return ResponseEntity.ok(respuesta); 
+	}
+	
+	@GetMapping("/allUser")
+	public List<Factura> getFacturasFromUser(@CurrentUser UserPrincipal user){
+		Usuario usuario = usuarioService.findById(user.getId()).orElse(null);
+		return facturaService.findByUser(usuario);
+	}
+	
+	@GetMapping("/pedidosUser")
+	public List<Factura> getFacturasPedidoFromUser(@CurrentUser UserPrincipal user){
+		Usuario usuario = usuarioService.findById(user.getId()).orElse(null);
+		return facturaService.findByUserFromPedido(usuario);
+	}
+	
+	@GetMapping("/suscripcionesUser")
+	public List<Factura> getFacturasSuscripcionFromUser(@CurrentUser UserPrincipal user){
+		Usuario usuario = usuarioService.findById(user.getId()).orElse(null);
+		return facturaService.findFromUser(usuario);
 	}
 }
