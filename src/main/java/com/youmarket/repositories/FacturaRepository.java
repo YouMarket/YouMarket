@@ -10,7 +10,10 @@ import com.youmarket.domain.Usuario;
 
 public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 
-	@Query("select factu from Factura factu where factu.usuario = ?1")
+	@Query("select factu from Factura factu where factu.usuario = ?1 order by factu.fechaFactura desc")
 	List<Factura> findByuser(Usuario usua);
+
+	@Query("select factu from Factura factu where factu.pedido.usuario = ?1 order by factu.fechaFactura desc")
+	List<Factura> findByUserFromPedido(Usuario usuario);
 
 }
