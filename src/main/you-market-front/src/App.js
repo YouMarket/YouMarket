@@ -31,6 +31,8 @@ import ShowCesta from './ShowCesta';
 import EditCesta from './EditCesta';
 import Error from './Misc';
 import CestaProductos from './CestaProductos';
+import TerminosYCondiciones from './TerminosCondiciones';
+
 
 function App() {
 
@@ -119,7 +121,9 @@ function App() {
 				<Error/>
 			</Route>
 
-
+				<Route path="/terminosycondiciones">
+        			<TerminosYCondiciones />
+        		</Route>
 		        <Route path="/">
 		        	<Productos />
 		        </Route>
