@@ -1,14 +1,18 @@
 package com.youmarket.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.youmarket.configuration.response.ApiResponse;
@@ -16,6 +20,7 @@ import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Factura;
 import com.youmarket.domain.Usuario;
+import com.youmarket.pdf.PDFUtil;
 import com.youmarket.services.FacturaService;
 import com.youmarket.services.UsuarioService;
 
@@ -28,6 +33,9 @@ public class FacturaController {
 	
 	@Autowired
 	FacturaService facturaService;
+	
+//	@Autowired
+//	FacturaService facturaService;
 	
 	@PostMapping("/create")
 	public ResponseEntity<ApiResponse> guardaFactura(@CurrentUser UserPrincipal curr){
@@ -63,5 +71,39 @@ public class FacturaController {
 	public List<Factura> getFacturasSuscripcionFromUser(@CurrentUser UserPrincipal user){
 		Usuario usuario = usuarioService.findById(user.getId()).orElse(null);
 		return facturaService.findFromUser(usuario);
+	}
+	
+	@RequestMapping(value = "/pdf", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> descargaPDF(){
+		
+		
+		ByteArrayInputStream bis = PDFUtil.suscripcionPDFGenerator(null, null);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=prueba.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+	}
+	
+	@RequestMapping(value = "/pdfSuscripcion", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> descargaPDFSuscripcion(@CurrentUser UserPrincipal user){
+		Usuario usuario = usuarioService.findById(user.getId()).orElse(null);
+		
+		ByteArrayInputStream bis = PDFUtil.suscripcionPDFGenerator(null, usuario.getSuscripcion());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=prueba.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
 	}
 }
