@@ -2,6 +2,7 @@ package com.youmarket.controllers;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,21 +29,20 @@ public class FacturaController {
 	@Autowired
 	FacturaService facturaService;
 	
-	
 	@PostMapping("/create")
 	public ResponseEntity<ApiResponse> guardaFactura(@CurrentUser UserPrincipal curr){
 		
 		ApiResponse respuesta = new ApiResponse();
 		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
 		
-		Factura fac = new Factura();
-		fac.setUsuario(user);
-		fac.setTotalIva(17.00);
-		fac.setTotal(17.00);
-		fac.setFechaFactura(new Date());
-		
-		facturaService.save(fac);
-		
+		Factura res = facturaService.createAndSaveFactura(user, null, user.getSuscripcion().getPrecio(), new Date());
+		if(res!= null) {
+			respuesta.setSuccess(true);
+			respuesta.setMessage("Pago realizado con éxito");
+		}else {
+			respuesta.setSuccess(false);
+			respuesta.setMessage("Error al guardar la factura");
+		}
 		
 		return ResponseEntity.ok(respuesta); 
 	}

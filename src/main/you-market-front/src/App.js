@@ -31,6 +31,7 @@ import ShowCesta from './ShowCesta';
 import EditCesta from './EditCesta';
 import Error from './Misc';
 import CestaProductos from './CestaProductos';
+import SubscripcionForm from './Perfil/DatosUsuario/suscripcionForm'
 
 function App() {
 
@@ -82,6 +83,9 @@ function App() {
 				</Route>
 				<Route path="/datos-perfil">
 					<DatosUsuario/>
+				</Route>
+				<Route path="/cambio-suscripcion">
+					<SubscripcionForm/>
 				</Route>
 				<Route path="/datos-subscripcion">
 					<DatosSubscripcion/>

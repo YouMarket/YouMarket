@@ -94,7 +94,6 @@ class RegistroUsuario extends React.Component{
 						onSubmit={(values, { setSubmitting }) => {
 							values.usuario.cpostal = values.dir.cpostal
 							values.usuario.suscripcion.id = document.getElementById('selectSuscripciones').value
-							console.log(values.usuario.suscripcion.id)
 							setTimeout(() => {
 								fetch('../usuario/signUpAll', {
 										headers: {
