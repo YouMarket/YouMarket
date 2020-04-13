@@ -3,19 +3,7 @@ package com.youmarket.controllers;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Collections;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.Date;
 
 import com.youmarket.configuration.SecurityConfiguration;
 import com.youmarket.configuration.response.ApiResponse;
@@ -34,6 +22,19 @@ import com.youmarket.services.DireccionService;
 import com.youmarket.services.RoleService;
 import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("usuario")
@@ -179,6 +180,21 @@ public class UsuarioController {
 		
 		
 		
+		return ResponseEntity.ok(respuesta);
+	}
+
+	@PostMapping("/eliminarUsuario")
+	public ResponseEntity<ApiResponse> eliminarUsuario(@CurrentUser UserPrincipal current){
+		ApiResponse respuesta = new ApiResponse();
+		Usuario usuario = this.usuarioService.findById(current.getId()).orElse(null);
+		usuario.setApellidos("XXXXX");
+		usuario.setNombre("XXXXX");
+		usuario.setCPostal("XXXXX");
+		usuario.setDni("XXXXX");
+		usuario.setEmail("XXXXX");
+		usuario.setFechaNacimiento(new Date());
+		usuario.setTelefono("XXXXX");
+		this.usuarioService.save(usuario);
 		return ResponseEntity.ok(respuesta);
 	}
 
