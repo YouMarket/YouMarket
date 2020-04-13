@@ -10,7 +10,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.youmarket.configuration.response.ApiResponse;
 import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.UserPrincipal;
+import com.youmarket.domain.CestaProducto;
 import com.youmarket.domain.Factura;
+import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
 import com.youmarket.pdf.PDFUtil;
+import com.youmarket.services.CestaProductoService;
 import com.youmarket.services.FacturaService;
+import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
 
 @RestController
@@ -34,8 +40,11 @@ public class FacturaController {
 	@Autowired
 	FacturaService facturaService;
 	
-//	@Autowired
-//	FacturaService facturaService;
+	@Autowired
+	SuscripcionService suscripcionService;
+	
+	@Autowired
+	CestaProductoService cpService;
 	
 	@PostMapping("/create")
 	public ResponseEntity<ApiResponse> guardaFactura(@CurrentUser UserPrincipal curr){
@@ -90,15 +99,26 @@ public class FacturaController {
                 .body(new InputStreamResource(bis));
 	}
 	
-	@RequestMapping(value = "/pdfSuscripcion", method = RequestMethod.GET,
+	@RequestMapping(value = "/generateFactura", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> descargaPDFSuscripcion(@CurrentUser UserPrincipal user){
-		Usuario usuario = usuarioService.findById(user.getId()).orElse(null);
+	public ResponseEntity<InputStreamResource> descargaPDF(@RequestBody Factura factura){
+
+		ByteArrayInputStream bis = null;
 		
-		ByteArrayInputStream bis = PDFUtil.suscripcionPDFGenerator(null, usuario.getSuscripcion());
+		if(factura.getPedido()!= null) {
+			System.out.println(factura.getPedido().getId());
+			List<CestaProducto> productos = cpService.findProdsByCesta(factura.getPedido());
+			bis = PDFUtil.pedidoPDFGenerator(factura, productos);
+		}else {
+			Suscripcion sus = suscripcionService.findSuscripcionByPrecio(factura.getTotalIva());
+			System.out.println(factura.getTotalIva());
+			System.out.println(sus);
+			bis = PDFUtil.suscripcionPDFGenerator(factura, sus);
+		}
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=prueba.pdf");
+        String filename = factura.getPedido()!= null ? "factura_pedido": "factura_suscripcion";
+        headers.add("Content-Disposition", "inline; filename="+filename+".pdf");
 
         return ResponseEntity
                 .ok()

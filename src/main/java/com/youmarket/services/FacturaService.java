@@ -61,4 +61,9 @@ public class FacturaService {
 		f.setPedido(p);
 		return repo.save(f);
 	}
+
+	public Factura findById(Integer id) {
+		
+		return repo.findById(id).orElse(null);
+	}
 }
