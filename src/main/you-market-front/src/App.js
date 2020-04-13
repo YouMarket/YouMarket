@@ -32,6 +32,7 @@ import Error from './Misc';
 import CestaProductos from './CestaProductos';
 import TerminosYCondiciones from './TerminosCondiciones';
 import Facturas from './Perfil/Facturas';
+import SubscripcionForm from './Perfil/DatosUsuario/suscripcionForm'
 
 
 function App() {
@@ -46,8 +47,6 @@ function App() {
 				<Route path="/pedido/create">
 					<PedidoForm />
 				</Route>
-
-
     			<Route path="/create/dieta">
 					<DietaForm />
 				</Route>
@@ -85,6 +84,9 @@ function App() {
 				<Route path="/datos-perfil">
 					<DatosUsuario/>
 				</Route>
+				<Route path="/cambio-suscripcion">
+					<SubscripcionForm/>
+				</Route>
 				<Route path="/datos-subscripcion">
 					<DatosSubscripcion/>
 				</Route>
@@ -116,11 +118,9 @@ function App() {
 				<Route path="/cesta/productos/dieta/list/:id">
 					<CestaProductos/>
 				</Route>
-
 				<Route path="/404">
-				<Error/>
-			</Route>
-
+					<Error/>
+				</Route>
 				<Route path="/terminosycondiciones">
         			<TerminosYCondiciones />
         		</Route>
