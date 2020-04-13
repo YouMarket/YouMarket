@@ -32,6 +32,8 @@ import EditCesta from './EditCesta';
 import Error from './Misc';
 import CestaProductos from './CestaProductos';
 import TerminosYCondiciones from './TerminosCondiciones';
+import AlertaBrecha from './AlertaBrecha';
+
 
 
 function App() {
@@ -118,12 +120,17 @@ function App() {
 				</Route>
 
 				<Route path="/404">
-				<Error/>
-			</Route>
+					<Error/>
+				</Route>
 
 				<Route path="/terminosycondiciones">
         			<TerminosYCondiciones />
         		</Route>
+        		
+				<Route path="/alertabrecha">
+    				<AlertaBrecha />
+    			</Route>
+        		
 		        <Route path="/">
 		        	<Productos />
 		        </Route>
