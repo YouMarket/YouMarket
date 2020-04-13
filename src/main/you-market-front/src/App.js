@@ -33,7 +33,7 @@ import Error from './Misc';
 import CestaProductos from './CestaProductos';
 import TerminosYCondiciones from './TerminosCondiciones';
 import AlertaBrecha from './AlertaBrecha';
-
+import PedidoExito from './PedidoExito';
 
 
 function App() {
@@ -125,15 +125,19 @@ function App() {
 
 				<Route path="/terminosycondiciones">
         			<TerminosYCondiciones />
-        		</Route>
+        </Route>
         		
 				<Route path="/alertabrecha">
     				<AlertaBrecha />
-    			</Route>
+    		</Route>
         		
-		        <Route path="/">
-		        	<Productos />
-		        </Route>
+				<Route path="/pedidoexito">
+					  <PedidoExito />
+				</Route>
+	
+		    <Route path="/">
+		        <Productos />
+		    </Route>
 
 
 		      </Switch>
