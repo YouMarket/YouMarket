@@ -326,6 +326,7 @@ public class PedidoController {
 			}
 		}
 		List<Pedido> res = Arrays.asList(p1s,p2s,p3s,p4s);
+		session.setAttribute("SESSION_CARRITO", new HashMap<Producto, Integer>());
 		return ResponseEntity.ok(res);
 
 	}
