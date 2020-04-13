@@ -32,6 +32,7 @@ import EditCesta from './EditCesta';
 import Error from './Misc';
 import CestaProductos from './CestaProductos';
 import TerminosYCondiciones from './TerminosCondiciones';
+import AlertaBrecha from './AlertaBrecha';
 import PedidoExito from './PedidoExito';
 
 
@@ -123,15 +124,20 @@ function App() {
 				</Route>
 
 				<Route path="/terminosycondiciones">
-					<TerminosYCondiciones />
-				</Route>
+        			<TerminosYCondiciones />
+        </Route>
+        		
+				<Route path="/alertabrecha">
+    				<AlertaBrecha />
+    		</Route>
+        		
 				<Route path="/pedidoexito">
-					<PedidoExito />
+					  <PedidoExito />
 				</Route>
 	
-		        <Route path="/">
-		        	<Productos />
-		        </Route>
+		    <Route path="/">
+		        <Productos />
+		    </Route>
 
 
 		      </Switch>
