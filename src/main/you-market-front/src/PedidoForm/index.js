@@ -1161,7 +1161,7 @@ export function PedidoForm() {
         	Enviar
         </button>
 
-			<h2>Elige tu método de pago ðŸ‘‡</h2>
+			<h2>Elige tu método de pago 👇</h2>
 	         <div className="grid">
 	         <PayPalButton
 				 amount={precio()}
@@ -1196,10 +1196,17 @@ export function PedidoForm() {
         </form>
       )}
     </Formik>
-
-	  </div>
     </div>
 
+
+		 ):(<div className="pedido-0-container">
+		 <h3> No te quedan envíos por realizar de tu suscripción. </h3>
+		 <img src={noPedido} className="imagen-0-pedidos"/>
+		 <p>Vuelve cuando hayas renovado tu suscripción.</p>
+		 
+		 </div>)}
+	  
+    </div>
 
 	</div>
 );
