@@ -6,7 +6,7 @@ import { withRouter, useHistory } from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
 
-
+var today = new Date().toISOString().split('T')[0];
 
 var pedido1mostrado;
 var pedido2mostrado;
@@ -119,7 +119,11 @@ export function PedidoForm() {
 
 	const [envioTomas, setEnvioTomas] = useState(0);
 	
+	
+	
 	useEffect(() => {
+		
+
 		
 		fetch('/usuario/envios', {
 			headers:{
@@ -132,15 +136,11 @@ export function PedidoForm() {
 			       .then(envios1 => {
 			    	   setEnvioTomas(envios1);
 			       });
+		
 		  }, []);
 	
-	if(envioTomas!=0){
-		validDate1();
-		validDate2();
-		validDate3();
-		validDate4();
-	}
-	
+
+
 	
 	const precio = () => {
 		const [total, setTotal] = useState(0.0);
@@ -610,6 +610,7 @@ export function PedidoForm() {
 				onChange={handleChange}
 				onBlur={handleBlur}
 				value={values.fechaEnvio1}
+				min={today}
 				/>
 				<div className="errores">
 				{errors.fechaEnvio1}
@@ -776,6 +777,7 @@ export function PedidoForm() {
 				value={values.fechaEnvio2}
 				onChange={handleChange}
 				onBlur={handleBlur}
+				min={today}
 				/>
 				<div className="errores">
 				{errors.fechaEnvio2}
@@ -936,6 +938,7 @@ export function PedidoForm() {
 				value={values.fechaEnvio3}
 				onChange={handleChange}
 				onBlur={handleBlur}
+				min={today}
 				/>
 				<div className="errores">
 					{errors.fechaEnvio3}
@@ -1094,6 +1097,7 @@ export function PedidoForm() {
 			value={values.fechaEnvio4}
 			onChange={handleChange}
 			onBlur={handleBlur}
+			min={today}
 			/>
 			<div className="errores">
 				{errors.fechaEnvio4}
