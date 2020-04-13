@@ -43,7 +43,6 @@ function App() {
 				<Route path="/producto/dieta/list/:id">
 					<DietaProductos/>
 				</Route>
-
 				<Route path="/pedido/create">
 					<PedidoForm />
 				</Route>
@@ -96,9 +95,8 @@ function App() {
 				<Route path="/login">
     				<Login />
 				</Route>
-
 				<Route path="/logout">
-				<Logout />
+					<Logout />
 				</Route>
 				<Route path="/cesta/edit/:id">
 				<EditCesta/>

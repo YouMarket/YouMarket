@@ -99,10 +99,11 @@ public class FacturaController {
                 .body(new InputStreamResource(bis));
 	}
 	
-	@RequestMapping(value = "/generateFactura", method = RequestMethod.GET,
+	@RequestMapping(value = "/generateFactura/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> descargaPDF(@RequestBody Factura factura){
-
+  	public ResponseEntity<InputStreamResource> descargaPDF(@PathVariable Integer id){
+    
+    	Factura factura = facturaService.findById(id);
 		ByteArrayInputStream bis = null;
 		
 		if(factura.getPedido()!= null) {

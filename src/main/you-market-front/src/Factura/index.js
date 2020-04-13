@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import './styles.css';
 import { NavLink } from "react-router-dom";
 
@@ -9,7 +9,24 @@ interface Props {
     fechaFactura : String,
     pedido : Number
 }
+/* 
+const [facturaPdf, setFacturaPdf] = useState([]);
 
+const fetchDescargarFactura = useCallback(() => {
+    return fetch('factura/pdf' , {headers: {
+        'Content-Type' : 'application/pdf'},
+        method:'GET'})
+      .then(res => res.json())
+      .then(facturaPdf => {
+        setFacturaPdf(facturaPdf);
+        console.log(facturaPdf);
+      });
+  }, []);
+
+useEffect(() => {
+    fetchDescargarFactura();
+  }, [fetchDescargarFactura]);	
+ */
 function Factura({id, total, totalIva, fechaFactura, pedido}: Props) {
 	
   return(
