@@ -1,9 +1,11 @@
 import React,  { useCallback, useState, useEffect} from 'react';
 import { Formik, Field, Button, useFormikContext, setFieldValue} from 'formik';
 import './styles.css'
+import noPedido from "./no-del.png";
 import { withRouter, useHistory } from 'react-router-dom';
 import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
+
 
 
 var pedido1mostrado;
@@ -301,9 +303,9 @@ export function PedidoForm() {
 	<div>
 
 
-	
-	  <div className="pedido-container container">
-	  <h1>Â¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos Ã°Å¸â„¢ï¿½</h1>
+	{envioTomas > 0 ? 
+	  (<div className="pedido-container container">
+	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
 	  <br/>
 	  <h3> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>
 	  <Formik validateOnChange={false} validateOnBlur={false} id="formikito"
@@ -477,7 +479,6 @@ export function PedidoForm() {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-    	  alert(JSON.stringify(values, null, 2));
         setTimeout(() => {
         	fetch('/pedido/create', {
         			headers: {
@@ -513,9 +514,9 @@ export function PedidoForm() {
         <div id="pedido1">
 			<div className="pedido-form-envio-container">
 			<fieldset>
-			 	<legend><h2>Pedido nÃºmero 1**</h2> </legend>
+			 	<legend><h2>Pedido número 1**</h2> </legend>
 
-	        <label htmlFor="poblacion1">PoblaciÃ³n*: </label>
+	        <label htmlFor="poblacion1">Población*: </label>
 	     	        
 	        
 	        
@@ -533,7 +534,7 @@ export function PedidoForm() {
 		        </div>
 			<br/><br/>
 
-			<label htmlFor="cpostal1">CÃ³digo postal*: </label>
+			<label htmlFor="cpostal1">Código postal*: </label>
 	        <Field
 				id="cpostal1"
 				type="text"
@@ -582,7 +583,7 @@ export function PedidoForm() {
 		        </div>
 				<br/><br/>
 
-			<label htmlFor="numero1">NÃºmero*: </label>
+			<label htmlFor="numero1">Número*: </label>
 	        <Field
 				id="numero1"
 				type="number"
@@ -666,7 +667,7 @@ export function PedidoForm() {
 	        		<div>
 					<br/><br/>
 						<a href="#enlaceMostrarPedido2"  onClick={mostrarPedido2} id="enlaceMostrarPedido2">
-						+ AÃ±adir/eliminar pedido nÃºmero 2
+						+ Añadir/eliminar pedido número 2
 						</a>
 					<br/><br/>
 	        		</div>
@@ -680,11 +681,11 @@ export function PedidoForm() {
 			<div className="pedido-form-envio-container" >
 			<fieldset>
 				<div className="mismaLinea">
-				 	<h2 className="tituloPedido">Pedido nÃºmero 2**</h2>
+				 	<h2 className="tituloPedido">Pedido número 2**</h2>
 
 				 	<a className="botonCopiar" href="#pedido2" onClick={copiarDir12}>  Copiar dirección </a>
 			 	</div>
-			 <label htmlFor="poblacion2">PoblaciÃ³n*: </label>
+			 <label htmlFor="poblacion2">Población*: </label>
 
 			 <input
 				id="poblacion2"
@@ -700,7 +701,7 @@ export function PedidoForm() {
 		    </div>
 			<br/><br/>
 
-			<label htmlFor="cpostal2">CÃ³digo postal*: </label>
+			<label htmlFor="cpostal2">Código postal*: </label>
 	        <input
 				id="cpostal2"
 				type="text"
@@ -748,7 +749,7 @@ export function PedidoForm() {
 		        </div>
 				<br/><br/>
 
-			<label htmlFor="numero2">NÃºmero*: </label>
+			<label htmlFor="numero2">Número*: </label>
 	        <input
 				id="numero2"
 				type="number"
@@ -831,7 +832,7 @@ export function PedidoForm() {
 		<div id="enlace2">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido3"  onClick={mostrarPedido3} id = "enlaceMostrarPedido3">
-				+ AÃ±adir/Eliminar pedido nÃºmero 3
+				+ Añadir/Eliminar pedido número 3
 			</a>
 			<br/><br/>
 		</div>
@@ -840,12 +841,12 @@ export function PedidoForm() {
 			<div className="pedido-form-envio-container" >
 			<fieldset>
 			<div className="mismaLinea">
-			 	<h2 className="tituloPedido">Pedido nÃºmero 3**</h2>
+			 	<h2 className="tituloPedido">Pedido número 3**</h2>
 	
 			 	<a className="botonCopiar" href="#pedido3" onClick={copiarDir13}>  Copiar dirección </a>
         	</div>
 
-			 <label htmlFor="poblacion3">PoblaciÃ³n*: </label>
+			 <label htmlFor="poblacion3">Población*: </label>
 			 <input
 				id="poblacion3"
 				type="text"
@@ -861,7 +862,7 @@ export function PedidoForm() {
 		    </div>
 			<br/><br/>
 
-			<label htmlFor="cpostal3">CÃ³digo postal*: </label>
+			<label htmlFor="cpostal3">Código postal*: </label>
 	        <input
 				id="cpostal3"
 				type="text"
@@ -908,7 +909,7 @@ export function PedidoForm() {
 		        </div>
 				<br/><br/>
 
-			<label htmlFor="numero3">NÃºmero*: </label>
+			<label htmlFor="numero3">Número*: </label>
 	        <input
 				id="numero3"
 				type="number"
@@ -990,7 +991,7 @@ export function PedidoForm() {
 		<div id="enlace3">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido4"  onClick={mostrarPedido4} id="enlaceMostrarPedido4">
-				+ AÃ±adir/Eliminar pedido nÃºmero 4
+				+ Añadir/Eliminar pedido número 4
 			</a>
 			<br/><br/>
 		</div>
@@ -999,12 +1000,12 @@ export function PedidoForm() {
 		<div className="pedido-form-envio-container" >
 		<fieldset>
 			<div className="mismaLinea">
-		 	<h2 className="tituloPedido">Pedido nÃºmero 4**</h2>
+		 	<h2 className="tituloPedido">Pedido número 4**</h2>
 
 		 	<a className="botonCopiar" href="#pedido4" onClick={copiarDir14}>  Copiar dirección </a>
     	</div>
 
-		 <label htmlFor="poblacion4">PoblaciÃ³n*: </label>
+		 <label htmlFor="poblacion4">Población*: </label>
 		 <input
 			id="poblacion4"
 			type="text"
@@ -1019,7 +1020,7 @@ export function PedidoForm() {
 	    </div>
 		<br/><br/>
 
-		<label htmlFor="cpostal4">CÃ³digo postal*: </label>
+		<label htmlFor="cpostal4">Código postal*: </label>
         <input
 			id="cpostal4"
 			type="text"
@@ -1066,7 +1067,7 @@ export function PedidoForm() {
 	        </div>
 			<br/><br/>
 
-		<label htmlFor="numero4">NÃºmero*: </label>
+		<label htmlFor="numero4">Número*: </label>
         <input
 			id="numero4"
 			type="number"
@@ -1151,7 +1152,7 @@ export function PedidoForm() {
 			* Campo obligatorio
 		</div>
 		<div>
-			** La entrega se realizarÃ¡ en la horquilla de horas indicada
+			** La entrega se realizará en la horquilla de horas indicada
 		</div>
 
 		<br/><br/>
@@ -1160,7 +1161,7 @@ export function PedidoForm() {
         	Enviar
         </button>
 
-			<h2>Elige tu mÃ©todo de pago ðŸ‘‡</h2>
+			<h2>Elige tu método de pago ðŸ‘‡</h2>
 	         <div className="grid">
 	         <PayPalButton
 				 amount={precio()}
