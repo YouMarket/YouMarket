@@ -120,10 +120,6 @@ export function PedidoForm() {
 	const [envioTomas, setEnvioTomas] = useState(0);
 	
 	useEffect(() => {
-		validDate1();
-		validDate2();
-		validDate3();
-		validDate4();
 		
 		fetch('/usuario/envios', {
 			headers:{
@@ -137,6 +133,13 @@ export function PedidoForm() {
 			    	   setEnvioTomas(envios1);
 			       });
 		  }, []);
+	
+	if(envioTomas!=0){
+		validDate1();
+		validDate2();
+		validDate3();
+		validDate4();
+	}
 	
 	
 	const precio = () => {
