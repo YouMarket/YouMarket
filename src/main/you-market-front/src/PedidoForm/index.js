@@ -252,7 +252,7 @@ export function PedidoForm() {
 
 */
 	const handleRedirect = () => {
-		history.push('/pedidoexito');
+		history.push('/');
 	}
 
 		if(localStorage.getItem('auth')==null){
@@ -383,7 +383,7 @@ export function PedidoForm() {
       }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-        	fetch('', {
+        	fetch('/pedido/create', {
         			headers: {
         				"Content-Type": "application/json",
         				'Accept' : 'application/json',
@@ -1077,11 +1077,10 @@ export function PedidoForm() {
 	             			},
 	             			method:'POST',
 	             			body:JSON.stringify(values, null, 2)
-	             	}).then(function(response) {
-	             	    return console.log(response.json());
 	             	}).then(() =>
-	    				{handleSubmit}
-	             	).then(() =>
+	             	 {
+	             		 handleSubmit();
+	             	 }).then(() =>
 	             	 {
 	             		 handleRedirect();
 	             	 })
