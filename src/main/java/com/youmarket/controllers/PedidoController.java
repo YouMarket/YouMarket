@@ -1,6 +1,5 @@
 package com.youmarket.controllers;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,22 +7,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import com.youmarket.configuration.security.CurrentUser;
-import com.youmarket.configuration.security.UserPrincipal;
-import com.youmarket.domain.CestaProducto;
-import com.youmarket.domain.Pedido;
-import com.youmarket.domain.Producto;
-import com.youmarket.domain.Usuario;
-import com.youmarket.domain.form.FormPedidos;
-import com.youmarket.services.CestaProductoService;
-import com.youmarket.services.PedidoService;
-import com.youmarket.services.SuscripcionService;
-import com.youmarket.services.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +19,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.youmarket.configuration.security.CurrentUser;
+import com.youmarket.configuration.security.UserPrincipal;
+import com.youmarket.domain.CestaProducto;
+import com.youmarket.domain.Pedido;
+import com.youmarket.domain.Producto;
+import com.youmarket.domain.Usuario;
+import com.youmarket.domain.form.FormPedidos;
+import com.youmarket.services.CestaProductoService;
+import com.youmarket.services.FacturaService;
+import com.youmarket.services.PedidoService;
+import com.youmarket.services.UsuarioService;
 
 @RestController
 @RequestMapping("pedido")
@@ -46,9 +44,9 @@ public class PedidoController {
 
 	@Autowired
 	private CestaProductoService cpService;
-
+	
 	@Autowired
-	private SuscripcionService susService;
+	private FacturaService facturaService;
 	
 	@GetMapping("/{id}")
     public ResponseEntity<Object> pedidoPorId(@Valid @PathVariable Integer id) {
@@ -259,6 +257,7 @@ public class PedidoController {
 			} else {
 				p1s = this.meterCesta(pedidos.getCestaId1(), p1);
 			}
+			facturaService.createAndSaveFactura(null, p1s, importeTotal(p1s), new Date());
 		}
 
 		if(pedidos.getDireccion2() != null){
@@ -281,6 +280,7 @@ public class PedidoController {
 			} else {
 				p2s = this.meterCesta(pedidos.getCestaId2(), p2);
 			}
+			facturaService.createAndSaveFactura(null, p2s, importeTotal(p2s), new Date());
 		}
 
 		if(pedidos.getDireccion3() != null){
@@ -303,6 +303,7 @@ public class PedidoController {
 			} else {
 				p3s = this.meterCesta(pedidos.getCestaId3(), p3);
 			}
+			facturaService.createAndSaveFactura(null, p3s, importeTotal(p3s), new Date());
 		}
 
 		if(pedidos.getDireccion4() != null){
@@ -325,6 +326,7 @@ public class PedidoController {
 			} else {
 				p4s = this.meterCesta(pedidos.getCestaId4(), p4);
 			}
+			facturaService.createAndSaveFactura(null, p4s, importeTotal(p4s), new Date());
 		}
 		List<Pedido> res = Arrays.asList(p1s,p2s,p3s,p4s);
 		session.setAttribute("SESSION_CARRITO", new HashMap<Producto, Integer>());
@@ -332,6 +334,17 @@ public class PedidoController {
 
 	}
 
+	private double importeTotal(Pedido pedido) {
+		double total = 0.0;
+		
+		List<CestaProducto> lista = cpService.findProdsByCesta(pedido);
+		for (CestaProducto prod : lista) {
+			total += prod.getProducto().getPrecioIva() * prod.getCantidad();
+		}
+		
+		return total;
+	}
+	
 	public Pedido meterCarrito(Map<Producto, Integer> carrito, Pedido p){
 		Pedido guardado = this.pedidoService.save(p);
 		List<Producto> keys = new ArrayList<>(carrito.keySet());

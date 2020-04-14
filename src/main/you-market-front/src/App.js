@@ -23,7 +23,6 @@ import Logout from './auth/Logout'
 
 import PedidoForm from './PedidoForm';
 
-import PedidoExito from './PedidoExito';
 import DietaProductos from './DietaProductos';
 
 import Carro from './Carro';
@@ -143,9 +142,7 @@ function App() {
     				<AlertaBrecha />
     		</Route>
         		
-				<Route path="/pedidoexito">
-					  <PedidoExito />
-				</Route>
+
 
 		    <Route path="/">
 		        <Productos />

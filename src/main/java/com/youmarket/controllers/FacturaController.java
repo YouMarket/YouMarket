@@ -46,11 +46,13 @@ public class FacturaController {
 	@Autowired
 	CestaProductoService cpService;
 	
-	@PostMapping("/create")
+	@PostMapping("/createSuscripcion")
 	public ResponseEntity<ApiResponse> guardaFactura(@CurrentUser UserPrincipal curr){
 		
 		ApiResponse respuesta = new ApiResponse();
 		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
+		user.setPedidosRestantes(user.getSuscripcion().getEnvios());
+		usuarioService.save(user);
 		
 		Factura res = facturaService.createAndSaveFactura(user, null, user.getSuscripcion().getPrecio(), new Date());
 		if(res!= null) {

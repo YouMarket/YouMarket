@@ -5,7 +5,7 @@ import Header from '../../Header';
 import Navegacion from '../Navegacion';
 import ListaSuscripciones from '../../Registro/suscripciones';
 import {Card} from 'primereact/card';
-import { PayPalButton } from "react-paypal-button-v2";
+import { Formik } from 'formik';
 
 function SuscripcionForm() {
 
@@ -25,46 +25,62 @@ function SuscripcionForm() {
             <Navegacion />
             <Card title="Modificación de la suscripción" subTitle="Seleccione la suscripción a la que desea cambiar" style={{ margin: 20 }}>
                 
+            <Formik
+						initialValues={{  
+                            suscripcion: {
+                                id: 0,
 
-                    <div className="row">
-                        <span className="p-float-label" className="span">
-                            <label className="label" >Tipo de suscripción: </label>
-                            <ListaSuscripciones>
+                            }
+						}}
+						onSubmit={(values, { setSubmitting }) => {
+                            values.suscripcion.id = document.getElementById('selectSuscripciones').value
+                            console.log(values.suscripcion.id)
+							setTimeout(() => {
+								fetch('usuario/updateSuscripcion', {
+										headers: {
+                                            'Content-Type' : 'application/json',
+                                            'Accept' : 'application/json',
+                                            'Authorization' : 'Bearer ' + localStorage.getItem('auth')
+										},
+										method:'POST',
+										body:JSON.stringify(values.suscripcion.id, null, 1)
+								}).then(response => response.json())
+								  .then(data => {
+									if (data.success) {
+										history.push('/datos-perfil');
+									  }
+									else{
+										this.state.errors = data.message
+										}
+								  });
+							
+							setSubmitting(false);
+							}, 400);
+						}}
+						>
+						{({
+							values,
+							errors,
+							handleChange,
+							handleBlur,
+							handleSubmit,
+							isSubmitting,
+							/* and other goodies */
+						}) => (
+							<form onSubmit={handleSubmit}>
+								<ListaSuscripciones>
 
-                            </ListaSuscripciones>
-                        </span>
-
-                    </div>
-                    <PayPalButton
-                        amount={20}
-                        onSuccess={(suscripcion) => {
-                            
-                            suscripcion.id = document.getElementById('selectSuscripciones').value
-                            setTimeout(() => {
-                                fetch('suscripcion/update', {
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                        'Accept': 'application/json',
-                                        'Authorization': 'Bearer ' + localStorage.getItem('auth')
-                                    },
-                                    method: 'POST',
-                                    body: JSON.stringify(suscripcion, null, 1)
-                                }).then(function (response) {
-                                    console.log("respuesta")
-                                    console.log(response);
-                                }).then(() => {
-                                    console.log("redirección")
-                                    history.push('/datos-perfil')
-                                })
-                            }, 400);
-                        }}
-
-                        options={{
-                            clientId: "AQ1wSRRux5eVDHDZia2gH5NfFd_dO2-mooYqs-CdF3E53DIHclXqJlDI_2I2vtfIeQi5qVQTciRnOS9Y",
-                            currency: "EUR"
-                        }}
-                    />
-               
+                                </ListaSuscripciones>   
+							
+							
+                                <button type="submit" className="boton" disabled={isSubmitting}>
+                                    Enviar
+                                </button>
+							
+						    </form>
+						)}
+					</Formik>
+                   
 
             </Card>
         </div>

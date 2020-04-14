@@ -171,8 +171,6 @@ export function PedidoForm() {
 		var x = document.getElementById("pedido1");
 		var y = document.getElementById("enlace1");
 		
-		//window.alert(z);
-		console.log("ESTO VALE LA Z: " + envioTomas);
 		
 		if (x.style.display === "flex") {
 			 pedido1mostrado = "no";
@@ -197,8 +195,6 @@ export function PedidoForm() {
 		var x = document.getElementById("pedido2");
 		var y = document.getElementById("enlace2");
 		
-		//window.alert(z);
-		console.log("ESTO VALE LA Z: " + envioTomas);
 		
 		if (x.style.display === "flex") {
 			 pedido2mostrado = "no";
@@ -497,7 +493,6 @@ export function PedidoForm() {
         	 {
         		 handleRedirect();
         	 })
-        	 alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
         }, 400);
       }}
@@ -1183,7 +1178,6 @@ export function PedidoForm() {
 	             	 {
 	             		 handleRedirect();
 	             	 })
-	               alert(JSON.stringify(values, null, 2));
 
 	               setSubmitting(false);
 	             }, 400);

@@ -1,5 +1,7 @@
 package com.youmarket.controllers;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -150,7 +152,9 @@ public class CarritoSessionController {
 		for(Producto p: productos){
 			precio+= p.getPrecio() * carrito.get(p);
 		}
-		return precio;
+		
+		BigDecimal importeIVA =  new BigDecimal(precio);
+		return importeIVA.setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
 	
 
