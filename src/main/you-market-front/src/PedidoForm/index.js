@@ -1164,10 +1164,6 @@ export function PedidoForm() {
 
 		<br/><br/>
 
-        <button type="submit" disabled={isSubmitting} onClick="mostrar()">
-        	Enviar
-        </button>
-
 			<h2>Elige tu método de pago 👇</h2>
 	         <div className="grid">
 	         <PayPalButton
