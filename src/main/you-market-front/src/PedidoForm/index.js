@@ -156,12 +156,13 @@ export function PedidoForm() {
 		       .then(res => res.json())
 		       .then(total => {
 		         setTotal(total)
-		       });
+		       }).then(console.log(total));
 		   }, []);
 
 		 useEffect(() => {
 		  fetchTotal(total);
 		   }, []);
+		 console.log(total)
 
 		 return total;
 	}
@@ -1320,8 +1321,6 @@ function pagar() {
 	             	 {
 	             		 handleRedirect();
 	             	 })
-
-	               setSubmitting(false);
 	             }, 400);
 			   }}
 
