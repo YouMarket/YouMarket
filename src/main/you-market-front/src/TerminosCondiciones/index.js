@@ -1,22 +1,15 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React from 'react';
 
-import style from './styles.css';
 import Header from '../Header';
-import { Formik } from 'formik';
 import {
 	  withRouter
 	} from 'react-router-dom';
 
 			
 class TerminoYCondiciones extends React.Component{
-	 constructor(props) {
-		    super(props);
-
-		  }
 		
 		render(){
 			return(
-
 
 		<div>
 		<Header/>

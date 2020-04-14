@@ -1,6 +1,7 @@
 package com.youmarket.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Direccion;
+import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
 import com.youmarket.services.DireccionService;
 import com.youmarket.services.UsuarioService;
@@ -55,8 +57,10 @@ public class DireccionController {
 	@PostMapping("/update")
 	public Direccion updateDir(@CurrentUser UserPrincipal currentUser, @RequestBody Direccion dir) {
 		
+		
 		//comprobar que la dir a modificar es del usuario logado
-		Usuario usu = usuarioService.findById(currentUser.getId()).get();
+		Usuario usu = usuarioService.findById(currentUser.getId()).orElse(null);
+			
 		dir.setUsuario(usu);
 		
 		//Comprobamos si ha modificado la direccion principal

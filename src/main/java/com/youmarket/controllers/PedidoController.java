@@ -1,5 +1,6 @@
 package com.youmarket.controllers;
 
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,15 +12,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.CestaProducto;
@@ -30,7 +22,17 @@ import com.youmarket.domain.form.FormPedidos;
 import com.youmarket.services.CestaProductoService;
 import com.youmarket.services.FacturaService;
 import com.youmarket.services.PedidoService;
+import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("pedido")
@@ -44,6 +46,9 @@ public class PedidoController {
 
 	@Autowired
 	private CestaProductoService cpService;
+
+	@Autowired
+	private SuscripcionService susService;
 	
 	@Autowired
 	private FacturaService facturaService;
@@ -225,7 +230,7 @@ public class PedidoController {
 		Pedido p2s = new Pedido();
 		Pedido p3s = new Pedido();
 		Pedido p4s = new Pedido();
-
+		
 		if(pedidos.getDireccion4() != null){
 			user.setPedidosRestantes(user.getPedidosRestantes() - 4);
 		} else if(pedidos.getDireccion3() != null){

@@ -1,6 +1,5 @@
 import React from 'react';
 import './styles.css';
-import { NavLink } from "react-router-dom";
 
 interface Props {
 	id : Number,
@@ -12,16 +11,17 @@ interface Props {
 
 function Factura({id, total, totalIva, fechaFactura, pedido}: Props) {
   
-  const url = "http://localhost:8081/factura/generateFactura/" + id.toString();
+  const url = "http://localhost:8081/factura/generateFactura/" + id
+  const dateFormatted = new Date(fechaFactura).toLocaleDateString()
 
   return(
 		<div className="factura-container">
 			<p className="factura-field factura-id"><b>ID: </b>{id}</p>
-            <p className="factura-field factura-precio"><b>Precio: </b>{total}</p>
-            <p className="factura-field factura-precioIva"><b>Precio con IVA: </b>{totalIva}</p>
-            <p className="factura-field factura-fecha"><b>Fecha: </b>{fechaFactura}</p>
-            <p className="factura-field factura-pedido"><b>ID Pedido: </b>{pedido}</p>
-            <NavLink className="link-button" to={url}>Descargar factura</NavLink>
+            <p className="factura-field factura-precio"><b>Precio: </b>{total} €</p>
+            <p className="factura-field factura-precioIva"><b>Precio con IVA: </b>{totalIva} €</p>
+            <p className="factura-field factura-fecha"><b>Fecha: </b>{dateFormatted}</p>
+            {pedido != null ? <p className="factura-field factura-pedido"><b>ID Pedido: </b>{pedido}</p> : <p></p>}
+            <a className="link-button" href={url} target="_blank">Descargar factura</a>
   		</div>
  );
 }

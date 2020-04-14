@@ -58,9 +58,9 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 	        </NavLink>
 			<div className="container-cantidad">
 				<div className="producto-editar-cantidad">
-					<img id={idMenos} className="menos" src={less} onClick={lessProduct}/>
+					<img id={idMenos} className="menos" src={less} onClick={lessProduct} alt="Menos"/>
 					<p id={idContador} className="contador">{cantidad}</p>
-					<img className="mas" src={plus} onClick={plusProduct}/>
+					<img className="mas" src={plus} onClick={plusProduct} alt="Mas"/>
 				</div>
 				<button className="boton-add-producto" onClick={() => sendToBack(id, cantidad)}>AÑADIR AL CARRO</button>
 			</div>
