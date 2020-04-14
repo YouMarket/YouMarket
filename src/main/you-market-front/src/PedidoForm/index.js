@@ -400,16 +400,26 @@ function pagar() {
         //Pedido 1
         if (!values.direccion1) {
         	errors.direccion1 = 'Campo obligatorio';
+        }else if(values.direccion1.includes("javascript") || values.direccion1.includes(";")){
+        	errors.direccion1 = 'No se permiten esos carácteres';
         }
+       
         if (!values.poblacion1) {
         	errors.poblacion1 = 'Campo obligatorio';
+        }else if(values.poblacion1.includes("javascript") || values.poblacion1.includes(";")){
+        	errors.poblacion1 = 'No se permiten esos carácteres';
         }
+        
         if (!values.cpostal1) {
         	errors.cpostal1 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
         }
+        
         if (!values.provincia1) {
         	errors.provincia1 = 'Campo obligatorio';
+        }else if(values.provincia1.includes("javascript") || values.provincia1.includes(";")){
+        	errors.provincia1 = 'No se permiten esos carácteres';
         }
+        
         if (!values.numero1) {
         	errors.numero1 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
         }
@@ -467,64 +477,83 @@ function pagar() {
         
         //Pedido 2
         if (pedido2mostrado === "si"){
-	        if (!values.direccion2) {
-	        	errors.direccion2 = 'Campo obligatorio';
-	        }
-	        if (!values.poblacion2) {
-	        	errors.poblacion2 = 'Campo obligatorio';
-	        }
-	        if (!values.cpostal2) {
-	        	errors.cpostal2 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
-	        }
-	        if (!values.provincia2) {
-	        	errors.provincia2 = 'Campo obligatorio';
-	        }
-	        if (!values.numero2) {
+        	  if (!values.direccion2) {
+              	errors.direccion2 = 'Campo obligatorio';
+              }else if(values.direccion2.includes("javascript") || values.direccion2.includes(";")){
+              	errors.direccion2 = 'No se permiten esos carácteres';
+              }
+             
+              if (!values.poblacion2) {
+              	errors.poblacion2 = 'Campo obligatorio';
+              }else if(values.poblacion2.includes("javascript") || values.poblacion2.includes(";")){
+              	errors.poblacion2 = 'No se permiten esos carácteres';
+              }
+              
+              if (!values.cpostal2) {
+              	errors.cpostal2 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
+              }
+              
+              if (!values.provincia2) {
+              	errors.provincia2 = 'Campo obligatorio';
+              }else if(values.provincia2.includes("javascript") || values.provincia2.includes(";")){
+              	errors.provincia2 = 'No se permiten esos carácteres';
+              }
+
+              if (!values.numero2) {
 	        	errors.numero2 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
-	        }
+              }
 	        
-	        if (!values.fechaEnvio2) {
+              if (!values.fechaEnvio2) {
 	        	errors.fechaEnvio2 = 'Campo obligatorio';
-	        }
-	        if (values.horaEnvioFin2 < values.horaEnvioIni2) {
+              }
+              if (values.horaEnvioFin2 < values.horaEnvioIni2) {
 	        	errors.horaEnvioFin2 = 'La hora final no puede ser anterior a la inicial'
-	        }
-	        if (values.horaEnvioFin2 < 9 || values.horaEnvioIni2<9 || values.horaEnvioFin2 > 21 || values.horaEnvioIni2 > 22) {
+              }
+              if (values.horaEnvioFin2 < 9 || values.horaEnvioIni2<9 || values.horaEnvioFin2 > 21 || values.horaEnvioIni2 > 22) {
 	        	errors.horaEnvioFin2 = 'En este tramo horario no se realizan entregas'
-	        }
-	        if (values.horaEnvioFin2=="" || values.horaEnvioIni2==null) {
+              }
+              if (values.horaEnvioFin2=="" || values.horaEnvioIni2==null) {
 	        	errors.horaEnvioFin2 = 'Campo obligatorio';
-	        }
+              }
 	        
-	        if (values.horaEnvioIni2=="" || values.horaEnvioIni2==null) {
+              if (values.horaEnvioIni2=="" || values.horaEnvioIni2==null) {
 	        	errors.horaEnvioFin2 = 'Campo obligatorio';
-	        }
-        } else {
-        	values.direccion2 = null;
-        	values.poblacion2 = null;
-        	values.cpostal2 = null;
-        	values.provincia2 = null;
-        	values.numero2 = null;
-        	values.fechaEnvio2 = null;
-        	values.horaEnvioFin2 = null;
-        	values.horaEnvioIni2 = null;
-        }
+              }
+        	} else {
+        		values.direccion2 = null;
+        		values.poblacion2 = null;
+        		values.cpostal2 = null;
+        		values.provincia2 = null;
+        		values.numero2 = null;
+        		values.fechaEnvio2 = null;
+        		values.horaEnvioFin2 = null;
+        		values.horaEnvioIni2 = null;
+        	}
         
                
         //Pedido 3
         if (pedido3mostrado === "si"){
-	        if (!values.direccion3) {
-	        	errors.direccion3 = 'Campo obligatorio';
-	        }
-	        if (!values.poblacion3) {
-	        	errors.poblacion3 = 'Campo obligatorio';
-	        }
-	        if (!values.cpostal3) {
-	        	errors.cpostal3 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
-	        }
-	        if (!values.provincia3) {
-	        	errors.provincia3 = 'Campo obligatorio';
-	        }
+        	  if (!values.direccion3) {
+              	errors.direccion3 = 'Campo obligatorio';
+              }else if(values.direccion3.includes("javascript") || values.direccion3.includes(";")){
+              	errors.direccion3 = 'No se permiten esos carácteres';
+              }
+             
+              if (!values.poblacion3) {
+              	errors.poblacion3 = 'Campo obligatorio';
+              }else if(values.poblacion3.includes("javascript") || values.poblacion3.includes(";")){
+              	errors.poblacion3 = 'No se permiten esos carácteres';
+              }
+              
+              if (!values.cpostal3) {
+              	errors.cpostal3 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
+              }
+              
+              if (!values.provincia3) {
+              	errors.provincia3 = 'Campo obligatorio';
+              }else if(values.provincia3.includes("javascript") || values.provincia3.includes(";")){
+              	errors.provincia3 = 'No se permiten esos carácteres';
+              }
 	        if (!values.numero3) {
 	        	errors.numero3 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
 	        }
@@ -558,18 +587,28 @@ function pagar() {
         
         //Pedido 4
         if (pedido4mostrado === "si"){
-	        if (!values.direccion4) {
-	        	errors.direccion4 = 'Campo obligatorio';
-	        }
-	        if (!values.poblacion4) {
-	        	errors.poblacion4 = 'Campo obligatorio';
-	        }
-	        if (!values.cpostal4) {
-	        	errors.cpostal4 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
-	        }
-	        if (!values.provincia4) {
-	        	errors.provincia4 = 'Campo obligatorio';
-	        }
+        	  if (!values.direccion4) {
+              	errors.direccion4 = 'Campo obligatorio';
+              }else if(values.direccion4.includes("javascript") || values.direccion4.includes(";")){
+              	errors.direccion4 = 'No se permiten esos carácteres';
+              }
+             
+              if (!values.poblacion4) {
+              	errors.poblacion4 = 'Campo obligatorio';
+              }else if(values.poblacion4.includes("javascript") || values.poblacion4.includes(";")){
+              	errors.poblacion4 = 'No se permiten esos carácteres';
+              }
+              
+              if (!values.cpostal4) {
+              	errors.cpostal4 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
+              }
+              
+              if (!values.provincia4) {
+              	errors.provincia4 = 'Campo obligatorio';
+              }else if(values.provincia4.includes("javascript") || values.provincia4.includes(";")){
+              	errors.provincia4 = 'No se permiten esos carácteres';
+              }
+              
 	        if (!values.numero4) {
 	        	errors.numero4 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
 	        }
