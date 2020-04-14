@@ -22,6 +22,8 @@ import Login from './auth/Login'
 import Logout from './auth/Logout'
 
 import PedidoForm from './PedidoForm';
+
+import PedidoExito from './PedidoExito';
 import DietaProductos from './DietaProductos';
 
 import Carro from './Carro';
@@ -98,8 +100,8 @@ function App() {
 				</Route>
 
 				<Route path="/logout">
-				<Logout />
-			</Route>
+					<Logout />
+				</Route>
 				<Route path="/cesta/edit/:id">
 				<EditCesta/>
 				</Route>
@@ -123,10 +125,16 @@ function App() {
 					<Error/>
 				</Route>
 
+				<Route path="/pedidoexito">
+					<PedidoExito/>
+				</Route>
+
+
+
 				<Route path="/terminosycondiciones">
         			<TerminosYCondiciones />
         </Route>
-        		
+
 				<Route path="/alertabrecha">
     				<AlertaBrecha />
     		</Route>
@@ -134,7 +142,7 @@ function App() {
 				<Route path="/pedidoexito">
 					  <PedidoExito />
 				</Route>
-	
+
 		    <Route path="/">
 		        <Productos />
 		    </Route>

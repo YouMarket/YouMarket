@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Usuario;
 import com.youmarket.repositories.UsuarioRepository;
 
@@ -44,5 +45,11 @@ public class UsuarioService {
 	public void delete() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public Integer enviosRestantes(Usuario usuario1) {
+		Integer envios = this.repo.getEnvios(usuario1.getId());
+		
+		return envios;
 	}
 }

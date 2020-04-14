@@ -1,8 +1,5 @@
 package com.youmarket.domain;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.validation.constraints.Positive;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Range;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,7 +31,7 @@ public class Suscripcion {
 	@Positive
 	private Double precio;
 	
-	@Positive
+	@Range(min=0, max =4)
 	private Integer envios;
 	
 	@Column(nullable = false)

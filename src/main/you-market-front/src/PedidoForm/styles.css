@@ -1,5 +1,72 @@
+.tituloPedido{
+	margin-right:auto;
+}
+
+.mismaLinea{
+	display:flex;
+	
+}
+
+#antonios {
+	float:left;
+}
+
+#inlines {
+	display:inline;
+}
+
+#pedido2 {
+	display:none;
+}
+
+#pedido3 {
+	display:none;
+}
+
+#pedido4 {
+	display:none;
+}
+
+
+#enlace2 {
+	display:none;
+}
+
+#enlace3 {
+	display:none;
+}
+
+.botonCopiar {
+    display: inline-block;
+    background-color: black;
+    border: none;
+    color: white;
+    margin-top: 20px;
+    padding: 15px 32px;
+    clear: both;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.errores {
+	color:red;
+	font-weight: bold;
+	display:inline;
+}
+
 .pedido-container label {
     font-weight: bold;
+}
+
+.pedido-0-container{
+	text-align:center;	
+}
+
+.imagen-0-pedidos{
+	width:40%;
+	margin:auto;
 }
 
 .pedido-container input {
@@ -18,6 +85,10 @@
 
 .pedido-container form {
     margin-top: 50px;
+}
+
+.pedido-form-envio-container{
+	width:100%;
 }
 
 .pedido-form-envio-container {
