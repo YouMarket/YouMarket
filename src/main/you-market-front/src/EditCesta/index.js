@@ -1,11 +1,7 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
-import {Link} from "react-router-dom";
+import React,  { useCallback, useState, useEffect } from 'react';
 import {useParams} from "react-router-dom";
 import cestaEdit from './cesta.png';
-import style from './styles.css';
-import Cesta from '../Cesta';
 import Header from '../Header';
-import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import { useHistory } from "react-router-dom";
 

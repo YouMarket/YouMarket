@@ -30,4 +30,9 @@ public class SuscripcionService {
 	public Suscripcion save(Suscripcion s){
 		return this.repo.save(s);
 	}
+	
+	public Suscripcion findSuscripcionByPrecio(double precio) {
+		List<Suscripcion> sus = repo.findSuscripcionByPrecio(precio);
+		return sus.isEmpty() ? null : sus.get(0);
+	}
 }
