@@ -26,6 +26,10 @@ public class SuscripcionService {
 	public List<Suscripcion> getSuscripcionesDietista(){
 		return repo.getSuscripcionesDietista();
 	}
+
+	public Suscripcion save(Suscripcion s){
+		return this.repo.save(s);
+	}
 	
 	public Suscripcion findSuscripcionByPrecio(double precio) {
 		List<Suscripcion> sus = repo.findSuscripcionByPrecio(precio);
