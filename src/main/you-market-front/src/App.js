@@ -34,7 +34,6 @@ import Error from './Misc';
 import CestaProductos from './CestaProductos';
 import TerminosYCondiciones from './TerminosCondiciones';
 import AlertaBrecha from './AlertaBrecha';
-import PedidoExito from './PedidoExito';
 import Facturas from './Perfil/Facturas';
 import SubscripcionForm from './Perfil/DatosUsuario/suscripcionForm'
 
