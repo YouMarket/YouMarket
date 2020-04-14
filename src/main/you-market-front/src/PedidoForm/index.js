@@ -33,15 +33,14 @@ function copiarDir12() {
 	  var numero2 = document.getElementById("numero2");
 	  var provincia2 = document.getElementById("provincia2");
 
-
 	  document.getElementById("poblacion2").value= poblacion1.value;
 	  document.getElementById("cpostal2").value= cpostal1.value;
 	  document.getElementById("numero2").value= numero1.value;
 	  document.getElementById("provincia2").value = provincia1.value;
 	  document.getElementById("direccion2").value = direccion1.value;
 
-
 	  pedido2copiado = true;
+	  document.getElementById("poblacion2").focus();
 	  return false;
 };
 
@@ -67,6 +66,7 @@ function copiarDir13() {
 
 
 	  pedido3copiado = true;
+	  document.getElementById("poblacion3").focus();
 
 	  return false;
 }; 
@@ -91,6 +91,7 @@ function copiarDir14() {
 	  document.getElementById("direccion4").value= direccion1.value;
 
 	  pedido4copiado = true;
+	  document.getElementById("poblacion4").focus();
 	  
 	  return false;
 };
@@ -403,23 +404,31 @@ function pagar() {
         	errors.poblacion1 = 'Campo obligatorio';
         }
         if (!values.cpostal1) {
-        	errors.cpostal1 = 'Campo obligatorio';
+        	errors.cpostal1 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
         }
         if (!values.provincia1) {
         	errors.provincia1 = 'Campo obligatorio';
         }
         if (!values.numero1) {
-        	errors.numero1 = 'Campo obligatorio';
+        	errors.numero1 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
         }
         if (!values.fechaEnvio1) {
         	errors.fechaEnvio1 = 'Campo obligatorio';
         }
         
         if (values.horaEnvioFin1 < values.horaEnvioIni1) {
-        	errors.horaEnvioFin1 = 'La hora final no puede ser anterior a la inicial'
+        	errors.horaEnvioFin1 = 'La hora final no puede ser anterior a la inicial';
+        }
+        
+        if (values.horaEnvioFin1=="" || values.horaEnvioFin1==null) {
+        	errors.horaEnvioFin1 = 'Campo obligatorio';
+        }
+        
+        if (values.horaEnvioIni1=="" || values.horaEnvioIni1==null) {
+        	errors.horaEnvioFin1 = 'Campo obligatorio';
         }
         if (values.horaEnvioFin1 < 9 || values.horaEnvioIni1<9 || values.horaEnvioFin1 > 21 || values.horaEnvioIni1 > 22) {
-        	errors.horaEnvioFin1 = 'En este tramo horario no se realizan entregas'
+        	errors.horaEnvioFin1 = 'En este tramo horario no se realizan entregas';
         }
         
 
@@ -464,13 +473,13 @@ function pagar() {
 	        	errors.poblacion2 = 'Campo obligatorio';
 	        }
 	        if (!values.cpostal2) {
-	        	errors.cpostal2 = 'Campo obligatorio';
+	        	errors.cpostal2 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
 	        }
 	        if (!values.provincia2) {
 	        	errors.provincia2 = 'Campo obligatorio';
 	        }
 	        if (!values.numero2) {
-	        	errors.numero2 = 'Campo obligatorio';
+	        	errors.numero2 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
 	        }
 	        
 	        if (!values.fechaEnvio2) {
@@ -478,6 +487,16 @@ function pagar() {
 	        }
 	        if (values.horaEnvioFin2 < values.horaEnvioIni2) {
 	        	errors.horaEnvioFin2 = 'La hora final no puede ser anterior a la inicial'
+	        }
+	        if (values.horaEnvioFin2 < 9 || values.horaEnvioIni2<9 || values.horaEnvioFin2 > 21 || values.horaEnvioIni2 > 22) {
+	        	errors.horaEnvioFin2 = 'En este tramo horario no se realizan entregas'
+	        }
+	        if (values.horaEnvioFin2=="" || values.horaEnvioIni2==null) {
+	        	errors.horaEnvioFin2 = 'Campo obligatorio';
+	        }
+	        
+	        if (values.horaEnvioIni2=="" || values.horaEnvioIni2==null) {
+	        	errors.horaEnvioFin2 = 'Campo obligatorio';
 	        }
         } else {
         	values.direccion2 = null;
@@ -500,19 +519,29 @@ function pagar() {
 	        	errors.poblacion3 = 'Campo obligatorio';
 	        }
 	        if (!values.cpostal3) {
-	        	errors.cpostal3 = 'Campo obligatorio';
+	        	errors.cpostal3 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
 	        }
 	        if (!values.provincia3) {
 	        	errors.provincia3 = 'Campo obligatorio';
 	        }
 	        if (!values.numero3) {
-	        	errors.numero3 = 'Campo obligatorio';
+	        	errors.numero3 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
 	        }
 	        if (!values.fechaEnvio3) {
 	        	errors.fechaEnvio3 = 'Campo obligatorio';
 	        }
 	        if (values.horaEnvioFin3 < values.horaEnvioIni3) {
 	        	errors.horaEnvioFin3 = 'La hora final no puede ser anterior a la inicial'
+	        }
+	        if (values.horaEnvioFin3 < 9 || values.horaEnvioIni3<9 || values.horaEnvioFin3 > 21 || values.horaEnvioIni3 > 22) {
+	        	errors.horaEnvioFin3 = 'En este tramo horario no se realizan entregas'
+	        }
+	        if (values.horaEnvioFin3=="" || values.horaEnvioIni3==null) {
+	        	errors.horaEnvioFin3 = 'Campo obligatorio';
+	        }
+	        
+	        if (values.horaEnvioIni3=="" || values.horaEnvioIni3==null) {
+	        	errors.horaEnvioFin3 = 'Campo obligatorio';
 	        }
         } else {
         	values.direccion3 = null;
@@ -535,13 +564,13 @@ function pagar() {
 	        	errors.poblacion4 = 'Campo obligatorio';
 	        }
 	        if (!values.cpostal4) {
-	        	errors.cpostal4 = 'Campo obligatorio';
+	        	errors.cpostal4 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
 	        }
 	        if (!values.provincia4) {
 	        	errors.provincia4 = 'Campo obligatorio';
 	        }
 	        if (!values.numero4) {
-	        	errors.numero4 = 'Campo obligatorio';
+	        	errors.numero4 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
 	        }
 	        if (!values.fechaEnvio4) {
 	        	errors.fechaEnvio4 = 'Campo obligatorio';
@@ -549,6 +578,17 @@ function pagar() {
 	        if (values.horaEnvioFin4 < values.horaEnvioIni4) {
 	        	errors.horaEnvioFin4 = 'La hora final no puede ser anterior a la inicial'
 	        }
+	        if (values.horaEnvioFin4 < 9 || values.horaEnvioIni4<9 || values.horaEnvioFin4 > 21 || values.horaEnvioIni4 > 22) {
+	        	errors.horaEnvioFin4 = 'En este tramo horario no se realizan entregas'
+	        }
+	        if (values.horaEnvioFin4=="" || values.horaEnvioIni4==null) {
+	        	errors.horaEnvioFin4 = 'Campo obligatorio';
+	        }
+	        
+	        if (values.horaEnvioIni4=="" || values.horaEnvioIni4==null) {
+	        	errors.horaEnvioFin4 = 'Campo obligatorio';
+	        }
+	        
         } else {
         	values.direccion4 = null;
         	values.poblacion4 = null;
@@ -619,7 +659,7 @@ function pagar() {
 			<label htmlFor="cpostal1">Código postal*: </label>
 	        <Field
 				id="cpostal1"
-				type="text"
+				type="number"
 				name="cpostal1"
 				onChange={handleChange}
 				onBlur={handleBlur}
@@ -707,6 +747,7 @@ function pagar() {
 				value={values.horaEnvioIni1}
 				min="9"
 				max="21"
+				required
 				/>
 				<div className="errores">
 					{errors.horaEnvioIni1}
@@ -722,6 +763,7 @@ function pagar() {
 				value={values.horaEnvioFin1}
 				min="9"
 				max="21"
+				required
 				/>
 				<div className="errores">
 					{errors.horaEnvioFin1}
@@ -787,7 +829,7 @@ function pagar() {
 			<label htmlFor="cpostal2">Código postal*: </label>
 	        <input
 				id="cpostal2"
-				type="text"
+				type="number"
 				name="cpostal2"
 				onChange={handleChange}
 				onBlur={handleBlur}
@@ -872,6 +914,7 @@ function pagar() {
 				value={values.horaEnvioIni2}
 				min="9"
 				max="21"
+				required
 				onChange={handleChange}
 				onBlur={handleBlur}
 				/>
@@ -889,6 +932,7 @@ function pagar() {
 				max="21"
 				onChange={handleChange}
 				onBlur={handleBlur}
+				required
 				/>
 				<div className="errores">
 				{errors.horaEnvioFin2}
@@ -951,7 +995,7 @@ function pagar() {
 			<label htmlFor="cpostal3">Código postal*: </label>
 	        <input
 				id="cpostal3"
-				type="text"
+				type="number"
 				name="cpostal3"
 				value={values.cpostal3}
 		        placeholder="41720"
@@ -1037,6 +1081,7 @@ function pagar() {
 				onBlur={handleBlur}
 				min="9"
 				max="21"
+				required
 				/>
 				<div className="errores">
 					{errors.horaEnvioIni3}
@@ -1050,6 +1095,7 @@ function pagar() {
 				value={values.horaEnvioFin3}
 				min="9"
 				max="21"
+				required
 				onChange={handleChange}
 				onBlur={handleBlur}
 				/>
@@ -1112,7 +1158,7 @@ function pagar() {
 		<label htmlFor="cpostal4">Código postal*: </label>
         <input
 			id="cpostal4"
-			type="text"
+			type="number"
 			name="cpostal4"
 			value={values.cpostal4}
 	        placeholder="41720"
@@ -1196,6 +1242,7 @@ function pagar() {
 			value={values.horaEnvioIni4}
 			min="9"
 			max="21"
+			required
 			onChange={handleChange}
 			onBlur={handleBlur}
 			/>
@@ -1211,6 +1258,7 @@ function pagar() {
 			value={values.horaEnvioFin4}
 			min="9"
 			max="21"
+			required
 			onChange={handleChange}
 			onBlur={handleBlur}
 			/>
