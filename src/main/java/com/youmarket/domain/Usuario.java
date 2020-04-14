@@ -52,6 +52,9 @@ public class Usuario {
 	
 	@Column(name="c_postal", length = 5)
 	private String cPostal;
+	
+	@Column(name="pedido_restante")
+	private Integer pedidosRestantes;
 
 	private String email;
 

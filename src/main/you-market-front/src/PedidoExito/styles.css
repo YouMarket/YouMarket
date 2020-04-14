@@ -1,15 +1,9 @@
-.tituloPedido{
-	margin-right:auto;
+
+
+#alert {
+	margin:auto;
 }
 
-.mismaLinea{
-	display:flex;
-	
-}
-
-#antonios {
-	float:left;
-}
 
 #inlines {
 	display:inline;
@@ -58,15 +52,6 @@
 
 .pedido-container label {
     font-weight: bold;
-}
-
-.pedido-0-container{
-	text-align:center;	
-}
-
-.imagen-0-pedidos{
-	width:40%;
-	margin:auto;
 }
 
 .pedido-container input {
