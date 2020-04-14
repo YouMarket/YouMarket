@@ -29,7 +29,12 @@ public class DietaService {
 	}
 
 	public Dieta findById(int idDieta) {
-		return dietaRepository.findById(idDieta).get();
+		Optional<Dieta> dieta =  dietaRepository.findById(idDieta);
+		if (dieta.isPresent()) {
+			return dieta.get();
+		} else {
+			return null;
+		}
 	}
 
 

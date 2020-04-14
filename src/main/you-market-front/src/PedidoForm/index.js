@@ -69,7 +69,7 @@ function copiarDir13() {
 	  document.getElementById("poblacion3").focus();
 
 	  return false;
-}; 
+};
 
 function copiarDir14() {
 	  var direccion1 = document.getElementById("direccion1");
@@ -92,7 +92,7 @@ function copiarDir14() {
 
 	  pedido4copiado = true;
 	  document.getElementById("poblacion4").focus();
-	  
+
 	  return false;
 };
 
@@ -103,7 +103,7 @@ function validDate1(){
 function validDate2(){
 	var today = new Date().toISOString().split('T')[0];
 	document.getElementsByName("fechaEnvio2")[0].setAttribute('min', today);
-    
+
 }
 function validDate3(){
 	var today = new Date().toISOString().split('T')[0];
@@ -121,13 +121,13 @@ export function PedidoForm() {
 	let history = useHistory();
 
 	const [envioTomas, setEnvioTomas] = useState(0);
-	
-	
-	
-	useEffect(() => {
-		
 
-		
+
+
+	useEffect(() => {
+
+
+
 		fetch('/usuario/envios', {
 			headers:{
 			  'Content-Type' : 'application/json',
@@ -139,12 +139,12 @@ export function PedidoForm() {
 			       .then(envios1 => {
 			    	   setEnvioTomas(envios1);
 			       });
-		
+
 		  }, []);
-	
 
 
-	
+
+
 	const precio = () => {
 		const [total, setTotal] = useState(0.0);
 		const fetchTotal = useCallback(() => {
@@ -165,12 +165,12 @@ export function PedidoForm() {
 
 		 return total;
 	}
-	
+
 	const mostrarPedido1 = () => {
-		
+
 		var x = document.getElementById("pedido1");
 		var y = document.getElementById("enlace1");
-		
+
 		if (x.style.display === "flex") {
 			 pedido1mostrado = "no";
 			 x.style.display = "none";
@@ -186,13 +186,13 @@ export function PedidoForm() {
 
 		return false;
 	}
-	
+
 function empieza() {
 	if(started==false){
 		started=true;
 	}
 }
-	
+
 function pagar() {
 		var x = document.getElementById("paypal-b");
 		var y =document.getElementById("pedido1");
@@ -207,7 +207,7 @@ function pagar() {
 		var h =document.getElementById("enlace2");
 		var i =document.getElementById("enlace3");
 		var j =document.getElementById("pagar-a");
-		
+
 
 			if(started==true &&
 			   errors.direccion1===undefined && errors.poblacion1===undefined &&
@@ -226,7 +226,7 @@ function pagar() {
 			   errors.cpostal4===undefined && errors.provincia4===undefined &&
 			   errors.numero4===undefined && errors.fechaEnvio4===undefined &&
 			   errors.horaEnvioFin4===undefined && errors.horaEnvioIni4===undefined){
-				
+
 			 x.style.display = "block";
 			 y.style.display = "none";
 			 z.style.display = "none";
@@ -242,18 +242,18 @@ function pagar() {
 			 j.style.display = "none";
 		}
 			else if(started==false){
-				
+
 			}else{
-				
+
 			}
 	}
-	
-	
+
+
 	const mostrarPedido2 = () => {
-		
+
 		var x = document.getElementById("pedido2");
 		var y = document.getElementById("enlace2");
-		
+
 		if (x.style.display === "flex") {
 			 pedido2mostrado = "no";
 			 x.style.display = "none";
@@ -263,16 +263,16 @@ function pagar() {
 			 document.getElementById("numero2").value = "";
 			 document.getElementById("provincia2").value = "";
 			 document.getElementById("direccion2").value = "";
-			 
+
 			 errors.direccion2=undefined;
 			 errors.poblacion2=undefined;
 			 errors.cpostal2=undefined;
 			 errors.provincia2=undefined;
-			 errors.numero2=undefined; 
+			 errors.numero2=undefined;
 			 errors.fechaEnvio2=undefined;
 			 errors.horaEnvioFin2=undefined;
 			 errors.horaEnvioIni2=undefined;
-			 
+
 		} else {
 			 document.getElementById("poblacion2").value = "";
 			 document.getElementById("cpostal2").value = "";
@@ -289,21 +289,21 @@ function pagar() {
 
 		return false;
 	}
-	
+
 	const mostrarPedido3 = () => {
 		  var x = document.getElementById("pedido3");
 		  var y = document.getElementById("enlace3")
-		  
+
 		  if (x.style.display === "flex") {
 			  	pedido3mostrado = "no";
 			    x.style.display = "none";
 			    y.style.display = "none";
-			    
+
 			    errors.direccion3=undefined;
 				errors.poblacion3=undefined;
 				errors.cpostal3=undefined;
 				errors.provincia3=undefined;
-				errors.numero3=undefined; 
+				errors.numero3=undefined;
 				errors.fechaEnvio3=undefined;
 				errors.horaEnvioFin3=undefined;
 				errors.horaEnvioIni3=undefined;
@@ -317,7 +317,7 @@ function pagar() {
 		  }
 		  return false;
 	};
-	
+
 	const mostrarPedido4 = () => {
 		  var x = document.getElementById("pedido4");
 		  var y = document.getElementById("enlace4")
@@ -325,12 +325,12 @@ function pagar() {
 			  	pedido4mostrado = "no";
 			    x.style.display = "none";
 			    y.style.display = "none";
-			    
+
 			    errors.direccion4=undefined;
 				errors.poblacion4=undefined;
 				errors.cpostal4=undefined;
 				errors.provincia4=undefined;
-				errors.numero4=undefined; 
+				errors.numero4=undefined;
 				errors.fechaEnvio4=undefined;
 				errors.horaEnvioFin4=undefined;
 				errors.horaEnvioIni4=undefined;
@@ -341,8 +341,8 @@ function pagar() {
 		  }
 		  return false;
 	};
-	
-	
+
+
 	const cestas = () => {
 		const[cestas, setCestas] = useState([]);
 
@@ -368,8 +368,8 @@ function pagar() {
 		return cestas;
 
 	}
-	
-	
+
+
 	const handleRedirect = () => {
 		history.push('/');
 	}
@@ -377,19 +377,19 @@ function pagar() {
 		if(localStorage.getItem('auth')==null){
 			this.props.history.push('/login');
 		}
-		
+
 		return(
-				
-				
+
+
 	<div>
 		<Header/>
 	<div>
 
 
-	{envioTomas > 0 ? 
+	{envioTomas > 0 ?
 	  (<div className="pedido-container container">
 	  <h1 id="titulo-pedidos">¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
-	  
+
 	  <h3 id="envios-restantes-pedidos"> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>
 	  <Formik validateOnChange={true} validateOnBlur={true} id="formikito"
     	className="formulario-pedido"
@@ -402,45 +402,45 @@ function pagar() {
         }else if(values.direccion1.includes("javascript") || values.direccion1.includes(";")){
         	errors.direccion1 = 'No se permiten esos carácteres';
         }
-       
+
         if (!values.poblacion1) {
         	errors.poblacion1 = 'Campo obligatorio';
         }else if(values.poblacion1.includes("javascript") || values.poblacion1.includes(";")){
         	errors.poblacion1 = 'No se permiten esos carácteres';
         }
-        
+
         if (!values.cpostal1) {
         	errors.cpostal1 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
         }
-        
+
         if (!values.provincia1) {
         	errors.provincia1 = 'Campo obligatorio';
         }else if(values.provincia1.includes("javascript") || values.provincia1.includes(";")){
         	errors.provincia1 = 'No se permiten esos carácteres';
         }
-        
+
         if (!values.numero1) {
         	errors.numero1 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
         }
         if (!values.fechaEnvio1) {
         	errors.fechaEnvio1 = 'Campo obligatorio';
         }
-        
+
         if (values.horaEnvioFin1 < values.horaEnvioIni1) {
         	errors.horaEnvioFin1 = 'La hora final no puede ser anterior a la inicial';
         }
-        
+
         if (values.horaEnvioFin1=="" || values.horaEnvioFin1==null) {
         	errors.horaEnvioFin1 = 'Campo obligatorio';
         }
-        
+
         if (values.horaEnvioIni1=="" || values.horaEnvioIni1==null) {
         	errors.horaEnvioFin1 = 'Campo obligatorio';
         }
         if (values.horaEnvioFin1 < 9 || values.horaEnvioIni1<9 || values.horaEnvioFin1 > 21 || values.horaEnvioIni1 > 22) {
         	errors.horaEnvioFin1 = 'En este tramo horario no se realizan entregas';
         }
-        
+
 
         if(pedido2copiado = true){
         	values.direccion2 = values.direccion1;
@@ -448,7 +448,7 @@ function pagar() {
         	values.cpostal2 = 	values.cpostal1;
         	values.provincia2 = values.provincia1;
         	values.numero2	  = values.numero1;
-        	
+
         	pedido2copiado = false;
         }
 
@@ -458,22 +458,22 @@ function pagar() {
         	values.cpostal3 = 	values.cpostal1;
         	values.provincia3 = values.provincia1;
         	values.numero3	  = values.numero1;
-        	
+
         	pedido3copiado = false;
         }
-        
+
         if(pedido4copiado == true){
         	values.direccion4 = values.direccion1;
         	values.poblacion4 = values.poblacion1;
         	values.cpostal4 = 	values.cpostal1;
         	values.provincia4 = values.provincia1;
         	values.numero4	  = values.numero1;
-        	
+
         	pedido4copiado = false;
         }
-        
-        
-        
+
+
+
         //Pedido 2
         if (pedido2mostrado === "si"){
         	  if (!values.direccion2) {
@@ -481,17 +481,17 @@ function pagar() {
               }else if(values.direccion2.includes("javascript") || values.direccion2.includes(";")){
               	errors.direccion2 = 'No se permiten esos carácteres';
               }
-             
+
               if (!values.poblacion2) {
               	errors.poblacion2 = 'Campo obligatorio';
               }else if(values.poblacion2.includes("javascript") || values.poblacion2.includes(";")){
               	errors.poblacion2 = 'No se permiten esos carácteres';
               }
-              
+
               if (!values.cpostal2) {
               	errors.cpostal2 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
               }
-              
+
               if (!values.provincia2) {
               	errors.provincia2 = 'Campo obligatorio';
               }else if(values.provincia2.includes("javascript") || values.provincia2.includes(";")){
@@ -501,7 +501,7 @@ function pagar() {
               if (!values.numero2) {
 	        	errors.numero2 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
               }
-	        
+
               if (!values.fechaEnvio2) {
 	        	errors.fechaEnvio2 = 'Campo obligatorio';
               }
@@ -514,7 +514,7 @@ function pagar() {
               if (values.horaEnvioFin2=="" || values.horaEnvioIni2==null) {
 	        	errors.horaEnvioFin2 = 'Campo obligatorio';
               }
-	        
+
               if (values.horaEnvioIni2=="" || values.horaEnvioIni2==null) {
 	        	errors.horaEnvioFin2 = 'Campo obligatorio';
               }
@@ -528,8 +528,8 @@ function pagar() {
         		values.horaEnvioFin2 = null;
         		values.horaEnvioIni2 = null;
         	}
-        
-               
+
+
         //Pedido 3
         if (pedido3mostrado === "si"){
         	  if (!values.direccion3) {
@@ -537,17 +537,17 @@ function pagar() {
               }else if(values.direccion3.includes("javascript") || values.direccion3.includes(";")){
               	errors.direccion3 = 'No se permiten esos carácteres';
               }
-             
+
               if (!values.poblacion3) {
               	errors.poblacion3 = 'Campo obligatorio';
               }else if(values.poblacion3.includes("javascript") || values.poblacion3.includes(";")){
               	errors.poblacion3 = 'No se permiten esos carácteres';
               }
-              
+
               if (!values.cpostal3) {
               	errors.cpostal3 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
               }
-              
+
               if (!values.provincia3) {
               	errors.provincia3 = 'Campo obligatorio';
               }else if(values.provincia3.includes("javascript") || values.provincia3.includes(";")){
@@ -568,7 +568,7 @@ function pagar() {
 	        if (values.horaEnvioFin3=="" || values.horaEnvioIni3==null) {
 	        	errors.horaEnvioFin3 = 'Campo obligatorio';
 	        }
-	        
+
 	        if (values.horaEnvioIni3=="" || values.horaEnvioIni3==null) {
 	        	errors.horaEnvioFin3 = 'Campo obligatorio';
 	        }
@@ -582,8 +582,8 @@ function pagar() {
         	values.horaEnvioFin3 = null;
         	values.horaEnvioIni3 = null;
         }
-        
-        
+
+
         //Pedido 4
         if (pedido4mostrado === "si"){
         	  if (!values.direccion4) {
@@ -591,23 +591,23 @@ function pagar() {
               }else if(values.direccion4.includes("javascript") || values.direccion4.includes(";")){
               	errors.direccion4 = 'No se permiten esos carácteres';
               }
-             
+
               if (!values.poblacion4) {
               	errors.poblacion4 = 'Campo obligatorio';
               }else if(values.poblacion4.includes("javascript") || values.poblacion4.includes(";")){
               	errors.poblacion4 = 'No se permiten esos carácteres';
               }
-              
+
               if (!values.cpostal4) {
               	errors.cpostal4 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
               }
-              
+
               if (!values.provincia4) {
               	errors.provincia4 = 'Campo obligatorio';
               }else if(values.provincia4.includes("javascript") || values.provincia4.includes(";")){
               	errors.provincia4 = 'No se permiten esos carácteres';
               }
-              
+
 	        if (!values.numero4) {
 	        	errors.numero4 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
 	        }
@@ -623,11 +623,11 @@ function pagar() {
 	        if (values.horaEnvioFin4=="" || values.horaEnvioIni4==null) {
 	        	errors.horaEnvioFin4 = 'Campo obligatorio';
 	        }
-	        
+
 	        if (values.horaEnvioIni4=="" || values.horaEnvioIni4==null) {
 	        	errors.horaEnvioFin4 = 'Campo obligatorio';
 	        }
-	        
+
         } else {
         	values.direccion4 = null;
         	values.poblacion4 = null;
@@ -638,8 +638,8 @@ function pagar() {
         	values.horaEnvioFin4 = null;
         	values.horaEnvioIni4 = null;
         }
-        
-        
+
+
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
@@ -669,7 +669,7 @@ function pagar() {
         isSubmitting,
         /* and other goodies */
       }) => (
-        <form onSubmit={handleSubmit}>	
+        <form onSubmit={handleSubmit}>
 
         <div id="pedido1">
 			<div className="pedido-form-envio-container">
@@ -677,9 +677,9 @@ function pagar() {
 			 	<legend><h2>Pedido número 1**</h2> </legend>
 
 	        <label htmlFor="poblacion1">Población*: </label>
-	     	        
-	        
-	        
+
+
+
 	        <Field
 				id="poblacion1"
 				type="text"
@@ -726,19 +726,19 @@ function pagar() {
 		        </div>
 				<br/><br/>
 
-			
+
 	        <label htmlFor="direccion1">Calle*: </label>
 	        <Field
 				id="direccion1"
 				type="text"
-				name="direccion1"			
+				name="direccion1"
 				value={values.direccion1}
 		        placeholder="c/Cisnes"
 				onChange={handleChange}
 				onBlur={handleBlur}
 		      	/>
 
-		        	
+
 		        <div className="errores">
 		        	{errors.direccion1}
 		        </div>
@@ -809,7 +809,7 @@ function pagar() {
 				</div>
 				<br/><br/>
 				<label htmlFor="cestaId1" className="s">   Elige tu cesta: </label>
-			   <select name="cestaId1" id="cestaId1" 
+			   <select name="cestaId1" id="cestaId1"
 			    value={values.id} onChange={handleChange}
 				onBlur={handleBlur}>
 
@@ -825,8 +825,8 @@ function pagar() {
 			</fieldset>
 			</div>
 		</div>
-		
-		{envioTomas > 1 ? 
+
+		{envioTomas > 1 ?
 	        <div id="enlace1">
 	        		<div>
 					<br/><br/>
@@ -838,7 +838,7 @@ function pagar() {
 	        </div>
 		:
 			<div>
-	        
+
 	        </div>
 	    }
 		<div id="pedido2">
@@ -859,7 +859,7 @@ function pagar() {
 				onBlur={handleBlur}
 		        placeholder="Los Palacios y Villafranca"
 				/>
-		    
+
 		       	<div className="errores">
 		        {errors.poblacion2}
 		    </div>
@@ -875,8 +875,8 @@ function pagar() {
 		        placeholder="41720"
 		        pattern="^\d{5}$"
 				/>
-		     
-		        	
+
+
 		     <div className="errores">
 		     	{errors.cpostal2}
 		     </div>
@@ -993,10 +993,10 @@ function pagar() {
 			<br/><br/>
 			<br/><br/>
 		</div>
-		
-		
-		
-		
+
+
+
+
 		<div id="enlace2">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido3"  onClick={mostrarPedido3} id = "enlaceMostrarPedido3">
@@ -1005,13 +1005,13 @@ function pagar() {
 			<br/><br/>
 			<br/><br/>
 		</div>
-		
+
 		<div id="pedido3">
 			<div className="pedido-form-envio-container" >
 			<fieldset>
 			<div className="mismaLinea">
 			 	<h2 className="tituloPedido">Pedido número 3**</h2>
-	
+
 			 	<a className="botonCopiar" href="#pedido3" onClick={copiarDir13}>  Copiar dirección </a>
         	</div>
 
@@ -1142,9 +1142,9 @@ function pagar() {
 					{errors.horaEnvioFin3}
 				</div>
 				<br/><br/>
-				
+
 				<label htmlFor="cestaId3" className="s">   Elige tu cesta: </label>
-				   <select name="cestaId3" id="cestaId3" 
+				   <select name="cestaId3" id="cestaId3"
 				    value={values.id} onChange={handleChange}
 					onBlur={handleBlur}>
 				   { cestas().map((cesta) => (
@@ -1160,7 +1160,7 @@ function pagar() {
 			<br/><br/>
 			<br/><br/>
 		</div>
-		
+
 		<div id="enlace3">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido4"  onClick={mostrarPedido4} id="enlaceMostrarPedido4">
@@ -1169,7 +1169,7 @@ function pagar() {
 			<br/><br/>
 			<br/><br/>
 		</div>
-		
+
 		<div id="pedido4">
 		<div className="pedido-form-envio-container" >
 		<fieldset>
@@ -1306,7 +1306,7 @@ function pagar() {
 			</div>
 				<br/><br/>
 			<label htmlFor="cestaId4">   Elige tu cesta: </label>
-			   <select name="cestaId4" id="cestaId4" 
+			   <select name="cestaId4" id="cestaId4"
 			    value={values.id} onChange={handleChange}
 				onBlur={handleBlur}>
 			   { cestas().map((cesta) => (
@@ -1322,7 +1322,7 @@ function pagar() {
 	</div>
 
 
-		
+
 
 		<div id="info-pedidos">
 			<br/>
@@ -1330,7 +1330,7 @@ function pagar() {
 		</div>
 		<div id="info-pedidos-2">
 			** La entrega se realizará en la horquilla de horas indicada
-		
+
 
 		<br/><br/>
 		</div>
@@ -1341,7 +1341,7 @@ function pagar() {
         	</div>
         	<div className="grid" id="paypal-b">
 			<h2>Elige tu método de pago 👇</h2>
-	         
+
 	         <PayPalButton
 				 amount={precio()}
 	         onSuccess={(values, { setSubmitting }) => {
@@ -1379,9 +1379,9 @@ function pagar() {
 		 <h3> No te quedan envíos por realizar de tu suscripción. </h3>
 		 <img src={noPedido} className="imagen-0-pedidos"/>
 		 <p>Vuelve cuando hayas renovado tu suscripción.</p>
-		 
+
 		 </div>)}
-	  
+
     </div>
 
 	</div>

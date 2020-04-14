@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -21,6 +20,7 @@ import com.youmarket.domain.Producto;
 import com.youmarket.domain.Usuario;
 import com.youmarket.domain.form.FormPedidos;
 import com.youmarket.services.CestaProductoService;
+import com.youmarket.services.FacturaService;
 import com.youmarket.services.PedidoService;
 import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
@@ -49,6 +49,9 @@ public class PedidoController {
 
 	@Autowired
 	private SuscripcionService susService;
+	
+	@Autowired
+	private FacturaService facturaService;
 	
 	@GetMapping("/{id}")
     public ResponseEntity<Object> pedidoPorId(@Valid @PathVariable Integer id) {
@@ -229,15 +232,16 @@ public class PedidoController {
 		Pedido p4s = new Pedido();
 		
 		if(pedidos.getDireccion4() != null){
-			user.getSuscripcion().setEnvios(user.getSuscripcion().getEnvios() - 4);
+			user.setPedidosRestantes(user.getPedidosRestantes() - 4);
 		} else if(pedidos.getDireccion3() != null){
-			user.getSuscripcion().setEnvios(user.getSuscripcion().getEnvios() - 3);
+			user.setPedidosRestantes(user.getPedidosRestantes() - 3);
 		} else if(pedidos.getDireccion2() != null){
-			user.getSuscripcion().setEnvios(user.getSuscripcion().getEnvios() - 2);
+			user.setPedidosRestantes(user.getPedidosRestantes() - 2);
 		} else if(pedidos.getDireccion1() != null){
-			user.getSuscripcion().setEnvios(user.getSuscripcion().getEnvios() - 1);
+			user.setPedidosRestantes(user.getPedidosRestantes() - 1);
 		}
-		this.susService.save(user.getSuscripcion());
+		this.usuarioService.save(user);
+
 		if(pedidos.getDireccion1() != null){
 			Pedido p1 = new Pedido();
 			p1.setCpostal(pedidos.getCpostal1());
@@ -258,6 +262,7 @@ public class PedidoController {
 			} else {
 				p1s = this.meterCesta(pedidos.getCestaId1(), p1);
 			}
+			facturaService.createAndSaveFactura(null, p1s, importeTotal(p1s), new Date());
 		}
 
 		if(pedidos.getDireccion2() != null){
@@ -280,6 +285,7 @@ public class PedidoController {
 			} else {
 				p2s = this.meterCesta(pedidos.getCestaId2(), p2);
 			}
+			facturaService.createAndSaveFactura(null, p2s, importeTotal(p2s), new Date());
 		}
 
 		if(pedidos.getDireccion3() != null){
@@ -302,6 +308,7 @@ public class PedidoController {
 			} else {
 				p3s = this.meterCesta(pedidos.getCestaId3(), p3);
 			}
+			facturaService.createAndSaveFactura(null, p3s, importeTotal(p3s), new Date());
 		}
 
 		if(pedidos.getDireccion4() != null){
@@ -324,6 +331,7 @@ public class PedidoController {
 			} else {
 				p4s = this.meterCesta(pedidos.getCestaId4(), p4);
 			}
+			facturaService.createAndSaveFactura(null, p4s, importeTotal(p4s), new Date());
 		}
 		List<Pedido> res = Arrays.asList(p1s,p2s,p3s,p4s);
 		session.setAttribute("SESSION_CARRITO", new HashMap<Producto, Integer>());
@@ -331,6 +339,17 @@ public class PedidoController {
 
 	}
 
+	private double importeTotal(Pedido pedido) {
+		double total = 0.0;
+		
+		List<CestaProducto> lista = cpService.findProdsByCesta(pedido);
+		for (CestaProducto prod : lista) {
+			total += prod.getProducto().getPrecioIva() * prod.getCantidad();
+		}
+		
+		return total;
+	}
+	
 	public Pedido meterCarrito(Map<Producto, Integer> carrito, Pedido p){
 		Pedido guardado = this.pedidoService.save(p);
 		List<Producto> keys = new ArrayList<>(carrito.keySet());

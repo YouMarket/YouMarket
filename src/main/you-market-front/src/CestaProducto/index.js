@@ -1,8 +1,5 @@
 import React from 'react';
 import './styles.css';
-import plus from '../assets/plus.svg'
-import less from '../assets/less.svg'
-import Header from '../Header';
 import {Link} from 'react-router-dom';
 
 interface Props {
