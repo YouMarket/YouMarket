@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../logo.png';
 import Header from '../Header';
+import "./styles.css"
 import { Formik } from 'formik';
 import {
 	  withRouter
@@ -91,7 +92,7 @@ class Login extends React.Component{
 		        isSubmitting,
 		        /* and other goodies */
 		      }) => (
-		        <form onSubmit={handleSubmit}>
+		        <form onSubmit={handleSubmit} className="login-form">
 
 		        <span className="p-float-label" className="span-login">
 	        	<label htmlFor="email"  className="login-label">Email </label>
@@ -131,7 +132,7 @@ class Login extends React.Component{
 		        </form>
 		      )}
 		    </Formik>
-		    <p className="registry-in-login">¿Aún no tienes cuenta?, <a href="/registro">Registrate</a></p>
+		    <p className="registry-in-login">¿Aún no tienes cuenta?, <a className="register-link" href="/registro">Registrate</a></p>
 		  </div>
 		 </div>
 		);}
