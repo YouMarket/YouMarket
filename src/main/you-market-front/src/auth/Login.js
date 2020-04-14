@@ -1,5 +1,4 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
-import style from './styles.css';
+import React from 'react';
 import Logo from '../logo.png';
 import Header from '../Header';
 import { Formik } from 'formik';
@@ -28,10 +27,10 @@ class Login extends React.Component{
 		  }
 
 		handleRedirect = () => {
-			if(localStorage.getItem('auth')!=null){	
-		      this.props.history.push('/cesta');
+			if (localStorage.getItem('auth') != null){	
+		      this.props.history.push('/');
 			}
-		    }
+		}
 			
 		 componentWillMount() {
 			if(localStorage.registroOK){

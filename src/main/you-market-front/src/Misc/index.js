@@ -1,9 +1,6 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
-
-import style from './styles.css';
+import React from 'react';
 import img from './404.png';
 import Header from '../Header';
-import { Formik } from 'formik';
 import {
 	  withRouter
 	} from 'react-router-dom';
