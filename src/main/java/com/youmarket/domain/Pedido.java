@@ -25,8 +25,15 @@ import lombok.NoArgsConstructor;
 public class Pedido extends Cesta{
 
 	
-	private String direccion;
+	private String 	direccion;
 	
+	private String 	poblacion;
+	
+	private int 	numero;
+	
+	private String 	provincia;
+	
+	private String 	cpostal;
 
 	
 	/**

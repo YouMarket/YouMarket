@@ -17,4 +17,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
 	Boolean existsByEmail(String email);
 
+	@Query("select u.suscripcion.envios from Usuario u where u.id=?1")
+	Integer getEnvios(Integer id);
+	
+	@Query("select count(p) from Pedido p where p.id=?1")
+	Integer getPedidosHechos(Integer id);
+
 }

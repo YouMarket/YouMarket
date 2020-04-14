@@ -31,7 +31,6 @@ const [cestas, setCestas] = useState([]);
 	    fetchCestas(cestas);
 	  }, []);
 	
-	await new Promise(r => setTimeout(r, 300));
   return(
 <div>
   <Header/>
