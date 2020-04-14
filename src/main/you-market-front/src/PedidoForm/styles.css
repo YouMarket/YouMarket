@@ -69,6 +69,11 @@
 	margin:auto;
 }
 
+#paypal-b{
+	display:none;
+	text-align:center;
+}
+
 .pedido-container input {
     padding: 8px 5px;
     margin-right: 20px;

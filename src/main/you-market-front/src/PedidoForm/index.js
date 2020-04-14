@@ -7,6 +7,8 @@ import Header from '../Header';
 import { PayPalButton } from "react-paypal-button-v2";
 
 var today = new Date().toISOString().split('T')[0];
+const errors = {};
+const started = false;
 
 var pedido1mostrado;
 var pedido2mostrado;
@@ -153,16 +155,13 @@ export function PedidoForm() {
 		       .then(res => res.json())
 		       .then(total => {
 		         setTotal(total)
-		       }).then(function(response) {
-            	    return console.log(response.json());
-
 		       });
 		   }, []);
 
 		 useEffect(() => {
 		  fetchTotal(total);
 		   }, []);
-		 console.log(total);
+
 		 return total;
 	}
 	
@@ -170,9 +169,6 @@ export function PedidoForm() {
 		
 		var x = document.getElementById("pedido1");
 		var y = document.getElementById("enlace1");
-		
-		//window.alert(z);
-		console.log("ESTO VALE LA Z: " + envioTomas);
 		
 		if (x.style.display === "flex") {
 			 pedido1mostrado = "no";
@@ -190,15 +186,72 @@ export function PedidoForm() {
 		return false;
 	}
 	
+function empieza() {
+	if(started==false){
+		started=true;
+	}
+}
+	
+function pagar() {
+		var x = document.getElementById("paypal-b");
+		var y =document.getElementById("pedido1");
+		var z =document.getElementById("pedido2");
+		var a =document.getElementById("pedido3");
+		var b =document.getElementById("pedido4");
+		var c =document.getElementById("titulo-pedidos");
+		var d =document.getElementById("envios-restantes-pedidos");
+		var e =document.getElementById("info-pedidos");
+		var f =document.getElementById("info-pedidos-2");
+		var g =document.getElementById("enlace1");
+		var h =document.getElementById("enlace2");
+		var i =document.getElementById("enlace3");
+		var j =document.getElementById("pagar-a");
+		
+
+			if(started==true &&
+			   errors.direccion1===undefined && errors.poblacion1===undefined &&
+			   errors.cpostal1===undefined && errors.provincia1===undefined &&
+			   errors.numero1===undefined && errors.fechaEnvio1===undefined &&
+			   errors.horaEnvioFin1===undefined && errors.horaEnvioIni1===undefined &&
+			   errors.direccion2===undefined && errors.poblacion2===undefined &&
+			   errors.cpostal2===undefined && errors.provincia2===undefined &&
+			   errors.numero2===undefined && errors.fechaEnvio2===undefined &&
+			   errors.horaEnvioFin2===undefined && errors.horaEnvioIni2===undefined &&
+			   errors.direccion3===undefined && errors.poblacion3===undefined &&
+			   errors.cpostal3===undefined && errors.provincia3===undefined &&
+			   errors.numero3===undefined && errors.fechaEnvio3===undefined &&
+			   errors.horaEnvioFin3===undefined && errors.horaEnvioIni3===undefined &&
+			   errors.direccion4===undefined && errors.poblacion4===undefined &&
+			   errors.cpostal4===undefined && errors.provincia4===undefined &&
+			   errors.numero4===undefined && errors.fechaEnvio4===undefined &&
+			   errors.horaEnvioFin4===undefined && errors.horaEnvioIni4===undefined){
+				
+			 x.style.display = "block";
+			 y.style.display = "none";
+			 z.style.display = "none";
+			 a.style.display = "none";
+			 b.style.display = "none";
+			 c.style.display = "none";
+			 d.style.display = "none";
+			 e.style.display = "none";
+			 f.style.display = "none";
+			 g.style.display = "none";
+			 h.style.display = "none";
+			 i.style.display = "none";
+			 j.style.display = "none";
+		}
+			else if(started==false){
+				
+			}else{
+				
+			}
+	}
 	
 	
 	const mostrarPedido2 = () => {
 		
 		var x = document.getElementById("pedido2");
 		var y = document.getElementById("enlace2");
-		
-		//window.alert(z);
-		console.log("ESTO VALE LA Z: " + envioTomas);
 		
 		if (x.style.display === "flex") {
 			 pedido2mostrado = "no";
@@ -210,6 +263,14 @@ export function PedidoForm() {
 			 document.getElementById("provincia2").value = "";
 			 document.getElementById("direccion2").value = "";
 			 
+			 errors.direccion2=undefined;
+			 errors.poblacion2=undefined;
+			 errors.cpostal2=undefined;
+			 errors.provincia2=undefined;
+			 errors.numero2=undefined; 
+			 errors.fechaEnvio2=undefined;
+			 errors.horaEnvioFin2=undefined;
+			 errors.horaEnvioIni2=undefined;
 			 
 		} else {
 			 document.getElementById("poblacion2").value = "";
@@ -236,6 +297,15 @@ export function PedidoForm() {
 			  	pedido3mostrado = "no";
 			    x.style.display = "none";
 			    y.style.display = "none";
+			    
+			    errors.direccion3=undefined;
+				errors.poblacion3=undefined;
+				errors.cpostal3=undefined;
+				errors.provincia3=undefined;
+				errors.numero3=undefined; 
+				errors.fechaEnvio3=undefined;
+				errors.horaEnvioFin3=undefined;
+				errors.horaEnvioIni3=undefined;
 		  } else {
 			  	pedido3mostrado = "si";
 			    x.style.display = "flex";
@@ -254,6 +324,15 @@ export function PedidoForm() {
 			  	pedido4mostrado = "no";
 			    x.style.display = "none";
 			    y.style.display = "none";
+			    
+			    errors.direccion4=undefined;
+				errors.poblacion4=undefined;
+				errors.cpostal4=undefined;
+				errors.provincia4=undefined;
+				errors.numero4=undefined; 
+				errors.fechaEnvio4=undefined;
+				errors.horaEnvioFin4=undefined;
+				errors.horaEnvioIni4=undefined;
 		  } else {
 			  	pedido4mostrado = "si";
 			    x.style.display = "flex";
@@ -308,14 +387,14 @@ export function PedidoForm() {
 
 	{envioTomas > 0 ? 
 	  (<div className="pedido-container container">
-	  <h1>¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
-	  <br/>
-	  <h3> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>
-	  <Formik validateOnChange={false} validateOnBlur={false} id="formikito"
+	  <h1 id="titulo-pedidos">¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
+	  
+	  <h3 id="envios-restantes-pedidos"> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>
+	  <Formik validateOnChange={true} validateOnBlur={true} id="formikito"
     	className="formulario-pedido"
     	initialValues={{   }}
      	validate={values => {
-        const errors = {};
+        errors = {};
         //Pedido 1
         if (!values.direccion1) {
         	errors.direccion1 = 'Campo obligatorio';
@@ -338,6 +417,9 @@ export function PedidoForm() {
         
         if (values.horaEnvioFin1 < values.horaEnvioIni1) {
         	errors.horaEnvioFin1 = 'La hora final no puede ser anterior a la inicial'
+        }
+        if (values.horaEnvioFin1 < 9 || values.horaEnvioIni1<9 || values.horaEnvioFin1 > 21 || values.horaEnvioIni1 > 22) {
+        	errors.horaEnvioFin1 = 'En este tramo horario no se realizan entregas'
         }
         
 
@@ -490,14 +572,10 @@ export function PedidoForm() {
         				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
         			method:'POST',
         			body:JSON.stringify(values, null, 2)
-        	}).then(function(response) {
-        	    return console.log(response.json());
-
         	}).then(() =>
         	 {
         		 handleRedirect();
         	 })
-        	 alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
         }, 400);
       }}
@@ -531,6 +609,7 @@ export function PedidoForm() {
 		        placeholder="Los Palacios y Villafranca"
 				onChange={handleChange}
 				onBlur={handleBlur}
+	        	onFocus={empieza}
 				/>
 		        <div className="errores">
 		        	{errors.poblacion1}
@@ -829,8 +908,9 @@ export function PedidoForm() {
 			</fieldset>
 			</div>
 			<br/><br/>
+			<br/><br/>
 		</div>
-		<br/><br/>
+		
 		
 		
 		
@@ -840,8 +920,9 @@ export function PedidoForm() {
 				+ Añadir/Eliminar pedido número 3
 			</a>
 			<br/><br/>
+			<br/><br/>
 		</div>
-		<br/><br/>
+		
 		<div id="pedido3">
 			<div className="pedido-form-envio-container" >
 			<fieldset>
@@ -992,16 +1073,18 @@ export function PedidoForm() {
 			</fieldset>
 			</div>
 			<br/><br/>
+			<br/><br/>
 		</div>
-		<br/><br/>
+		
 		<div id="enlace3">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido4"  onClick={mostrarPedido4} id="enlaceMostrarPedido4">
 				+ Añadir/Eliminar pedido número 4
 			</a>
 			<br/><br/>
+			<br/><br/>
 		</div>
-		<br/><br/>
+		
 		<div id="pedido4">
 		<div className="pedido-form-envio-container" >
 		<fieldset>
@@ -1149,27 +1232,29 @@ export function PedidoForm() {
 
 		</fieldset>
 		</div>
-		<br/><br/>
 	</div>
 
 
-		<br/>
+		
 
-		<div>
+		<div id="info-pedidos">
+			<br/>
 			* Campo obligatorio
 		</div>
-		<div>
+		<div id="info-pedidos-2">
 			** La entrega se realizará en la horquilla de horas indicada
-		</div>
+		
 
 		<br/><br/>
-
-        <button type="submit" disabled={isSubmitting} onClick="mostrar()">
-        	Enviar
-        </button>
-
+		</div>
+		<div>
+        <a id="pagar-a" href="#" onClick={pagar}>
+        	Pagar
+        </a>
+        	</div>
+        	<div className="grid" id="paypal-b">
 			<h2>Elige tu método de pago 👇</h2>
-	         <div className="grid">
+	         
 	         <PayPalButton
 				 amount={precio()}
 	         onSuccess={(values, { setSubmitting }) => {
@@ -1187,7 +1272,6 @@ export function PedidoForm() {
 	             	 {
 	             		 handleRedirect();
 	             	 })
-	               alert(JSON.stringify(values, null, 2));
 
 	               setSubmitting(false);
 	             }, 400);
