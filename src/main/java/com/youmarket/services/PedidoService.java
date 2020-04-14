@@ -1,10 +1,12 @@
 package com.youmarket.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.youmarket.domain.Pedido;
 import com.youmarket.domain.Pedido;
 import com.youmarket.repositories.PedidoRepository;
 
@@ -33,6 +35,12 @@ public class PedidoService {
 	}
 
 	public Pedido findById(int idPedido) {
-		return repo.findById(idPedido).get();
+		Optional<Pedido> pedido =  repo.findById(idPedido);
+		if (pedido.isPresent()) {
+			return pedido.get();
+		} else {
+			return null;
+		}
+		
 	}
 }
