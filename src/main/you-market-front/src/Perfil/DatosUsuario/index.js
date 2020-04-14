@@ -100,7 +100,7 @@ function DatosUsuario() {
 						currency="EUR"
 						onSuccess={() => {
 						setTimeout(() => {
-							fetch('/factura/create', {
+							fetch('/factura/createSuscripcion', {
 								headers: {
 									'Content-Type' : 'application/json',
 									'Accept' : 'application/json',
@@ -108,7 +108,7 @@ function DatosUsuario() {
 								},
 								method:'POST'})
 							.then(function(response) {})
-							.then(() => {history.push('/')})
+							.then(() => {history.push('/datos-perfil')})
 						
 						
 						}, 400);

@@ -22,7 +22,6 @@ import Logout from './auth/Logout'
 
 import PedidoForm from './PedidoForm';
 
-import PedidoExito from './PedidoExito';
 import DietaProductos from './DietaProductos';
 
 import Carro from './Carro';
@@ -32,10 +31,12 @@ import ShowCesta from './ShowCesta';
 import EditCesta from './EditCesta';
 import Error from './Misc';
 import CestaProductos from './CestaProductos';
-import TerminosYCondiciones from './TerminosCondiciones';
-import AlertaBrecha from './AlertaBrecha';
 import Facturas from './Perfil/Facturas';
 import SubscripcionForm from './Perfil/DatosUsuario/suscripcionForm'
+import TerminosYCondiciones from './TerminosCondiciones';
+import AlertaBrecha from './AlertaBrecha';
+import PedidoExito from './PedidoExito';
+
 
 
 function App() {
@@ -137,9 +138,7 @@ function App() {
     				<AlertaBrecha />
     		</Route>
         		
-				<Route path="/pedidoexito">
-					  <PedidoExito />
-				</Route>
+
 
 		    <Route path="/">
 		        <Productos />

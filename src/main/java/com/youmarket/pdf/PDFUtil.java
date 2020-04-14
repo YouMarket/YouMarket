@@ -24,6 +24,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.youmarket.domain.CestaProducto;
 import com.youmarket.domain.Factura;
 import com.youmarket.domain.Suscripcion;
+import com.youmarket.domain.Usuario;
 
 public class PDFUtil {
 	
@@ -31,12 +32,16 @@ public class PDFUtil {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	}
 
-	private static Paragraph parrafoFactura(Factura factura) {
+	private static Paragraph parrafoFactura(Factura factura, Usuario usuario) {
 		NumberFormat formatter = new DecimalFormat("#0.00");  
 		Paragraph p = new Paragraph();
 		p.add("\n \n");
 		p.add("Importe: "+formatter.format(factura.getTotal()) + " €");
 		p.add("\nImporte + I.V.A.: "+formatter.format(factura.getTotalIva()) + " €");
+		p.add("\nCliente: "+usuario.getNombre()+" "+usuario.getApellidos());
+		if(factura.getPedido()!= null) {
+			p.add("\nDirección: "+factura.getPedido().getDireccion());
+		}
 		if(factura.getFechaFactura() != null)
 			p.add("\nFecha de la factura: "+ formatDate().format(factura.getFechaFactura()));
 		p.setAlignment(Element.ALIGN_JUSTIFIED);
@@ -87,7 +92,7 @@ public class PDFUtil {
 			p.add("\nSuscripción: "+suscripcion.getNombre());
 			p.setAlignment(Element.ALIGN_JUSTIFIED);
 
-			Paragraph pFactura = parrafoFactura(factura);
+			Paragraph pFactura = parrafoFactura(factura, factura.getUsuario());
 
 			PdfWriter.getInstance(document, out);
 			document.open();
@@ -119,7 +124,7 @@ public class PDFUtil {
 		try {
 
 			PdfPTable table = cabecera("Factura de pedido");
-			Paragraph pFactura = parrafoFactura(factura);
+			Paragraph pFactura = parrafoFactura(factura, factura.getPedido().getUsuario());
 
 			PdfPTable pedidos = tablaPedidos(factura, lista);
 			

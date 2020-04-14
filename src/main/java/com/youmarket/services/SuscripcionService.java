@@ -42,4 +42,5 @@ public class SuscripcionService {
 		List<Suscripcion> sus = repo.findSuscripcionByPrecio(precio);
 		return sus.isEmpty() ? null : sus.get(0);
 	}
+
 }

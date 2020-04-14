@@ -123,7 +123,7 @@ public class UsuarioController {
 		ApiResponse respuesta = new ApiResponse();
 		if(usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
 			Usuario usuario = form.getUsuario();
-			
+			usuario.setPedidosRestantes(0);
 			Suscripcion sus = suscripcionService.findById(usuario.getSuscripcion().getId());
 			usuario.setSuscripcion(sus);
 			if(sus.isDietista()) {
@@ -186,6 +186,18 @@ public class UsuarioController {
 		dirService.save(dir);
 		
 		
+		
+		return ResponseEntity.ok(respuesta);
+	}
+	
+	@PostMapping("/updateSuscripcion")
+	public ResponseEntity<ApiResponse> updateSuscripcion(@RequestBody Integer sus, @CurrentUser UserPrincipal curr){
+		ApiResponse respuesta = new ApiResponse();
+		respuesta.setSuccess(true);
+		Suscripcion susc = suscripcionService.findById(sus);
+		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
+		user.setSuscripcion(susc);
+		usuarioService.save(user);
 		
 		return ResponseEntity.ok(respuesta);
 	}
