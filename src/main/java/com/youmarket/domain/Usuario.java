@@ -17,11 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.Range;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @NoArgsConstructor
@@ -54,6 +54,7 @@ public class Usuario {
 	private String cPostal;
 	
 	@Column(name="pedido_restante")
+	@Range(min=0, max=4)
 	private Integer pedidosRestantes;
 
 	private String email;

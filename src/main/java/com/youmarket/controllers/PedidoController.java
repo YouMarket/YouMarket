@@ -227,17 +227,18 @@ public class PedidoController {
 		Pedido p2s = new Pedido();
 		Pedido p3s = new Pedido();
 		Pedido p4s = new Pedido();
-		
+
 		if(pedidos.getDireccion4() != null){
-			user.getSuscripcion().setEnvios(user.getSuscripcion().getEnvios() - 4);
+			user.setPedidosRestantes(user.getPedidosRestantes() - 4);
 		} else if(pedidos.getDireccion3() != null){
-			user.getSuscripcion().setEnvios(user.getSuscripcion().getEnvios() - 3);
+			user.setPedidosRestantes(user.getPedidosRestantes() - 3);
 		} else if(pedidos.getDireccion2() != null){
-			user.getSuscripcion().setEnvios(user.getSuscripcion().getEnvios() - 2);
+			user.setPedidosRestantes(user.getPedidosRestantes() - 2);
 		} else if(pedidos.getDireccion1() != null){
-			user.getSuscripcion().setEnvios(user.getSuscripcion().getEnvios() - 1);
+			user.setPedidosRestantes(user.getPedidosRestantes() - 1);
 		}
-		this.susService.save(user.getSuscripcion());
+		this.usuarioService.save(user);
+
 		if(pedidos.getDireccion1() != null){
 			Pedido p1 = new Pedido();
 			p1.setCpostal(pedidos.getCpostal1());
