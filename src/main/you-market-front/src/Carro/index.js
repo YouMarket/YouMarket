@@ -12,17 +12,7 @@ function updatePrecioFinal(cantidad, precio){
 	return precioFinal
 }
 
-function construyeCarrito(){
-	var prods = [];
-	Object.keys(sessionStorage).forEach(element => {
-		var ele = sessionStorage.getItem(element)
-		if (JSON.parse(ele)){
-		}
-		var strProd = JSON.parse(sessionStorage.getItem(element))
-		console.log(JSON.stringify(strProd))
-	});
-	return 0;
-}
+
 
 function Carro() {
 precioFinal=0.00
@@ -31,15 +21,23 @@ const[cestas, setCestas]=useState([]);
 let history=useHistory();
 
 	const fetchCarrito=useCallback(()=> {
-		construyeCarrito();
-		return fetch('carrito')
-			.then(res=> res.json())
-			.then(carrito=> {
-				setCarrito(carrito)
-			});
+		return construyeCarrito();
+		
 	}, []);
 
-
+	function construyeCarrito(){
+		var prods = [];
+		Object.keys(sessionStorage).forEach(element => {
+			var ele = sessionStorage.getItem(element)
+			if (JSON.parse(ele)){
+				prods.push(JSON.parse(ele))
+			}
+			console.log(prods)
+			setCarrito(prods)
+		});
+		setCarrito(prods)
+		return 0;
+	}
 
 	useEffect(()=> {
 		fetchCarrito(carrito);

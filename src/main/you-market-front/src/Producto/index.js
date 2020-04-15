@@ -32,15 +32,19 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 		document.getElementById(idContador).textContent = cantidad
 	}
 	
-	function sendToBack(id, cantidad, nombre, precio, urlImagen) {
+	function sendToBack(id, cantidad, nombre, precio, urlImagen, supermercado, unidad) {
 		var prodSession = sessionStorage.getItem('prod_'+id);
 		if(!prodSession){
 			var jsonProd = {
 				'producto': {
 					'id': id, 
 					'nombre': nombre,
-					'precio': precio,
-					'urlImagen': urlImagen
+					'precioIva': precio,
+					'supermercado': {
+						'nombre': supermercado
+					},
+					'urlImagen': urlImagen,
+					'unidad': unidad
 				},
 				'cantidad': cantidad
 			}
@@ -83,7 +87,7 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 					<p id={idContador} className="contador">{cantidad}</p>
 					<img className="mas" src={plus} onClick={plusProduct} alt="Mas"/>
 				</div>
-				<button className="boton-add-producto" onClick={() => sendToBack(id, cantidad, nombre, precio, urlImagen)}>AÑADIR AL CARRO</button>
+				<button className="boton-add-producto" onClick={() => sendToBack(id, cantidad, nombre, precio, urlImagen, supermercado, unidad)}>AÑADIR AL CARRO</button>
 			</div>
   		</div>
 	  
