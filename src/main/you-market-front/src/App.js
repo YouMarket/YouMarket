@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import {
 	  BrowserRouter as Router,
 	  Switch,
-	  Route,
-	  withRouter
+	  Route
 	} from "react-router-dom";
 import Productos from './Productos';
 import Dietas from './Dietas';
@@ -22,6 +21,7 @@ import Login from './auth/Login'
 import Logout from './auth/Logout'
 
 import PedidoForm from './PedidoForm';
+
 import DietaProductos from './DietaProductos';
 
 import Carro from './Carro';
@@ -31,7 +31,12 @@ import ShowCesta from './ShowCesta';
 import EditCesta from './EditCesta';
 import Error from './Misc';
 import CestaProductos from './CestaProductos';
+import Facturas from './Perfil/Facturas';
+import SubscripcionForm from './Perfil/DatosUsuario/suscripcionForm'
 import TerminosYCondiciones from './TerminosCondiciones';
+import AlertaBrecha from './AlertaBrecha';
+import PedidoExito from './PedidoExito';
+
 
 
 function App() {
@@ -42,12 +47,9 @@ function App() {
 				<Route path="/producto/dieta/list/:id">
 					<DietaProductos/>
 				</Route>
-
 				<Route path="/pedido/create">
 					<PedidoForm />
 				</Route>
-
-
     			<Route path="/create/dieta">
 					<DietaForm />
 				</Route>
@@ -85,6 +87,9 @@ function App() {
 				<Route path="/datos-perfil">
 					<DatosUsuario/>
 				</Route>
+				<Route path="/cambio-suscripcion">
+					<SubscripcionForm/>
+				</Route>
 				<Route path="/datos-subscripcion">
 					<DatosSubscripcion/>
 				</Route>
@@ -94,10 +99,9 @@ function App() {
 				<Route path="/login">
     				<Login />
 				</Route>
-
 				<Route path="/logout">
-				<Logout />
-			</Route>
+					<Logout />
+				</Route>
 				<Route path="/cesta/edit/:id">
 				<EditCesta/>
 				</Route>
@@ -110,23 +114,35 @@ function App() {
 	    		<Route path="/show/cesta/:id">
 	    			<ShowCesta />
 				</Route>
-
-
-
+				<Route path="/facturas-usuario">
+	    			<Facturas />
+				</Route>
 				<Route path="/cesta/productos/dieta/list/:id">
 					<CestaProductos/>
 				</Route>
-
 				<Route path="/404">
-				<Error/>
-			</Route>
+					<Error/>
+				</Route>
+
+				<Route path="/pedidoexito">
+					<PedidoExito/>
+				</Route>
+
+
 
 				<Route path="/terminosycondiciones">
         			<TerminosYCondiciones />
-        		</Route>
-		        <Route path="/">
-		        	<Productos />
-		        </Route>
+        </Route>
+
+				<Route path="/alertabrecha">
+    				<AlertaBrecha />
+    		</Route>
+        		
+
+
+		    <Route path="/">
+		        <Productos />
+		    </Route>
 
 
 		      </Switch>

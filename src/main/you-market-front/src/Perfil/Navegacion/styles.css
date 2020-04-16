@@ -1,7 +1,5 @@
 .perfil-links{
 	padding: 30px 60px;
-	display: flex;
-	flex-direction: column;
 	justify-content: space-between;
 	border-bottom: 1px solid #aaaaaa !important;
 	background-color: #8bb547;
@@ -9,29 +7,34 @@
 	box-shadow:0 2px 5px #aaaaaa;
 }
 
-.separador{
+ .separador-menu{
 	display: none;
 	border-bottom: none !important;
+	text-align: center;
 }
-
+ 
 .perfil-link{
 	text-decoration: none;
 	color: black;
 	margin-top: 15px;
 	margin-bottom: 15px;
+	text-align: center;
+    width: 33.33%;
+	display: inline-block;
+}
+
+.perfil-link:hover {
+	font-weight: bold;
+    color: black !important;
 }
 
 
-@media (min-width: 850px){
+@media (max-width: 600px){
 	
-	.perfil-links{
-		padding-left: 30%;
-		padding-right: 30%;
-		flex-direction: row;
+	.perfil-link {
+		width: 100%;
+		display: block;
 	}
-	
-	.separador{
-	display: block;
-	}
+
 }
 

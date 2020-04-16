@@ -2,8 +2,15 @@ package com.youmarket.controllers;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.youmarket.configuration.SecurityConfiguration;
 import com.youmarket.configuration.response.ApiResponse;
@@ -12,6 +19,7 @@ import com.youmarket.configuration.security.JwtAuthenticationResponse;
 import com.youmarket.configuration.security.JwtTokenProvider;
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Direccion;
+import com.youmarket.domain.Producto;
 import com.youmarket.domain.Role;
 import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
@@ -116,7 +124,7 @@ public class UsuarioController {
 		ApiResponse respuesta = new ApiResponse();
 		if(usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
 			Usuario usuario = form.getUsuario();
-			
+			usuario.setPedidosRestantes(0);
 			Suscripcion sus = suscripcionService.findById(usuario.getSuscripcion().getId());
 			usuario.setSuscripcion(sus);
 			if(sus.isDietista()) {
@@ -183,6 +191,7 @@ public class UsuarioController {
 		return ResponseEntity.ok(respuesta);
 	}
 
+
 	@PostMapping("/eliminarUsuario")
 	public ResponseEntity<ApiResponse> eliminarUsuario(@CurrentUser UserPrincipal current){
 		ApiResponse respuesta = new ApiResponse();
@@ -198,4 +207,32 @@ public class UsuarioController {
 		return ResponseEntity.ok(respuesta);
 	}
 
+	
+	@PostMapping("/updateSuscripcion")
+	public ResponseEntity<ApiResponse> updateSuscripcion(@RequestBody Integer sus, @CurrentUser UserPrincipal curr){
+		ApiResponse respuesta = new ApiResponse();
+		respuesta.setSuccess(true);
+		Suscripcion susc = suscripcionService.findById(sus);
+		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
+		user.setSuscripcion(susc);
+		usuarioService.save(user);
+		
+		return ResponseEntity.ok(respuesta);
+	}
+	
+	@GetMapping("/envios")
+	public ResponseEntity<Integer> enviosRestantes(@CurrentUser UserPrincipal curr){
+		Integer envios = 0;
+		Usuario usuario1=null;
+		
+		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		
+		if(user.isPresent()) {
+			usuario1 = user.get();
+		}
+		
+		return ResponseEntity.ok(this.usuarioService.enviosRestantes(usuario1));
+		
+	}
+>>>>>>> develop
 }

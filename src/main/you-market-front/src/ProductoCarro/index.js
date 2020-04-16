@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.css';
 import removeButton from '../assets/delete.svg';
 
@@ -35,7 +35,7 @@ function ProductoListado({id, urlImagen, nombre, supermercado, precioIva, unidad
 			<p className="producto-list-precio">{precioIva} {unidad}</p>
 			<p className="producto-list-supermercado">{supermercado}</p>
 			<p className="producto-list-cantidad"><b>Unidades:</b> {cantidad}</p>
-			<img className="borrar-producto" src={removeButton} onClick={() => eliminarProducto(id)}/>
+			<img className="borrar-producto" src={removeButton} onClick={() => eliminarProducto(id)} alt="Eliminar producto"/>
 		</div>
 	</div>
  );
