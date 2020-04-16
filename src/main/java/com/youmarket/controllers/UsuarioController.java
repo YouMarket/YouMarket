@@ -234,5 +234,4 @@ public class UsuarioController {
 		return ResponseEntity.ok(this.usuarioService.enviosRestantes(usuario1));
 		
 	}
->>>>>>> develop
 }
