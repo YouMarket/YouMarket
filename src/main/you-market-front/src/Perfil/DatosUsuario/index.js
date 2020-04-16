@@ -39,7 +39,21 @@ function DatosUsuario() {
 			.then(suscripcion => {
 				setSuscripcion(suscripcion)
 			});
-		}, []);		
+		}, []);
+	
+	function deleteUser(id) {
+		alert("¿Está a punto de eliminar su cuenta, ¿desea continuar?");
+		fetch('/eliminarUsuario', {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': "application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')
+			},
+			method:'POST',
+			body:JSON.stringify({usuarioId: id})
+		})
+		
+	}
 
 	const fetchDireccion = useCallback(() => {
 		return fetch('direccion/principal' , {headers: {
@@ -117,6 +131,9 @@ function DatosUsuario() {
 					<p>Código postal: {direccion.cpostal}</p>
 				</div>
 			</Card>
+			
+			{ <button className="boton-perfil" onClick={() => deleteUser(id)}
+			alert("¿Está a punto de eliminar su cuenta, ¿desea continuar?")>Eliminar cuenta</button> }
 			
 			{/* <button className="boton-perfil">Cambiar datos</button>*/}
 		</div>
