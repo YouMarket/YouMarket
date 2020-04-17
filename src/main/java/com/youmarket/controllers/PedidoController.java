@@ -225,7 +225,7 @@ public class PedidoController {
 		
 		@SuppressWarnings("unchecked")
 		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
-
+		
 		Pedido p1s = new Pedido();
 		Pedido p2s = new Pedido();
 		Pedido p3s = new Pedido();

@@ -12,6 +12,12 @@ function updatePrecioFinal(cantidad, precio){
 	return precioFinal
 }
 
+function limpiaStorage(){
+	sessionStorage.clear();
+
+}
+
+
 
 
 function Carro() {
@@ -100,7 +106,7 @@ let history=useHistory();
 				   <Form onSubmit={handleSubmit}>
 	
 					 <div className="button-carrito-a-cesta">
-					 <button type="submit" disabled={isSubmitting} className="button-vaciar">
+					 <button type="submit" disabled={isSubmitting} onClick={() => limpiaStorage()} className="button-vaciar">
 					 Vaciar
 					 </button>
 					 </div>
