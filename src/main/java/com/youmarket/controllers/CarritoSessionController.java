@@ -51,16 +51,6 @@ public class CarritoSessionController {
         return res;
     }
 
-	@GetMapping("/carrito")
-	public ResponseEntity<List<ProductoCarrito>> carritoGet(HttpSession session){
-		@SuppressWarnings("unchecked")
-		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
-		if(carrito == null){
-			carrito = new HashMap<>();
-		}
-		return ResponseEntity.ok(this.listCarrito(carrito));
-	}
-
 	@PostMapping("/carrito")
 	public List<ProductoCarrito> carritoPost(@RequestBody Map<String,Integer> postProducto, HttpServletRequest request, HttpSession session){
 		Producto p = this.productoService.findById(postProducto.get("postId"));
@@ -102,25 +92,16 @@ public class CarritoSessionController {
 		return "redirect:/";
 	}
 
-	@PostMapping("/cestaACarrito")
-	public List<ProductoCarrito> cestaACarrito(@RequestBody Map<String,String> postCesta, HttpServletRequest request, HttpSession session){
+	@GetMapping("/cestaACarrito")
+	public List<ProductoCarrito> cestaACarrito(@RequestBody Map<String,String> postCesta){
 		List<CestaProducto> productos = this.cpService.cpPorCesta(Integer.valueOf(postCesta.get("id")));
-		@SuppressWarnings("unchecked")
-		Map<Producto, Integer> carritoSession = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
-		if(carritoSession == null){
-			carritoSession = new HashMap<>();
-		}
-		for(CestaProducto cp : productos){
-			Producto p = cp.getProducto();
-			int cantidad = cp.getCantidad();
-			if (carritoSession.keySet().contains(p)){
-				carritoSession.put(p, carritoSession.get(p) + cantidad);
-			} else {
-				carritoSession.put(p, cantidad);
-			}
-		}
-		request.getSession().setAttribute("SESSION_CARRITO", carritoSession);
-		return this.listCarrito(carritoSession);
+		
+		List<ProductoCarrito> res = new ArrayList<>();
+        for(CestaProducto p: productos){
+            ProductoCarrito pc = new ProductoCarrito(p.getProducto(), p.getCantidad());
+            res.add(pc);
+        }
+        return res;
 	}
 
 	@PostMapping("/carritoACesta")
