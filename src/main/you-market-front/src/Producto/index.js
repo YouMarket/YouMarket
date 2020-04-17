@@ -32,14 +32,37 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 		document.getElementById(idContador).textContent = cantidad
 	}
 	
-	function sendToBack(id, cantidad) {
+	function sendToBack(id, cantidad, nombre, precio, urlImagen, supermercado, unidad) {
+		var prodSession = sessionStorage.getItem('prod_'+id);
+		if(!prodSession){
+			var jsonProd = {
+				'producto': {
+					'id': id, 
+					'nombre': nombre,
+					'precioIva': precio,
+					'supermercado': {
+						'nombre': supermercado
+					},
+					'urlImagen': urlImagen,
+					'unidad': unidad
+				},
+				'cantidad': cantidad
+			}
+			var res = JSON.stringify(jsonProd)
+			console.log(res)
+			sessionStorage.setItem('prod_'+id, res)
+		}else{
+			var strProd = JSON.parse(prodSession)
+			strProd.cantidad = parseInt(strProd.cantidad,10)+cantidad;
+			console.log(strProd)
+			sessionStorage.setItem('prod_'+id, JSON.stringify(strProd))
+		}
+
 		setCantidad(0);
-		fetch('https://youmarket-entrega2.herokuapp.com/carrito',{credentials: 'same-origin'}
-, {
+		fetch('/carrito', {
 			headers: {
 				"Accept": "application/json",
 				"Content-Type": "application/json",
-				'Authorization' : 'Bearer ' + localStorage.getItem('auth')
 			},
 			method:'POST',
 			body:JSON.stringify({postId: id, postCantidad: cantidad})
@@ -60,11 +83,11 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 	        </NavLink>
 			<div className="container-cantidad">
 				<div className="producto-editar-cantidad">
-					<img id={idMenos} className="menos" src={less} onClick={lessProduct}/>
+					<img id={idMenos} className="menos" src={less} onClick={lessProduct} alt="Menos"/>
 					<p id={idContador} className="contador">{cantidad}</p>
-					<img className="mas" src={plus} onClick={plusProduct}/>
+					<img className="mas" src={plus} onClick={plusProduct} alt="Mas"/>
 				</div>
-				<button className="boton-add-producto" onClick={() => sendToBack(id, cantidad)}>AÑADIR AL CARRO</button>
+				<button className="boton-add-producto" onClick={() => sendToBack(id, cantidad, nombre, precio, urlImagen, supermercado, unidad)}>AÑADIR AL CARRO</button>
 			</div>
   		</div>
 	  

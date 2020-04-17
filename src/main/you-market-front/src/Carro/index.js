@@ -13,42 +13,51 @@ function updatePrecioFinal(cantidad, precio){
 }
 
 function Carro() {
-precioFinal = 0.00
-const[carrito, setCarrito] = useState([]);
-const[cestas, setCestas] = useState([]);
-let history = useHistory();
-	
-	const fetchCarrito = useCallback(() => {
-		return fetch('https://youmarket-entrega2.herokuapp.com/carrito', {credentials: 'same-origin'}
-)
-			.then(res => res.json())
-			.then(carrito => {
-				setCarrito(carrito);
-				console.log(carrito);
+	precioFinal=0.00
+	const[carrito, setCarrito]=useState([]);
+	const[cestas, setCestas]=useState([]);
+	let history=useHistory();
+
+		const fetchCarrito=useCallback(()=> {
+			return construyeCarrito();
+			
+		}, []);
+
+		function construyeCarrito(){
+			var prods = [];
+			Object.keys(sessionStorage).forEach(element => {
+				var ele = sessionStorage.getItem(element)
+				if (JSON.parse(ele)){
+					prods.push(JSON.parse(ele))
+				}
+				console.log(prods)
+				setCarrito(prods)
 			});
-	}, []);
+			setCarrito(prods)
+			return 0;
+		}
 
-	useEffect(() => {
-		fetchCarrito(carrito);
-	},[]);
-	const fetchCestas = useCallback(() => {
-	    return fetch('https://youmarket-entrega2.herokuapp.com/cesta/user' , {headers: {
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		method:'GET'})
-	      .then(res => res.json())
-	      .then(cestas => {
-	        setCestas(cestas)
-	      });
-	  }, []);
+		useEffect(()=> {
+			fetchCarrito(carrito);
+		},[]);
+
+		const fetchCestas=useCallback(()=> {
+		    return fetch('https://youmarket-entrega2.herokuapp.com/cesta/user' , {headers: {
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+			method:'GET'})
+		      .then(res=> res.json())
+		      .then(cestas=> {
+		        setCestas(cestas)
+		      });
+		  }, []);
 
 
-	useEffect(() => {
-	    fetchCestas(cestas);
-	  }, []);
+		useEffect(()=> {
+		    fetchCestas(cestas);
+		  }, []);
 
-	
   return(
 		<div>
 			<Header/> 
