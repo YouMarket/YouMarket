@@ -1,33 +1,34 @@
 import React from 'react';
 import Logo from '../logo.png';
 import Header from '../Header';
+import "./styles.css"
 import { Formik } from 'formik';
 import {
 	  withRouter
 	} from 'react-router-dom';
 
-			
+
 class Login extends React.Component{
 	 constructor(props) {
 		    super(props);
 			this.state = { status: "NotLogged" };
 			this.state = { signup: ""};
 		  }
-	 
-	 onChangeStatus() {        
+
+	 onChangeStatus() {
 		    this.setState({ status: "Logged" });
 		  }
-		
-		onChangeErrors(Serrors) {        
+
+		onChangeErrors(Serrors) {
 		    this.setState({ errors: Serrors });
 		  }
 
 		handleRedirect = () => {
-			if (localStorage.getItem('auth') != null){	
+			if (localStorage.getItem('auth') != null){
 		      this.props.history.push('/');
 			}
 		}
-			
+
 		 componentWillMount() {
 			if(localStorage.registroOK){
 				this.setState({signup : localStorage.registroOK});
@@ -35,7 +36,7 @@ class Login extends React.Component{
 			}
       		this.handleRedirect();
    		}
-		
+
 		render(){
 			return(
 
@@ -62,16 +63,16 @@ class Login extends React.Component{
 
 					}).then(response => response.json())
 						.then(data => {
-						
+
 						if (data.accessToken!=null) {
 		                    this.onChangeStatus("Logged");
 		                    localStorage.setItem('auth', data.accessToken);
-							
+
 		                    this.handleRedirect();
 		                  }
 		                else{
 		                	this.onChangeErrors("Contraseña incorrecta");
-	
+
 		                	}
 						});
 
@@ -90,7 +91,7 @@ class Login extends React.Component{
 		        /* and other goodies */
 		      }) => (
 		        <form onSubmit={handleSubmit}>
-		        
+
 		        <div className="span-login">
 		        <span className="p-float-label">
 	        	<label htmlFor="email"  className="login-label">Email </label>
@@ -104,12 +105,12 @@ class Login extends React.Component{
 		            value={values.email}
 		        	className="input-login"
 		          />
-		          </span> 
+		          </span>
 		        </div>
 		        {errors.email && touched.email}
 		        	<div className="span-login">
 		        	<span className="p-float-label">
-		        	
+
 		        	<label htmlFor="password" className="login-label">Contraseña </label>
 		          <input
 		          id="password"
@@ -123,7 +124,7 @@ class Login extends React.Component{
 		          />
 		          </span>
 		          </div>
-		       
+
 		          {errors.password && touched.password}
 		          <button type="submit" disabled={isSubmitting} className="submit-login">
 		          Iniciar Sesión
@@ -134,7 +135,7 @@ class Login extends React.Component{
 		        </form>
 		      )}
 		    </Formik>
-		    <p className="registry-in-login">¿Aún no tienes cuenta?, <a href="/registro">Registrate</a></p>
+		    <p className="registry-in-login">¿Aún no tienes cuenta?, <a className="register-link" href="/registro">Registrate</a></p>
 		  </div>
 		 </div>
 		);}

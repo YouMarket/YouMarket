@@ -100,3 +100,17 @@
     border: 2px solid rgb(148,194,76, 0.75);
     padding: 10px 30px;
 }
+
+.pedido-form-envio-container input {
+    width: 400px;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+.pedido-form-envio-container input[type="number"] {
+    width: 50px;
+}
+
+.pedido-margin {
+    margin: 20px 0;
+}
