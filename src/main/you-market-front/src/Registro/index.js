@@ -31,7 +31,7 @@ class RegistroUsuario extends React.Component{
 				<div className="registro-container">
 			
 					{this.state.errors}
-					<Formik validateOnChange={true} validateOnBlur={true}
+					<Formik validateOnChange={false} validateOnBlur={false}
 						initialValues={{  
 							usuario: {
 								nombre: '',
