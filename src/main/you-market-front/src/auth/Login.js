@@ -17,10 +17,6 @@ class Login extends React.Component{
 	 onChangeStatus() {        
 		    this.setState({ status: "Logged" });
 		  }
-		  
-		onChangeStatus(Serrors) {        
-		    this.setState({ errors: Serrors });
-		  }
 		
 		onChangeErrors(Serrors) {        
 		    this.setState({ errors: Serrors });
@@ -34,7 +30,7 @@ class Login extends React.Component{
 			
 		 componentWillMount() {
 			if(localStorage.registroOK){
-				this.state.signup = localStorage.registroOK;
+				this.setState({signup : localStorage.registroOK});
 				localStorage.registroOK = ''
 			}
       		this.handleRedirect();
@@ -48,9 +44,11 @@ class Login extends React.Component{
 		  <Header/>
 
 		  <div className="caja-form">
-		    <img src={Logo} className="logo-umarket"/>
-			<span className="p-float-label" className="span-login"><p className="registrado-p">{this.state.signup}</p></span>
-		    <Formik
+		    <img src={Logo} alt="imagen-logo" className="logo-umarket"/>
+		    <div className="span-login">
+			<span className="p-float-label"><p className="registrado-p">{this.state.signup}</p></span>
+			</div>
+			<Formik
 		      initialValues={{ email: '', password: '' }}
 
 		      onSubmit={(values, { setSubmitting }) => {
@@ -69,7 +67,7 @@ class Login extends React.Component{
 		                    this.onChangeStatus("Logged");
 		                    localStorage.setItem('auth', data.accessToken);
 							
-		                    {this.handleRedirect();}
+		                    this.handleRedirect();
 		                  }
 		                else{
 		                	this.onChangeErrors("Contraseña incorrecta");
@@ -92,8 +90,9 @@ class Login extends React.Component{
 		        /* and other goodies */
 		      }) => (
 		        <form onSubmit={handleSubmit}>
-
-		        <span className="p-float-label" className="span-login">
+		        
+		        <div className="span-login">
+		        <span className="p-float-label">
 	        	<label htmlFor="email"  className="login-label">Email </label>
 		        <input
 		            type="text"
@@ -106,8 +105,11 @@ class Login extends React.Component{
 		        	className="input-login"
 		          />
 		          </span> 
+		        </div>
 		        {errors.email && touched.email}
-		        	<span className="p-float-label" className="span-login">
+		        	<div className="span-login">
+		        	<span className="p-float-label">
+		        	
 		        	<label htmlFor="password" className="login-label">Contraseña </label>
 		          <input
 		          id="password"
@@ -120,6 +122,7 @@ class Login extends React.Component{
 		          	className="input-login"
 		          />
 		          </span>
+		          </div>
 		       
 		          {errors.password && touched.password}
 		          <button type="submit" disabled={isSubmitting} className="submit-login">
