@@ -38,7 +38,6 @@ let history=useHistory();
 			if (JSON.parse(ele)){
 				prods.push(JSON.parse(ele))
 			}
-			console.log(prods)
 			setCarrito(prods)
 		});
 		setCarrito(prods)

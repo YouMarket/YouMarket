@@ -4,6 +4,7 @@ import Header from '../Header';
 import { useParams } from "react-router-dom";
 import plus from '../assets/plus.svg'
 import less from '../assets/less.svg'
+import Producto from '../Producto';
 
 function ProductoDetalle() {
 
@@ -16,7 +17,6 @@ function ProductoDetalle() {
 	      .then(res => res.json())
 	      .then(producto => {
 	        setProducto(producto)
-	        console.log(producto);
 	      });
 	  	}, []);
 
@@ -49,18 +49,32 @@ function ProductoDetalle() {
 		document.getElementById(idContador).textContent = cantidad
 	}
 
-	function sendToBack(id, cantidad) {
-		setCantidad(0);
-		fetch('/carrito', {
-			headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json",
-			},
-			method:'POST',
-			body:JSON.stringify({postId: id, postCantidad: cantidad})
-		})
-		
+	function storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad){
+        var prodSession = sessionStorage.getItem('prod_'+id);
+        if(!prodSession){
+            var jsonProd = {
+                'producto': {
+                    'id': id, 
+                    'nombre': nombre,
+                    'precioIva': precio,
+                    'supermercado': supermercado,
+                    'urlImagen': urlImagen,
+                    'unidad': unidad
+                },
+                'cantidad': cantidad
+            }
+            var res = JSON.stringify(jsonProd)
+            console.log(res)
+            sessionStorage.setItem('prod_'+id, res)
+        }else{
+            var strProd = JSON.parse(prodSession)
+            strProd.cantidad = parseInt(strProd.cantidad,10)+cantidad;
+            console.log(strProd)
+            sessionStorage.setItem('prod_'+id, JSON.stringify(strProd))
+		}
+		setCantidad(0)
 	}
+
 
 	return(
 	  <div>
@@ -97,7 +111,8 @@ function ProductoDetalle() {
 									<p id={idContador} className="contador no-link">{cantidad}</p>
 									<img className="mas" src={plus} onClick={plusProduct}/>
 								</div>
-								<button className="producto-detalle-add" onClick={() => sendToBack(id, cantidad)}>AÑADIR AL CARRO</button>
+								<button className="producto-detalle-add" onClick={() => storeProdSession(producto.id, cantidad, producto.nombre,
+									 producto.precio, producto.urlImagen, producto.supermercado, producto.unidad)}>AÑADIR AL CARRO</button>
 							</div>
 						</div>
 				</div>
