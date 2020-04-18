@@ -10,7 +10,7 @@ import {
 class PedidoExito extends React.Component{
 	
 		render(){
-			if(localStorage.getItem('pedido')!=true){
+			if(!localStorage.getItem('pedido')){
 				this.props.history.push('/');	
 			}
 			

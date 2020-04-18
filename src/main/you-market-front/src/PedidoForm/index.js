@@ -323,7 +323,12 @@ function pagar() {
 	}
 
 		if(localStorage.getItem('auth')==null){
-			this.props.history.push('/login');
+			history.push('/login');
+			
+		}
+		
+		if(!localStorage.getItem('carrolleno')){
+			history.push('/');
 		}
 
 		return(
@@ -610,6 +615,7 @@ function pagar() {
         			body:JSON.stringify(values, null, 2)
         	}).then(() =>
         	 {
+        		 localStorage.removeItem('carrolleno');
         		 handleRedirect();
         	 })
           setSubmitting(false);
