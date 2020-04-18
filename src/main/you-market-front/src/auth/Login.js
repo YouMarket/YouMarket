@@ -103,7 +103,7 @@ class Login extends React.Component{
 		        isSubmitting,
 		        /* and other goodies */
 		      }) => (
-		        <form onSubmit={handleSubmit}>
+		        <form onSubmit={handleSubmit} className="login-form">
 
 		        <div>
 		        <span className="p-float-label" className="span-login">
