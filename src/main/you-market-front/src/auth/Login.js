@@ -59,8 +59,8 @@ class Login extends React.Component{
 
 		  <div className="caja-form">
 		    <img src={Logo} alt="imagen-logo" className="logo-umarket"/>
-		    <div className="span-login">
-			<span className="p-float-label"><p className="registrado-p">{this.state.signup}</p></span>
+		    <div>
+			<span className="p-float-label" className="span-login"><p className="registrado-p">{this.state.signup}</p></span>
 			</div>
 			<Formik
 		      initialValues={{ email: '', password: '' }}
@@ -105,8 +105,8 @@ class Login extends React.Component{
 		      }) => (
 		        <form onSubmit={handleSubmit}>
 
-		        <div className="span-login">
-		        <span className="p-float-label">
+		        <div>
+		        <span className="p-float-label" className="span-login">
 	        	<label htmlFor="email"  className="login-label">Email </label>
 		        <input
 		            type="text"
@@ -121,8 +121,8 @@ class Login extends React.Component{
 		          </span>
 		        </div>
 		        {errors.email && touched.email}
-		        	<div className="span-login">
-		        	<span className="p-float-label">
+		        	<div>
+		        	<span className="p-float-label" className="span-login">
 
 		        	<label htmlFor="password" className="login-label">Contraseña </label>
 		          <input
