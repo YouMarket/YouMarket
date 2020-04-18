@@ -36,6 +36,19 @@ class Login extends React.Component{
 			}
       		this.handleRedirect();
    		}
+		 
+		 dietasCheck() {
+			 fetch('/usuario/dietasCheck' , {headers: {
+					'Content-Type' : 'application/json',
+					'Accept' : 'application/json',
+					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+					method:'GET'})
+				      .then(res => res.json())
+				      .then(dietasCheck => {
+				    	  localStorage.setItem('dietasCheck', dietasCheck);
+				        
+				      });
+		 }
 
 		render(){
 			return(
@@ -67,7 +80,7 @@ class Login extends React.Component{
 						if (data.accessToken!=null) {
 		                    this.onChangeStatus("Logged");
 		                    localStorage.setItem('auth', data.accessToken);
-
+		                    this.dietasCheck();
 		                    this.handleRedirect();
 		                  }
 		                else{
