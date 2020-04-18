@@ -1329,7 +1329,7 @@ function pagar() {
 
 	         <PayPalButton
 				 amount={precioTotal()}
-	         onSuccess={(values, { setSubmitting }) => {
+	         onSuccess={(valuesP, { setSubmitting }) => {
 	             setTimeout(() => {
 	             	fetch('', {
 	             			headers: {
@@ -1337,7 +1337,7 @@ function pagar() {
 	             			},
 	             			method:'POST',
 	             			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})
-	             	}).then(() =>
+	             	}).then(console.log(JSON.stringify({carrito: construyeCarrito(), pedidoForm:values}))).then(() =>
 	             	 {
 	             		 handleSubmit();
 	             	 }).then(() =>
