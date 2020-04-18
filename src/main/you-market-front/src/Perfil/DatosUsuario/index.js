@@ -43,7 +43,6 @@ function DatosUsuario() {
 		}, []);
 	
 	function deleteUser() {
-		alert.show('¿Está a punto de eliminar su cuenta, ¿desea continuar?');
 		fetch('/eliminarUsuario', {
 			headers: {
 				'Accept': 'application/json',
@@ -160,7 +159,7 @@ function DatosUsuario() {
 				</div>
 			</Card>
 			
-			{ <button className="boton-perfil" onClick={this.deleteUser()}>Eliminar cuenta</button> }
+			{ <button className="boton-perfil" onClick={() => {if (window.confirm('¿Seguro que desea eliminar su cuenta?')) deleteUser}}>Eliminar cuenta</button> }
 			
 			{/* <button className="boton-perfil">Cambiar datos</button>*/}
 		</div>
