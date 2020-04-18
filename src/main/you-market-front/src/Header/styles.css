@@ -22,11 +22,29 @@
 	color: black !important;
 }
 
+.header-links a::after,
+.menuLink::after,
+.login::after {
+	content: '';
+	display: block;
+	height: 3px;
+	width: 0;
+	background: transparent;
+	transition: width .5s ease, background-color .5s ease;
+}
+
 .header-links a:hover,
 .menuLink:hover,
 .login:hover {
-	font-weight: bold;
 	color: black !important;
+}
+
+
+.header-links a:hover::after,
+.menuLink:hover::after,
+.login:hover::after {
+	width: 100%;
+	background: #779C3D;
 }
 
 .header-link{

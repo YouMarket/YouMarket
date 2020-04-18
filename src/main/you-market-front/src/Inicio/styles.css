@@ -13,7 +13,7 @@
     color: white;
     text-align: center;
     width: 100%;
-    text-shadow: 4px 3px 0 #7A7A7A;
+    text-shadow: 4px 3px 0 black;
 }
 
 .homepage-services {
@@ -51,17 +51,16 @@
     display: block;
 }
 
+.service-text {
+    text-align: center;
+    line-height: 1.25;
+}
+
 .service-information {
     margin-top: 20px;
 }
 
-@media (max-width: 900px){
-    .homepage-services {
-        grid-template-columns: 450px;
-    }
-}
-
-@media (max-width: 600px){
+@media (max-width: 700px){
     .homepage-welcome {
         font-size: 50px;
         padding: 20px;

@@ -4,7 +4,7 @@ import logo from '../logo.png';
 import carro from './shopping-cart.svg';
 import menu from './menu.svg';
 import {Link, NavLink} from 'react-router-dom';
-import user from './user-circle-solid.svg';
+import user from './user.svg';
 
 window.onresize = hideMenuLinks;
 
