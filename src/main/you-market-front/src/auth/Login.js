@@ -7,40 +7,49 @@ import {
 	  withRouter
 	} from 'react-router-dom';
 
-			
+
 class Login extends React.Component{
 	 constructor(props) {
 		    super(props);
 			this.state = { status: "NotLogged" };
 			this.state = { signup: ""};
 		  }
-	 
-	 onChangeStatus() {        
+
+	 onChangeStatus() {
 		    this.setState({ status: "Logged" });
 		  }
-		  
-		onChangeStatus(Serrors) {        
-		    this.setState({ errors: Serrors });
-		  }
-		
-		onChangeErrors(Serrors) {        
+
+		onChangeErrors(Serrors) {
 		    this.setState({ errors: Serrors });
 		  }
 
 		handleRedirect = () => {
-			if (localStorage.getItem('auth') != null){	
+			if (localStorage.getItem('auth') != null){
 		      this.props.history.push('/');
 			}
 		}
-			
+
 		 componentWillMount() {
 			if(localStorage.registroOK){
-				this.state.signup = localStorage.registroOK;
+				this.setState({signup : localStorage.registroOK});
 				localStorage.registroOK = ''
 			}
       		this.handleRedirect();
    		}
-		
+		 
+		 dietasCheck() {
+			 fetch('/usuario/dietasCheck' , {headers: {
+					'Content-Type' : 'application/json',
+					'Accept' : 'application/json',
+					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+					method:'GET'})
+				      .then(res => res.json())
+				      .then(dietasCheck => {
+				    	  localStorage.setItem('dietasCheck', dietasCheck);
+				        
+				      });
+		 }
+
 		render(){
 			return(
 
@@ -49,9 +58,11 @@ class Login extends React.Component{
 		  <Header/>
 
 		  <div className="caja-form">
-		    <img src={Logo} className="logo-umarket"/>
+		    <img src={Logo} alt="imagen-logo" className="logo-umarket"/>
+		    <div>
 			<span className="p-float-label" className="span-login"><p className="registrado-p">{this.state.signup}</p></span>
-		    <Formik
+			</div>
+			<Formik
 		      initialValues={{ email: '', password: '' }}
 
 		      onSubmit={(values, { setSubmitting }) => {
@@ -65,16 +76,16 @@ class Login extends React.Component{
 
 					}).then(response => response.json())
 						.then(data => {
-						
+
 						if (data.accessToken!=null) {
 		                    this.onChangeStatus("Logged");
 		                    localStorage.setItem('auth', data.accessToken);
-							
-		                    {this.handleRedirect();}
+		                    this.dietasCheck();
+		                    this.handleRedirect();
 		                  }
 		                else{
 		                	this.onChangeErrors("Contraseña incorrecta");
-	
+
 		                	}
 						});
 
@@ -94,6 +105,7 @@ class Login extends React.Component{
 		      }) => (
 		        <form onSubmit={handleSubmit} className="login-form">
 
+		        <div>
 		        <span className="p-float-label" className="span-login">
 	        	<label htmlFor="email"  className="login-label">Email </label>
 		        <input
@@ -106,9 +118,12 @@ class Login extends React.Component{
 		            value={values.email}
 		        	className="input-login"
 		          />
-		          </span> 
+		          </span>
+		        </div>
 		        {errors.email && touched.email}
+		        	<div>
 		        	<span className="p-float-label" className="span-login">
+
 		        	<label htmlFor="password" className="login-label">Contraseña </label>
 		          <input
 		          id="password"
@@ -121,7 +136,8 @@ class Login extends React.Component{
 		          	className="input-login"
 		          />
 		          </span>
-		       
+		          </div>
+
 		          {errors.password && touched.password}
 		          <button type="submit" disabled={isSubmitting} className="submit-login">
 		          Iniciar Sesión

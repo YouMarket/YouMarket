@@ -333,10 +333,9 @@ function pagar() {
 
 	{envioTomas > 0 ?
 	  (<div className="pedido-container container">
-	  <h1 id="titulo-pedidos">¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
+	  <h1 id="titulo-pedidos">¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos 😉</h1>
 
-	  <h3 id="envios-restantes-pedidos"> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>
-	  <Formik validateOnChange={true} validateOnBlur={true} id="formikito"
+	  <h3 id="envios-restantes-pedidos"> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>	  <Formik validateOnChange={true} validateOnBlur={true} id="formikito"
     	className="formulario-pedido"
     	initialValues={{   }}
      	validate={values => {
@@ -781,7 +780,7 @@ function pagar() {
 		</div>
 
 		{envioTomas > 1 ?
-	        <div id="enlace1">
+	        <div id="enlace1" className="pedido-margin">
 	        		<div>
 						<a href="#enlaceMostrarPedido2" className="link-button" onClick={mostrarPedido2} id="enlaceMostrarPedido2">
 						+ Añadir/eliminar pedido número 2
@@ -945,22 +944,17 @@ function pagar() {
 			</fieldset>
 			</div>
 			<br/><br/>
-			<br/><br/>
 		</div>
 
-
-
-
-		<div id="enlace2">
+		<div id="enlace2" className="pedido-margin">
 			<br/><br/>
-			<a href="#enlaceMostrarPedido3"  onClick={mostrarPedido3} id="enlaceMostrarPedido3">
+			<a href="#enlaceMostrarPedido3" className="link-button" onClick={mostrarPedido3} id = "enlaceMostrarPedido3">
 				+ Añadir/Eliminar pedido número 3
 			</a>
 			<br/><br/>
 			<br/><br/>
 		</div>
-
-		<div id="pedido3">
+		<div id="pedido3" className="pedido-margin">
 			<div className="pedido-form-envio-container" >
 			<fieldset>
 			<div className="mismaLinea">
@@ -1114,8 +1108,7 @@ function pagar() {
 			<br/><br/>
 			<br/><br/>
 		</div>
-
-		<div id="enlace3">
+		<div id="enlace3" className="pedido-margin">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido4" className="link-button" onClick={mostrarPedido4} id="enlaceMostrarPedido4">
 				+ Añadir/Eliminar pedido número 4
@@ -1123,8 +1116,7 @@ function pagar() {
 			<br/><br/>
 			<br/><br/>
 		</div>
-
-		<div id="pedido4">
+		<div id="pedido4" className="pedido-margin">
 		<div className="pedido-form-envio-container" >
 		<fieldset>
 			<div className="mismaLinea">

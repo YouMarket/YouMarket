@@ -2,14 +2,11 @@ package com.youmarket.controllers;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +28,7 @@ import com.youmarket.configuration.security.JwtAuthenticationResponse;
 import com.youmarket.configuration.security.JwtTokenProvider;
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Direccion;
-import com.youmarket.domain.Producto;
+import com.youmarket.domain.Factura;
 import com.youmarket.domain.Role;
 import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
@@ -39,6 +36,7 @@ import com.youmarket.domain.enums.RoleName;
 import com.youmarket.domain.form.SignUpForm;
 import com.youmarket.repositories.RoleRepository;
 import com.youmarket.services.DireccionService;
+import com.youmarket.services.FacturaService;
 import com.youmarket.services.RoleService;
 import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
@@ -73,6 +71,9 @@ public class UsuarioController {
 
 	@Autowired
 	DireccionService dirService;
+	
+	@Autowired
+	FacturaService fService;
 	
 	@Autowired
 	private SuscripcionService suscripcionService;
@@ -202,9 +203,49 @@ public class UsuarioController {
 		return ResponseEntity.ok(respuesta);
 	}
 	
+	@GetMapping("/alertaPago")
+	public ResponseEntity<ApiResponse> alertaPago(@CurrentUser UserPrincipal curr){
+		ApiResponse respuesta = new ApiResponse();
+		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
+		Factura last = fService.findLastSuscripcion(user);
+		
+		respuesta.setSuccess(true);
+		respuesta.setMessage("OK");
+		if(last == null) {
+			respuesta.setMessage("Para poder realizar su primer pedido, tiene primero que abonar la suscripción.");
+			respuesta.setSuccess(false);
+		}else if( last.getFechaFactura()!= null) {
+			LocalDate fechaFactura = last.getFechaFactura().toInstant()
+				      .atZone(ZoneId.systemDefault())
+				      .toLocalDate();
+			LocalDate fecha = LocalDate.now();
+			
+			if(fecha.getMonthValue() > fechaFactura.getMonthValue() && user.getPedidosRestantes() == 0) {
+				respuesta.setMessage("Aún no ha pagado la suscripción de este mes y no le quedan pedidos."); 
+				respuesta.setSuccess(false);
+			}
+		}		
+		
+		return ResponseEntity.ok(respuesta);
+	}
+	
 	@GetMapping("/envios")
 	public ResponseEntity<Integer> enviosRestantes(@CurrentUser UserPrincipal curr){
 		Integer envios = 0;
+		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		
+		if(user.isPresent()) {
+			envios = user.get().getPedidosRestantes();
+		}
+		
+		return ResponseEntity.ok(envios);
+		
+	}
+	
+	@GetMapping("/dietasCheck")
+	public ResponseEntity<Integer> dietasCheck(@CurrentUser UserPrincipal curr){
+		Boolean result=false;
+		Integer res=0;
 		Usuario usuario1=null;
 		
 		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
@@ -213,7 +254,35 @@ public class UsuarioController {
 			usuario1 = user.get();
 		}
 		
-		return ResponseEntity.ok(this.usuarioService.enviosRestantes(usuario1));
+		result=usuario1.getSuscripcion().isDietista();
+		
+		if(result==true) {
+			res=1;
+		}
+		
+		return ResponseEntity.ok(res);
+		
+	}
+	
+	@GetMapping("/dietasCheck")
+	public ResponseEntity<Integer> dietasCheck(@CurrentUser UserPrincipal curr){
+		Boolean result=false;
+		Integer res=0;
+		Usuario usuario1=null;
+		
+		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		
+		if(user.isPresent()) {
+			usuario1 = user.get();
+		}
+		
+		result=usuario1.getSuscripcion().isDietista();
+		
+		if(result==true) {
+			res=1;
+		}
+		
+		return ResponseEntity.ok(res);
 		
 	}
 }

@@ -62,7 +62,6 @@ function DatosUsuario() {
 		method:'GET'})
 			.then(res => res.json())
 			.then(response => {
-				console.log(response)
 				setPagada(response.success)
 				setMeses(response.message)
 			});

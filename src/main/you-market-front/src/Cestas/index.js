@@ -36,7 +36,7 @@ const [cestas, setCestas] = useState([]);
   <Header/>
 
   <div className="nueva-cesta">
-  	<a href="/create/cesta">Nueva cesta</a>
+  	<a className="link-button" href="/create/cesta">Nueva cesta</a>
   	{cestas.length > 0 ?
 	  (<div className="cestas-container">
 	  { cestas && cestas.map((cesta) => (
