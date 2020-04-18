@@ -160,12 +160,13 @@ let history=useHistory();
 	
 					 onSubmit={(values, { setSubmitting })=> {
 					   setTimeout(()=> {
-						   fetch(`/carritoACesta`, {headers: {
+
+						   fetch(`/carritoACesta/${values.id}`, {headers: {
 							'Content-Type' : 'application/json',
 							'Accept' : 'application/json',
 							'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 								   method:'POST',
-								   body:JSON.stringify(values, null, 2)
+								   body:JSON.stringify(carrito, null, 1)
 						   }).then((response)=> {
 							   setSubmitting=false;
 	

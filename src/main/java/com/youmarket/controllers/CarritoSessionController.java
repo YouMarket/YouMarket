@@ -3,12 +3,20 @@ package com.youmarket.controllers;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.UserPrincipal;
@@ -19,15 +27,6 @@ import com.youmarket.domain.ProductoCarrito;
 import com.youmarket.services.CestaProductoService;
 import com.youmarket.services.CestaService;
 import com.youmarket.services.ProductoService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/")
@@ -117,6 +116,7 @@ public class CarritoSessionController {
         return res;
 	}
 
+	@Deprecated
 	@PostMapping("/carritoACesta")
 	public Cesta carritoACesta(@RequestBody Map<String,String> postCesta, HttpServletRequest request, HttpSession session, @CurrentUser UserPrincipal currentUser){
 		Cesta c = (Cesta)this.cestaService.findById(Integer.valueOf(postCesta.get("id")), currentUser);
@@ -134,6 +134,22 @@ public class CarritoSessionController {
 			
 		}
 		request.getSession().setAttribute("SESSION_CARRITO", carrito);
+		return c;
+	}
+	
+	@PostMapping("/carritoACesta/{idCesta}")
+	public Cesta carritoACesta(@RequestBody List<ProductoCarrito> prods, @PathVariable Integer idCesta, @CurrentUser UserPrincipal currentUser){
+		Cesta c = this.cestaService.findById(idCesta, currentUser);
+		
+		for (ProductoCarrito p : prods) {
+			CestaProducto cp = new CestaProducto();
+			cp.setCantidad(p.getCantidad());
+			cp.setCesta(c);
+			cp.setProducto(p.getProducto());
+			cp.setId(p.getProducto(), c);
+			cpService.save(cp);
+		}
+		
 		return c;
 	}
 
