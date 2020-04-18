@@ -43,7 +43,7 @@ if (localStorage.getItem('auth')==null){
 
       <div class="container">
       <h1 className="titulo-create-cesta">Editar cesta</h1>
-      <img src={cestaEdit} className="cesta-imagen-edit"/>
+      <img src={cestaEdit} className="cesta-imagen-edit" alt="Editar cesta"/>
       <Formik
         initialValues={{nombre: `${cesta.nombre}`}}
 

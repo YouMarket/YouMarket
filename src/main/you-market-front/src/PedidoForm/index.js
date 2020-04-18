@@ -335,7 +335,8 @@ function pagar() {
 	  (<div className="pedido-container container">
 	  <h1 id="titulo-pedidos">¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos 😉</h1>
 
-	  <h3 id="envios-restantes-pedidos"> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>	  <Formik validateOnChange={true} validateOnBlur={true} id="formikito"
+	  <h3 id="envios-restantes-pedidos"> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>
+	  <Formik validateOnChange={true} validateOnBlur={true} id="formikito"
     	className="formulario-pedido"
     	initialValues={{   }}
      	validate={values => {
@@ -948,7 +949,7 @@ function pagar() {
 
 		<div id="enlace2" className="pedido-margin">
 			<br/><br/>
-			<a href="#enlaceMostrarPedido3" className="link-button" onClick={mostrarPedido3} id = "enlaceMostrarPedido3">
+			<a href="#enlaceMostrarPedido3" className="link-button" onClick={mostrarPedido3} id="enlaceMostrarPedido3">
 				+ Añadir/Eliminar pedido número 3
 			</a>
 			<br/><br/>

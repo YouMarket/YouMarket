@@ -1,10 +1,9 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React,  { useCallback, useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
-import style from './styles.css';
+import './styles.css';
 import Cesta from '../Cesta';
 import Header from '../Header';
-import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import { useHistory } from "react-router-dom";
 
@@ -92,7 +91,7 @@ const { id } = useParams();
 			    
 			    <Link to={`/show/producto/${productoC.producto.id}`}> {productoC.producto.nombre}
 			    </Link> x{productoC.cantidad}
-			    <img src={productoC.url}/>
+			    <img src={productoC.url} alt={productoC.nombre}/>
 
 
 			    

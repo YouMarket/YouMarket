@@ -1,7 +1,7 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React,  { useCallback, useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
-import style from './styles.css';
+import './styles.css';
 import Cesta from '../Cesta';
 import Header from '../Header';
 

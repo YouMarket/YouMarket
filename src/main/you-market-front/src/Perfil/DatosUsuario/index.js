@@ -79,7 +79,7 @@ function DatosUsuario() {
 	<div>
 		<Header/>
 		<Navegacion/>
-		<div className="card-container">
+		<div className="container">
 			
 			<Card title="Información Personal" style={{margin: 20}} >
 				<div >
@@ -123,14 +123,14 @@ function DatosUsuario() {
 			}
 			</Card>
 
-			{meses != 1 && 
+			{meses !== 1 && 
 				<a href="/cambio-suscripcion" className="modificar-suscripcion">
 					<button className="button-finish">Modificar Suscripción</button>
 				</a>
 			}
 
 			{
-				meses == 1 && 
+				meses === 1 && 
 				<div>
 					<p>Ya ha realizado una modificación en su suscripción para el mes siguiente. Hasta entonces, no podrá volver a modificarla.</p>
 				</div>

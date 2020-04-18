@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from "react-router-dom";
 import './styles.css';
 import Header from '../../Header';
@@ -9,13 +9,6 @@ import { Formik } from 'formik';
 
 function SuscripcionForm() {
 
-    const suscripcion ={
-        id: Number,
-        dietista: Boolean,
-        envios: Number,
-        nombre: String,
-        precio: Number
-    }
     let history = useHistory();
 
 
@@ -61,10 +54,6 @@ function SuscripcionForm() {
 							}}
 							>
 							{({
-								values,
-								errors,
-								handleChange,
-								handleBlur,
 								handleSubmit,
 								isSubmitting,
 								/* and other goodies */
