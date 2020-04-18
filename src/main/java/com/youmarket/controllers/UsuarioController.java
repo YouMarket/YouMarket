@@ -7,6 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import com.youmarket.configuration.SecurityConfiguration;
@@ -193,6 +194,10 @@ public class UsuarioController {
 			throws NoSuchAlgorithmException {
 		ApiResponse respuesta = new ApiResponse();
 		Usuario usuario = this.usuarioService.findById(current.getId()).orElse(null);
+		List<Direccion> direcciones = this.dirService.findAllByUser(usuario);
+		for(Direccion d : direcciones){
+			this.dirService.delete(d);
+		}
 		usuario.setApellidos("Eliminado");
 		usuario.setNombre("Usuario");
 		usuario.setCPostal("00000");
