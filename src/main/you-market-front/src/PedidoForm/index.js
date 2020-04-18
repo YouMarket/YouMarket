@@ -335,7 +335,7 @@ function pagar() {
 	  (<div className="pedido-container container">
 	  <h1 id="titulo-pedidos">¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos ðŸ™�</h1>
 
-	  <h3 id="envios-restantes-pedidos"> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>
+	  <h3 id="envios-restantes-pedidos"> Te queda <br/> {envioTomas} envíos por realizar de tu suscripción. </h3>
 	  <Formik validateOnChange={true} validateOnBlur={true} id="formikito"
     	className="formulario-pedido"
     	initialValues={{   }}
