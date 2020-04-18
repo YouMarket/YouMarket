@@ -18,6 +18,9 @@ var pedido2copiado = false;
 var pedido3copiado = false;
 var pedido4copiado = false;
 
+function setPedidoCheck(){
+	
+}
 
 function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");
@@ -1302,6 +1305,9 @@ function pagar() {
 	             	}).then(() =>
 	             	 {
 	             		 handleSubmit();
+	             	 }).then(() =>
+	             	 {
+	             		 localStorage.setItem('pedido',true);
 	             	 }).then(() =>
 	             	 {
 	             		 handleRedirect();

@@ -49,6 +49,32 @@ class Login extends React.Component{
 				        
 				      });
 		 }
+		 
+		 cestasCheck() {
+			 fetch('/usuario/cestasCheck' , {headers: {
+					'Content-Type' : 'application/json',
+					'Accept' : 'application/json',
+					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+					method:'GET'})
+				      .then(res => res.json())
+				      .then(dietasCheck => {
+				    	  localStorage.setItem('dietasCheck', dietasCheck);
+				        
+				      });
+		 }
+		 
+		 enviosCheck() {
+			 fetch('/usuario/dietasCheck' , {headers: {
+					'Content-Type' : 'application/json',
+					'Accept' : 'application/json',
+					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+					method:'GET'})
+				      .then(res => res.json())
+				      .then(dietasCheck => {
+				    	  localStorage.setItem('dietasCheck', dietasCheck);
+				        
+				      });
+		 }
 
 		render(){
 			return(

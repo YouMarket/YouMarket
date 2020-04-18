@@ -17,7 +17,19 @@ function SuscripcionForm() {
         precio: Number
     }
     let history = useHistory();
-
+    
+    function dietasCheck() {
+		 fetch('/usuario/dietasCheck' , {headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+				method:'GET'})
+			      .then(res => res.json())
+			      .then(dietasCheck2 => {
+			    	  localStorage.setItem('dietasCheck', dietasCheck2);
+			        
+			      });
+	 }
 
     return (
         <div>
@@ -34,7 +46,6 @@ function SuscripcionForm() {
 						}}
 						onSubmit={(values, { setSubmitting }) => {
                             values.suscripcion.id = document.getElementById('selectSuscripciones').value
-                            console.log(values.suscripcion.id)
 							setTimeout(() => {
 								fetch('usuario/updateSuscripcion', {
 										headers: {
@@ -45,11 +56,11 @@ function SuscripcionForm() {
 										method:'POST',
 										body:JSON.stringify(values.suscripcion.id, null, 1)
 								}).then(response => response.json())
-								  .then(data => {
+										.then(data => {
 									if (data.success) {
 										history.push('/datos-perfil');
-									  }
-									else{
+										dietasCheck();
+									  }else{
 										this.state.errors = data.message
 										}
 								  });
