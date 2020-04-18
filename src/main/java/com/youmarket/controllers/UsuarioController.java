@@ -232,13 +232,10 @@ public class UsuarioController {
 	@GetMapping("/envios")
 	public ResponseEntity<Integer> enviosRestantes(@CurrentUser UserPrincipal curr){
 		Integer envios = 0;
-		Usuario usuario1=null;
-		
 		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
 		
 		if(user.isPresent()) {
-			usuario1 = user.get();
-			envios = usuario1.getPedidosRestantes();
+			envios = user.get().getPedidosRestantes();
 		}
 		
 		return ResponseEntity.ok(envios);
