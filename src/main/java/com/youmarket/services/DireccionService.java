@@ -32,4 +32,8 @@ public class DireccionService {
 	public Direccion save(@Valid Direccion dir) {
 		return repo.save(dir);
 	}
+
+	public void delete(@Valid Direccion dir){
+		repo.delete(dir);
+	}
 }
