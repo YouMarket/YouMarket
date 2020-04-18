@@ -17,6 +17,7 @@ import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.CestaProducto;
 import com.youmarket.domain.Pedido;
 import com.youmarket.domain.Producto;
+import com.youmarket.domain.ProductoCarrito;
 import com.youmarket.domain.Usuario;
 import com.youmarket.domain.form.FormPedidos;
 import com.youmarket.services.CestaProductoService;
@@ -217,14 +218,12 @@ public class PedidoController {
 	// }
 	
 	@PostMapping("/create")
-	public ResponseEntity<List<Pedido>> createPedidos(@RequestBody FormPedidos pedidos, HttpSession session, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
+	public ResponseEntity<List<Pedido>> createPedidos(@RequestBody List<ProductoCarrito> carrito, @RequestBody FormPedidos pedidos, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
 		
 		Usuario user = this.usuarioService.findById(currentUser.getId()).orElse(null);
-
+		
 		Date now = new Date();
 		
-		@SuppressWarnings("unchecked")
-		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
 		
 		Pedido p1s = new Pedido();
 		Pedido p2s = new Pedido();

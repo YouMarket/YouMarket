@@ -154,10 +154,11 @@ public class CarritoSessionController {
 	}
 
 	@GetMapping("/precioTotalCarrito")
-	public Double precioTotal(HttpServletRequest request, HttpSession session){
+	public Double precioTotal(@RequestBody List<ProductoCarrito> prods){
 		Double precio = 0.0;
+		System.out.println(prods);
 		@SuppressWarnings("unchecked")
-		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
+		Map<Producto, Integer> carrito = (Map<Producto, Integer>)prods;
 		List<Producto> productos = new ArrayList<>(carrito.keySet());
 		for(Producto p: productos){
 			precio+= p.getPrecio() * carrito.get(p);

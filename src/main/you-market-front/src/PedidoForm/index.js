@@ -19,6 +19,8 @@ var pedido3copiado = false;
 var pedido4copiado = false;
 
 
+
+
 function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");
 	  var poblacion1 = document.getElementById("poblacion1");
@@ -100,10 +102,37 @@ export function PedidoForm() {
 	let history = useHistory();
 
 	const [envioTomas, setEnvioTomas] = useState(0);
+	
+
+
+	function construyeCarrito(){
+		var prods = [];
+		Object.keys(sessionStorage).forEach(element => {
+			var ele = sessionStorage.getItem(element)
+			if (JSON.parse(ele)){
+				prods.push(JSON.parse(ele))
+			}
+		});
+		console.log('Productos del carrito');
+		console.log(prods);
+		return prods;
+	}
+	
+	function precioTotal(){
+		var precioTotal = 0.0;
+		construyeCarrito().forEach(element => {
+			precioTotal = precioTotal + element.producto.precioIva * element.cantidad;
+		})
+		
+		console.log('PRECIO TOTAL');
+		console.log(precioTotal)
+		return precioTotal;
+	}
 
 
 
-	useEffect(() => {
+
+	useEffect(() => {construyeCarrito(),
 		fetch('/usuario/envios', {
 			headers:{
 			  'Content-Type' : 'application/json',
@@ -138,7 +167,7 @@ export function PedidoForm() {
 		 useEffect(() => {
 		  fetchTotal(total);
 		   }, []);
-
+		 
 		 return total;
 	}
 
@@ -604,7 +633,7 @@ function pagar() {
         				'Accept' : 'application/json',
         				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
         			method:'POST',
-        			body:JSON.stringify(values, null, 2)
+        			body:JSON.stringify(construyeCarrito(), values, null, 2)
         	}).then(() =>
         	 {
         		 handleRedirect();
@@ -1299,7 +1328,7 @@ function pagar() {
 			<h2>Elige tu método de pago 👇</h2>
 
 	         <PayPalButton
-				 amount={precio()}
+				 amount={precioTotal()}
 	         onSuccess={(values, { setSubmitting }) => {
 	             setTimeout(() => {
 	             	fetch('', {
@@ -1307,7 +1336,7 @@ function pagar() {
 	             				"Content-Type": "application/json"
 	             			},
 	             			method:'POST',
-	             			body:JSON.stringify(values, null, 2)
+	             			body:JSON.stringify(construyeCarrito(), values, null, 2)
 	             	}).then(() =>
 	             	 {
 	             		 handleSubmit();
