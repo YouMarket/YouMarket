@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.google.gson.Gson;
 import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.CestaProducto;
@@ -218,12 +219,22 @@ public class PedidoController {
 	
 	@PostMapping("/create")
 	public ResponseEntity<List<Pedido>> createPedidos(@RequestBody Map<String, Object> putamierda, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
-		FormPedidos pedidos = (FormPedidos)putamierda.get("pedidoForm");
+//		Gson gson = new Gson();
+//		FormPedidos pedidos = gson.fromJson(putamierda.get("pedidoForm").toString(), FormPedidos.class);
 		List<ProductoCarrito> carrito = (List<ProductoCarrito>)putamierda.get("carrito");
 		Usuario user = this.usuarioService.findById(currentUser.getId()).orElse(null);
-		
 		Date now = new Date();
-		
+		String s = putamierda.get("pedidoForm").toString();
+		FormPedidos pedidos = new FormPedidos();
+		s = s.replaceAll("[{]", "");
+		s = s.replaceAll("[}]", "");
+		Map<String, String> myMap = new HashMap<String, String>();
+		String[] pairs = s.split(", ");
+		for (int i=0;i<pairs.length;i++) {
+		    String pair = pairs[i];
+		    String[] keyValue = pair.split("=");
+		    myMap.put(keyValue[0], keyValue[1]);
+		}
 		
 		Pedido p1s = new Pedido();
 		Pedido p2s = new Pedido();
