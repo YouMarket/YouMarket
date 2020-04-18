@@ -1,18 +1,13 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React from 'react';
 
 import style from './styles.css';
 import Header from '../Header';
-import { Formik } from 'formik';
 import {
 	  withRouter
 	} from 'react-router-dom';
 
 			
 class PedidoExito extends React.Component{
-	 constructor(props) {
-		    super(props);
-
-		  }
 		
 		render(){
 			return(
@@ -27,7 +22,7 @@ class PedidoExito extends React.Component{
 			<div className="producto-detalle-container container clearfix" >
 			
 			
-			<h1> Pedido/s realizado/s con éxito </h1>
+			<h1> Pedido/s realizado/s con Ã‰xito </h1>
 			
 
 		  	

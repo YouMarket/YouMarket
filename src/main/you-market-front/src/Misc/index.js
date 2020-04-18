@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.css';
 import img from './404.png';
 import Header from '../Header';
 import {
@@ -7,10 +8,6 @@ import {
 
 			
 class Error extends React.Component{
-	 constructor(props) {
-		    super(props);
-
-		  }
 		
 		render(){
 			return(
@@ -20,7 +17,7 @@ class Error extends React.Component{
 		  <Header/>
 
 		  <div className="caja-404">
-		    <img src={img} className="error404"/>
+		    <img src={img} alt="404" className="error404"/>
 		     <div className="disculpa">
 		    	<p>Póngase en contacto con el administrador del sistema, <a href="#"> you.market.0@gmail.com</a>, si el error persiste.</p>
 		    		<p>Disculpe las molestias.</p>

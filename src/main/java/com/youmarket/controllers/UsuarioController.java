@@ -241,4 +241,26 @@ public class UsuarioController {
 		return ResponseEntity.ok(envios);
 		
 	}
+	
+	@GetMapping("/dietasCheck")
+	public ResponseEntity<Integer> dietasCheck(@CurrentUser UserPrincipal curr){
+		Boolean result=false;
+		Integer res=0;
+		Usuario usuario1=null;
+		
+		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		
+		if(user.isPresent()) {
+			usuario1 = user.get();
+		}
+		
+		result=usuario1.getSuscripcion().isDietista();
+		
+		if(result==true) {
+			res=1;
+		}
+		
+		return ResponseEntity.ok(res);
+		
+	}
 }

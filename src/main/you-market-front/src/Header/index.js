@@ -4,7 +4,7 @@ import logo from '../logo.png';
 import carro from './shopping-cart.svg';
 import menu from './menu.svg';
 import {Link, NavLink} from 'react-router-dom';
-import user from './user-circle-solid.svg';
+import user from './user.svg';
 
 window.onresize = hideMenuLinks;
 
@@ -59,8 +59,9 @@ function Header() {
 				<img className="logo" src={logo} alt="Logo"/>
 			</NavLink>
 			<div className="header-links">
-				<Link to="/" className="header-link" >Productos</Link>
-				<Link className="header-link" to="/dieta/list">Dietas</Link>
+				<Link to="/productos" className="header-link" >Productos</Link>
+				{localStorage.getItem('dietasCheck')==1 ?
+				(<Link className="header-link" to="/dieta/list">Dietas</Link>)  : <div></div>}
 				<Link className="header-link" to="/cesta">Cestas</Link>
 			</div>
 			<div className="carro-menu-container">
@@ -80,7 +81,7 @@ function Header() {
 			</Link>
 		</div>
 		<div id="menuLinks">
-			<Link to="/" className="menuLink" onClick={closeMenu}>Productos</Link>
+			<Link to="/productos" className="menuLink" onClick={closeMenu}>Productos</Link>
 			<Link className="menuLink" to="/dieta/list" onClick={closeMenu}>Dietas</Link>
 			<Link className="menuLink" to="/products" onClick={closeMenu}>Cestas</Link>
 			<Link className="menuLink" to="/perfil" onClick={closeMenu}>Mi perfil</Link>
