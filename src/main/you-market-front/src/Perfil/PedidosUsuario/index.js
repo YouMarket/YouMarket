@@ -27,7 +27,7 @@ function PedidosUsuario() {
 	<div>
 		<Header/>
 		<Navegacion/>
-		<div className="card-container">
+		<div className="container">
 			<h1>Todos los pedidos</h1>
 			<div className="list-pedidos">
 				{pedidos.length >0 && pedidos.map((pedido) => 
