@@ -31,7 +31,7 @@ class RegistroUsuario extends React.Component{
 				<div className="registro-container">
 			
 					{this.state.errors}
-					<Formik
+					<Formik validateOnChange={false} validateOnBlur={false}
 						initialValues={{  
 							usuario: {
 								nombre: '',
@@ -57,15 +57,37 @@ class RegistroUsuario extends React.Component{
 							const errors={};
 							if (!values.usuario.nombre) {
 								errors.usuario='El usuario es obligatorio';
+							}else if(values.usuario.nombre.includes("1")||
+									values.usuario.nombre.includes("2")||
+									values.usuario.nombre.includes("3")||
+									values.usuario.nombre.includes("4")||
+									values.usuario.nombre.includes("5")||
+									values.usuario.nombre.includes("6")||
+									values.usuario.nombre.includes("7")||
+									values.usuario.nombre.includes("8")||
+									values.usuario.nombre.includes("9")){
+								errors.usuario='No se permiten números';
 							}
 							if (!values.usuario.apellidos) {
 								errors.apellidos='El apellido es obligatorio';
+							}else if(values.usuario.apellidos.includes("1")||
+									values.usuario.apellidos.includes("2")||
+									values.usuario.apellidos.includes("3")||
+									values.usuario.apellidos.includes("4")||
+									values.usuario.apellidos.includes("5")||
+									values.usuario.apellidos.includes("6")||
+									values.usuario.apellidos.includes("7")||
+									values.usuario.apellidos.includes("8")||
+									values.usuario.apellidos.includes("9")){
+								errors.apellidos='No se permiten números';
 							}
-							if (!values.usuario.dni || !/[0-9]{8}[A-Z]{1}/.test(values.usuario.dni)) {
-								errors.dni='El dni es obligatorio';
+							if (!values.usuario.dni || !/[0-9]{8}[A-Z]{1}/.test(values.usuario.dni)|| values.usuario.dni.toString().length!==9) {
+								errors.dni='El dni es obligatorio y tiene que respetar el formato 12345678A';
 							}
-							if (!values.usuario.telefono || !/[0-9]*/.test(values.usuario.telefono)) {
+							if (!values.usuario.telefono || !/[0-9]{9}/.test(values.usuario.telefono)) {
 								errors.telefono='El teléfono es obligatorio';
+							}else if(values.usuario.telefono.toString().length!==9){
+								errors.telefono='Tiene que seguir el formato español sin incluir el prefijo (+34)';
 							}
 							if(!values.usuario.email || !/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.usuario.email)){
 								errors.email='Debe introducir un email válido' 
@@ -74,18 +96,38 @@ class RegistroUsuario extends React.Component{
 								errors.fechaNacimiento='Debe introducir una fecha con formato Año - mes - dia' 
 							}
 							if(!values.usuario.password || !/^[a-zA-Z0-9]{6,20}$/.test(values.usuario.password)){
-								errors.password='La contraseña debe tener mínimo de 6 carácteres y pede contener letras y números' 
+								errors.password='La contraseña debe tener mínimo de 6 carácteres y puede contener letras y números' 
 							}
 							if (!values.dir.direccion) {
 								errors.direccion='La dirección es obligatoria';
 							}
-							if (!values.dir.provincia) {
+							if (!values.dir.provincia || values.dir.provincia==="") {
 								errors.provincia='La provincia es obligatoria';
+							}else if(values.dir.provincia.includes("1")||
+									values.dir.provincia.includes("2")||
+									values.dir.provincia.includes("3")||
+									values.dir.provincia.includes("4")||
+									values.dir.provincia.includes("5")||
+									values.dir.provincia.includes("6")||
+									values.dir.provincia.includes("7")||
+									values.dir.provincia.includes("8")||
+									values.dir.provincia.includes("9")){
+								errors.provincia='No se permiten números';
 							}
 							if (!values.dir.poblacion) {
 								errors.poblacion='La población es obligatoria';
+							}else if(values.dir.poblacion.includes("1")||
+									values.dir.poblacion.includes("2")||
+									values.dir.poblacion.includes("3")||
+									values.dir.poblacion.includes("4")||
+									values.dir.poblacion.includes("5")||
+									values.dir.poblacion.includes("6")||
+									values.dir.poblacion.includes("7")||
+									values.dir.poblacion.includes("8")||
+									values.dir.poblacion.includes("9")){
+								errors.poblacion='No se permiten números';
 							}
-							if (!values.dir.cpostal || !/[0-9]{5}/.test(values.dir.cpostal)) {
+							if (!values.dir.cpostal || !/[0-9]{5}/.test(values.dir.cpostal)||values.dir.cpostal.toString().length!==5) {
 								errors.cpostal='El código postal es obligatorio y debe tener 5 dígitos';
 							}
 							return errors;
@@ -107,10 +149,10 @@ class RegistroUsuario extends React.Component{
 									if (data.success) {
 										console.log(data)
 										localStorage.registroOK='Registrado correctamente, inicie sesión para empezar a comprar.'
-										{this.handleRedirect();}
+										this.handleRedirect();
 									  }
 									else{
-										this.state.errors=data.message
+										this.setState({errors:data.message});
 										}
 								  });
 							
@@ -132,7 +174,7 @@ class RegistroUsuario extends React.Component{
 							<Card title="Datos del usuario" subTitle="Todos los datos son obligatorios" style={{margin: 20}}>
 								<small className="error">{this.state.errors}</small>
 								<div className="row">
-									<span className="p-float-label" className="span">
+									<span className="span">
 										<label htmlFor="nomIn" className="label">Nombre: </label>
 										<input
 											className="input"
@@ -147,7 +189,7 @@ class RegistroUsuario extends React.Component{
 									</span>
 								</div>
 								<div className="row">
-									<span  className="p-float-label" className="span"> 
+									<span  className="span"> 
 										<label className="label" htmlFor="apellidosIn">Apellidos: </label>
 										<input
 											className="input"
@@ -163,7 +205,7 @@ class RegistroUsuario extends React.Component{
 									</span>
 								</div>
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 										<label className="label" htmlFor="dniIn">DNI: </label>
 										<input
 											className="input"
@@ -178,11 +220,11 @@ class RegistroUsuario extends React.Component{
 									</span>
 								</div>
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 										<label className="label" htmlFor="nacimientoIn">Fecha de nacimiento</label>
 										<input
 											className="input"
-											type="text"
+											type="date"
 											name="usuario.fechaNacimiento"
 											id="nacimientoIn"
 											onChange={handleChange}
@@ -193,7 +235,7 @@ class RegistroUsuario extends React.Component{
 									</span>
 								</div>
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 										<label className="label" htmlFor="telefono" >Teléfono: </label>
 										
 										<input
@@ -209,7 +251,7 @@ class RegistroUsuario extends React.Component{
 									</span> 
 								</div>
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 									<label className="label" >Tipo de suscripción: </label>
 										<ListaSuscripciones>
 					
@@ -219,7 +261,7 @@ class RegistroUsuario extends React.Component{
 								</div>
 						
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 										<label className="label" htmlFor="email" >Email </label>
 										<input
 											className="input"
@@ -235,7 +277,7 @@ class RegistroUsuario extends React.Component{
 									</span> 
 								</div>
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 										<label className="label" htmlFor="passwordIn">Contraseña: </label>
 										<input
 											className="input"
@@ -255,7 +297,7 @@ class RegistroUsuario extends React.Component{
 
 							<Card title="Dirección del usuario" subTitle="Todos los datos son obligatorios" style={{margin: 20}}> 
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 										<label className="label" htmlFor="direccion">Dirección completa:</label>
 										<input
 											className="input"
@@ -270,7 +312,7 @@ class RegistroUsuario extends React.Component{
 									</span> 
 								</div>
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 										<label className="label" htmlFor="poblacion" >Municipio: </label>
 										<input
 											className="input"
@@ -285,7 +327,7 @@ class RegistroUsuario extends React.Component{
 									</span> 
 								</div>
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 										<label className="label" htmlFor="provincia"  >Provincia </label>
 										<input
 											className="input"
@@ -300,7 +342,7 @@ class RegistroUsuario extends React.Component{
 									</span> 
 								</div>
 								<div className="row">
-									<span  className="p-float-label" className="span">
+									<span  className="span">
 										<label className="label" htmlFor="cpostal" >Código postal </label>
 										<input
 											className="input"
