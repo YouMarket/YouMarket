@@ -19,7 +19,7 @@ import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import Login from './auth/Login'
 import Logout from './auth/Logout'
-
+import Inicio from './Inicio'
 import PedidoForm from './PedidoForm';
 
 import DietaProductos from './DietaProductos';
@@ -137,13 +137,13 @@ function App() {
 				<Route path="/alertabrecha">
     				<AlertaBrecha />
     		</Route>
-        		
-
-
-		    <Route path="/">
+		    <Route path="/productos">
 		        <Productos />
 		    </Route>
 
+			<Route path="/">
+					<Inicio/>
+				</Route>
 
 		      </Switch>
         </Router>
