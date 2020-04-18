@@ -43,15 +43,16 @@ function DatosUsuario() {
 		}, []);
 	
 	function deleteUser() {
-		alert.show('¿Está a punto de eliminar su cuenta, ¿desea continuar?');
-		fetch('/eliminarUsuario', {
+		alert('¿Está a punto de eliminar su cuenta, ¿desea continuar?');
+		fetch('/usuario/eliminarUsuario', {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-			method:'POST',
-		})
-		
+			method:'POST'
+		});
+		var url= "/logout"; 
+    	window.location = url; 
 	}
 
 	const fetchDireccion = useCallback(() => {
@@ -160,7 +161,7 @@ function DatosUsuario() {
 				</div>
 			</Card>
 			
-			{ <button className="boton-perfil" onClick={this.deleteUser()}>Eliminar cuenta</button> }
+			{ <button className="boton-perfil" onClick={deleteUser}>Eliminar cuenta</button> }
 			
 			{/* <button className="boton-perfil">Cambiar datos</button>*/}
 		</div>
