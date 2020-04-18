@@ -15,7 +15,6 @@ const [cestaproductos, setCestaproductos] = useState();
 	      .then(res => res.json())
 	      .then(cestaproductos => {
 	        setCestaproductos(cestaproductos);
-	        console.log(cestaproductos);
 	      });
 	  }, []);
 	
