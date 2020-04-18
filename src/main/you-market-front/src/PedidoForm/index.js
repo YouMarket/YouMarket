@@ -633,8 +633,8 @@ function pagar() {
         				'Accept' : 'application/json',
         				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
         			method:'POST',
-        			body:JSON.stringify(construyeCarrito(), values, null, 2)
-        	}).then(() =>
+        			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})
+        	}).then(console.log(JSON.stringify({pedidoForm: values, carrito: construyeCarrito()}))).then(() =>
         	 {
         		 handleRedirect();
         	 })
@@ -1336,7 +1336,7 @@ function pagar() {
 	             				"Content-Type": "application/json"
 	             			},
 	             			method:'POST',
-	             			body:JSON.stringify(construyeCarrito(), values, null, 2)
+	             			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})
 	             	}).then(() =>
 	             	 {
 	             		 handleSubmit();

@@ -1,6 +1,5 @@
 package com.youmarket.controllers;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.youmarket.configuration.security.CurrentUser;
@@ -33,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -218,8 +217,9 @@ public class PedidoController {
 	// }
 	
 	@PostMapping("/create")
-	public ResponseEntity<List<Pedido>> createPedidos(@RequestBody List<ProductoCarrito> carrito, @RequestBody FormPedidos pedidos, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
-		
+	public ResponseEntity<List<Pedido>> createPedidos(@RequestBody Map<String, Object> putamierda, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
+		FormPedidos pedidos = (FormPedidos)putamierda.get("pedidoForm");
+		List<ProductoCarrito> carrito = (List<ProductoCarrito>)putamierda.get("carrito");
 		Usuario user = this.usuarioService.findById(currentUser.getId()).orElse(null);
 		
 		Date now = new Date();
@@ -333,7 +333,6 @@ public class PedidoController {
 			facturaService.createAndSaveFactura(null, p4s, importeTotal(p4s), new Date());
 		}
 		List<Pedido> res = Arrays.asList(p1s,p2s,p3s,p4s);
-		session.setAttribute("SESSION_CARRITO", new HashMap<Producto, Integer>());
 		return ResponseEntity.ok(res);
 
 	}
@@ -349,15 +348,28 @@ public class PedidoController {
 		return total;
 	}
 	
-	public Pedido meterCarrito(Map<Producto, Integer> carrito, Pedido p){
+	// public Pedido meterCarrito(Map<Producto, Integer> carrito, Pedido p){
+	// 	Pedido guardado = this.pedidoService.save(p);
+	// 	List<Producto> keys = new ArrayList<>(carrito.keySet());
+	// 	for(Producto prod : keys){
+	// 		CestaProducto cp = new CestaProducto();
+	// 		cp.setProducto(prod);
+	// 		cp.setCantidad(carrito.get(prod));
+	// 		cp.setCesta(guardado);
+	// 		cp.setId(prod, guardado);
+	// 		this.cpService.save(cp);
+	// 	}
+	// 	return guardado;
+	// }
+
+	public Pedido meterCarrito(List<ProductoCarrito> carrito, Pedido p){
 		Pedido guardado = this.pedidoService.save(p);
-		List<Producto> keys = new ArrayList<>(carrito.keySet());
-		for(Producto prod : keys){
+		for(ProductoCarrito prod : carrito){
 			CestaProducto cp = new CestaProducto();
-			cp.setProducto(prod);
-			cp.setCantidad(carrito.get(prod));
+			cp.setProducto(prod.getProducto());
+			cp.setCantidad(prod.getCantidad());
 			cp.setCesta(guardado);
-			cp.setId(prod, guardado);
+			cp.setId(prod.getProducto(), guardado);
 			this.cpService.save(cp);
 		}
 		return guardado;
