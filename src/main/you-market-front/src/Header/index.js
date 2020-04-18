@@ -60,7 +60,8 @@ function Header() {
 			</NavLink>
 			<div className="header-links">
 				<Link to="/" className="header-link" >Productos</Link>
-				<Link className="header-link" to="/dieta/list">Dietas</Link>
+				{localStorage.getItem('dietasCheck')==1 ?
+				(<Link className="header-link" to="/dieta/list">Dietas</Link>)  : <div></div>}
 				<Link className="header-link" to="/cesta">Cestas</Link>
 			</div>
 			<div className="carro-menu-container">
