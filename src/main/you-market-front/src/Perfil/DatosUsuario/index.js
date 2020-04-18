@@ -42,16 +42,14 @@ function DatosUsuario() {
 			});
 		}, []);
 	
-	function deleteUser(id) {
-		alert("¿Está a punto de eliminar su cuenta, ¿desea continuar?");
+	function deleteUser() {
+		alert.show('¿Está a punto de eliminar su cuenta, ¿desea continuar?');
 		fetch('/eliminarUsuario', {
 			headers: {
 				'Accept': 'application/json',
-				'Content-Type': "application/json',
-				'Authorization' : 'Bearer ' + localStorage.getItem('auth')
-			},
+				'Content-Type': 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 			method:'POST',
-			body:JSON.stringify({usuarioId: id})
 		})
 		
 	}
@@ -162,8 +160,7 @@ function DatosUsuario() {
 				</div>
 			</Card>
 			
-			{ <button className="boton-perfil" onClick={() => deleteUser(id)}
-			alert("¿Está a punto de eliminar su cuenta, ¿desea continuar?")>Eliminar cuenta</button> }
+			{ <button className="boton-perfil" onClick={this.deleteUser()}>Eliminar cuenta</button> }
 			
 			{/* <button className="boton-perfil">Cambiar datos</button>*/}
 		</div>
