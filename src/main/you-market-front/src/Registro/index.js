@@ -1,109 +1,35 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { PayPalButton } from "react-paypal-button-v2";
-
+import React  from 'react';
 import './styles.css';
-import Header from '../../Header';
-import Navegacion from '../Navegacion';
-import { useHistory } from "react-router-dom";
-
+import Header from '../Header';
 import {Card} from 'primereact/card';
+import { Formik } from 'formik';
+import { withRouter } from 'react-router-dom';
 
-function DatosUsuario() {
-	let history = useHistory();
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import ListaSuscripciones from './suscripciones';
 
 
-	const [usuario, setUsuario] = useState([]);
-	const [direccion, setDireccion] = useState([]);
-	const [suscripcion, setSuscripcion] = useState([]);
-	const [pagada, setPagada] = useState([]);
-	const [meses, setMeses] = useState([]);
-		
-	const fetchUsuario = useCallback(() => {
-		return fetch('usuario/getUser' , {headers: {
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		method:'GET'})
-			.then(res => res.json())
-			.then(usuario => {
-				setUsuario(usuario)
-			});
-		}, []);		
-	
-	const fetchSuscripcion = useCallback(() => {
-		return fetch('usuario/getSuscripcion' , {headers: {
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		method:'GET'})
-			.then(res => res.json())
-			.then(suscripcion => {
-				setSuscripcion(suscripcion)
-			});
-		}, []);
-	
-	function deleteUser() {
-		alert.show('¿Está a punto de eliminar su cuenta, ¿desea continuar?');
-		fetch('/eliminarUsuario', {
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-			method:'POST',
-		})
-		
+class RegistroUsuario extends React.Component{
+	constructor(props) {
+		super(props);
+		this.state={ errors: "" };
+
 	}
 
-	const fetchDireccion = useCallback(() => {
-		return fetch('direccion/principal' , {headers: {
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		method:'GET'})
-			.then(res => res.json())
-			.then(direccion => {
-				setDireccion(direccion)
-			});
-		}, []);		
-	
-	const fetchPagoSus = useCallback(() => {
-		return fetch('suscripcion/pagada' , {headers: {
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		method:'GET'})
-			.then(res => res.json())
-			.then(response => {
-				console.log(response)
-				setPagada(response.success)
-				setMeses(response.message)
-			});
-		}, []);			
+	handleRedirect=() => {
+			this.props.history.push('/login');
+	}
 
-		useEffect(() => {
-			fetchUsuario(usuario);
-			fetchDireccion(direccion);
-			fetchSuscripcion(suscripcion);
-			fetchPagoSus();
-			}, []);
-	
-
-  return(
-	<div>
-		<Header/>
-		<Navegacion/>
-		<div className="card-container">
+  	render(){
+		
+		return (
+			<div>	  
+				<Header/>
+				
+				<div className="registro-container">
 			
-			<Card title="Información Personal" style={{margin: 20}} >
-				<div >
-					<p>Nombre: {usuario.nombre}</p>
-					<p>Apellidos: {usuario.apellidos}</p>
-					<p>DNI: {usuario.dni} </p>
-					<p>Fecha de nacimiento: {usuario.fechaNacimiento} </p>
-					<p>Zona de reparto: {usuario.cpostal}</p>
-					<p>Suscripción: {suscripcion.nombre} </p>
-					<p>Precio: {suscripcion.precio} €</p>
-				</div>
 					{this.state.errors}
 					<Formik validateOnChange={false} validateOnBlur={false}
 						initialValues={{  
@@ -155,7 +81,7 @@ function DatosUsuario() {
 									values.usuario.apellidos.includes("9")){
 								errors.apellidos='No se permiten números';
 							}
-							if (!values.usuario.dni || !/[0-9]{8}[A-Z]{1}/.test(values.usuario.dni)|| values.usuario.dni.toString().length!==9) {
+							if (!values.usuario.dni || !/[0-9]{8}[A-Z]{1}/.test(values.usuario.dni)|| values.usuario.dni.toString().length!==9) {
 								errors.dni='El dni es obligatorio y tiene que respetar el formato 12345678A';
 							}
 							if (!values.usuario.telefono || !/[0-9]{9}/.test(values.usuario.telefono)) {
@@ -332,36 +258,8 @@ function DatosUsuario() {
 										</ListaSuscripciones>
 									</span>
 
-				{!pagada && <div>
-					<p>Pagar subscripción</p>
-					<PayPalButton
-						amount={suscripcion.precio}
-						currency="EUR"
-						onSuccess={() => {
-						setTimeout(() => {
-							fetch('/factura/createSuscripcion', {
-								headers: {
-									'Content-Type' : 'application/json',
-									'Accept' : 'application/json',
-									'Authorization' : 'Bearer ' + localStorage.getItem('auth')
-								},
-								method:'POST'})
-							.then(function(response) {})
-							.then(() => {history.push('/datos-perfil')})
+								</div>
 						
-						
-						}, 400);
-					}}
-					
-					options={{
-						clientId: "AQ1wSRRux5eVDHDZia2gH5NfFd_dO2-mooYqs-CdF3E53DIHclXqJlDI_2I2vtfIeQi5qVQTciRnOS9Y",
-						currency: "EUR"
-					}}
-				/>
-
-				</div>
-			}
-			</Card>
 								<div className="row">
 									<span  className="span">
 										<label className="label" htmlFor="email" >Email </label>
@@ -460,35 +358,32 @@ function DatosUsuario() {
 								</div>
 							</Card>
 
-			{meses != 1 && 
-				<a href="/cambio-suscripcion">
-					<button className="button-finish">Modificar Suscripción</button>
-				</a>
-			}
+							
+							<div className="row">
+							
+							
+							<input
+							id="terms"
+							type="checkbox"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							text="Debe aceptar los terminos y condiciones"
+							required
+							/>
+							<label htmlFor="terms"> He leido y acepto los <a href="/terminosycondiciones"> terminos y condiciones </a> </label>
 
-			{
-				meses == 1 && 
-				<div>
-					<p>Ya ha realizado una modificación en su suscripción para el mes siguiente. Hasta entonces, no podrá volver a modificarla.</p>
+							<br/><br/>
+							
+							<button type="submit" className="boton" disabled={isSubmitting}>
+								Enviar
+							</button>
+							
+							</div>
+						</form>
+						)}
+					</Formik>
 				</div>
-			}
-			
-			<Card title="Información de Usuario" style={{margin: 20}} >
-				<div>
-					
-					<p>Email: {usuario.email}</p>
-					<p>Dirección completa: {direccion.direccion}</p>
-					<p>Población: {direccion.poblacion}</p>
-					<p>Provincia: {direccion.provincia}</p>
-					<p>Código postal: {direccion.cpostal}</p>
-				</div>
-			</Card>
-			
-			{ <button className="boton-perfil" onClick={this.deleteUser()}>Eliminar cuenta</button> }
-			
-			{/* <button className="boton-perfil">Cambiar datos</button>*/}
-		</div>
-	</div>
- );
-}
-export default DatosUsuario;
+			</div>
+		)
+ 	}
+}export default withRouter(RegistroUsuario);
