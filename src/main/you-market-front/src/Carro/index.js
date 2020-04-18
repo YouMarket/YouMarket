@@ -92,11 +92,6 @@ let history=useHistory();
 				 }}
 			   >
 				 {({
-				   values,
-				   errors,
-				   touched,
-				   handleChange,
-				   handleBlur,
 				   handleSubmit,
 				   isSubmitting,
 				   /* and other goodies */
@@ -234,7 +229,7 @@ let history=useHistory();
 	 <div className="container">
 		<h1 className="introduction introduction-empty">Vaya.. parece que aún no tienes productos añadidos</h1>
 	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad}></img></div>
-		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/products">aquí</NavLink></p>
+		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/productos">aquí</NavLink></p>
 	 </div>)}
 	 
 	 </div>

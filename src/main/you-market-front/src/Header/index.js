@@ -82,8 +82,9 @@ function Header() {
 		</div>
 		<div id="menuLinks">
 			<Link to="/productos" className="menuLink" onClick={closeMenu}>Productos</Link>
-			<Link className="menuLink" to="/dieta/list" onClick={closeMenu}>Dietas</Link>
-			<Link className="menuLink" to="/products" onClick={closeMenu}>Cestas</Link>
+			{localStorage.getItem('dietasCheck')==1 ?
+			<Link className="menuLink" to="/dieta/list" onClick={closeMenu}>Dietas</Link> : <div></div>}
+			<Link className="menuLink" to="/cesta" onClick={closeMenu}>Cestas</Link>
 			<Link className="menuLink" to="/perfil" onClick={closeMenu}>Mi perfil</Link>
 		</div>
 		</div>

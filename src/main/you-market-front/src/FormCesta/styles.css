@@ -22,11 +22,10 @@
 
 .name-input-cesta{
 	margin-top:2%;
-	padding-bottom:5%;
+	padding:5%;
 	margin-bottom:5%;
 	width:100%;
 	font-size:20px;
-
 }
 
 .label-cesta-create{
@@ -45,7 +44,6 @@ input[type=text]:focus {
 }
 
 .grid2-create-cesta button{
-	background-color: #4CAF50; /* Green */
   border: none;
   color: white;
   text-align: center;
@@ -60,9 +58,4 @@ input[type=text]:focus {
 
 .grid2-create-cesta button:focus {
   background-color: #90EE90;
-}
-
-.submit-cesta-create{
-	backgroung-color:green;
-
 }

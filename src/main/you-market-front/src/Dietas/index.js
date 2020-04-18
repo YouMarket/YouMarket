@@ -53,7 +53,9 @@ function Dietas() {
 					))}
 					</div>
 				</div>
-			</div>):(<div></div>)}
+			</div>):(<div className="container">
+				<p>No tienes acceso a este contenido</p>
+			</div>)}
 	 </div>
 	);
 	

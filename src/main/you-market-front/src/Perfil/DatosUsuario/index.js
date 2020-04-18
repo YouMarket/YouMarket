@@ -124,7 +124,7 @@ function DatosUsuario() {
 			</Card>
 
 			{meses != 1 && 
-				<a href="/cambio-suscripcion">
+				<a href="/cambio-suscripcion" className="modificar-suscripcion">
 					<button className="button-finish">Modificar Suscripción</button>
 				</a>
 			}
