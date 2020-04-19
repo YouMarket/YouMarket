@@ -1,24 +1,54 @@
-import React from 'react';
+import React, {useCallback, useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import './styles.css';
 import Header from '../Header';
 import Receta from '../Receta';
+import SinAcceso from '../SinAcceso';
 
 function Recetas() {
+	const [recetas, setRecetas] = useState([]);
+
+	const { dietaId } = useParams();
+	
+	const fetchRecetas = useCallback(() => {
+	    return fetch(`../../../receta/list/${dietaId}`)
+	      .then(res => res.json())
+	      .then(recetas => {
+			setRecetas(recetas)
+			console.log(recetas)
+	      });
+		  }, []);
+	console.log(recetas)
+    
+    useEffect(() => {
+	    fetchRecetas();
+	  }, [fetchRecetas]);	
+    
+    if(localStorage.getItem('auth')==null){
+		history.push('/login');
+	}
+    
+    if(localStorage.getItem('dietasCheck')===0){
+		history.push('/404');
+	}
+
   return(
 	<div>	  
 	  <Header/>
-	  <h2 className="container">¡Aquí tienes las recetas de la dieta que has seleccionado!</h2>
-	  <div className="recetas-container container">
-	  	<div className="grid">
-	  		<Receta id="1" nombre="Hummus" imagen="https://delantaldealces.com/wp-content/uploads/2016/09/hummus-FB.jpg" personas="2" tiempo="20 min" calorias="60 calorias"/>
-	  		<Receta id="2" nombre="Sopa de Garbanzo con especias y un monton de cosas vegetarianas" imagen="https://d1kxxrc2vqy8oa.cloudfront.net/wp-content/uploads/2019/03/29163422/RFB-1503-2-sopadegarbanzos.jpg" personas="3" tiempo="40 min" calorias="100 calorias"/>
-			<Receta id="1" nombre="Hummus" imagen="https://delantaldealces.com/wp-content/uploads/2016/09/hummus-FB.jpg" personas="2" tiempo="20 min" calorias="60 calorias"/>
-	  		<Receta id="2" nombre="Sopa de Garbanzo con especias y un monton de cosas vegetarianas" imagen="https://d1kxxrc2vqy8oa.cloudfront.net/wp-content/uploads/2019/03/29163422/RFB-1503-2-sopadegarbanzos.jpg" personas="3" tiempo="40 min" calorias="100 calorias"/>
-	  		<Receta id="1" nombre="Hummus" imagen="https://delantaldealces.com/wp-content/uploads/2016/09/hummus-FB.jpg" personas="2" tiempo="20 min" calorias="60 calorias"/>
-	  		<Receta id="2" nombre="Sopa de Garbanzo con especias y un monton de cosas vegetarianas" imagen="https://d1kxxrc2vqy8oa.cloudfront.net/wp-content/uploads/2019/03/29163422/RFB-1503-2-sopadegarbanzos.jpg" personas="3" tiempo="40 min" calorias="100 calorias"/>
-	  	</div>
-	  </div>
+	  {localStorage.getItem('dietasCheck')===1 ?
+	  		(<div>
+			<h2 className="container">¡Aquí tienes las recetas de la dieta que has seleccionado!</h2>
+			<div className="recetas-container container">
+				<div className="grid">
+					{recetas.length > 0 ? 
+					<div>{recetas && recetas.map(receta => (
+						<Receta id={receta.id} imagen={receta.imagen} nombre={receta.nombre} personas={receta.personas} tiempo={receta.tiempo} calorias={receta.calorias} />
+					))}</div>:<h1 className="container">No hay recetas</h1>}
+				</div>
+			</div>
+			</div>) :(<SinAcceso/>)}
 	</div>
- );
+  );
 }
+
 export default Recetas;

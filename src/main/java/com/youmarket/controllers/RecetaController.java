@@ -9,9 +9,9 @@ import com.youmarket.services.RecetaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,13 +21,13 @@ public class RecetaController{
     @Autowired
     private RecetaService recetaService;
     
-    @RequestMapping("/list")
-    public List<Receta> listaRecetas(@RequestParam ("id")int dietaId){
+    @GetMapping("/list/${dietaId}")
+    public List<Receta> listaRecetas(@PathVariable Integer dietaId){
         List<Receta> recetas = recetaService.findByDietaId(dietaId);
         return recetas;
     }
 
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Object> recetaDetalle(@Valid @PathVariable Integer id){
         return ResponseEntity.ok(recetaService.findById(id));
     }
