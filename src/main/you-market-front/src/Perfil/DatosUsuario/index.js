@@ -41,7 +41,19 @@ function DatosUsuario() {
 			.then(suscripcion => {
 				setSuscripcion(suscripcion)
 			});
-		}, []);		
+		}, []);
+	
+	function deleteUser() {
+		fetch('/usuario/eliminarUsuario', {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+			method:'POST'
+		});
+		var url= "/logout"; 
+    	window.location = url; 
+	}
 
 	const fetchDireccion = useCallback(() => {
 		return fetch('direccion/principal' , {headers: {
@@ -147,6 +159,10 @@ function DatosUsuario() {
 					<p>Código postal: {direccion.cpostal}</p>
 				</div>
 			</Card>
+			
+			{ <button className="boton-perfil" onClick={() => {if (window.confirm('¿Seguro que desea eliminar su cuenta?')) deleteUser()}}>Eliminar cuenta</button> }
+
+			
 			<a href={urlPDF} target="_blank">
 				<button className="button-finish">Exportar información del usuario en PDF</button>
 			</a>
