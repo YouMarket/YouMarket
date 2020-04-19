@@ -8,8 +8,16 @@ import {
 
 			
 class PedidoExito extends React.Component{
-		
+	
 		render(){
+			if(!localStorage.getItem('pedido')){
+				this.props.history.push('/');	
+			}
+			
+			function handleRedirect(){
+				 this.props.history.push('/');
+			}
+			
 			return(
 
 
@@ -24,8 +32,6 @@ class PedidoExito extends React.Component{
 			
 			<h1> Pedido/s realizado/s con Éxito </h1>
 			
-
-		  	
 		  </div>
 		  </center>
 		</div>

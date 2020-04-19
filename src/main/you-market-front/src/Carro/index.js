@@ -64,6 +64,10 @@ let history=useHistory();
 		fetchCestas(cestas);
 		fetchMsg();
 	  }, []);
+	  
+	  function carritoLleno(){
+		  localStorage.setItem('carrolleno', true);
+	  }
 
   return(
 		<div>
@@ -82,7 +86,7 @@ let history=useHistory();
 							   method:'POST'
 					   }).then((response)=> {
 						   setSubmitting=false;
-	
+						   localStorage.removeItem('carrolleno');
 					   }).then(()=>
 					   {window.location.reload(false);}
 					   )
@@ -129,7 +133,7 @@ let history=useHistory();
 						sinSuscripcion ? 
 							(
 								<a href="/pedido/create">
-								<button className="button-finish">Terminar pedido</button>
+								<button className="button-finish" onClick={carritoLleno}>Terminar pedido</button>
 								</a>) 
 							:(
 								<div>
