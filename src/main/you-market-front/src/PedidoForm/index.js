@@ -18,6 +18,9 @@ var pedido2copiado = false;
 var pedido3copiado = false;
 var pedido4copiado = false;
 
+function setPedidoCheck(){
+	
+}
 
 function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");
@@ -320,7 +323,12 @@ function pagar() {
 	}
 
 		if(localStorage.getItem('auth')==null){
-			this.props.history.push('/login');
+			history.push('/login');
+			
+		}
+		
+		if(!localStorage.getItem('carrolleno')){
+			history.push('/');
 		}
 
 		return(
@@ -607,6 +615,7 @@ function pagar() {
         			body:JSON.stringify(values, null, 2)
         	}).then(() =>
         	 {
+        		 localStorage.removeItem('carrolleno');
         		 handleRedirect();
         	 })
           setSubmitting(false);
@@ -1302,6 +1311,9 @@ function pagar() {
 	             	}).then(() =>
 	             	 {
 	             		 handleSubmit();
+	             	 }).then(() =>
+	             	 {
+	             		 localStorage.setItem('pedido',true);
 	             	 }).then(() =>
 	             	 {
 	             		 handleRedirect();

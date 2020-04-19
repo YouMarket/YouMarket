@@ -11,6 +11,18 @@ function SuscripcionForm() {
 
     let history = useHistory();
 
+    function dietasCheck() {
+		 fetch('/usuario/dietasCheck' , {headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+				method:'GET'})
+			      .then(res => res.json())
+			      .then(dietasCheck2 => {
+			    	  localStorage.setItem('dietasCheck', dietasCheck2);
+
+			      });
+	 }
 
     return (
         <div>
@@ -19,12 +31,12 @@ function SuscripcionForm() {
 
 			<div className="container">
 			<Card title="Modificación de la suscripción" subTitle="Seleccione la suscripción a la que desea cambiar" style={{ margin: 20 }}>
-                
+
 				<Formik
-							initialValues={{  
+							initialValues={{
 								suscripcion: {
 									id: 0,
-	
+
 								}
 							}}
 							onSubmit={(values, { setSubmitting }) => {
@@ -48,7 +60,7 @@ function SuscripcionForm() {
 											this.state.errors = data.message
 											}
 									  });
-								
+
 								setSubmitting(false);
 								}, 400);
 							}}
@@ -60,21 +72,21 @@ function SuscripcionForm() {
 							}) => (
 								<form onSubmit={handleSubmit}>
 									<ListaSuscripciones>
-	
-									</ListaSuscripciones>   
-								
-								
+
+									</ListaSuscripciones>
+
+
 									<button type="submit" className="boton" disabled={isSubmitting}>
 										Enviar
 									</button>
-								
+
 								</form>
 							)}
 						</Formik>
-					   
-	
+
+
 				</Card>
-			
+
 			</div>
 
 		</div>
