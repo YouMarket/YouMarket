@@ -27,6 +27,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -197,6 +198,39 @@ public class UsuarioController {
 			respuesta.setMessage("El usuario ya existe");
 		}
 
+		return ResponseEntity.ok(respuesta);
+	}
+
+	@PutMapping("/updatePerfil")
+	public ResponseEntity<ApiResponse> updateDatosPerfil(@RequestBody SignUpForm form, @CurrentUser UserPrincipal logged){
+		ApiResponse respuesta = new ApiResponse();
+		if(usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
+			Usuario user = usuarioService.findById(logged.getId()).orElse(null);
+			Direccion direccionActual = dirService.findPrincipalByUser(user);
+			Usuario usuarioForm = form.getUsuario();
+			Direccion direccionForm = form.getDir();
+			
+			user.setEmail(usuarioForm.getEmail());
+			user.setNombre(usuarioForm.getNombre());
+			user.setApellidos(usuarioForm.getApellidos());
+			user.setTelefono(usuarioForm.getTelefono());
+
+			direccionActual.setDireccion(direccionForm.getDireccion());
+			direccionActual.setCpostal(direccionForm.getCpostal());
+			direccionActual.setPoblacion(direccionForm.getPoblacion());
+			direccionActual.setProvincia(direccionForm.getProvincia());
+
+			usuarioService.save(user);
+			dirService.save(direccionActual);
+
+			respuesta.setSuccess(true);
+			respuesta.setMessage("Datos actualizados con éxito");
+			
+		}else {
+			respuesta.setSuccess(false);
+			respuesta.setMessage("El email ya está en uso.");
+		}
+			
 		return ResponseEntity.ok(respuesta);
 	}
 
