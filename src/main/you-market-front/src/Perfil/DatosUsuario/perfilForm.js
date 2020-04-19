@@ -3,11 +3,10 @@ import { useHistory } from "react-router-dom";
 import './styles.css';
 import Header from '../../Header';
 import Navegacion from '../Navegacion';
-import ListaSuscripciones from '../../Registro/suscripciones';
 import {Card} from 'primereact/card';
 import { Formik } from 'formik';
 
-function SuscripcionForm() {
+function PerfilForm() {
 const [usuario, setUsuario] = useState();
     let history = useHistory();
 	
@@ -153,10 +152,11 @@ if (localStorage.getItem('auth')==null){
                                             'Authorization' : 'Bearer ' + localStorage.getItem('auth')
 										},
 										method:'PUT',
-										body:JSON.stringify(values.suscripcion.id, null, 1)
+										body:JSON.stringify(values, null, 2)
 								}).then(response => response.json())
 										.then(data => {
 									if (data.success) {
+										alert(JSON.stringify(values, null, 2));
 										history.push('/datos-perfil');
 									  }
 								  });
@@ -318,4 +318,4 @@ if (localStorage.getItem('auth')==null){
         </div>
     );
 }
-export default SuscripcionForm;
+export default PerfilForm;
