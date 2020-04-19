@@ -1,0 +1,13 @@
+.access-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    max-height: 400px;
+    max-width: 300px;
+}
+
+.access-text {
+    text-align: center;
+}

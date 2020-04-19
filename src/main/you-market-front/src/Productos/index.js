@@ -36,7 +36,6 @@ const [displayedProducts, setDisplayedProducts] = useState([]);
 	<div>	  
 	  <Header/>
 	  <div className="productos-page container">
-		<h1 className="productos-title">¡Bienvenido a YouMarket!</h1>
 		<h1 className="productos-title">Aquí tienes los productos disponibles 🤙</h1>
 		<input className="productos-search" type="text" onChange={search} placeholder="Busca aquí tus productos favoritos..."/>
 	  </div>

@@ -231,7 +231,7 @@ let history=useHistory();
 		</div>
 	 : (
 	 <div className="container">
-		<h1 className="introduction introduction-empty">Vaya.. parece que aún no tienes productos añadidos</h1>
+		<h1 className="introduction introduction-empty">Vaya... parece que aún no tienes productos añadidos</h1>
 	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad} alt="Carro vacío"/></div>
 		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/productos">aquí</NavLink></p>
 	 </div>)}

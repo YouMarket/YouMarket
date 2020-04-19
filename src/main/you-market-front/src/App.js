@@ -8,7 +8,7 @@ import {
 import Productos from './Productos';
 import Dietas from './Dietas';
 import Perfil from './Perfil';
-import RecetasListado from './RecetasListado';
+import RecetasListado from './Recetas';
 import ProductoDetalle from './ProductoDetalle';
 import RegistroUsuario from './Registro';
 import PedidosUsuario from './Perfil/PedidosUsuario';
@@ -37,7 +37,8 @@ import PerfilForm from './Perfil/DatosUsuario/perfilForm'
 import TerminosYCondiciones from './TerminosCondiciones';
 import AlertaBrecha from './AlertaBrecha';
 import PedidoExito from './PedidoExito';
-
+import Recetas from './Recetas';
+import Receta from './Receta';
 
 function App() {
 
@@ -123,25 +124,25 @@ function App() {
 				<Route path="/404">
 					<Error/>
 				</Route>
-
 				<Route path="/pedidoexito">
 					<PedidoExito/>
 				</Route>
-
-
-
 				<Route path="/terminosycondiciones">
         			<TerminosYCondiciones />
-        </Route>
-
+        		</Route>
 				<Route path="/alertabrecha">
     				<AlertaBrecha />
-    		</Route>
-		    <Route path="/productos">
-		        <Productos />
-		    </Route>
-
-			<Route path="/">
+				</Route>
+				<Route path="/recetas/list">
+					<Recetas />
+				</Route>
+				<Route path="/recetas/:id">
+					<Receta />
+				</Route>
+				<Route path="/productos">
+					<Productos />
+				</Route>
+				<Route path="/">
 					<Inicio/>
 				</Route>
 

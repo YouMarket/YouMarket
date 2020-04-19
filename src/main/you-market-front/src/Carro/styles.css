@@ -24,18 +24,18 @@
     background-color: red;
 	
 }
-.guardar-carrito-a-cesta{
-	padding-top:26%;
-	display:block;
-	font-size:80%;
+.guardar-carrito-a-cesta {
+    clear: both;
+    display:block;
+    padding-top: 30px;
 }
 
 .button-carrito-a-cesta{
 	float: none !important;
-        width: 90%;
-        margin-top: 2%;
-        margin-left:2%;
-        display: block;
+    width: 90%;
+    margin-top: 2%;
+    margin-left:2%;
+    display: block;
 }
 
 .error-required-cesta-a-carrito{
@@ -130,7 +130,6 @@ select {
 
 .guardar-carrito-a-cesta{
 	text-align:center;
-	font-size:80%;
 	margin:auto;
 }
 
