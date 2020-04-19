@@ -383,6 +383,28 @@ public class UsuarioController {
 			return ResponseEntity.ok(res);
 
 		}
+	
+	@GetMapping("/cestasCheck")
+	public ResponseEntity<Integer> cestasCheck(@CurrentUser UserPrincipal curr){
+		Boolean result=false;
+		Integer res=0;
+		Usuario usuario1=null;
+
+		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+
+		if(user.isPresent()) {
+			usuario1 = user.get();
+		}
+
+		List<Cesta> cestas=this.cestaService.cestasPorUsuario(usuario1.getId());
+		
+		if(cestas.size() > 0) {
+			res=1;
+		}
+
+		return ResponseEntity.ok(res);
+
+	}
 
 		@GetMapping("/userPerfil")
 		public ResponseEntity<Usuario> userPerfil(@CurrentUser UserPrincipal curr){

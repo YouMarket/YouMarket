@@ -57,8 +57,8 @@ class Login extends React.Component{
 					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 					method:'GET'})
 				      .then(res => res.json())
-				      .then(dietasCheck => {
-				    	  localStorage.setItem('dietasCheck', dietasCheck);
+				      .then(cestasCheck1 => {
+				    	  localStorage.setItem('cestasCheck', cestasCheck1);
 				        
 				      });
 		 }
