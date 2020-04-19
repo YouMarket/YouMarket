@@ -1,6 +1,6 @@
 import React from 'react';
 
-import style from './styles.css';
+import './styles.css';
 import Header from '../Header';
 import {
 	  withRouter
@@ -17,7 +17,7 @@ class PedidoExito extends React.Component{
 		<Header/>
 			<br/><br/>
 			<center>
-				<img src="https://media1.tenor.com/images/06ae072fb343a704ee80c2c55d2da80a/tenor.gif" alt="alert" id="alert"/>
+				<img src="https://www.irelandwebsitedesign.com/images/request-a-quote/thumbs-up.gif" alt="alert" id="alert"/>
 			
 			<div className="producto-detalle-container container clearfix" >
 			

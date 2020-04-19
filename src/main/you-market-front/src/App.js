@@ -19,7 +19,7 @@ import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import Login from './auth/Login'
 import Logout from './auth/Logout'
-
+import Inicio from './Inicio'
 import PedidoForm from './PedidoForm';
 
 import DietaProductos from './DietaProductos';
@@ -36,7 +36,6 @@ import SubscripcionForm from './Perfil/DatosUsuario/suscripcionForm'
 import TerminosYCondiciones from './TerminosCondiciones';
 import AlertaBrecha from './AlertaBrecha';
 import PedidoExito from './PedidoExito';
-
 
 
 function App() {
@@ -66,12 +65,9 @@ function App() {
 		    	<Route path="/dieta/list">
     				<Dietas />
     			</Route>
-
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
 				</Route>
-
-
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
@@ -137,13 +133,13 @@ function App() {
 				<Route path="/alertabrecha">
     				<AlertaBrecha />
     		</Route>
-        		
-
-
-		    <Route path="/">
+		    <Route path="/productos">
 		        <Productos />
 		    </Route>
 
+			<Route path="/">
+					<Inicio/>
+				</Route>
 
 		      </Switch>
         </Router>

@@ -92,7 +92,7 @@ public class FacturaController {
 		ByteArrayInputStream bis = PDFUtil.suscripcionPDFGenerator(null, null);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=prueba.pdf");
+        headers.add("Content-Disposition", "attachment; filename=prueba.pdf");
 
         return ResponseEntity
                 .ok()
@@ -121,7 +121,7 @@ public class FacturaController {
 
         HttpHeaders headers = new HttpHeaders();
         String filename = factura.getPedido()!= null ? "factura_pedido": "factura_suscripcion";
-        headers.add("Content-Disposition", "inline; filename="+filename+".pdf");
+        headers.add("Content-Disposition", "attachment; filename="+filename+".pdf");
 
         return ResponseEntity
                 .ok()

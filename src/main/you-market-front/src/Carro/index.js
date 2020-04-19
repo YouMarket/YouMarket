@@ -16,6 +16,8 @@ function Carro() {
 precioFinal=0.00
 const[carrito, setCarrito]=useState([]);
 const[cestas, setCestas]=useState([]);
+const[sinSuscripcion, setSinSuscripcion] = useState([]);
+const[mensajeAlerta, setMensajeAlerta] = useState([]);
 let history=useHistory();
 
 	const fetchCarrito=useCallback(()=> {
@@ -43,11 +45,26 @@ let history=useHistory();
 	  }, []);
 
 
-	useEffect(()=> {
-	    fetchCestas(cestas);
+	
+
+	  const fetchMsg=useCallback(()=> {
+	    return fetch('/usuario/alertaPago' , {headers: {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json',
+		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+		method:'GET'})
+	      .then(res=> res.json())
+	      .then(response => {
+			  setSinSuscripcion(response.success)
+			  setMensajeAlerta(response.message)
+	      });
+	  }, []);
+	
+	  useEffect(()=> {
+		fetchCestas(cestas);
+		fetchMsg();
 	  }, []);
 
-	
   return(
 		<div>
 			<Header/> 
@@ -75,11 +92,6 @@ let history=useHistory();
 				 }}
 			   >
 				 {({
-				   values,
-				   errors,
-				   touched,
-				   handleChange,
-				   handleBlur,
 				   handleSubmit,
 				   isSubmitting,
 				   /* and other goodies */
@@ -114,9 +126,24 @@ let history=useHistory();
 					<div className="buttons">
 
 					{ localStorage.getItem('auth') ? (
-						<a href="/pedido/create">
-						<button className="button-finish">Terminar pedido</button>
-						</a>
+						sinSuscripcion ? 
+							(
+								<a href="/pedido/create">
+								<button className="button-finish">Terminar pedido</button>
+								</a>) 
+							:(
+								<div>
+									<p>
+										{mensajeAlerta}
+									</p>
+									<a href="/datos-perfil">
+										<button className="button-finish">Ir a mi perfil</button>
+									</a>
+									<br/>
+								</div>
+								
+							)
+						
 					
 					): (<a href="/login">
 						<button className="button-finish">Terminar pedido</button>
@@ -134,7 +161,7 @@ let history=useHistory();
 					 initialValues={{id: ''}}
 					 validate={values=> {
 						const errors={};
-						if (values.id=="") {
+						if (values.id==="") {
 						  errors.id='No puede estar vacío';
 						}
 						return errors;
@@ -201,8 +228,8 @@ let history=useHistory();
 	 : (
 	 <div className="container">
 		<h1 className="introduction introduction-empty">Vaya.. parece que aún no tienes productos añadidos</h1>
-	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad}></img></div>
-		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/products">aquí</NavLink></p>
+	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad} alt="Carro vacío"/></div>
+		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/productos">aquí</NavLink></p>
 	 </div>)}
 	 
 	 </div>

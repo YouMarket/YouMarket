@@ -19,7 +19,7 @@ function Cesta({id, nombre, productos, total}: Props) {
 	  <div className="cesta-icon-show">
 
 	  <Link to={`/show/cesta/${id}`}><img className="cesta-imagen-show" src={cest} alt="Imagen de cesta"/></Link>
-		<Link to={`/cesta/edit/${id}`} className="cesta-editar">Editar</Link>
+		<Link to={`/cesta/edit/${id}`} className="cesta-editar link-button">Editar</Link>
 
   	</div>
   </div>
