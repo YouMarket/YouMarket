@@ -23,11 +23,11 @@ class formCesta extends React.Component{
 		
 		return(<div>
   <Header/>
-  <div>
+  <div className="container">
     <h1 className="titulo-create-cesta">Crear cesta</h1>
     <img src={cest} className="cesta-imagen-edit" alt="Cesta"/>
     <Formik
-      initialValues={{name: 'nuevaCesta'}}
+      initialValues={{name: 'Nueva cesta'}}
 
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -76,7 +76,7 @@ class formCesta extends React.Component{
 
           {errors.name && touched.name}
           <div className="grid2-create-cesta">
-          <button type="submit" disabled={isSubmitting} className="submit-cesta-create">
+          <button type="submit" disabled={isSubmitting} className="submit-cesta-create link-button">
           Enviar
           </button>
           </div>

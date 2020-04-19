@@ -1,7 +1,7 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React,  { useCallback, useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
-import style from './styles.css';
+import './styles.css';
 import Cesta from '../Cesta';
 import Header from '../Header';
 
@@ -36,7 +36,7 @@ const [cestas, setCestas] = useState([]);
   <Header/>
 
   <div className="nueva-cesta">
-  	<a href="/create/cesta">Nueva cesta</a>
+  	<a className="link-button" href="/create/cesta">Nueva cesta</a>
   	{cestas.length > 0 ?
 	  (<div className="cestas-container">
 	  { cestas && cestas.map((cesta) => (

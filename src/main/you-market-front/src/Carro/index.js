@@ -96,11 +96,6 @@ let history=useHistory();
 				 }}
 			   >
 				 {({
-				   values,
-				   errors,
-				   touched,
-				   handleChange,
-				   handleBlur,
 				   handleSubmit,
 				   isSubmitting,
 				   /* and other goodies */
@@ -170,7 +165,7 @@ let history=useHistory();
 					 initialValues={{id: ''}}
 					 validate={values=> {
 						const errors={};
-						if (values.id=="") {
+						if (values.id==="") {
 						  errors.id='No puede estar vacío';
 						}
 						return errors;
@@ -237,8 +232,8 @@ let history=useHistory();
 	 : (
 	 <div className="container">
 		<h1 className="introduction introduction-empty">Vaya.. parece que aún no tienes productos añadidos</h1>
-	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad}></img></div>
-		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/products">aquí</NavLink></p>
+	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad} alt="Carro vacío"/></div>
+		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/productos">aquí</NavLink></p>
 	 </div>)}
 	 
 	 </div>

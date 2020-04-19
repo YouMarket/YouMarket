@@ -343,7 +343,7 @@ function pagar() {
 	  (<div className="pedido-container container">
 	  <h1 id="titulo-pedidos">¡Ya queda menos para finalizar tu pedido! Por favor, rellena estos campos 😉</h1>
 
-	  <h3 id="envios-restantes-pedidos"> Te queda <br/> {envioTomas} envíos por realizar de tu suscripción. </h3>
+	  <h3 id="envios-restantes-pedidos"> Te queda/n {envioTomas} envíos por realizar de tu suscripción. </h3>
 	  <Formik validateOnChange={true} validateOnBlur={true} id="formikito"
     	className="formulario-pedido"
     	initialValues={{   }}
@@ -394,7 +394,14 @@ function pagar() {
         }
         if (values.horaEnvioFin1 < 9 || values.horaEnvioIni1<9 || values.horaEnvioFin1 > 21 || values.horaEnvioIni1 > 22) {
         	errors.horaEnvioFin1 = 'En este tramo horario no se realizan entregas';
+        }else if(values.horaEnvioFin1 === values.horaEnvioIni1) {
+        	errors.horaEnvioFin1 = 'La hora de inicio de entrega no puede ser igual a la de final'
+        }else if(values.horaEnvioFin1 < values.horaEnvioIni1){
+      	  errors.horaEnvioFin1 = 'La hora de inicio de entrega no puede mayor a la de final'
         }
+        if (values.fechaEnvio1 < today) {
+	        	errors.fechaEnvio1 = 'Fecha no válida';
+            }
 
 
         if(pedido2copiado === true){
@@ -468,6 +475,10 @@ function pagar() {
               }
               if (values.horaEnvioFin2 < 9 || values.horaEnvioIni2<9 || values.horaEnvioFin2 > 21 || values.horaEnvioIni2 > 22) {
 	        	errors.horaEnvioFin2 = 'En este tramo horario no se realizan entregas'
+              }else if(values.horaEnvioFin2 === values.horaEnvioIni2) {
+	        	errors.horaEnvioFin2 = 'La hora de inicio de entrega no puede ser igual a la de final'
+              }else if(values.horaEnvioFin2 < values.horaEnvioIni2){
+            	  errors.horaEnvioFin2 = 'La hora de inicio de entrega no puede mayor a la de final'
               }
               if (values.horaEnvioFin2==="" || values.horaEnvioIni2==null) {
 	        	errors.horaEnvioFin2 = 'Campo obligatorio';
@@ -476,6 +487,10 @@ function pagar() {
               if (values.horaEnvioIni2==="" || values.horaEnvioIni2==null) {
 	        	errors.horaEnvioFin2 = 'Campo obligatorio';
               }
+              if (values.fechaEnvio2 < today) {
+  	        	errors.fechaEnvio2 = 'Fecha no válida';
+                }
+              
         	} else {
         		values.direccion2 = null;
         		values.poblacion2 = null;
@@ -524,7 +539,12 @@ function pagar() {
 	        }
 	        if (values.horaEnvioFin3 < 9 || values.horaEnvioIni3<9 || values.horaEnvioFin3 > 21 || values.horaEnvioIni3 > 22) {
 	        	errors.horaEnvioFin3 = 'En este tramo horario no se realizan entregas'
-	        }
+	        }else if(values.horaEnvioFin3 === values.horaEnvioIni3) {
+	        	errors.horaEnvioFin3 = 'La hora de inicio de entrega no puede ser igual a la de final'
+            }else if(values.horaEnvioFin3 < values.horaEnvioIni3){
+          	  errors.horaEnvioFin3 = 'La hora de inicio de entrega no puede mayor a la de final'
+            }
+	        
 	        if (values.horaEnvioFin3==="" || values.horaEnvioIni3==null) {
 	        	errors.horaEnvioFin3 = 'Campo obligatorio';
 	        }
@@ -532,6 +552,9 @@ function pagar() {
 	        if (values.horaEnvioIni3==="" || values.horaEnvioIni3==null) {
 	        	errors.horaEnvioFin3 = 'Campo obligatorio';
 	        }
+	        if (values.fechaEnvio3 < today) {
+  	        	errors.fechaEnvio3 = 'Fecha no válida';
+                }
         } else {
         	values.direccion3 = null;
         	values.poblacion3 = null;
@@ -581,7 +604,11 @@ function pagar() {
 	        }
 	        if (values.horaEnvioFin4 < 9 || values.horaEnvioIni4<9 || values.horaEnvioFin4 > 21 || values.horaEnvioIni4 > 22) {
 	        	errors.horaEnvioFin4 = 'En este tramo horario no se realizan entregas'
-	        }
+	        }else if(values.horaEnvioFin4 === values.horaEnvioIni4) {
+	        	errors.horaEnvioFin4 = 'La hora de inicio de entrega no puede ser igual a la de final'
+            }else if(values.horaEnvioFin4 < values.horaEnvioIni4){
+          	  errors.horaEnvioFin4 = 'La hora de inicio de entrega no puede mayor a la de final'
+            }
 	        if (values.horaEnvioFin4==="" || values.horaEnvioIni4==null) {
 	        	errors.horaEnvioFin4 = 'Campo obligatorio';
 	        }
@@ -589,6 +616,9 @@ function pagar() {
 	        if (values.horaEnvioIni4==="" || values.horaEnvioIni4==null) {
 	        	errors.horaEnvioFin4 = 'Campo obligatorio';
 	        }
+	        if (values.fechaEnvio4 < today) {
+  	        	errors.fechaEnvio4 = 'Fecha no válida';
+                }
 
         } else {
         	values.direccion4 = null;
@@ -958,7 +988,7 @@ function pagar() {
 
 		<div id="enlace2" className="pedido-margin">
 			<br/><br/>
-			<a href="#enlaceMostrarPedido3" className="link-button" onClick={mostrarPedido3} id = "enlaceMostrarPedido3">
+			<a href="#enlaceMostrarPedido3" className="link-button" onClick={mostrarPedido3} id="enlaceMostrarPedido3">
 				+ Añadir/Eliminar pedido número 3
 			</a>
 			<br/><br/>
