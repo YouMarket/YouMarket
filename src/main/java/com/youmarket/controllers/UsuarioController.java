@@ -1,14 +1,19 @@
 package com.youmarket.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,9 +21,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.youmarket.configuration.SecurityConfiguration;
@@ -27,16 +34,23 @@ import com.youmarket.configuration.security.CurrentUser;
 import com.youmarket.configuration.security.JwtAuthenticationResponse;
 import com.youmarket.configuration.security.JwtTokenProvider;
 import com.youmarket.configuration.security.UserPrincipal;
+import com.youmarket.domain.Cesta;
+import com.youmarket.domain.CestaProducto;
 import com.youmarket.domain.Direccion;
 import com.youmarket.domain.Factura;
+import com.youmarket.domain.Pedido;
 import com.youmarket.domain.Role;
 import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
 import com.youmarket.domain.enums.RoleName;
 import com.youmarket.domain.form.SignUpForm;
+import com.youmarket.pdf.PDFUtil;
 import com.youmarket.repositories.RoleRepository;
+import com.youmarket.services.CestaProductoService;
+import com.youmarket.services.CestaService;
 import com.youmarket.services.DireccionService;
 import com.youmarket.services.FacturaService;
+import com.youmarket.services.PedidoService;
 import com.youmarket.services.RoleService;
 import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
@@ -74,6 +88,15 @@ public class UsuarioController {
 	
 	@Autowired
 	FacturaService fService;
+	
+	@Autowired 
+	CestaService cestaService;
+	
+	@Autowired 
+	PedidoService pedidoService;
+	
+	@Autowired
+	CestaProductoService cpService;
 	
 	@Autowired
 	private SuscripcionService suscripcionService;
@@ -227,6 +250,41 @@ public class UsuarioController {
 		}		
 		
 		return ResponseEntity.ok(respuesta);
+	}
+	
+	@RequestMapping(value = "/exportPDF/{idUsuario}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> exportPDF (@PathVariable Integer idUsuario){
+		Usuario user = usuarioService.findById(idUsuario).orElse(null);
+		
+		//incluye facturas de usuario y de pedido
+		List<Factura> facturas = fService.findByUser(user);
+		List<Direccion> direcciones = dirService.findAllByUser(user);
+		List<Cesta> cestas = cestaService.cestasPorUsuario(user.getId());
+		List<Pedido> pedidos = pedidoService.findAllByUser(user.getId());
+		List<List<CestaProducto>> productosCestas = new ArrayList<>();
+		List<List<CestaProducto>> productosPedidos = new ArrayList<>();
+		for (Cesta c : cestas) {
+			List<CestaProducto> prods = cpService.findProdsByCesta(c);
+			productosCestas.add(prods);
+		}
+		for (Pedido c : pedidos) {
+			List<CestaProducto> prods = cpService.findProdsByCesta(c);
+			productosPedidos.add(prods);
+		}
+		
+		
+		ByteArrayInputStream bis = PDFUtil.usuarioPDFGenerator(user, direcciones, productosCestas, productosPedidos, facturas);
+
+        HttpHeaders headers = new HttpHeaders();
+        String filename = "export_usuario_"+user.getEmail();
+        headers.add("Content-Disposition", "attachment; filename="+filename+".pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
 	}
 	
 	@GetMapping("/envios")

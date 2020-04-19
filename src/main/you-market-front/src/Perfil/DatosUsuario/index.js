@@ -11,8 +11,9 @@ import {Card} from 'primereact/card';
 function DatosUsuario() {
 	let history = useHistory();
 
-
+	
 	const [usuario, setUsuario] = useState([]);
+	const urlPDF = "http://localhost:8081/usuario/exportPDF/"+usuario.id;
 	const [direccion, setDireccion] = useState([]);
 	const [suscripcion, setSuscripcion] = useState([]);
 	const [pagada, setPagada] = useState([]);
@@ -146,7 +147,9 @@ function DatosUsuario() {
 					<p>Código postal: {direccion.cpostal}</p>
 				</div>
 			</Card>
-			
+			<a href={urlPDF} target="_blank">
+				<button className="button-finish">Exportar información del usuario en PDF</button>
+			</a>
 			{/* <button className="boton-perfil">Cambiar datos</button>*/}
 		</div>
 	</div>
