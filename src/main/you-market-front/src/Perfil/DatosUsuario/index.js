@@ -160,7 +160,7 @@ function DatosUsuario() {
 				</div>
 			</Card>
 			
-			{ <button className="boton-perfil" onClick={() => {if (window.confirm('¿Seguro que desea eliminar su cuenta?')) deleteUser}}>Eliminar cuenta</button> }
+			{ <button className="boton-perfil" onClick={() => {if (window.confirm('¿Seguro que desea eliminar su cuenta?')) deleteUser()}}>Eliminar cuenta</button> }
 
 			
 			{/* <button className="boton-perfil">Cambiar datos</button>*/}
