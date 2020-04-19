@@ -1,10 +1,13 @@
 package com.youmarket.controllers;
 
 import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +25,7 @@ import com.youmarket.domain.form.FormPedidos;
 import com.youmarket.services.CestaProductoService;
 import com.youmarket.services.FacturaService;
 import com.youmarket.services.PedidoService;
+import com.youmarket.services.ProductoService;
 import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
 
@@ -50,6 +54,9 @@ public class PedidoController {
 
 	@Autowired
 	private SuscripcionService susService;
+	
+	@Autowired
+	private ProductoService productoService;
 	
 	@Autowired
 	private FacturaService facturaService;
@@ -221,7 +228,7 @@ public class PedidoController {
 	public ResponseEntity<List<Pedido>> createPedidos(@RequestBody Map<String, Object> putamierda, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
 //		Gson gson = new Gson();
 //		FormPedidos pedidos = gson.fromJson(putamierda.get("pedidoForm").toString(), FormPedidos.class);
-		List<ProductoCarrito> carrito = (List<ProductoCarrito>)putamierda.get("carrito");
+		List<LinkedHashMap> carrito = (List<LinkedHashMap>)putamierda.get("carrito");
 		Usuario user = this.usuarioService.findById(currentUser.getId()).orElse(null);
 		Date now = new Date();
 		String s = putamierda.get("pedidoForm").toString();
@@ -235,6 +242,124 @@ public class PedidoController {
 		    String[] keyValue = pair.split("=");
 		    myMap.put(keyValue[0], keyValue[1]);
 		}
+		if(!myMap.get("poblacion1").equals("null")) {
+			pedidos.setPoblacion1(myMap.get("poblacion1"));			
+		}
+		if(!myMap.get("poblacion2").equals("null")) {
+			pedidos.setPoblacion2(myMap.get("poblacion2"));			
+		}
+		if(!myMap.get("poblacion3").equals("null")) {
+			pedidos.setPoblacion3(myMap.get("poblacion3"));			
+		}
+		if(!myMap.get("poblacion4").equals("null")) {
+			pedidos.setPoblacion4(myMap.get("poblacion4"));			
+		}
+		if(!myMap.get("direccion1").equals("null")) {
+			pedidos.setDireccion1(myMap.get("direccion1"));			
+		}
+		if(!myMap.get("direccion2").equals("null")) {
+			pedidos.setDireccion2(myMap.get("direccion2"));			
+		}
+		if(!myMap.get("direccion3").equals("null")) {
+			pedidos.setDireccion3(myMap.get("direccion3"));			
+		}
+		if(!myMap.get("direccion4").equals("null")) {
+			pedidos.setDireccion4(myMap.get("direccion4"));			
+		}
+		if(!myMap.get("cpostal1").equals("null")) {
+			pedidos.setCpostal1(myMap.get("cpostal1"));			
+		}
+		if(!myMap.get("cpostal2").equals("null")) {
+			pedidos.setCpostal2(myMap.get("cpostal2"));
+		}
+		if(!myMap.get("cpostal3").equals("null")) {
+			pedidos.setCpostal3(myMap.get("cpostal3"));
+		}
+		if(!myMap.get("cpostal4").equals("null")) {
+			pedidos.setCpostal4(myMap.get("cpostal4"));
+		}
+		if(!myMap.get("horaEnvioFin1").equals("null")) {
+			pedidos.setHoraEnvioFin1(new Integer(myMap.get("horaEnvioFin1")));
+		}
+		if(!myMap.get("horaEnvioFin2").equals("null")) {
+			pedidos.setHoraEnvioFin2(new Integer(myMap.get("horaEnvioFin2")));
+		}
+		if(!myMap.get("horaEnvioFin3").equals("null")) {
+			pedidos.setHoraEnvioFin3(new Integer(myMap.get("horaEnvioFin3")));
+		}
+		if(!myMap.get("horaEnvioFin4").equals("null")) {
+			pedidos.setHoraEnvioFin4(new Integer(myMap.get("horaEnvioFin4")));
+		}
+		if(!myMap.get("fechaEnvio1").equals("null")) {
+			try {
+				pedidos.setFechaEnvio1(new SimpleDateFormat("yyyy-MM-dd").parse(myMap.get("fechaEnvio1")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(!myMap.get("fechaEnvio2").equals("null")) {
+			try {
+				pedidos.setFechaEnvio2(new SimpleDateFormat("yyyy-MM-dd").parse(myMap.get("fechaEnvio2")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(!myMap.get("fechaEnvio3").equals("null")) {
+			try {
+				pedidos.setFechaEnvio3(new SimpleDateFormat("yyyy-MM-dd").parse(myMap.get("fechaEnvio3")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(!myMap.get("fechaEnvio4").equals("null")) {
+			try {
+				pedidos.setFechaEnvio4(new SimpleDateFormat("yyyy-MM-dd").parse(myMap.get("fechaEnvio4")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(!myMap.get("horaEnvioIni1").equals("null")) {
+			pedidos.setHoraEnvioIni1(new Integer(myMap.get("horaEnvioIni1")));
+		}
+		if(!myMap.get("horaEnvioIni2").equals("null")) {
+			pedidos.setHoraEnvioIni2(new Integer(myMap.get("horaEnvioIni2")));
+		}
+		if(!myMap.get("horaEnvioIni3").equals("null")) {
+			pedidos.setHoraEnvioIni3(new Integer(myMap.get("horaEnvioIni3")));
+		}
+		if(!myMap.get("horaEnvioIni4").equals("null")) {
+			pedidos.setHoraEnvioIni4(new Integer(myMap.get("horaEnvioIni4")));
+		}
+		if(!myMap.get("numero1").equals("null")) {
+			pedidos.setNumero1(new Integer(myMap.get("numero1")));
+		}
+		if(!myMap.get("numero2").equals("null")) {
+			pedidos.setNumero2(new Integer(myMap.get("numero2")));
+		}
+		if(!myMap.get("numero3").equals("null")) {
+			pedidos.setNumero3(new Integer(myMap.get("numero3")));
+		}
+		if(!myMap.get("numero4").equals("null")) {
+			pedidos.setNumero4(new Integer(myMap.get("numero4")));
+		}
+		if(!myMap.get("provincia1").equals("null")) {
+			pedidos.setProvincia1(myMap.get("provincia1"));
+		}
+		if(!myMap.get("provincia2").equals("null")) {
+			pedidos.setProvincia2(myMap.get("provincia2"));
+		}
+		if(!myMap.get("provincia3").equals("null")) {
+			pedidos.setProvincia3(myMap.get("provincia3"));
+		}
+		if(!myMap.get("provincia4").equals("null")) {
+			pedidos.setProvincia4(myMap.get("provincia4"));
+		}
+		
+		
 		
 		Pedido p1s = new Pedido();
 		Pedido p2s = new Pedido();
@@ -347,6 +472,243 @@ public class PedidoController {
 		return ResponseEntity.ok(res);
 
 	}
+	
+	@PostMapping("/precio")
+    public ResponseEntity<Double> precioTtal(@RequestBody Map<String, Object> putamierda) {
+		Date now = new Date();
+		List<LinkedHashMap> carrito = (List<LinkedHashMap>)putamierda.get("carrito");
+		String s = putamierda.get("pedidoForm").toString();
+		
+		FormPedidos pedidos = new FormPedidos();
+		try {
+		s = s.replaceAll("[{]", "");
+		s = s.replaceAll("[}]", "");
+		Map<String, String> myMap = new HashMap<String, String>();
+		String[] pairs = s.split(", ");
+		for (int i=0;i<pairs.length;i++) {
+		    String pair = pairs[i];
+		    String[] keyValue = pair.split("=");
+		    myMap.put(keyValue[0], keyValue[1]);
+		}
+		if(!myMap.get("poblacion1").equals("null")) {
+			pedidos.setPoblacion1(myMap.get("poblacion1"));			
+		}
+		if(!myMap.get("poblacion2").equals("null")) {
+			pedidos.setPoblacion2(myMap.get("poblacion2"));			
+		}
+		if(!myMap.get("poblacion3").equals("null")) {
+			pedidos.setPoblacion3(myMap.get("poblacion3"));			
+		}
+		if(!myMap.get("poblacion4").equals("null")) {
+			pedidos.setPoblacion4(myMap.get("poblacion4"));			
+		}
+		if(!myMap.get("direccion1").equals("null")) {
+			pedidos.setDireccion1(myMap.get("direccion1"));			
+		}
+		if(!myMap.get("direccion2").equals("null")) {
+			pedidos.setDireccion2(myMap.get("direccion2"));			
+		}
+		if(!myMap.get("direccion3").equals("null")) {
+			pedidos.setDireccion3(myMap.get("direccion3"));			
+		}
+		if(!myMap.get("direccion4").equals("null")) {
+			pedidos.setDireccion4(myMap.get("direccion4"));			
+		}
+		if(!myMap.get("cpostal1").equals("null")) {
+			pedidos.setCpostal1(myMap.get("cpostal1"));			
+		}
+		if(!myMap.get("cpostal2").equals("null")) {
+			pedidos.setCpostal2(myMap.get("cpostal2"));
+		}
+		if(!myMap.get("cpostal3").equals("null")) {
+			pedidos.setCpostal3(myMap.get("cpostal3"));
+		}
+		if(!myMap.get("cpostal4").equals("null")) {
+			pedidos.setCpostal4(myMap.get("cpostal4"));
+		}
+		if(!myMap.get("horaEnvioFin1").equals("null")) {
+			pedidos.setHoraEnvioFin1(new Integer(myMap.get("horaEnvioFin1")));
+		}
+		if(!myMap.get("horaEnvioFin2").equals("null")) {
+			pedidos.setHoraEnvioFin2(new Integer(myMap.get("horaEnvioFin2")));
+		}
+		if(!myMap.get("horaEnvioFin3").equals("null")) {
+			pedidos.setHoraEnvioFin3(new Integer(myMap.get("horaEnvioFin3")));
+		}
+		if(!myMap.get("horaEnvioFin4").equals("null")) {
+			pedidos.setHoraEnvioFin4(new Integer(myMap.get("horaEnvioFin4")));
+		}
+		if(!myMap.get("fechaEnvio1").equals("null")) {
+			try {
+				pedidos.setFechaEnvio1(new SimpleDateFormat("yyyy-MM-dd").parse(myMap.get("fechaEnvio1")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(!myMap.get("fechaEnvio2").equals("null")) {
+			try {
+				pedidos.setFechaEnvio2(new SimpleDateFormat("yyyy-MM-dd").parse(myMap.get("fechaEnvio2")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(!myMap.get("fechaEnvio3").equals("null")) {
+			try {
+				pedidos.setFechaEnvio3(new SimpleDateFormat("yyyy-MM-dd").parse(myMap.get("fechaEnvio3")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(!myMap.get("fechaEnvio4").equals("null")) {
+			try {
+				pedidos.setFechaEnvio4(new SimpleDateFormat("yyyy-MM-dd").parse(myMap.get("fechaEnvio4")));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(!myMap.get("horaEnvioIni1").equals("null")) {
+			pedidos.setHoraEnvioIni1(new Integer(myMap.get("horaEnvioIni1")));
+		}
+		if(!myMap.get("horaEnvioIni2").equals("null")) {
+			pedidos.setHoraEnvioIni2(new Integer(myMap.get("horaEnvioIni2")));
+		}
+		if(!myMap.get("horaEnvioIni3").equals("null")) {
+			pedidos.setHoraEnvioIni3(new Integer(myMap.get("horaEnvioIni3")));
+		}
+		if(!myMap.get("horaEnvioIni4").equals("null")) {
+			pedidos.setHoraEnvioIni4(new Integer(myMap.get("horaEnvioIni4")));
+		}
+		if(!myMap.get("numero1").equals("null")) {
+			pedidos.setNumero1(new Integer(myMap.get("numero1")));
+		}
+		if(!myMap.get("numero2").equals("null")) {
+			pedidos.setNumero2(new Integer(myMap.get("numero2")));
+		}
+		if(!myMap.get("numero3").equals("null")) {
+			pedidos.setNumero3(new Integer(myMap.get("numero3")));
+		}
+		if(!myMap.get("numero4").equals("null")) {
+			pedidos.setNumero4(new Integer(myMap.get("numero4")));
+		}
+		if(!myMap.get("provincia1").equals("null")) {
+			pedidos.setProvincia1(myMap.get("provincia1"));
+		}
+		if(!myMap.get("provincia2").equals("null")) {
+			pedidos.setProvincia2(myMap.get("provincia2"));
+		}
+		if(!myMap.get("provincia3").equals("null")) {
+			pedidos.setProvincia3(myMap.get("provincia3"));
+		}
+		if(!myMap.get("provincia4").equals("null")) {
+			pedidos.setProvincia4(myMap.get("provincia4"));
+		}
+		
+		if(myMap.containsKey("cestaId1")) {
+			pedidos.setCestaId1(new Integer(myMap.get("cestaId1")));
+		}
+		if(myMap.containsKey("cestaId2")) {
+			pedidos.setCestaId2(new Integer(myMap.get("cestaId2")));
+		}
+		if(myMap.containsKey("cestaId3")) {
+			pedidos.setCestaId3(new Integer(myMap.get("cestaId3")));
+		}
+		if(myMap.containsKey("cestaId4")) {
+			pedidos.setCestaId4(new Integer(myMap.get("cestaId4")));
+		}
+			
+		}catch(Exception e) {
+			ResponseEntity<Double> n = ResponseEntity.ok(0.0);
+			return n;
+		}
+		
+		Double res = 0.0;
+		
+		if(pedidos.getCestaId1() != null) {
+			List<CestaProducto> cp = this.cpService.cpPorCesta(pedidos.getCestaId1());
+			for(CestaProducto cestop : cp) {
+				res = res + cestop.getCantidad() * cestop.getProducto().getPrecioIva();
+			}
+		}
+		if(pedidos.getCestaId2() != null) {
+			List<CestaProducto> cp2 = this.cpService.cpPorCesta(pedidos.getCestaId2());
+			for(CestaProducto cestop2 : cp2) {
+				res = res + cestop2.getCantidad() * cestop2.getProducto().getPrecioIva();
+			}
+		}
+		if(pedidos.getCestaId3() != null) {
+			List<CestaProducto> cp3 = this.cpService.cpPorCesta(pedidos.getCestaId3());
+			for(CestaProducto cestop3 : cp3) {
+				res = res + cestop3.getCantidad() * cestop3.getProducto().getPrecioIva();
+			}
+		}
+		if(pedidos.getCestaId4() != null) {
+			List<CestaProducto> cp4 = this.cpService.cpPorCesta(pedidos.getCestaId4());
+			for(CestaProducto cestop4 : cp4) {
+				res = res + cestop4.getCantidad() * cestop4.getProducto().getPrecioIva();
+			}
+		}
+		
+		Integer cuentaCarros = 0;
+		
+		if(pedidos.getFechaEnvio1() != null) {
+			cuentaCarros++;
+		}
+		if(pedidos.getFechaEnvio2() != null) {
+			cuentaCarros++;
+		}
+		if(pedidos.getFechaEnvio3() != null) {
+			cuentaCarros++;
+		}
+		if(pedidos.getFechaEnvio4() != null) {
+			cuentaCarros++;
+		}
+		
+		if(pedidos.getCestaId1() != null && pedidos.getCestaId1() != 0) {
+			cuentaCarros--;
+		}
+		if(pedidos.getCestaId2() != null && pedidos.getCestaId2() != 0) {
+			cuentaCarros--;
+		}
+		if(pedidos.getCestaId3() != null && pedidos.getCestaId3() != 0) {
+			cuentaCarros--;
+		}
+		if(pedidos.getCestaId4() != null && pedidos.getCestaId4() != 0) {
+			cuentaCarros--;
+		}
+		
+		Double precioCarros = 0.0;
+		for(LinkedHashMap cosa : carrito) {
+			Producto pr = new Producto();
+			Integer cantidad = (Integer) cosa.get("cantidad");
+			LinkedHashMap produs = (LinkedHashMap)cosa.get("producto");
+			Integer id = new Integer((int) produs.get("id"));
+			pr = this.productoService.findById(id);
+			precioCarros = precioCarros + (pr.getPrecioIva() * cantidad);
+		}
+		
+		res = res + precioCarros * cuentaCarros;
+		res = PedidoController.redondearDecimales(res, 2);
+		System.out.println(res);
+		return ResponseEntity.ok(res);
+    }
+
+	 public static double redondearDecimales(double valorInicial, int numeroDecimales) {
+	        double parteEntera, resultado;
+	        resultado = valorInicial;
+	        parteEntera = Math.floor(resultado);
+	        resultado=(resultado-parteEntera)*Math.pow(10, numeroDecimales);
+	        resultado=Math.round(resultado);
+	        resultado=(resultado/Math.pow(10, numeroDecimales))+parteEntera;
+	        return resultado;
+	    }
+//	@GetMapping("/{id}")
+//    public ResponseEntity<Object> pedidoPorId(@Valid @PathVariable Integer id) {
+//        return ResponseEntity.ok(pedidoService.findById(id));
+//    }
 
 	private double importeTotal(Pedido pedido) {
 		double total = 0.0;
@@ -373,9 +735,21 @@ public class PedidoController {
 	// 	return guardado;
 	// }
 
-	public Pedido meterCarrito(List<ProductoCarrito> carrito, Pedido p){
+	public Pedido meterCarrito(List<LinkedHashMap> carrito, Pedido p){
 		Pedido guardado = this.pedidoService.save(p);
-		for(ProductoCarrito prod : carrito){
+		List<ProductoCarrito> carritoReal = new ArrayList<ProductoCarrito>();
+		for(LinkedHashMap cosa : carrito) {
+			Producto pr = new Producto();
+			Integer cantidad = (Integer) cosa.get("cantidad");
+			LinkedHashMap produs = (LinkedHashMap)cosa.get("producto");
+			Integer id = new Integer((int) produs.get("id"));
+			pr = this.productoService.findById(id);
+			ProductoCarrito x = new ProductoCarrito();
+			x.setProducto(pr);
+			x.setCantidad(cantidad);
+			carritoReal.add(x);
+		}
+		for(ProductoCarrito prod : carritoReal){
 			CestaProducto cp = new CestaProducto();
 			cp.setProducto(prod.getProducto());
 			cp.setCantidad(prod.getCantidad());

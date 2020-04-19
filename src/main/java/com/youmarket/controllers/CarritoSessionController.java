@@ -154,18 +154,18 @@ public class CarritoSessionController {
 	}
 
 	@GetMapping("/precioTotalCarrito")
-	public Double precioTotal(@RequestBody List<ProductoCarrito> prods){
-		Double precio = 0.0;
-		System.out.println(prods);
-		@SuppressWarnings("unchecked")
-		Map<Producto, Integer> carrito = (Map<Producto, Integer>)prods;
-		List<Producto> productos = new ArrayList<>(carrito.keySet());
-		for(Producto p: productos){
-			precio+= p.getPrecio() * carrito.get(p);
-		}
-		
-		BigDecimal importeIVA =  new BigDecimal(precio);
-		return importeIVA.setScale(2, RoundingMode.HALF_UP).doubleValue();
+	public Double precioTotal(@RequestBody Map<String, Object> putamierda){
+//		Double precio = 0.0;
+//		System.out.println(prods);
+//		@SuppressWarnings("unchecked")
+//		Map<Producto, Integer> carrito = (Map<Producto, Integer>)prods;
+//		List<Producto> productos = new ArrayList<>(carrito.keySet());
+//		for(Producto p: productos){
+//			precio+= p.getPrecio() * carrito.get(p);
+//		}
+//		
+//		BigDecimal importeIVA =  new BigDecimal(precio);
+		return 1.0;
 	}
 	
 
