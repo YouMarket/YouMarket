@@ -54,6 +54,7 @@ function SuscripcionForm() {
 									}).then(response => response.json())
 									  .then(data => {
 										if (data.success) {
+											dietasCheck();
 											history.push('/datos-perfil');
 										  }
 										else{

@@ -27,7 +27,7 @@ function Dietas() {
 		history.push('/login');
 	}
     
-    if(localStorage.getItem('dietasCheck')===0){
+    if(localStorage.getItem('dietasCheck')==0){
 		history.push('/404');
 	}
 	
@@ -35,7 +35,7 @@ function Dietas() {
 	return(
 	  <div>
 	  	  <Header/>
-	  	{localStorage.getItem('dietasCheck')===1 ?
+	  	{localStorage.getItem('dietasCheck')==1 ?
 			(<div className="dietas-page-container container">
 			<h1 className="container dietas-title">Estas son las dietas que tenemos disponibles actualmente, ¡disfrútalas! 🥳</h1>
 				{/* <a href="../create/dieta" className="link-button"> Crear nueva dieta </a> */}
