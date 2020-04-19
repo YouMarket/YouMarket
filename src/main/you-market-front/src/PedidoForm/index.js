@@ -696,7 +696,7 @@ function pagar() {
 				type="text"
 				name="direccion1"
 				value={values.direccion1}
-		        placeholder="c/Cisnes"
+		        placeholder="Calle Cisnes"
 				onChange={handleChange}
 				onBlur={handleBlur}
 		      	/>
@@ -1027,7 +1027,7 @@ function pagar() {
 				type="text"
 				name="direccion3"
 				value={values.direccion3}
-		        placeholder="c/Cisnes"
+		        placeholder="Calle Cisnes"
 				onChange={handleChange}
 				onBlur={handleBlur}
 				/>
@@ -1188,7 +1188,7 @@ function pagar() {
 			type="text"
 			name="direccion4"
 			value={values.direccion4}
-	        placeholder="c/Cisnes"
+	        placeholder="Calle Cisnes"
 			onChange={handleChange}
 			onBlur={handleBlur}
 			/>
@@ -1291,8 +1291,8 @@ function pagar() {
 		<br/><br/>
 		</div>
 		<div>
-        <a id="pagar-a" href="#" onClick={pagar}>
-        	Pagar
+        <a id="pagar-a" href="#">
+        	<button onClick={pagar} className="button-finish">Pagar</button>
         </a>
         	</div>
         	<div className="grid" id="paypal-b">
