@@ -38,7 +38,6 @@ import AlertaBrecha from './AlertaBrecha';
 import PedidoExito from './PedidoExito';
 
 
-
 function App() {
 
         return (
@@ -66,12 +65,9 @@ function App() {
 		    	<Route path="/dieta/list">
     				<Dietas />
     			</Route>
-
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
 				</Route>
-
-
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
