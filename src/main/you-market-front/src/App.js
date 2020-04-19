@@ -33,6 +33,7 @@ import Error from './Misc';
 import CestaProductos from './CestaProductos';
 import Facturas from './Perfil/Facturas';
 import SubscripcionForm from './Perfil/DatosUsuario/suscripcionForm'
+import PerfilForm from './Perfil/DatosUsuario/perfilForm'
 import TerminosYCondiciones from './TerminosCondiciones';
 import AlertaBrecha from './AlertaBrecha';
 import PedidoExito from './PedidoExito';
@@ -86,6 +87,9 @@ function App() {
 				</Route>
 				<Route path="/cambio-suscripcion">
 					<SubscripcionForm/>
+				</Route>
+				<Route path="/cambio-perfil">
+				<PerfilForm/>
 				</Route>
 				<Route path="/datos-subscripcion">
 					<DatosSubscripcion/>

@@ -3,10 +3,14 @@ package com.youmarket.controllers;
 import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +59,19 @@ import com.youmarket.services.RoleService;
 import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("usuario")
 public class UsuarioController {
@@ -70,7 +87,7 @@ public class UsuarioController {
 
 	@Autowired
 	RoleRepository roleRepository;
-	
+
 	@Autowired
 	RoleService roleService;
 
@@ -79,25 +96,28 @@ public class UsuarioController {
 
 	@Autowired
 	JwtTokenProvider tokenProvider;
-	
+
 	@Autowired
 	DireccionController direccionController;
 
 	@Autowired
+	DireccionService direccionService;
+
+	@Autowired
 	DireccionService dirService;
-	
+
 	@Autowired
 	FacturaService fService;
-	
-	@Autowired 
+
+	@Autowired
 	CestaService cestaService;
-	
-	@Autowired 
+
+	@Autowired
 	PedidoService pedidoService;
-	
+
 	@Autowired
 	CestaProductoService cpService;
-	
+
 	@Autowired
 	private SuscripcionService suscripcionService;
 
@@ -113,67 +133,70 @@ public class UsuarioController {
 		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 
 	}
-	
+
 	@GetMapping("/user/me")
-    public Usuario getCurrentUser(@CurrentUser UserPrincipal currentUser) {
+	public Usuario getCurrentUser(@CurrentUser UserPrincipal currentUser) {
 		currentUser.getId();
 		Usuario userSummary = usuarioService.findById(currentUser.getId()).get();
 		userSummary.setId(0);
 		userSummary.setPassword(null);
-        return userSummary;
-    }
+		return userSummary;
+	}
 
-//	@PostMapping("/signUp")
-//	public Usuario signUp(@RequestBody Usuario usuario) {
-//		
-//		Suscripcion sus = suscripcionService.findById(usuario.getSuscripcion().getId());
-//		usuario.setSuscripcion(sus);
-//		if(sus.isDietista()) {
-//			Role userRole = roleService.findByName(RoleName.CLIENTE_CON_DIETAS).orElse(null);
-//			usuario.setRoles(Collections.singleton(userRole));
-//		}else {
-//			Role userRole = roleService.findByName(RoleName.CLIENTE).orElse(null);
-//			usuario.setRoles(Collections.singleton(userRole));
-//		}
-//		
-//		usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
-//		Usuario signUpped = usuarioService.save(usuario);
-//		return signUpped;
-//	}
+	// @PostMapping("/signUp")
+	// public Usuario signUp(@RequestBody Usuario usuario) {
+	//
+	// Suscripcion sus =
+	// suscripcionService.findById(usuario.getSuscripcion().getId());
+	// usuario.setSuscripcion(sus);
+	// if(sus.isDietista()) {
+	// Role userRole =
+	// roleService.findByName(RoleName.CLIENTE_CON_DIETAS).orElse(null);
+	// usuario.setRoles(Collections.singleton(userRole));
+	// }else {
+	// Role userRole = roleService.findByName(RoleName.CLIENTE).orElse(null);
+	// usuario.setRoles(Collections.singleton(userRole));
+	// }
+	//
+	// usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
+	// Usuario signUpped = usuarioService.save(usuario);
+	// return signUpped;
+	// }
 
 	@PostMapping("/signUpAll")
-	public ResponseEntity<ApiResponse> signUpAll(@RequestBody SignUpForm form) throws MalformedURLException, URISyntaxException {
-		
+	public ResponseEntity<ApiResponse> signUpAll(@RequestBody SignUpForm form)
+			throws MalformedURLException, URISyntaxException {
+
 		ApiResponse respuesta = new ApiResponse();
-		if(usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
+		if (usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
 			Usuario usuario = form.getUsuario();
 			usuario.setPedidosRestantes(0);
 			Suscripcion sus = suscripcionService.findById(usuario.getSuscripcion().getId());
 			usuario.setSuscripcion(sus);
-			if(sus.isDietista()) {
+			if (sus.isDietista()) {
 				Role userRole = roleService.findByName(RoleName.CLIENTE_CON_DIETAS).orElse(null);
 				usuario.setRoles(Collections.singleton(userRole));
-			}else {
+			} else {
 				Role userRole = roleService.findByName(RoleName.CLIENTE).orElse(null);
 				usuario.setRoles(Collections.singleton(userRole));
 			}
-			
+
 			usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
 			usuarioService.save(usuario);
-			
-			if(form.getDir() != null) {
+
+			if (form.getDir() != null) {
 				form.getDir().setUsuario(usuario);
 				form.getDir().setPrincipal(true);
 				direccionController.saveNewDir(form.getDir());
 			}
-			
+
 			respuesta.setSuccess(true);
 			respuesta.setMessage("logado");
-		}else {
+		} else {
 			respuesta.setSuccess(false);
 			respuesta.setMessage("El usuario ya existe");
 		}
-			
+
 		return ResponseEntity.ok(respuesta);
 	}
 
@@ -181,57 +204,77 @@ public class UsuarioController {
 	public Usuario getUser(@CurrentUser UserPrincipal currentUser) {
 		return usuarioService.findById(currentUser.getId()).get();
 	}
-	
+
 	@GetMapping("/getSuscripcion")
 	public Suscripcion getUserSuscrip(@CurrentUser UserPrincipal currentUser) {
 		return usuarioService.findById(currentUser.getId()).get().getSuscripcion();
 	}
 
 	@PostMapping("/updateUser")
-	public ResponseEntity<ApiResponse> updateUser(@CurrentUser UserPrincipal curr, @RequestBody SignUpForm form){
+	public ResponseEntity<ApiResponse> updateUser(@CurrentUser UserPrincipal curr, @RequestBody SignUpForm form) {
 		ApiResponse respuesta = new ApiResponse();
-		
+
 		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
 		Direccion dir = dirService.findPrincipalByUser(user);
-		
+
 		user.setNombre(form.getUsuario().getNombre());
 		user.setApellidos(form.getUsuario().getApellidos());
 		user.setDni(form.getUsuario().getDni());
 		user.setFechaNacimiento(form.getUsuario().getFechaNacimiento());
 		user.setTelefono(form.getUsuario().getTelefono());
 		user.setCPostal(form.getUsuario().getCPostal());
-		
+
 		dir.setDireccion(form.getDir().getDireccion());
 		dir.setPoblacion(form.getDir().getPoblacion());
 		dir.setProvincia(form.getDir().getProvincia());
 		dir.setCpostal(form.getDir().getCpostal());
-		
+
 		usuarioService.save(user);
 		dirService.save(dir);
-		
-		
-		
+
 		return ResponseEntity.ok(respuesta);
 	}
-	
+
+	@PostMapping("/eliminarUsuario")
+	public ResponseEntity<ApiResponse> eliminarUsuario(@CurrentUser UserPrincipal current)
+			throws NoSuchAlgorithmException {
+		ApiResponse respuesta = new ApiResponse();
+		Usuario usuario = this.usuarioService.findById(current.getId()).orElse(null);
+		List<Direccion> direcciones = this.dirService.findAllByUser(usuario);
+		for(Direccion d : direcciones){
+			this.dirService.delete(d);
+		}
+		usuario.setApellidos("Eliminado");
+		usuario.setNombre("Usuario");
+		usuario.setCPostal("00000");
+		usuario.setDni("00000000X");
+		usuario.setEmail(bytesToHex(stringDiggest(usuario.getEmail())) + "@anon.user");
+		usuario.setFechaNacimiento(new Date());
+		usuario.setTelefono("000000000");
+		usuario.setPassword(bytesToHex(stringDiggest(usuario.getPassword())));
+		this.usuarioService.save(usuario);
+		return ResponseEntity.ok(respuesta);
+	}
+
 	@PostMapping("/updateSuscripcion")
-	public ResponseEntity<ApiResponse> updateSuscripcion(@RequestBody Integer sus, @CurrentUser UserPrincipal curr){
+	public ResponseEntity<ApiResponse> updateSuscripcion(@RequestBody Integer sus, @CurrentUser UserPrincipal curr) {
 		ApiResponse respuesta = new ApiResponse();
 		respuesta.setSuccess(true);
 		Suscripcion susc = suscripcionService.findById(sus);
 		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
 		user.setSuscripcion(susc);
 		usuarioService.save(user);
-		
+
 		return ResponseEntity.ok(respuesta);
 	}
-	
+
+
 	@GetMapping("/alertaPago")
 	public ResponseEntity<ApiResponse> alertaPago(@CurrentUser UserPrincipal curr){
 		ApiResponse respuesta = new ApiResponse();
 		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
 		Factura last = fService.findLastSuscripcion(user);
-		
+
 		respuesta.setSuccess(true);
 		respuesta.setMessage("OK");
 		if(last == null) {
@@ -242,21 +285,21 @@ public class UsuarioController {
 				      .atZone(ZoneId.systemDefault())
 				      .toLocalDate();
 			LocalDate fecha = LocalDate.now();
-			
+
 			if(fecha.getMonthValue() > fechaFactura.getMonthValue() && user.getPedidosRestantes() == 0) {
-				respuesta.setMessage("Aún no ha pagado la suscripción de este mes y no le quedan pedidos."); 
+				respuesta.setMessage("Aún no ha pagado la suscripción de este mes y no le quedan pedidos.");
 				respuesta.setSuccess(false);
 			}
-		}		
-		
+		}
+
 		return ResponseEntity.ok(respuesta);
 	}
-	
+
 	@RequestMapping(value = "/exportPDF/{idUsuario}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> exportPDF (@PathVariable Integer idUsuario){
 		Usuario user = usuarioService.findById(idUsuario).orElse(null);
-		
+
 		//incluye facturas de usuario y de pedido
 		List<Factura> facturas = fService.findByUser(user);
 		List<Direccion> direcciones = dirService.findAllByUser(user);
@@ -272,8 +315,8 @@ public class UsuarioController {
 			List<CestaProducto> prods = cpService.findProdsByCesta(c);
 			productosPedidos.add(prods);
 		}
-		
-		
+
+
 		ByteArrayInputStream bis = PDFUtil.usuarioPDFGenerator(user, direcciones, productosCestas, productosPedidos, facturas);
 
         HttpHeaders headers = new HttpHeaders();
@@ -286,40 +329,95 @@ public class UsuarioController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
 	}
-	
+
 	@GetMapping("/envios")
-	public ResponseEntity<Integer> enviosRestantes(@CurrentUser UserPrincipal curr){
+	public ResponseEntity<Integer> enviosRestantes(@CurrentUser UserPrincipal curr) {
 		Integer envios = 0;
+		Usuario usuario1 = null;
+
 		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
-		
+
 		if(user.isPresent()) {
 			envios = user.get().getPedidosRestantes();
 		}
-		
+
 		return ResponseEntity.ok(envios);
-		
+
 	}
-	
+
+	private static String bytesToHex(byte[] hash) {
+		StringBuffer hexString = new StringBuffer();
+		for (int i = 0; i < hash.length; i++) {
+			String hex = Integer.toHexString(0xff & hash[i]);
+			if (hex.length() == 1)
+				hexString.append('0');
+			hexString.append(hex);
+		}
+		return hexString.toString();
+	}
+
+	private static byte[] stringDiggest(String s) throws NoSuchAlgorithmException {
+		MessageDigest digest = MessageDigest.getInstance("SHA-256");
+		byte[] encodedhash = digest.digest(s.getBytes(StandardCharsets.UTF_8));
+		return encodedhash;
+	}
+
 	@GetMapping("/dietasCheck")
-	public ResponseEntity<Integer> dietasCheck(@CurrentUser UserPrincipal curr){
-		Boolean result=false;
-		Integer res=0;
-		Usuario usuario1=null;
-		
-		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
-		
-		if(user.isPresent()) {
-			usuario1 = user.get();
+		public ResponseEntity<Integer> dietasCheck(@CurrentUser UserPrincipal curr){
+			Boolean result=false;
+			Integer res=0;
+			Usuario usuario1=null;
+
+			Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+
+			if(user.isPresent()) {
+				usuario1 = user.get();
+			}
+
+			result=usuario1.getSuscripcion().isDietista();
+
+			if(result==true) {
+				res=1;
+			}
+
+			return ResponseEntity.ok(res);
+
 		}
-		
-		result=usuario1.getSuscripcion().isDietista();
-		
-		if(result==true) {
-			res=1;
+
+		@GetMapping("/userPerfil")
+		public ResponseEntity<Usuario> userPerfil(@CurrentUser UserPrincipal curr){
+			Usuario usuario1=null;
+
+			Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+
+			if(user.isPresent()) {
+				usuario1 = user.get();
+			}
+
+			return ResponseEntity.ok(usuario1);
+
 		}
-		
-		return ResponseEntity.ok(res);
-		
-	}
-	
+
+		@GetMapping("/direccion")
+		public ResponseEntity<Direccion> userDireccion(@CurrentUser UserPrincipal curr){
+			Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+			Usuario usuario1=null;
+			if(user.isPresent()) {
+				usuario1=user.get();
+			}
+
+			usuario1.setPassword(null);
+
+			List<Direccion> direcciones=this.direccionService.findAllByUser(usuario1);
+			ResponseEntity<Direccion> res;
+			if(direcciones.size()==0) {
+				res= null;
+			}else {
+
+			res= ResponseEntity.ok(direcciones.get(0));
+			}
+
+			return res;
+
+		}
 }

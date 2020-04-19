@@ -81,7 +81,7 @@ class RegistroUsuario extends React.Component{
 									values.usuario.apellidos.includes("9")){
 								errors.apellidos='No se permiten números';
 							}
-							if (!values.usuario.dni || !/[0-9]{8}[A-Z]{1}/.test(values.usuario.dni)|| values.usuario.dni.toString().length!==9) {
+							if (!values.usuario.dni || !/[0-9]{8}[A-Z]{1}/.test(values.usuario.dni)|| values.usuario.dni.toString().length!==9) {
 								errors.dni='El dni es obligatorio y tiene que respetar el formato 12345678A';
 							}
 							if (!values.usuario.telefono || !/[0-9]{9}/.test(values.usuario.telefono)) {
