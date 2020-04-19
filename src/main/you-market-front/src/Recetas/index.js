@@ -8,10 +8,10 @@ import SinAcceso from '../SinAcceso';
 function Recetas() {
 	const [recetas, setRecetas] = useState([]);
 
-	const { dietaId } = useParams();
+	const { id } = useParams();
 	
 	const fetchRecetas = useCallback(() => {
-	    return fetch(`../../../receta/list/${dietaId}`)
+	    return fetch(`receta/list/${id}`)
 	      .then(res => res.json())
 	      .then(recetas => {
 			setRecetas(recetas)
