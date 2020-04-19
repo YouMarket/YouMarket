@@ -93,9 +93,9 @@ function ProductoDetalle() {
 
 							<div className="producto-add-contenedor">
 								<div className="producto-editar-cantidad clearfix">
-									<img id={idMenos} className="menos" src={less} onClick={lessProduct}/>
+									<img id={idMenos} className="menos" src={less} onClick={lessProduct} alt="Quitar uno"/>
 									<p id={idContador} className="contador no-link">{cantidad}</p>
-									<img className="mas" src={plus} onClick={plusProduct}/>
+									<img className="mas" src={plus} onClick={plusProduct} alt="Añadir uno"/>
 								</div>
 								<button className="producto-detalle-add" onClick={() => sendToBack(id, cantidad)}>AÑADIR AL CARRO</button>
 							</div>
