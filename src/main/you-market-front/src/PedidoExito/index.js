@@ -14,11 +14,6 @@ class PedidoExito extends React.Component{
 				this.props.history.push('/');	
 			}
 			
-			function redireccionar() {
-				localStorage.removeItem('pedido');
-			    setTimeout(handleRedirect, 5000);
-			  }
-			
 			function handleRedirect(){
 				 this.props.history.push('/');
 			}
@@ -37,10 +32,6 @@ class PedidoExito extends React.Component{
 			
 			<h1> Pedido/s realizado/s con Éxito </h1>
 			
-			{redireccionar}
-			
-
-		  	
 		  </div>
 		  </center>
 		</div>

@@ -122,20 +122,26 @@ function DatosUsuario() {
 				</div>
 			}
 			</Card>
-
+			<div className="a-cambio-perfil">
 			{meses != 1 && 
 				<a href="/cambio-suscripcion">
 					<button className="button-finish">Modificar Suscripción</button>
 				</a>
+				
 			}
-
+			
 			{
 				meses == 1 && 
 				<div>
 					<p>Ya ha realizado una modificación en su suscripción para el mes siguiente. Hasta entonces, no podrá volver a modificarla.</p>
 				</div>
 			}
-			
+			</div>
+			<div className="a-cambio-perfil2">
+			<a href="/cambio-perfil">
+			<button className="button-finish">Modificar Perfil</button>
+			</a>
+			</div>
 			<Card title="Información de Usuario" style={{margin: 20}} >
 				<div>
 					

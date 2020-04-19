@@ -70,6 +70,9 @@ public class UsuarioController {
 	DireccionController direccionController;
 
 	@Autowired
+	DireccionService direccionService;
+	
+	@Autowired
 	DireccionService dirService;
 	
 	@Autowired
@@ -263,4 +266,43 @@ public class UsuarioController {
 		return ResponseEntity.ok(res);
 		
 	}
+	
+	@GetMapping("/userPerfil")
+	public ResponseEntity<Usuario> userPerfil(@CurrentUser UserPrincipal curr){
+		Usuario usuario1=null;
+		
+		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		
+		if(user.isPresent()) {
+			usuario1 = user.get();
+		}
+		
+		return ResponseEntity.ok(usuario1);
+		
+	}
+	
+	@GetMapping("/direccion")
+	public ResponseEntity<Direccion> userDireccion(@CurrentUser UserPrincipal curr){	
+		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		Usuario usuario1=null;
+		if(user.isPresent()) {
+			usuario1=user.get();
+		}
+		
+		usuario1.setPassword(null);
+		
+		List<Direccion> direcciones=this.direccionService.findAllByUser(usuario1);
+		ResponseEntity<Direccion> res;
+		if(direcciones.size()==0) {
+			res= null;
+		}else {
+		
+		res= ResponseEntity.ok(direcciones.get(0));
+		}
+		
+		return res;
+		
+	}
+	
+	
 }
