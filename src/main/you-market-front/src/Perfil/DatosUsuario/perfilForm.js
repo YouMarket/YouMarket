@@ -145,7 +145,7 @@ if (localStorage.getItem('auth')==null){
 			}}
 						onSubmit={(values, { setSubmitting }) => {
 							setTimeout(() => {
-								fetch('usuario/updatePerfil', {
+								fetch('../../../usuario/updatePerfil', {
 										headers: {
                                             'Content-Type' : 'application/json',
                                             'Accept' : 'application/json',

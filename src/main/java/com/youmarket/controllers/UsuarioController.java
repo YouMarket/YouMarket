@@ -204,13 +204,12 @@ public class UsuarioController {
 	@PutMapping("/updatePerfil")
 	public ResponseEntity<ApiResponse> updateDatosPerfil(@RequestBody SignUpForm form, @CurrentUser UserPrincipal logged){
 		ApiResponse respuesta = new ApiResponse();
-		if(usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
-			Usuario user = usuarioService.findById(logged.getId()).orElse(null);
-			Direccion direccionActual = dirService.findPrincipalByUser(user);
-			Usuario usuarioForm = form.getUsuario();
-			Direccion direccionForm = form.getDir();
-			
-			user.setEmail(usuarioForm.getEmail());
+		Usuario user = usuarioService.findById(logged.getId()).orElse(null);
+		Direccion direccionActual = dirService.findPrincipalByUser(user);
+		Usuario usuarioForm = form.getUsuario();
+		Direccion direccionForm = form.getDir();
+
+		if(usuarioForm.getEmail().equals(user.getEmail())){
 			user.setNombre(usuarioForm.getNombre());
 			user.setApellidos(usuarioForm.getApellidos());
 			user.setTelefono(usuarioForm.getTelefono());
@@ -225,11 +224,33 @@ public class UsuarioController {
 
 			respuesta.setSuccess(true);
 			respuesta.setMessage("Datos actualizados con éxito");
-			
-		}else {
-			respuesta.setSuccess(false);
-			respuesta.setMessage("El email ya está en uso.");
+		} else {
+			if (!usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
+				respuesta.setSuccess(false);
+				respuesta.setMessage("El email ya está en uso.");
+			} else {
+				user.setNombre(usuarioForm.getNombre());
+				user.setApellidos(usuarioForm.getApellidos());
+				user.setTelefono(usuarioForm.getTelefono());
+				user.setEmail(usuarioForm.getEmail());
+
+				direccionActual.setDireccion(direccionForm.getDireccion());
+				direccionActual.setCpostal(direccionForm.getCpostal());
+				direccionActual.setPoblacion(direccionForm.getPoblacion());
+				direccionActual.setProvincia(direccionForm.getProvincia());
+
+				usuarioService.save(user);
+				dirService.save(direccionActual);
+
+				respuesta.setSuccess(true);
+				respuesta.setMessage("Datos actualizados con éxito");
+			}
 		}
+			
+		
+
+		
+			
 			
 		return ResponseEntity.ok(respuesta);
 	}
