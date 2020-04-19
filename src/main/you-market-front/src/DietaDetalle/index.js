@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import Header from '../Header';
-import Dieta from '../Dieta';
-import { useParams, Link, NavLink } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import './styles.css';
 
 

@@ -19,9 +19,20 @@
 	font-size:	16px;
 }
 
+.a-cambio-perfil{
+	margin-right:5%;
+	flex:left;
+}
+.a-cambio-perfil2{
+	flex:right;
+}
+
 .card-container{
 	padding: 40px 30px;
 	width: 50%;
 	margin: 0 auto;
-	
+}
+
+.modificar-suscripcion {
+	margin: 20px;
 }

@@ -8,7 +8,7 @@ import {
 import Productos from './Productos';
 import Dietas from './Dietas';
 import Perfil from './Perfil';
-import RecetasListado from './RecetasListado';
+import RecetasListado from './Recetas';
 import ProductoDetalle from './ProductoDetalle';
 import RegistroUsuario from './Registro';
 import PedidosUsuario from './Perfil/PedidosUsuario';
@@ -19,7 +19,7 @@ import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import Login from './auth/Login'
 import Logout from './auth/Logout'
-
+import Inicio from './Inicio'
 import PedidoForm from './PedidoForm';
 
 import DietaProductos from './DietaProductos';
@@ -33,11 +33,12 @@ import Error from './Misc';
 import CestaProductos from './CestaProductos';
 import Facturas from './Perfil/Facturas';
 import SubscripcionForm from './Perfil/DatosUsuario/suscripcionForm'
+import PerfilForm from './Perfil/DatosUsuario/perfilForm'
 import TerminosYCondiciones from './TerminosCondiciones';
 import AlertaBrecha from './AlertaBrecha';
 import PedidoExito from './PedidoExito';
-
-
+import Recetas from './Recetas';
+import Receta from './Receta';
 
 function App() {
 
@@ -66,12 +67,9 @@ function App() {
 		    	<Route path="/dieta/list">
     				<Dietas />
     			</Route>
-
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
 				</Route>
-
-
     			<Route path="/recetas">
     				<RecetasListado/>
     			</Route>
@@ -89,6 +87,9 @@ function App() {
 				</Route>
 				<Route path="/cambio-suscripcion">
 					<SubscripcionForm/>
+				</Route>
+				<Route path="/cambio-perfil">
+				<PerfilForm/>
 				</Route>
 				<Route path="/datos-subscripcion">
 					<DatosSubscripcion/>
@@ -123,27 +124,27 @@ function App() {
 				<Route path="/404">
 					<Error/>
 				</Route>
-
 				<Route path="/pedidoexito">
 					<PedidoExito/>
 				</Route>
-
-
-
 				<Route path="/terminosycondiciones">
         			<TerminosYCondiciones />
-        </Route>
-
+        		</Route>
 				<Route path="/alertabrecha">
     				<AlertaBrecha />
-    		</Route>
-        		
-
-
-		    <Route path="/">
-		        <Productos />
-		    </Route>
-
+				</Route>
+				<Route path="/recetas/list">
+					<Recetas />
+				</Route>
+				<Route path="/recetas/:id">
+					<Receta />
+				</Route>
+				<Route path="/productos">
+					<Productos />
+				</Route>
+				<Route path="/">
+					<Inicio/>
+				</Route>
 
 		      </Switch>
         </Router>

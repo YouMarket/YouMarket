@@ -32,7 +32,7 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 		setCantidad(cantidad + 1)
 		document.getElementById(idContador).textContent = cantidad
 	}
-    
+  
 	function storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad){
         var prodSession = sessionStorage.getItem('prod_'+id);
         if(!prodSession){
@@ -62,6 +62,7 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 
 	function sendToBack(id, cantidad, nombre, precio, urlImagen, supermercado, unidad) {
 		storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad)
+
 
 		setCantidad(0);
 	}
