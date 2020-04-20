@@ -27,6 +27,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -197,6 +198,60 @@ public class UsuarioController {
 			respuesta.setMessage("El usuario ya existe");
 		}
 
+		return ResponseEntity.ok(respuesta);
+	}
+
+	@PutMapping("/updatePerfil")
+	public ResponseEntity<ApiResponse> updateDatosPerfil(@RequestBody SignUpForm form, @CurrentUser UserPrincipal logged){
+		ApiResponse respuesta = new ApiResponse();
+		Usuario user = usuarioService.findById(logged.getId()).orElse(null);
+		Direccion direccionActual = dirService.findPrincipalByUser(user);
+		Usuario usuarioForm = form.getUsuario();
+		Direccion direccionForm = form.getDir();
+
+		if(usuarioForm.getEmail().equals(user.getEmail())){
+			user.setNombre(usuarioForm.getNombre());
+			user.setApellidos(usuarioForm.getApellidos());
+			user.setTelefono(usuarioForm.getTelefono());
+
+			direccionActual.setDireccion(direccionForm.getDireccion());
+			direccionActual.setCpostal(direccionForm.getCpostal());
+			direccionActual.setPoblacion(direccionForm.getPoblacion());
+			direccionActual.setProvincia(direccionForm.getProvincia());
+
+			usuarioService.save(user);
+			dirService.save(direccionActual);
+
+			respuesta.setSuccess(true);
+			respuesta.setMessage("Datos actualizados con éxito");
+		} else {
+			if (!usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
+				respuesta.setSuccess(false);
+				respuesta.setMessage("El email ya está en uso.");
+			} else {
+				user.setNombre(usuarioForm.getNombre());
+				user.setApellidos(usuarioForm.getApellidos());
+				user.setTelefono(usuarioForm.getTelefono());
+				user.setEmail(usuarioForm.getEmail());
+
+				direccionActual.setDireccion(direccionForm.getDireccion());
+				direccionActual.setCpostal(direccionForm.getCpostal());
+				direccionActual.setPoblacion(direccionForm.getPoblacion());
+				direccionActual.setProvincia(direccionForm.getProvincia());
+
+				usuarioService.save(user);
+				dirService.save(direccionActual);
+
+				respuesta.setSuccess(true);
+				respuesta.setMessage("Datos actualizados con éxito");
+			}
+		}
+			
+		
+
+		
+			
+			
 		return ResponseEntity.ok(respuesta);
 	}
 
@@ -383,6 +438,28 @@ public class UsuarioController {
 			return ResponseEntity.ok(res);
 
 		}
+	
+	@GetMapping("/cestasCheck")
+	public ResponseEntity<Integer> cestasCheck(@CurrentUser UserPrincipal curr){
+		Boolean result=false;
+		Integer res=0;
+		Usuario usuario1=null;
+
+		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+
+		if(user.isPresent()) {
+			usuario1 = user.get();
+		}
+
+		List<Cesta> cestas=this.cestaService.cestasPorUsuario(usuario1.getId());
+		
+		if(cestas.size() > 0) {
+			res=1;
+		}
+
+		return ResponseEntity.ok(res);
+
+	}
 
 		@GetMapping("/userPerfil")
 		public ResponseEntity<Usuario> userPerfil(@CurrentUser UserPrincipal curr){
