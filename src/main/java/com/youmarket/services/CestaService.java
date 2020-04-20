@@ -1,5 +1,6 @@
 package com.youmarket.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,13 +119,14 @@ public class CestaService {
 
 	public List<Cesta> cestasPorUsuarioLlenas(Integer id) {
 		List<Cesta> res = cestaRepository.cestaPorUsuario(id);
+		List<Cesta> res2 = new ArrayList<>();
 		
 		for(Cesta c:res) {
-			if(this.cestaProductoService.cpPorCesta(c.getId()).isEmpty()) {
-				res.remove(c);
+			if(this.cestaProductoService.cpPorCesta(c.getId()).size()!=0) {
+				res2.add(c);
 			}
 		}
-		return res;
+		return res2;
 	}
 
 }

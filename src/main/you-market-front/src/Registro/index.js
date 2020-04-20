@@ -88,6 +88,9 @@ class RegistroUsuario extends React.Component{
 							}
 							if (!values.usuario.telefono || !/[0-9]{9}/.test(values.usuario.telefono)) {
 								errors.telefono='El teléfono es obligatorio';
+								if(values.usuario.telefono.toString().length!==9){
+									errors.telefono='Tiene que seguir el formato español sin incluir el prefijo (+34)';
+								}
 							}else if(values.usuario.telefono.toString().length!==9){
 								errors.telefono='Tiene que seguir el formato español sin incluir el prefijo (+34)';
 							}
@@ -242,7 +245,7 @@ class RegistroUsuario extends React.Component{
 										
 										<input
 											className="input"
-											type="text"
+											type="number"
 											name="usuario.telefono"
 											id="telefono"
 											onChange={handleChange}

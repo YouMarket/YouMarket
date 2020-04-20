@@ -15,6 +15,7 @@ class Logout extends React.Component{
 		    localStorage.removeItem('dietasCheck'); 
 		    localStorage.removeItem('enviosD');
 		    localStorage.removeItem('cestasCheck'); 
+		    localStorage.removeItem('carrolleno'); 
 			this.props.history.push('/login');
 	    }
 			

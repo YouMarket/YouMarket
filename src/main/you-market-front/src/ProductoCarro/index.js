@@ -13,7 +13,10 @@ interface Props {
 }
 
 function eliminarProducto(id) {
-	sessionStorage.removeItem("prod_"+id)
+	sessionStorage.removeItem("prod_"+id);
+	if(sessionStorage.length==0){
+	localStorage.removeItem('carrolleno');
+	}
 	window.location.reload(false)
 }
 
