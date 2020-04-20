@@ -13,7 +13,7 @@ function DatosUsuario() {
 
 
 	const [usuario, setUsuario] = useState([]);
-	const urlPDF = "http://localhost:8081/usuario/exportPDF/"+usuario.id;
+	const urlPDF = "http://localhost:8081/usuario/exportPDF";
 	const [direccion, setDireccion] = useState([]);
 	const [suscripcion, setSuscripcion] = useState([]);
 	const [ultimaSuscripcion, setUltimaSuscripcion] = useState([]);
@@ -45,7 +45,7 @@ function DatosUsuario() {
 		}, []);
 
 	function deleteUser() {
-		fetch('/usuario/eliminarUsuario', {
+		 fetch('/usuario/eliminarUsuario', {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
@@ -102,6 +102,29 @@ function DatosUsuario() {
 			}, []);
 
 
+	function descarga() {
+		console.log('entra en la funcion');
+		fetch(urlPDF, {
+			headers: {
+				'Authorization': 'Bearer ' + localStorage.getItem('auth')
+			},
+			method: 'GET',
+			responseType: 'blob' 
+		}).then(response => {
+			response.blob().then(blob => {
+				let url = window.URL.createObjectURL(blob);
+				let a = document.createElement('a');
+				a.href = url;
+				a.download = 'datos_usuario_'+usuario.email+'.pdf';
+					
+				a.click();
+				});
+				});
+		
+			
+			
+	}
+
   return(
 	<div>
 		<Header/>
@@ -128,7 +151,7 @@ function DatosUsuario() {
 						currency="EUR"
 						onSuccess={() => {
 						setTimeout(() => {
-							fetch('/factura/createSuscripcion', {
+							 fetch('/factura/createSuscripcion', {
 								headers: {
 									'Content-Type' : 'application/json',
 									'Accept' : 'application/json',
@@ -184,8 +207,8 @@ function DatosUsuario() {
 			{ <button className="button-perfil button-finish" onClick={() => {if (window.confirm('¿Seguro que desea eliminar su cuenta?')) deleteUser()}}>Eliminar cuenta</button> }
 
 
-			<a href={urlPDF} target="_blank">
-				<button className="button-perfil button-finish">Exportar información del usuario en PDF</button>
+			<a target="_blank">
+				<button className="button-perfil button-finish" onClick={descarga}>Exportar información del usuario en PDF</button>
 			</a>
 		</div>
 	</div>
