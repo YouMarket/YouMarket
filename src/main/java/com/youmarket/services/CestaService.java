@@ -1,5 +1,6 @@
 package com.youmarket.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,7 +63,7 @@ public class CestaService {
 		cestaRepository.deleteById(c.getId());
 	}
 
-	public Object findById(Integer id, UserPrincipal currentUser) {
+	public Cesta findById(Integer id, UserPrincipal currentUser) {
 		Cesta res=null;
 		Optional<Cesta> c=cestaRepository.findById(id);
 		if(c.isPresent()) {
@@ -89,10 +90,6 @@ public class CestaService {
 
 	}
 
-	public Cesta saveProductos(@Valid Cesta c, List<Producto> productos) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public void borrarPorIdSeguro(Integer id, UserPrincipal cu)	 {
 		Optional<Cesta> c=this.cestaRepository.findById(id);
@@ -110,12 +107,22 @@ public class CestaService {
 				cestaProductoService.deleteByCestaId(id);
 			}
 			cestasProductos=(List<CestaProducto>) cestaProductoService.CestasProductoPorCestaId(id, cu);
-			System.out.println("Anvorguesa");
-			System.out.println(cestasProductos.size());
 			if(cestasProductos.size()==0) {
 				cestaRepository.deleteById(id);
 
 		}}
+	}
+
+	public List<Cesta> cestasPorUsuarioLlenas(Integer id) {
+		List<Cesta> res = cestaRepository.cestaPorUsuario(id);
+		List<Cesta> res2 = new ArrayList<>();
+		
+		for(Cesta c:res) {
+			if(this.cestaProductoService.cpPorCesta(c.getId()).size()!=0) {
+				res2.add(c);
+			}
+		}
+		return res2;
 	}
 
 }

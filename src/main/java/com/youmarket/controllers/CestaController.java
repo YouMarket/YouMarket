@@ -32,6 +32,7 @@ import com.youmarket.services.ProductoService;
 import com.youmarket.services.UsuarioService;
 
 import ch.qos.logback.classic.Logger;
+import io.jsonwebtoken.lang.Assert;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,6 +47,8 @@ public class CestaController {
 
 	@PostMapping
     public ResponseEntity<Cesta> create(@RequestBody FormCesta c, @CurrentUser UserPrincipal currentUser) {
+		Assert.isTrue(c.getName() != null && c.getName() != "");
+
 		Cesta nc =cestaService.creaCesta(c, currentUser);
 		nc=cestaService.save(nc);
 
@@ -58,6 +61,12 @@ public class CestaController {
     public ResponseEntity<List<Cesta>> cestasPorUsuario(@CurrentUser UserPrincipal currentUser) {
 		Integer id=currentUser.getId();
         return ResponseEntity.ok(cestaService.cestasPorUsuario(id));
+    }
+	
+	@GetMapping("/user/llenas")
+    public ResponseEntity<List<Cesta>> cestasPorUsuarioLlenas(@CurrentUser UserPrincipal currentUser) {
+		Integer id=currentUser.getId();
+        return ResponseEntity.ok(cestaService.cestasPorUsuarioLlenas(id));
     }
 
 	@GetMapping("/{id}")

@@ -6,12 +6,16 @@ import Header from '../Header';
 function Productos() {
 	
 const [productos, setProductos] = useState([]);
+const [displayedProducts, setDisplayedProducts] = useState([]);
 
 	const fetchProductos = useCallback(() => {
 	    return fetch('https://youmarket-entrega2.herokuapp.com/producto/list')
 	      .then(res => res.json())
 	      .then(productos => {
-	        setProductos(productos);
+
+			setProductos(productos);
+			setDisplayedProducts(productos);
+	        console.log(productos);
 	      });
 	  }, []);
 	
@@ -19,15 +23,26 @@ const [productos, setProductos] = useState([]);
 	    fetchProductos();
 	  }, [fetchProductos]);
 	
+	function search(event){
+		var searchQuery = event.target.value.toLowerCase();
+		var displayedProducts = productos.filter(function(el){
+			var serchVal = el.nombre.toLowerCase();
+			return serchVal.indexOf(searchQuery)!==-1;
+		});
+		console.log(displayedProducts);
+		setDisplayedProducts(displayedProducts)
+	};
 	
   return(
 	<div>	  
 	  <Header/>
-	  <h1 className="container productos-title">¡Bienvenido a YouMarket!</h1>
-	  <h1 className="container productos-title">Aquí tienes los productos disponibles 🤙</h1>
+	  <div className="productos-page container">
+		<h1 className="productos-title">Aquí tienes los productos disponibles 🤙</h1>
+		<input className="productos-search" type="text" onChange={search} placeholder="Busca aquí tus productos favoritos..."/>
+	  </div>
 	  <div className="productos-container">
 	  	<div className="grid">
-	  		{productos.map(producto => (
+	  		{displayedProducts.map(producto => (
 	  			<Producto 
 	  				id={producto.id}  
 	  				urlImagen={producto.urlImagen} 

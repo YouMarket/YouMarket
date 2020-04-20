@@ -20,21 +20,15 @@ public class DietaService {
 		return this.dietaRepository.findAll();
 	}
 
-	public Dieta save(Dieta d) {
-		return dietaRepository.save(d);
-	}
-
-	public void delete(Dieta d) {
-		this.dietaRepository.delete(d);
-	}
 
 	public Dieta findById(int idDieta) {
-		return dietaRepository.findById(idDieta).get();
+		Optional<Dieta> dieta =  dietaRepository.findById(idDieta);
+		if (dieta.isPresent()) {
+			return dieta.get();
+		} else {
+			return null;
+		}
 	}
 
 
-	public Dieta deleteById(int id) {
-		this.dietaRepository.deleteById(id);
-		return null;
-	}
 }

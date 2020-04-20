@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import {
 	  BrowserRouter as Router,
 	  Switch,
-	  Route,
-	  withRouter
+	  Route
 	} from "react-router-dom";
 import Productos from './Productos';
 import Dietas from './Dietas';
 import Perfil from './Perfil';
-import RecetasListado from './RecetasListado';
 import ProductoDetalle from './ProductoDetalle';
 import RegistroUsuario from './Registro';
 import PedidosUsuario from './Perfil/PedidosUsuario';
@@ -20,8 +18,9 @@ import DietaDetalle from './DietaDetalle';
 import DietaForm from './DietaForm';
 import Login from './auth/Login'
 import Logout from './auth/Logout'
-
+import Inicio from './Inicio'
 import PedidoForm from './PedidoForm';
+
 import DietaProductos from './DietaProductos';
 
 import Carro from './Carro';
@@ -31,6 +30,15 @@ import ShowCesta from './ShowCesta';
 import EditCesta from './EditCesta';
 import Error from './Misc';
 import CestaProductos from './CestaProductos';
+import Facturas from './Perfil/Facturas';
+import SubscripcionForm from './Perfil/DatosUsuario/suscripcionForm';
+import PerfilForm from './Perfil/DatosUsuario/perfilForm';
+import TerminosYCondiciones from './TerminosCondiciones';
+import AlertaBrecha from './AlertaBrecha';
+import PedidoExito from './PedidoExito';
+import Recetas from './Recetas';
+import Receta from './Receta';
+import RecetaDetalle from './RecetaDetalle';
 
 function App() {
 
@@ -40,12 +48,9 @@ function App() {
 				<Route path="/producto/dieta/list/:id">
 					<DietaProductos/>
 				</Route>
-
 				<Route path="/pedido/create">
 					<PedidoForm />
 				</Route>
-
-
     			<Route path="/create/dieta">
 					<DietaForm />
 				</Route>
@@ -62,15 +67,9 @@ function App() {
 		    	<Route path="/dieta/list">
     				<Dietas />
     			</Route>
-
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
 				</Route>
-
-
-    			<Route path="/recetas">
-    				<RecetasListado/>
-    			</Route>
     			<Route path="/registro">
 					<RegistroUsuario/>
 				</Route>
@@ -83,6 +82,12 @@ function App() {
 				<Route path="/datos-perfil">
 					<DatosUsuario/>
 				</Route>
+				<Route path="/cambio-suscripcion">
+					<SubscripcionForm/>
+				</Route>
+				<Route path="/cambio-perfil">
+				<PerfilForm/>
+				</Route>
 				<Route path="/datos-subscripcion">
 					<DatosSubscripcion/>
 				</Route>
@@ -92,10 +97,9 @@ function App() {
 				<Route path="/login">
     				<Login />
 				</Route>
-
 				<Route path="/logout">
-				<Logout />
-			</Route>
+					<Logout />
+				</Route>
 				<Route path="/cesta/edit/:id">
 				<EditCesta/>
 				</Route>
@@ -108,22 +112,36 @@ function App() {
 	    		<Route path="/show/cesta/:id">
 	    			<ShowCesta />
 				</Route>
-
-
-
+				<Route path="/facturas-usuario">
+	    			<Facturas />
+				</Route>
 				<Route path="/cesta/productos/dieta/list/:id">
 					<CestaProductos/>
 				</Route>
-
 				<Route path="/404">
-				<Error/>
-			</Route>
-
-
-		        <Route path="/">
-		        	<Productos />
-		        </Route>
-
+					<Error/>
+				</Route>
+				<Route path="/pedidoexito">
+					<PedidoExito/>
+				</Route>
+				<Route path="/terminosycondiciones">
+        			<TerminosYCondiciones />
+        		</Route>
+				<Route path="/alertabrecha">
+    				<AlertaBrecha />
+				</Route>
+				<Route path="/recetas/list/:id">
+					<Recetas />
+				</Route>
+				<Route path="/recetas/:id">
+					<RecetaDetalle />
+				</Route>
+				<Route path="/productos">
+					<Productos />
+				</Route>
+				<Route path="/">
+					<Inicio/>
+				</Route>
 
 		      </Switch>
         </Router>

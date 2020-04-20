@@ -1,11 +1,8 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React from 'react';
 
-import style from './styles.css';
 import cest from './cesta2.png';
 import { Formik } from 'formik';
-import {Button} from 'primereact/button';
 import Header from '../Header';
-import { Redirect } from 'react-router-dom';
 import {
 	  withRouter
 	} from 'react-router-dom';
@@ -21,16 +18,30 @@ class formCesta extends React.Component{
 	      this.props.history.push('/cesta');
 	    }
 	
+	cestasCheck() {
+		 fetch('/usuario/cestasCheck' , {headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+				method:'GET'})
+			      .then(res => res.json())
+			      .then(cestasCheck1 => {
+			    	  localStorage.removeItem('cestasCheck');
+			    	  localStorage.setItem('cestasCheck', cestasCheck1);
+			        
+			      }).then(() => {this.handleRedirect()});
+	 }
+	
 	render(){ 
 		{this.compruebaAuth();}
 		
 		return(<div>
   <Header/>
-  <div>
+  <div className="container">
     <h1 className="titulo-create-cesta">Crear cesta</h1>
-    <img src={cest} className="cesta-imagen-edit"/>
+    <img src={cest} className="cesta-imagen-edit" alt="Cesta"/>
     <Formik
-      initialValues={{name: 'nuevaCesta'}}
+      initialValues={{name: 'Nueva cesta'}}
 
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -42,11 +53,11 @@ class formCesta extends React.Component{
         			body:JSON.stringify(values, null, 2)
         	}).then((response)=> {
         		setSubmitting=false;
+        		localStorage.removeItem('cestasCheck');
+        		this.cestasCheck();
 
 
-        	}).then(() =>
-        	{this.handleRedirect();}
-            )
+        	})
 
 
         }, 400);
@@ -79,7 +90,7 @@ class formCesta extends React.Component{
 
           {errors.name && touched.name}
           <div className="grid2-create-cesta">
-          <button type="submit" disabled={isSubmitting} className="submit-cesta-create">
+          <button type="submit" disabled={isSubmitting} className="submit-cesta-create link-button">
           Enviar
           </button>
           </div>

@@ -2,20 +2,19 @@
 package com.youmarket.services;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.youmarket.configuration.security.UserPrincipal;
+import com.youmarket.domain.Cesta;
 import com.youmarket.domain.CestaProducto;
 import com.youmarket.domain.Producto;
 import com.youmarket.repositories.CestaProductoRepository;
 import com.youmarket.repositories.ProductoRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class CestaProductoService{
@@ -98,5 +97,8 @@ public class CestaProductoService{
         return this.cprepo.save(cp);
     }
 
+    public List<CestaProducto> findProdsByCesta(Cesta idCesta) {
+    	return this.cprepo.findByCestaId(idCesta.getId());
+    }
 
 }

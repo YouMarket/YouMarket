@@ -1,9 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import Header from '../Header';
+	import React, { useCallback, useState, useEffect } from 'react';
 import './styles.css';
-import Dieta from '../Dieta';
-import { useParams } from "react-router-dom";
-
 
 function ListaSuscripciones() {
 

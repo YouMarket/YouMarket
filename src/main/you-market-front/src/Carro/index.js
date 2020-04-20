@@ -1,82 +1,126 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './styles.css';
 import Header from '../Header';
-import ProductoListado from '../ProductoListado';
-import { Formik,Field, Form } from 'formik';
+import ProductoListado from '../ProductoCarro';
+import { Formik, Form } from 'formik';
 import { useHistory, NavLink } from "react-router-dom";
 import shoppingSad from '../assets/shopping-cart-sad.png'
 
-const precioFinal = 0.00
+var precioFinal=0.00
 function updatePrecioFinal(cantidad, precio){
-	precioFinal += precio*cantidad
+	precioFinal +=precio*cantidad
 	return precioFinal
 }
 
+function limpiaStorage(){
+	localStorage.removeItem('carrolleno');
+	sessionStorage.clear();
+
+}
+
+
+
+
 function Carro() {
-	precioFinal=0.00
-	const[carrito, setCarrito]=useState([]);
-	const[cestas, setCestas]=useState([]);
-	let history=useHistory();
+precioFinal=0.00
+const[carrito, setCarrito]=useState([]);
+const[cestas, setCestas]=useState([]);
+const[sinSuscripcion, setSinSuscripcion] = useState([]);
+const[mensajeAlerta, setMensajeAlerta] = useState([]);
+let history=useHistory();
 
-		const fetchCarrito=useCallback(()=> {
-			return construyeCarrito();
-			
-		}, []);
+	const fetchCarrito=useCallback(()=> {
+		return construyeCarrito();
+		
+	}, []);
 
-		function construyeCarrito(){
-			var prods = [];
-			Object.keys(sessionStorage).forEach(element => {
-				var ele = sessionStorage.getItem(element)
-				if (JSON.parse(ele)){
-					prods.push(JSON.parse(ele))
-				}
-				console.log(prods)
-				setCarrito(prods)
-			});
+	function construyeCarrito(){
+		var prods = [];
+		Object.keys(sessionStorage).forEach(element => {
+			var ele = sessionStorage.getItem(element)
+			if (JSON.parse(ele)){
+				prods.push(JSON.parse(ele))
+			}
 			setCarrito(prods)
-			return 0;
-		}
+		});
+		setCarrito(prods)
+		return 0;
+	}
 
-		useEffect(()=> {
-			fetchCarrito(carrito);
-		},[]);
+	useEffect(()=> {
+		fetchCarrito(carrito);
+		  fetch('/usuario/cestasCheck' , {headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+				method:'GET'})
+			      .then(res => res.json())
+			      .then(cestasCheck1 => {
+			    	  localStorage.removeItem('cestasCheck');
+			  	      localStorage.setItem('cestasCheck', cestasCheck1);
+			        
+			      });
+	},[]);
 
-		const fetchCestas=useCallback(()=> {
-		    return fetch('https://youmarket-entrega2.herokuapp.com/cesta/user' , {headers: {
-			'Content-Type' : 'application/json',
-			'Accept' : 'application/json',
-			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-			method:'GET'})
-		      .then(res=> res.json())
-		      .then(cestas=> {
-		        setCestas(cestas)
-		      });
-		  }, []);
+	const fetchCestas=useCallback(()=> {
+	    return fetch('cesta/user' , {headers: {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json',
+		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+		method:'GET'})
+	      .then(res=> res.json())
+	      .then(cestas=> {
+	        setCestas(cestas)
+	      });
+	  }, []);
 
 
-		useEffect(()=> {
-		    fetchCestas(cestas);
-		  }, []);
+	
+
+	  const fetchMsg=useCallback(()=> {
+	    return fetch('/usuario/alertaPago' , {headers: {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json',
+		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+		method:'GET'})
+	      .then(res=> res.json())
+	      .then(response => {
+			  setSinSuscripcion(response.success)
+			  setMensajeAlerta(response.message)
+	      });
+	  }, []);
+	
+	  useEffect(()=> {
+		fetchCestas(cestas);
+		fetchMsg();
+	  }, []);
+	  
+	  function carritoLleno(){
+		  localStorage.setItem('carrolleno', true);
+	  }
+
 
   return(
 		<div>
 			<Header/> 
-			{carrito.length > 0 ? <div>
+			{localStorage.getItem('carrolleno') ? <div>
 			<div className="container clearfix">
 			<h1 className="introduction">Este es tu carrito. ¡Estás a pocos pasos de completar tu compra! 👍</h1>
 				<div className="vaciar-carrito">
 				<Formik
-				 onSubmit={(values, { setSubmitting }) => {
-				   setTimeout(() => {
-					   fetch('https://youmarket-entrega2.herokuapp.com/carritoDestroy', {headers: {
+
+				 onSubmit={(values, { setSubmitting })=> {
+				   setTimeout(()=> {
+					   fetch('/carritoDestroy', {headers: {
+
 						'Content-Type' : 'application/json',
 						'Accept' : 'application/json',
 						'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 							   method:'POST'
 					   }).then((response)=> {
 						   setSubmitting=false;
-	
-					   }).then(() =>
+						   localStorage.removeItem('carrolleno');
+					   }).then(()=>
 					   {window.location.reload(false);}
 					   )
 	
@@ -85,19 +129,14 @@ function Carro() {
 				 }}
 			   >
 				 {({
-				   values,
-				   errors,
-				   touched,
-				   handleChange,
-				   handleBlur,
 				   handleSubmit,
 				   isSubmitting,
 				   /* and other goodies */
-				 }) => (
+				 })=> (
 				   <Form onSubmit={handleSubmit}>
 	
 					 <div className="button-carrito-a-cesta">
-					 <button type="submit" disabled={isSubmitting} className="button-vaciar">
+					 <button type="submit" disabled={isSubmitting} onClick={() => limpiaStorage()} className="button-vaciar">
 					 Vaciar
 					 </button>
 					 </div>
@@ -107,15 +146,15 @@ function Carro() {
 			   </Formik>
 				</div>
 				<div className="products-container-list">
-					{carrito.map((cestaproducto) => (
+					{carrito.map((cestaproducto)=> (
 						<ProductoListado
 							id={cestaproducto.producto.id}
-							nombre ={cestaproducto.producto.nombre}
+							nombre={cestaproducto.producto.nombre}
 							supermercado={cestaproducto.producto.supermercado.nombre}
-							precioIva ={cestaproducto.producto.precioIva}
+							precioIva={cestaproducto.producto.precioIva}
 							urlImagen={cestaproducto.producto.urlImagen}
-							unidad = {cestaproducto.producto.unidad}
-							cantidad = {cestaproducto.cantidad}>
+							unidad={cestaproducto.producto.unidad}
+							cantidad={cestaproducto.cantidad}>
 								{updatePrecioFinal(cestaproducto.cantidad, cestaproducto.producto.precioIva)}
 						</ProductoListado>
 					))}
@@ -124,16 +163,31 @@ function Carro() {
 					<div className="buttons">
 
 					{ localStorage.getItem('auth') ? (
-						<a href="/pedido/create">
-						<button className="button-finish">Terminar pedido</button>
-						</a>
+						sinSuscripcion ? 
+							(
+								<a href="/pedido/create">
+								<button className="button-finish" onClick={carritoLleno}>Terminar pedido</button>
+								</a>) 
+							:(
+								<div>
+									<p>
+										{mensajeAlerta}
+									</p>
+									<a href="/datos-perfil">
+										<button className="button-finish">Ir a mi perfil</button>
+									</a>
+									<br/>
+								</div>
+								
+							)
+						
 					
 					): (<a href="/login">
 						<button className="button-finish">Terminar pedido</button>
 						</a>)}
 				 </div>
 	
-					 { localStorage.getItem('auth') ? (
+					 { localStorage.getItem('cestasCheck')>0 ? (
 					<div className="guardar-carrito-a-cesta">
 					<h2>¿Quieres guardar tu carrito como cesta?</h2>
 					<p>Elige la cesta en la que quieres guardar el carrito:</p>
@@ -142,26 +196,29 @@ function Carro() {
 						  de detalle de la cesta que quieras cargar cuando quieras)</p>
 					<Formik
 					 initialValues={{id: ''}}
-					 validate={values => {
-						const errors = {};
-						if (values.id=="") {
-						  errors.id = 'No puede estar vacío';
+					 validate={values=> {
+						const errors={};
+						if (values.id==="") {
+						  errors.id='No puede estar vacío';
 						}
 						return errors;
 					  }}
 	
-					 onSubmit={(values, { setSubmitting }) => {
-					   setTimeout(() => {
-						   fetch(`https://youmarket-entrega2.herokuapp.com/carritoACesta`, {headers: {
+
+					 onSubmit={(values, { setSubmitting })=> {
+					   setTimeout(()=> {
+
+						   fetch(`/carritoACesta/${values.id}`, {headers: {
+
 							'Content-Type' : 'application/json',
 							'Accept' : 'application/json',
 							'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 								   method:'POST',
-								   body:JSON.stringify(values, null, 2)
+								   body:JSON.stringify(carrito, null, 1)
 						   }).then((response)=> {
 							   setSubmitting=false;
 	
-						   }).then(() =>
+						   }).then(()=>
 						   {history.push(`/show/cesta/${values.id}`);}
 						   )
 	
@@ -178,14 +235,14 @@ function Carro() {
 					   handleSubmit,
 					   isSubmitting,
 					   /* and other goodies */
-					 }) => (
+					 })=> (
 					   <Form onSubmit={handleSubmit}>
 					   <div className="">
 	
 					   <select name="id" id="id" onChange={handleChange}
 					   onBlur={handleBlur} value={values.id}>
 					   <option value=""></option>
-					   { cestas && cestas.map((cesta) => (
+					   { cestas && cestas.map((cesta)=> (
 	
 										   <option value={cesta.id}>{cesta.nombre}</option>
 										   ))}
@@ -210,9 +267,10 @@ function Carro() {
 		</div>
 	 : (
 	 <div className="container">
-		<h1 className="introduction introduction-empty">Vaya.. parece que aún no tienes productos añadidos</h1>
-	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad}></img></div>
-		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/products">aquí</NavLink></p>
+		<h1 className="introduction introduction-empty">Vaya... parece que aún no tienes productos añadidos</h1>
+	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad} alt="Carro vacío"/></div>
+		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/productos">aquí</NavLink></p>
+
 	 </div>)}
 	 
 	 </div>

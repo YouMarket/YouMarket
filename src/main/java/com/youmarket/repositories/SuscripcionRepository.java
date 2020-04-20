@@ -12,4 +12,7 @@ public interface SuscripcionRepository  extends JpaRepository<Suscripcion, Integ
 	
 	@Query("select sus from Suscripcion sus where sus.dietista = TRUE")
 	public List<Suscripcion> getSuscripcionesDietista();
+
+	@Query("select sus from Suscripcion sus where sus.precio = ?1")
+	public List<Suscripcion> findSuscripcionByPrecio(Double precio);
 }

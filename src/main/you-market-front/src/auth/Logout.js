@@ -1,8 +1,4 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
-import style from './styles.css';
-import Logo from '../logo.png';
-import Header from '../Header';
-import { Formik } from 'formik';
+import React from 'react';
 import {
 	  withRouter
 	} from 'react-router-dom';
@@ -16,6 +12,10 @@ class Logout extends React.Component{
 
 		handleRedirect = () => {
 		    localStorage.removeItem('auth'); 
+		    localStorage.removeItem('dietasCheck'); 
+		    localStorage.removeItem('enviosD');
+		    localStorage.removeItem('cestasCheck'); 
+		    localStorage.removeItem('carrolleno'); 
 			this.props.history.push('/login');
 	    }
 			

@@ -1,14 +1,14 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React,  { useCallback, useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
-import style from './styles.css';
+import './styles.css';
 import Cesta from '../Cesta';
+import noCestas from './noCestas.png';
 import Header from '../Header';
 
 function Cestas() {
 let history = useHistory();
 const [cestas, setCestas] = useState([]);
-const [total, setTotal] = useState(0);
 
 	if(localStorage.getItem('auth')==null){
 		history.push('/login');
@@ -26,20 +26,30 @@ const [total, setTotal] = useState(0);
 	        
 	      });
 	  }, []);
-
-
+	
 	useEffect(() => {
 	    fetchCestas(cestas);
+	    fetch('/usuario/cestasCheck' , {headers: {
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+			method:'GET'})
+		      .then(res => res.json())
+		      .then(cestasCheck1 => {
+		    	  localStorage.removeItem('cestasCheck');
+		  	      localStorage.setItem('cestasCheck', cestasCheck1);
+		        
+		      });
 	  }, []);
 	
   return(
 <div>
   <Header/>
-
+  
   <div className="nueva-cesta">
-  	<a href="/create/cesta">Nueva cesta</a>
-
-	  <div className="cestas-container">
+  	<a className="link-button" href="/create/cesta">Nueva cesta</a>
+  	{localStorage.getItem('cestasCheck') > 0 ?
+	  (<div className="cestas-container">
 	  { cestas && cestas.map((cesta) => (
 
 			    <div key={cesta.id} className="grid-cesta">
@@ -49,7 +59,7 @@ const [total, setTotal] = useState(0);
 
 	           ))}
 
-	  </div>
+	  </div>) : (<div><img className="no-cestas-img" src={noCestas} alt="No-cestas"/><p>No hay cestas</p></div>)}
 
   </div>
  </div>

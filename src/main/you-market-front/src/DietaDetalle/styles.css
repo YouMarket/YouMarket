@@ -4,6 +4,7 @@
 	width: 400px;
 	height: 400px;
 	float: left;
+	object-fit: cover;
 }
 
 .dieta-detalle-info {
@@ -28,6 +29,11 @@
 .dieta-detalle-productos {
 	position: absolute;
 	bottom: 0;
+}
+
+.dieta-detalle-recetas {
+	position: absolute;
+	bottom: -80px;
 }
 
 .dieta-detalle-info p {
