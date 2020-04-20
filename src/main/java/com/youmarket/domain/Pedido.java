@@ -9,7 +9,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -24,15 +29,25 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Pedido extends Cesta{
 
-	
+	@NotBlank
+	@SafeHtml
 	private String 	direccion;
-	
+
+	@NotBlank
+	@SafeHtml
 	private String 	poblacion;
 	
+	@Positive
+	@NotNull
 	private int 	numero;
-	
+
+	@NotBlank
+	@SafeHtml
 	private String 	provincia;
 	
+	@NotBlank
+	@SafeHtml
+	@Pattern(regexp ="\\b\\d{5}\\b")
 	private String 	cpostal;
 
 	
