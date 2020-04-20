@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -194,6 +195,21 @@ public class PedidoController {
 		}
 		if(!myMap.get("provincia4").equals("null")) {
 			pedidos.setProvincia4(myMap.get("provincia4"));
+		}
+
+		Set<String> keyset = myMap.keySet();
+
+		if(keyset.contains("cestaId1") && !myMap.get("cestaId1").equals("null")) {
+			pedidos.setCestaId1(new Integer(myMap.get("cestaId1")));
+		}
+		if(keyset.contains("cestaId2") && !myMap.get("cestaId2").equals("null")) {
+			pedidos.setCestaId2(new Integer(myMap.get("cestaId2")));
+		}
+		if(keyset.contains("cestaId3") && !myMap.get("cestaId3").equals("null")) {
+			pedidos.setCestaId3(new Integer(myMap.get("cestaId3")));
+		}
+		if(keyset.contains("cestaId4") && !myMap.get("cestaId4").equals("null")) {
+			pedidos.setCestaId4(new Integer(myMap.get("cestaId4")));
 		}
 		
 		
