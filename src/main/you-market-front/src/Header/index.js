@@ -82,6 +82,7 @@ function Header() {
 			</Link>
 		</div>
 		<div id="menuLinks">
+			<Link to="/precios" className="menuLink" onClick={closeMenu}>Precios</Link>
 			<Link to="/productos" className="menuLink" onClick={closeMenu}>Productos</Link>
 			{localStorage.getItem('dietasCheck')==1 ?
 			<Link className="menuLink" to="/dieta/list" onClick={closeMenu}>Dietas</Link> : <div></div>}
