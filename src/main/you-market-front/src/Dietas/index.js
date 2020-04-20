@@ -11,11 +11,7 @@ function Dietas() {
 	const [dietas, setDietas] = useState([]);
 
 	const fetchDietas = useCallback(() => {
-	    return  fetch('dieta/list', {headers: {
-			'Content-Type' : 'application/json',
-			'Accept' : 'application/json',
-			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-			method:'GET'})
+	    return fetch('list')
 	      .then(res => res.json())
 	      .then(dietas => {
 	        setDietas(dietas)

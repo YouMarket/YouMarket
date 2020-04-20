@@ -33,10 +33,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-   		 <dependency>
-        <groupId>io.lettuce</groupId>
-        <artifactId>lettuce-core</artifactId>
-   		</dependency>
 			<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -52,14 +48,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
-		<dependency>
-      <groupId>org.springframework.session</groupId>
-   		   <artifactId>spring-session-bom</artifactId>
-    	   <version>Corn-SR2</version>
-   		   <type>pom</type>
-    	   <scope>import</scope>
-  	  </dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -97,7 +85,7 @@
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
-			<version>0.9.0</version>
+			<version>${jjwt.version}</version>
 		</dependency>
 
 		<!-- For Java 8 Date/Time Support -->
@@ -155,7 +143,16 @@
         <installDirectory>target</installDirectory>
     </configuration>
     <executions>
-        
+        <execution>
+            <id>install node and npm</id>
+            <goals>
+                <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+                <nodeVersion>v12.16.1</nodeVersion>
+                <npmVersion>6.9.2</npmVersion>
+            </configuration>
+        </execution>
         
     </executions>
 </plugin>

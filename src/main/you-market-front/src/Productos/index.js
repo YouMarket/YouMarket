@@ -9,10 +9,9 @@ const [productos, setProductos] = useState([]);
 const [displayedProducts, setDisplayedProducts] = useState([]);
 
 	const fetchProductos = useCallback(() => {
-	    return  fetch('producto/list')
+	    return fetch('producto/list')
 	      .then(res => res.json())
 	      .then(productos => {
-
 			setProductos(productos);
 			setDisplayedProducts(productos);
 	      });

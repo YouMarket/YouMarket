@@ -11,11 +11,7 @@ function Recetas() {
 	const { id } = useParams();
 	
 	const fetchRecetas = useCallback(() => {
-		return fetch(` receta/list/${id}` , {headers: {
-			'Content-Type' : 'application/json',
-			'Accept' : 'application/json',
-			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-			method:'GET'})
+		return fetch(`../../../receta/list/${id}`)
 	      .then(res => res.json())
 	      .then(recetas => {
 			setRecetas(recetas)

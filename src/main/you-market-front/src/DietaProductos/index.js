@@ -11,11 +11,7 @@ const [productos, setProductos] = useState([]);
 	const { id } = useParams();
 
 	const fetchDietaProductos = useCallback(() => {
-	    return fetch(` producto/dieta/list/${id}`, {headers: {
-			'Content-Type' : 'application/json',
-			'Accept' : 'application/json',
-			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-			method:'GET'})
+	    return fetch(`../../../producto/dieta/list/${id}`)
 	      .then(res => res.json())
 	      .then(productos => {
 	        setProductos(productos);

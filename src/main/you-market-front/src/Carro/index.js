@@ -49,7 +49,7 @@ let history=useHistory();
 
 	useEffect(()=> {
 		fetchCarrito(carrito);
-		   fetch('usuario/cestasCheck' , {headers: {
+		  fetch('/usuario/cestasCheck' , {headers: {
 				'Content-Type' : 'application/json',
 				'Accept' : 'application/json',
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -63,7 +63,7 @@ let history=useHistory();
 	},[]);
 
 	const fetchCestas=useCallback(()=> {
-	    return  fetch('cesta/user' , {headers: {
+	    return fetch('cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -78,7 +78,7 @@ let history=useHistory();
 	
 
 	  const fetchMsg=useCallback(()=> {
-	    return  fetch('usuario/alertaPago' , {headers: {
+	    return fetch('/usuario/alertaPago' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -99,7 +99,6 @@ let history=useHistory();
 		  localStorage.setItem('carrolleno', true);
 	  }
 
-
   return(
 		<div>
 			<Header/> 
@@ -108,11 +107,9 @@ let history=useHistory();
 			<h1 className="introduction">Este es tu carrito. ¡Estás a pocos pasos de completar tu compra! 👍</h1>
 				<div className="vaciar-carrito">
 				<Formik
-
 				 onSubmit={(values, { setSubmitting })=> {
 				   setTimeout(()=> {
-					    fetch('carritoDestroy', {headers: {
-
+					   fetch('/carritoDestroy', {headers: {
 						'Content-Type' : 'application/json',
 						'Accept' : 'application/json',
 						'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -205,12 +202,10 @@ let history=useHistory();
 						return errors;
 					  }}
 	
-
 					 onSubmit={(values, { setSubmitting })=> {
 					   setTimeout(()=> {
 
-						   fetch(` carritoACesta/${values.id}`, {headers: {
-
+						   fetch(`/carritoACesta/${values.id}`, {headers: {
 							'Content-Type' : 'application/json',
 							'Accept' : 'application/json',
 							'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -271,7 +266,6 @@ let history=useHistory();
 		<h1 className="introduction introduction-empty">Vaya... parece que aún no tienes productos añadidos</h1>
 	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad} alt="Carro vacío"/></div>
 		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/productos">aquí</NavLink></p>
-
 	 </div>)}
 	 
 	 </div>

@@ -7,7 +7,7 @@ function ListaSuscripciones() {
 	const [suscripciones, setSuscripciones] = useState([]);
 		
 		const fetchSuscripciones = useCallback(() => {
-			return  fetch('suscripcion/all' , {headers: {
+			return fetch('suscripcion/all' , {headers: {
 			'Content-Type' : 'application/json',
 			'Accept' : 'application/json'},
 			method:'GET'})

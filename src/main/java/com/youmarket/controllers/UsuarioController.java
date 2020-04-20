@@ -259,7 +259,6 @@ public class UsuarioController {
 
 	@GetMapping("/getUser")
 	public Usuario getUser(@CurrentUser UserPrincipal currentUser) {
-		System.out.println(currentUser);
 		return usuarioService.findById(currentUser.getId()).get();
 	}
 

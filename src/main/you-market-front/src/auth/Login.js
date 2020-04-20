@@ -38,7 +38,7 @@ class Login extends React.Component{
    		}
 		 
 		 dietasCheck() {
-			  fetch('usuario/dietasCheck' , {headers: {
+			 fetch('/usuario/dietasCheck' , {headers: {
 					'Content-Type' : 'application/json',
 					'Accept' : 'application/json',
 					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -51,7 +51,7 @@ class Login extends React.Component{
 		 }
 		 
 		 cestasCheck() {
-			  fetch('usuario/cestasCheck' , {headers: {
+			 fetch('/usuario/cestasCheck' , {headers: {
 					'Content-Type' : 'application/json',
 					'Accept' : 'application/json',
 					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -64,7 +64,7 @@ class Login extends React.Component{
 		 }
 		 
 		 enviosCheck() {
-			  fetch('usuario/envios', {
+			 fetch('/usuario/envios', {
 					headers:{
 					  'Content-Type' : 'application/json',
 					  'Accept' : 'application/json',
@@ -94,7 +94,7 @@ class Login extends React.Component{
 
 		      onSubmit={(values, { setSubmitting }) => {
 		        setTimeout(() => {
-		        	 fetch('usuario/signIn', {
+		        	fetch('../usuario/signIn', {
 		        			headers: {
 		        				"Content-Type": "application/json"
 		        			},

@@ -21,7 +21,7 @@ function DatosUsuario() {
 	const [meses, setMeses] = useState([]);
 
 	const fetchUsuario = useCallback(() => {
-		return  fetch('usuario/getUser' , {headers: {
+		return fetch('usuario/getUser' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -33,7 +33,7 @@ function DatosUsuario() {
 		}, []);
 
 	const fetchSuscripcion = useCallback(() => {
-		return  fetch('usuario/getSuscripcion' , {headers: {
+		return fetch('usuario/getSuscripcion' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -45,7 +45,7 @@ function DatosUsuario() {
 		}, []);
 
 	function deleteUser() {
-		 fetch('usuario/eliminarUsuario', {
+		fetch('/usuario/eliminarUsuario', {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ function DatosUsuario() {
 	}
 
 	const fetchDireccion = useCallback(() => {
-		return  fetch('direccion/principal' , {headers: {
+		return fetch('direccion/principal' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -69,7 +69,7 @@ function DatosUsuario() {
 		}, []);
 
 	const fetchPagoSus = useCallback(() => {
-		return  fetch('suscripcion/pagada' , {headers: {
+		return fetch('suscripcion/pagada' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -83,7 +83,7 @@ function DatosUsuario() {
 
 
 	const fetchUltimaSuscripcion = useCallback(() => {
-		return  fetch('factura/lastSuscripcion' , {headers: {
+		return fetch('factura/lastSuscripcion' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -128,7 +128,7 @@ function DatosUsuario() {
 						currency="EUR"
 						onSuccess={() => {
 						setTimeout(() => {
-							 fetch('factura/createSuscripcion', {
+							fetch('/factura/createSuscripcion', {
 								headers: {
 									'Content-Type' : 'application/json',
 									'Accept' : 'application/json',
@@ -148,9 +148,7 @@ function DatosUsuario() {
 				/>
 
 				</div>
-
 			}
-
 			</Card>
 			<div className="a-cambio-perfil">
 			{meses != 1 &&
