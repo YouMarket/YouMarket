@@ -5,7 +5,6 @@ import {useParams} from "react-router-dom";
 import './styles.css';
 import Cesta from '../Cesta';
 import Header from '../Header';
-import { Formik } from 'formik';
 
 import { useHistory } from "react-router-dom";
 
@@ -100,7 +99,7 @@ function ShowCesta() {
 		<div>
 			<Header />
 
-			<div className="cesta-container-show">
+			<div className="cesta-container-show container">
 
 				<Cesta nombre={cesta.nombre} id={cesta.id} total="" />
 				<h2 className="show-cesta-h">Productos</h2>
@@ -117,8 +116,8 @@ function ShowCesta() {
 				<p className="cesta-total">Total: {total}€</p>
 
 				<div className="grid2-carrito-cesta">
-					<button onClick={() => {storeAsCarrito()}}  className="submit-cesta-carrito">
-						Añadir
+					<button onClick={() => {storeAsCarrito()}}  className="submit-cesta-carrito button-finish">
+						Añadir estos productos al carrito
             		</button>
 				</div>
 			</div>
