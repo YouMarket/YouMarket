@@ -49,7 +49,7 @@ let history=useHistory();
 
 	useEffect(()=> {
 		fetchCarrito(carrito);
-		  fetch('/usuario/cestasCheck' , {headers: {
+		  fetch('https://youmarket-entrega4.herokuapp.com/usuario/cestasCheck' , {headers: {
 				'Content-Type' : 'application/json',
 				'Accept' : 'application/json',
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -63,7 +63,7 @@ let history=useHistory();
 	},[]);
 
 	const fetchCestas=useCallback(()=> {
-	    return fetch('cesta/user' , {headers: {
+	    return fetch('https://youmarket-entrega4.herokuapp.com/cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -78,7 +78,7 @@ let history=useHistory();
 	
 
 	  const fetchMsg=useCallback(()=> {
-	    return fetch('/usuario/alertaPago' , {headers: {
+	    return fetch('https://youmarket-entrega4.herokuapp.com/usuario/alertaPago' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -111,7 +111,7 @@ let history=useHistory();
 
 				 onSubmit={(values, { setSubmitting })=> {
 				   setTimeout(()=> {
-					   fetch('/carritoDestroy', {headers: {
+					   fetch('https://youmarket-entrega4.herokuapp.com/carritoDestroy', {headers: {
 
 						'Content-Type' : 'application/json',
 						'Accept' : 'application/json',
@@ -209,7 +209,7 @@ let history=useHistory();
 					 onSubmit={(values, { setSubmitting })=> {
 					   setTimeout(()=> {
 
-						   fetch(`/carritoACesta/${values.id}`, {headers: {
+						   fetch(`https://youmarket-entrega4.herokuapp.com/carritoACesta/${values.id}`, {headers: {
 
 							'Content-Type' : 'application/json',
 							'Accept' : 'application/json',
