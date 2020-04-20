@@ -40,12 +40,6 @@ public class CestaProductoController {
 		Cesta res = cestaService.save(c);
 		return ResponseEntity.created(new URI ("/cesta/)" + res.getId())).body(res);
 	}
-
-	@PutMapping("/cesta/{id}")
-	public ResponseEntity<Cesta> updateCesta(@Valid @RequestBody Cesta c, List<Producto> productos){
-		Cesta res = cestaService.saveProductos(c, productos);
-		return ResponseEntity.ok().body(res);
-	}
 	
 	@GetMapping("/productos/{id}")
     public ResponseEntity<Object> cestaProductoPorId(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal currentUser) {

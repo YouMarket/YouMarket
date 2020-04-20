@@ -13,6 +13,7 @@ function updatePrecioFinal(cantidad, precio){
 }
 
 function limpiaStorage(){
+	localStorage.removeItem('carrolleno');
 	sessionStorage.clear();
 
 }
@@ -48,6 +49,17 @@ let history=useHistory();
 
 	useEffect(()=> {
 		fetchCarrito(carrito);
+		  fetch('/usuario/cestasCheck' , {headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+				method:'GET'})
+			      .then(res => res.json())
+			      .then(cestasCheck1 => {
+			    	  localStorage.removeItem('cestasCheck');
+			  	      localStorage.setItem('cestasCheck', cestasCheck1);
+			        
+			      });
 	},[]);
 
 	const fetchCestas=useCallback(()=> {
@@ -90,7 +102,7 @@ let history=useHistory();
   return(
 		<div>
 			<Header/> 
-			{carrito.length > 0 ? <div>
+			{localStorage.getItem('carrolleno') ? <div>
 			<div className="container clearfix">
 			<h1 className="introduction">Este es tu carrito. ¡Estás a pocos pasos de completar tu compra! 👍</h1>
 				<div className="vaciar-carrito">
@@ -158,7 +170,7 @@ let history=useHistory();
 									<p>
 										{mensajeAlerta}
 									</p>
-									<a href="/datos-perfil">
+									<a href="/datos-perfil" className="enlace-perfil">
 										<button className="button-finish">Ir a mi perfil</button>
 									</a>
 									<br/>
@@ -172,13 +184,14 @@ let history=useHistory();
 						</a>)}
 				 </div>
 	
-					 { localStorage.getItem('auth') ? (
+					 { localStorage.getItem('cestasCheck')>0 ? (
 					<div className="guardar-carrito-a-cesta">
 					<h2>¿Quieres guardar tu carrito como cesta?</h2>
-					<p>Elige la cesta en la que quieres guardar el carrito:</p>
-					<p>(Si guardas este carrito dentro de una cesta que hayas creado,
+					<p>Elige la cesta en la que quieres guardar el carrito.</p>
+					<p>Si guardas este carrito dentro de una cesta que hayas creado,
 						  podrás volver a cargar esta cesta como carrito desde la vista
-						  de detalle de la cesta que quieras cargar cuando quieras)</p>
+						  de detalle de la cesta que quieras cargar cuando quieras</p>
+					<p>Si no tienes ningua cesta puedes crearla <a href="/create/cesta" className="link-button">aquí</a></p>
 					<Formik
 					 initialValues={{id: ''}}
 					 validate={values=> {

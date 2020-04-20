@@ -129,7 +129,6 @@ public class CarritoSessionController {
 			cp.setCantidad(carrito.get(prod));
 			cp.setCesta(c);
 			cp.setId(prod, c);
-			System.out.println(cp.getCesta().getId());
 			this.cpService.save(cp);
 			
 		}
@@ -156,7 +155,6 @@ public class CarritoSessionController {
 	@GetMapping("/precioTotalCarrito")
 	public Double precioTotal(@RequestBody Map<String, Object> putamierda){
 //		Double precio = 0.0;
-//		System.out.println(prods);
 //		@SuppressWarnings("unchecked")
 //		Map<Producto, Integer> carrito = (Map<Producto, Integer>)prods;
 //		List<Producto> productos = new ArrayList<>(carrito.keySet());

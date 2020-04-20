@@ -88,6 +88,9 @@ class RegistroUsuario extends React.Component{
 							}
 							if (!values.usuario.telefono || !/[0-9]{9}/.test(values.usuario.telefono)) {
 								errors.telefono='El teléfono es obligatorio';
+								if(values.usuario.telefono.toString().length!==9){
+									errors.telefono='Tiene que seguir el formato español sin incluir el prefijo (+34)';
+								}
 							}else if(values.usuario.telefono.toString().length!==9){
 								errors.telefono='Tiene que seguir el formato español sin incluir el prefijo (+34)';
 							}
@@ -177,9 +180,9 @@ class RegistroUsuario extends React.Component{
 								<small className="error">{this.state.errors}</small>
 								<div className="row">
 									<span className="span">
-										<label htmlFor="nomIn" className="label">Nombre: </label>
+										<label htmlFor="nomIn" className="registro-label">Nombre: </label>
 										<input
-											className="input"
+											className="registro-input"
 											type="text"
 											name="usuario.nombre"
 											id="nombreIn"
@@ -192,9 +195,9 @@ class RegistroUsuario extends React.Component{
 								</div>
 								<div className="row">
 									<span  className="span"> 
-										<label className="label" htmlFor="apellidosIn">Apellidos: </label>
+										<label className="registro-label" htmlFor="apellidosIn">Apellidos: </label>
 										<input
-											className="input"
+											className="registro-input"
 											type="text"
 											name="usuario.apellidos"
 											id="apellidosIn"
@@ -208,9 +211,9 @@ class RegistroUsuario extends React.Component{
 								</div>
 								<div className="row">
 									<span  className="span">
-										<label className="label" htmlFor="dniIn">DNI: </label>
+										<label className="registro-label" htmlFor="dniIn">DNI: </label>
 										<input
-											className="input"
+											className="registro-input"
 											type="text"
 											name="usuario.dni"
 											id="dniIn"
@@ -223,9 +226,9 @@ class RegistroUsuario extends React.Component{
 								</div>
 								<div className="row">
 									<span  className="span">
-										<label className="label" htmlFor="nacimientoIn">Fecha de nacimiento</label>
+										<label className="registro-label" htmlFor="nacimientoIn">Fecha de nacimiento</label>
 										<input
-											className="input"
+											className="registro-input"
 											type="date"
 											name="usuario.fechaNacimiento"
 											id="nacimientoIn"
@@ -238,11 +241,11 @@ class RegistroUsuario extends React.Component{
 								</div>
 								<div className="row">
 									<span  className="span">
-										<label className="label" htmlFor="telefono" >Teléfono: </label>
+										<label className="registro-label" htmlFor="telefono" >Teléfono: </label>
 										
 										<input
-											className="input"
-											type="text"
+											className="registro-input"
+											type="number"
 											name="usuario.telefono"
 											id="telefono"
 											onChange={handleChange}
@@ -254,7 +257,7 @@ class RegistroUsuario extends React.Component{
 								</div>
 								<div className="row">
 									<span  className="span">
-									<label className="label" >Tipo de suscripción: </label>
+									<label className="registro-label" >Tipo de suscripción: </label>
 										<ListaSuscripciones>
 					
 										</ListaSuscripciones>
@@ -264,9 +267,9 @@ class RegistroUsuario extends React.Component{
 						
 								<div className="row">
 									<span  className="span">
-										<label className="label" htmlFor="email" >Email </label>
+										<label className="registro-label" htmlFor="email" >Email </label>
 										<input
-											className="input"
+											className="registro-input"
 											type="text"
 											name="usuario.email"
 											id="email"
@@ -280,9 +283,9 @@ class RegistroUsuario extends React.Component{
 								</div>
 								<div className="row">
 									<span  className="span">
-										<label className="label" htmlFor="passwordIn">Contraseña: </label>
+										<label className="registro-label" htmlFor="passwordIn">Contraseña: </label>
 										<input
-											className="input"
+											className="registro-input"
 											type="password"
 											name="usuario.password"
 											id="passwordIn"
@@ -300,9 +303,9 @@ class RegistroUsuario extends React.Component{
 							<Card title="Dirección del usuario" subTitle="Todos los datos son obligatorios" style={{margin: 20}}> 
 								<div className="row">
 									<span  className="span">
-										<label className="label" htmlFor="direccion">Dirección completa:</label>
+										<label className="registro-label" htmlFor="direccion">Dirección completa:</label>
 										<input
-											className="input"
+											className="registro-input"
 											type="text"
 											name="dir.direccion"
 											id="direccion"
@@ -315,9 +318,9 @@ class RegistroUsuario extends React.Component{
 								</div>
 								<div className="row">
 									<span  className="span">
-										<label className="label" htmlFor="poblacion" >Municipio: </label>
+										<label className="registro-label" htmlFor="poblacion" >Municipio: </label>
 										<input
-											className="input"
+											className="registro-input"
 											type="text"
 											name="dir.poblacion"
 											id="poblacion"
@@ -330,9 +333,9 @@ class RegistroUsuario extends React.Component{
 								</div>
 								<div className="row">
 									<span  className="span">
-										<label className="label" htmlFor="provincia"  >Provincia </label>
+										<label className="registro-label" htmlFor="provincia"  >Provincia </label>
 										<input
-											className="input"
+											className="registro-input"
 											type="text"
 											name="dir.provincia"
 											id="provincia"
@@ -345,9 +348,9 @@ class RegistroUsuario extends React.Component{
 								</div>
 								<div className="row">
 									<span  className="span">
-										<label className="label" htmlFor="cpostal" >Código postal </label>
+										<label className="registro-label" htmlFor="cpostal" >Código postal </label>
 										<input
-											className="input"
+											className="registro-input"
 											type="text"
 											name="dir.cpostal"
 											id="cpostal"
@@ -361,7 +364,7 @@ class RegistroUsuario extends React.Component{
 							</Card>
 
 							
-							<div className="row">
+							<div className="row terms-div">
 							
 							
 							<input

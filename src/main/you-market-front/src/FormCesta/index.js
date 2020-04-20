@@ -26,9 +26,10 @@ class formCesta extends React.Component{
 				method:'GET'})
 			      .then(res => res.json())
 			      .then(cestasCheck1 => {
+			    	  localStorage.removeItem('cestasCheck');
 			    	  localStorage.setItem('cestasCheck', cestasCheck1);
 			        
-			      });
+			      }).then(() => {this.handleRedirect()});
 	 }
 	
 	render(){ 
@@ -56,9 +57,7 @@ class formCesta extends React.Component{
         		this.cestasCheck();
 
 
-        	}).then(() =>
-        	{this.handleRedirect();}
-            )
+        	})
 
 
         }, 400);

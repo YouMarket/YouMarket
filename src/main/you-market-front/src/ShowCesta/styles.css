@@ -12,6 +12,8 @@
 
 .cesta-editar{
 	text-align:center;
+	width: 110px;
+    margin: 0 auto;
 }
 
 .cesta-imagen{
@@ -28,7 +30,21 @@
 
 .div-productos-cesta{
 	text-align:center;
+	margin: 8px 0;
 }
+
+.div-productos-cesta a {
+	text-align: center;
+	color: black;
+	text-decoration: underline;
+}
+
+.div-productos-cesta a:hover {
+	text-align: center;
+	color: rgb(148,194,76);;
+	text-decoration: underline;
+}
+
 .cesta-nombre{
 	text-align:center;
 }
@@ -41,8 +57,8 @@
 	margin: 0 0 0px 0;
 }
 
-.grid2-carrito-cesta button:focus {
-  background-color: #90EE90;
+.grid2-carrito-cesta {
+	margin: 20px auto;
 }
 
 .show-cesta-h{
@@ -51,22 +67,6 @@
 	display:block;
 	margin:auto;	
 }
-.grid2-carrito-cesta button{
-	background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  text-align: center;
-  padding: 3% 15%;
-  text-decoration: none;
-  display: block;
-  margin:auto;
-  margin-top:4%;
-  font-size: 100%;
-  cursor:pointer;
-  margin-bottom:2%;
-
-}
-
 
 .separador{
 	display:block;

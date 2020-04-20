@@ -149,3 +149,7 @@ select {
     text-align: center;
     margin-top: 50px;
 }
+
+.enlace-perfil {
+    float: right;
+}

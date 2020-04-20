@@ -55,7 +55,7 @@ function Header() {
 	return(
 		<div>
 		<div className="header-container">
-			<NavLink to="/">
+			<NavLink to="/" className="page-logo">
 				<img className="logo" src={logo} alt="Logo"/>
 			</NavLink>
 			<div className="header-links">

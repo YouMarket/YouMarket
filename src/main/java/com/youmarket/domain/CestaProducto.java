@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.validation.constraints.Min;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +30,7 @@ public class CestaProducto {
 	@JoinColumn(name = "cesta_id")
 	Cesta cesta;
 
+	@Min(1)
 	int cantidad;
 
 	public void setId(Producto producto, Cesta cesta){

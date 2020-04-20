@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.jsonwebtoken.lang.Assert;
+
 import com.youmarket.configuration.security.UserPrincipal;
 import com.youmarket.domain.Usuario;
 import com.youmarket.repositories.UsuarioRepository;
@@ -39,7 +41,9 @@ public class UsuarioService {
 	}
 
 	public Usuario save(Usuario p) {
+		Assert.isTrue(this.validarDNI(p.getDni()), "El dni no es válido");
 		return repo.save(p);
+
 	}
 
 	public void delete() {
@@ -52,4 +56,36 @@ public class UsuarioService {
 		
 		return envios;
 	}
+
+	public boolean validarDNI(String dniAComprobar){
+		char[] letraDni = {
+            'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D',  'X',  'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'
+		};  
+		String num= "";
+        int ind = 0;  
+        boolean valido = true;
+        if (!Character.isLetter(dniAComprobar.charAt(8)) || dniAComprobar.length() != 9){   
+             valido = false;  
+        }
+  
+        if (dniAComprobar.length() != 9){   
+            valido = false;
+        }  
+        for (int i=0; i<8; i++) {
+             if(!Character.isDigit(dniAComprobar.charAt(i))){
+                   valido = false;    
+             }
+             num += dniAComprobar.charAt(i);     
+        }
+        ind = Integer.parseInt(num);
+        ind %= 23;
+  
+    	if ((Character.toUpperCase(dniAComprobar.charAt(8))) != letraDni[ind]){
+             valido = false;
+		   }
+		if (valido != true){
+			valido = dniAComprobar.contains("00000000X");
+		}
+       	return valido ;
+   }
 }

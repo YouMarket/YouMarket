@@ -16,6 +16,7 @@ function DatosUsuario() {
 	const urlPDF = "http://localhost:8081/usuario/exportPDF/"+usuario.id;
 	const [direccion, setDireccion] = useState([]);
 	const [suscripcion, setSuscripcion] = useState([]);
+	const [ultimaSuscripcion, setUltimaSuscripcion] = useState([]);
 	const [pagada, setPagada] = useState([]);
 	const [meses, setMeses] = useState([]);
 
@@ -80,11 +81,24 @@ function DatosUsuario() {
 			});
 		}, []);
 
+
+	const fetchUltimaSuscripcion = useCallback(() => {
+		return fetch('factura/lastSuscripcion' , {headers: {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json',
+		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+		method:'GET'})
+			.then(res => res.json())
+			.then(response => {
+				setUltimaSuscripcion(response)
+			});
+		}, []);
 		useEffect(() => {
 			fetchUsuario(usuario);
 			fetchDireccion(direccion);
 			fetchSuscripcion(suscripcion);
 			fetchPagoSus();
+			fetchUltimaSuscripcion(ultimaSuscripcion);
 			}, []);
 
 
@@ -99,10 +113,12 @@ function DatosUsuario() {
 					<p>Nombre: {usuario.nombre}</p>
 					<p>Apellidos: {usuario.apellidos}</p>
 					<p>DNI: {usuario.dni} </p>
-					<p>Fecha de nacimiento: {usuario.fechaNacimiento} </p>
+					<p>Fecha de nacimiento: {new Date(usuario.fechaNacimiento).toLocaleDateString()} </p>
 					<p>Zona de reparto: {usuario.cpostal}</p>
 					<p>Suscripción: {suscripcion.nombre} </p>
 					<p>Precio: {suscripcion.precio} €</p>
+					<p>Pedidos restantes: {usuario.pedidosRestantes}</p>
+  					{ultimaSuscripcion.fechaFactura ? <p>Último pago realizado de la suscripción: {new Date(ultimaSuscripcion.fechaFactura).toLocaleDateString()}</p>: <p></p>}
 				</div>
 
 				{!pagada && <div>
@@ -119,10 +135,9 @@ function DatosUsuario() {
 									'Authorization' : 'Bearer ' + localStorage.getItem('auth')
 								},
 								method:'POST'})
-							.then(function(response) {})
-							.then(() => {history.push('/datos-perfil')})
-
-
+							.then(function(response) {
+								history.push('/datos-perfil')
+							})
 						}, 400);
 					}}
 
