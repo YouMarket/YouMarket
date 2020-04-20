@@ -9,9 +9,10 @@ function Recetas() {
 	const [recetas, setRecetas] = useState([]);
 
 	const { id } = useParams();
+	console.log(id);
 	
 	const fetchRecetas = useCallback(() => {
-	    return fetch(`receta/list/${id}`)
+		return fetch(`../../../receta/list/${id}`)
 	      .then(res => res.json())
 	      .then(recetas => {
 			setRecetas(recetas)

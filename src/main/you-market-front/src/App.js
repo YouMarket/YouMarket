@@ -8,7 +8,6 @@ import {
 import Productos from './Productos';
 import Dietas from './Dietas';
 import Perfil from './Perfil';
-import RecetasListado from './Recetas';
 import ProductoDetalle from './ProductoDetalle';
 import RegistroUsuario from './Registro';
 import PedidosUsuario from './Perfil/PedidosUsuario';
@@ -70,9 +69,6 @@ function App() {
     			<Route path="/show/dieta/:id">
 					<DietaDetalle />
 				</Route>
-    			<Route path="/recetas">
-    				<RecetasListado/>
-    			</Route>
     			<Route path="/registro">
 					<RegistroUsuario/>
 				</Route>
@@ -133,7 +129,7 @@ function App() {
 				<Route path="/alertabrecha">
     				<AlertaBrecha />
 				</Route>
-				<Route path="/recetas/list">
+				<Route path="/recetas/list/:id">
 					<Recetas />
 				</Route>
 				<Route path="/recetas/:id">
