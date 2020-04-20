@@ -114,3 +114,13 @@
 .pedido-margin {
     margin: 20px 0;
 }
+
+#enlace1 a,
+#enlace2 a,
+#enlace3 a {
+    height: 30px;
+}
+
+.botonCopiar:hover {
+    color: white;
+}

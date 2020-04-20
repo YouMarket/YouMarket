@@ -13,6 +13,7 @@ function updatePrecioFinal(cantidad, precio){
 }
 
 function limpiaStorage(){
+	localStorage.removeItem('carrolleno');
 	sessionStorage.clear();
 
 }
@@ -48,6 +49,17 @@ let history=useHistory();
 
 	useEffect(()=> {
 		fetchCarrito(carrito);
+		  fetch('/usuario/cestasCheck' , {headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+				method:'GET'})
+			      .then(res => res.json())
+			      .then(cestasCheck1 => {
+			    	  localStorage.removeItem('cestasCheck');
+			  	      localStorage.setItem('cestasCheck', cestasCheck1);
+			        
+			      });
 	},[]);
 
 	const fetchCestas=useCallback(()=> {
@@ -90,7 +102,7 @@ let history=useHistory();
   return(
 		<div>
 			<Header/> 
-			{carrito.length > 0 ? <div>
+			{localStorage.getItem('carrolleno') ? <div>
 			<div className="container clearfix">
 			<h1 className="introduction">Este es tu carrito. ¡Estás a pocos pasos de completar tu compra! 👍</h1>
 				<div className="vaciar-carrito">
@@ -172,7 +184,7 @@ let history=useHistory();
 						</a>)}
 				 </div>
 	
-					 { localStorage.getItem('auth') ? (
+					 { localStorage.getItem('cestasCheck')>0 ? (
 					<div className="guardar-carrito-a-cesta">
 					<h2>¿Quieres guardar tu carrito como cesta?</h2>
 					<p>Elige la cesta en la que quieres guardar el carrito:</p>

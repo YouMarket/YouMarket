@@ -62,6 +62,9 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 
 	function sendToBack(id, cantidad, nombre, precio, urlImagen, supermercado, unidad) {
 		storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad)
+		if(cantidad!=0){
+			localStorage.setItem('carrolleno',true);
+		}
 
 
 		setCantidad(0);
