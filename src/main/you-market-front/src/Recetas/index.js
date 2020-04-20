@@ -29,14 +29,14 @@ function Recetas() {
 		history.push('/login');
 	}
     
-	if(localStorage.getItem('dietasCheck')===0){
+	if(localStorage.getItem('dietasCheck')==0){
 		history.push('/404');
 	}
 
   return(
 	<div>	  
 	  <Header/>
-	  {localStorage.getItem('dietasCheck')===1 ?
+	  {localStorage.getItem('dietasCheck')==1 ?
 	  		(<div>
 			<h2 className="container">¡Aquí tienes las recetas de la dieta que has seleccionado!</h2>
 			<div className="recetas-container container">
