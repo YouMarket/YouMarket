@@ -50,7 +50,7 @@ public class Usuario {
 
 	@NotBlank
 	@SafeHtml
-	@Pattern(regexp = "/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/")
+	@Pattern(regexp = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")
 	@Column(name="dni", length=9)
 	private String dni;
 
