@@ -50,10 +50,9 @@ public class SuscripcionController {
 		if(sus.getId() != user.getSuscripcion().getId()) {
 			Suscripcion nueva = suscripcionService.findById(sus.getId());
 			user.setSuscripcion(nueva);
-			usuarioService.save(user);
-			Date fechaMes = new Date();
-			fechaMes.setMonth(fechaMes.getMonth()+1);
-			facturaService.createAndSaveFactura(user, null, nueva.getPrecio(), fechaMes);
+			user = usuarioService.save(user);
+			
+			facturaService.createAndSaveFactura(user, null, nueva.getPrecio(), new Date());
 			
 			respuesta.setSuccess(true);
 			respuesta.setMessage("Suscripción actualizada");
