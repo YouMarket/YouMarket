@@ -32,7 +32,7 @@ export default class RegistroDireccion extends React.Component{
 						password: ''}}
 						onSubmit={(values, { setSubmitting }) => {
 							setTimeout(() => {
-								fetch('../usuario/signUp', {
+								fetch('https://youmarket-entrega4.herokuapp.com/usuario/signUp', {
 										headers: {
 											"Content-Type": "application/json"
 										},

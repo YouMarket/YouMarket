@@ -3,7 +3,7 @@ package com.youmarket.controllers;
 
 import java.util.List;
 
-
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class ProductoController {
 	@RequestMapping("/list")
 	public List<Producto> listProductos(Model model){
 		List<Producto> productos=productoService.listaProductos();
-		
+
 		return productos;
 	}
 	
