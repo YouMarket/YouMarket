@@ -57,7 +57,7 @@ if (localStorage.getItem('auth')==null){
             <Header />
             <Navegacion />
             
-            <Formik
+            <Formik validateOnBlur={false} validateOnChange={false}
 						initialValues={{  
 							usuario: {
 								nombre: `${usuario.nombre}`,
@@ -75,7 +75,7 @@ if (localStorage.getItem('auth')==null){
             validate={values => {
 				const errors={};
 				if (!values.usuario.nombre) {
-					errors.usuario='El usuario es obligatorio';
+					errors.nombre='El usuario es obligatorio';
 				}else if(values.usuario.nombre.includes("1")||
 						values.usuario.nombre.includes("2")||
 						values.usuario.nombre.includes("3")||
@@ -85,7 +85,7 @@ if (localStorage.getItem('auth')==null){
 						values.usuario.nombre.includes("7")||
 						values.usuario.nombre.includes("8")||
 						values.usuario.nombre.includes("9")){
-					errors.usuario='No se permiten números';
+					errors.nombre='No se permiten números';
 				}
 				if (!values.usuario.apellidos) {
 					errors.apellidos='El apellido es obligatorio';
@@ -156,7 +156,6 @@ if (localStorage.getItem('auth')==null){
 								}).then(response => response.json())
 										.then(data => {
 									if (data.success) {
-										alert(JSON.stringify(values, null, 2));
 										history.push('/datos-perfil');
 									  }
 								  });
@@ -306,9 +305,9 @@ if (localStorage.getItem('auth')==null){
 							</div>
 						</Card>
 							
-                                <button type="submit" className="boton" disabled={isSubmitting}>
+                              <a href="#"><button type="submit" className="boton" disabled={isSubmitting}>
                                     Enviar
-                                </button>
+                                </button></a>
 							
 						    </form>
 						)}

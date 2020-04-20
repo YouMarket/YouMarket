@@ -50,6 +50,9 @@ function ProductoDetalle() {
 	}
 
 	function storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad){
+		if(cantidad!=0){
+			localStorage.setItem('carrolleno', true);
+		}
         var prodSession = sessionStorage.getItem('prod_'+id);
         if(!prodSession){
             var jsonProd = {
