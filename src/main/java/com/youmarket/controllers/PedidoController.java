@@ -541,7 +541,6 @@ public class PedidoController {
 		
 		res = res + precioCarros * cuentaCarros;
 		res = PedidoController.redondearDecimales(res, 2);
-		System.out.println(res);
 		return ResponseEntity.ok(res);
     }
 
