@@ -18,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Range;
@@ -50,11 +51,12 @@ public class Usuario {
 	@NotBlank
 	@SafeHtml
 	@Pattern(regexp = "/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/")
-	@Column(name="dni", length=20)
+	@Column(name="dni", length=9)
 	private String dni;
 
 	@Column(name="fecha_nacimiento")
 	@Temporal(TemporalType.DATE)
+	@Past
 	private Date fechaNacimiento;
 	
 	@ManyToOne(optional= true)
