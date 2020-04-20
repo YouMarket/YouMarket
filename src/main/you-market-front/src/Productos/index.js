@@ -14,7 +14,6 @@ const [displayedProducts, setDisplayedProducts] = useState([]);
 	      .then(productos => {
 			setProductos(productos);
 			setDisplayedProducts(productos);
-	        console.log(productos);
 	      });
 	  }, []);
 	
@@ -28,7 +27,6 @@ const [displayedProducts, setDisplayedProducts] = useState([]);
 			var serchVal = el.nombre.toLowerCase();
 			return serchVal.indexOf(searchQuery)!==-1;
 		});
-		console.log(displayedProducts);
 		setDisplayedProducts(displayedProducts)
 	};
 	

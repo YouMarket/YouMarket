@@ -115,8 +115,6 @@ export function PedidoForm() {
 				prods.push(JSON.parse(ele))
 			}
 		});
-		console.log('Productos del carrito');
-		console.log(prods);
 		return prods;
 	}
 
@@ -141,11 +139,6 @@ export function PedidoForm() {
 
 
 		precioTotal = totalDeCestas(values);
-		console.log('PRECIO TOTAL');
-		console.log(precioTotalCestas)
-		console.log(precioTotal);
-		console.log('AQUI HIJOS DE PUTA');
-		console.log(values.cestaId1);
 		return precioTotal;
 	}
 
@@ -453,7 +446,6 @@ function pagar() {
 
 
         if(pedido2copiado === true){
-        	console.log(pedido2copiado)
         	values.direccion2 = values.direccion1;
         	values.poblacion2 = values.poblacion1;
         	values.cpostal2 = 	values.cpostal1;

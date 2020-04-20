@@ -7,7 +7,6 @@ import Header from '../Header';
 class DietaForm extends React.Component{
 		
 	handleRedirect = () => {
-		console.log(this.props.history);
 		this.props.history.push('../../dieta/show/id');
 	}
 	
@@ -48,8 +47,6 @@ class DietaForm extends React.Component{
         			    method:'POST'},
         			    body:JSON.stringify(values, null, 2)
         	,
-        	}).then(function(response) {
-        	    return console.log(response.json());
         	}).then(() => 
        	 		{
        	 			this.handleRedirect();

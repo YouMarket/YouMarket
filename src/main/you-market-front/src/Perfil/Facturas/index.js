@@ -18,7 +18,6 @@ const [facturasSuscripcion, setFacturasSuscripcion] = useState([]);
 	      .then(res => res.json())
 	      .then(facturasPedidos => {
 			setFacturasPedidos(facturasPedidos);
-	        console.log(facturasPedidos);
 	      });
       }, []);
       
@@ -31,7 +30,6 @@ const [facturasSuscripcion, setFacturasSuscripcion] = useState([]);
 	      .then(res => res.json())
 	      .then(facturasSuscripcion => {
 			setFacturasSuscripcion(facturasSuscripcion);
-	        console.log(facturasSuscripcion);
 	      });
 	  }, []);
 	
