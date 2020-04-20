@@ -3,7 +3,6 @@ package com.youmarket.controllers;
 import java.io.ByteArrayInputStream;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -88,7 +87,6 @@ public class FacturaController {
 	@RequestMapping(value = "/pdf", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> descargaPDF(){
-		
 		ByteArrayInputStream bis = PDFUtil.suscripcionPDFGenerator(null);
 
         HttpHeaders headers = new HttpHeaders();
@@ -103,20 +101,9 @@ public class FacturaController {
 	
 	@RequestMapping(value = "/generateFactura/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
-  	public ResponseEntity<InputStreamResource> descargaPDF(@PathVariable Integer id, @CurrentUser UserPrincipal curr){
+  	public ResponseEntity<InputStreamResource> descargaPDF(@PathVariable Integer id){
     	Factura factura = facturaService.findById(id);
-    	System.out.println(id);
-    	System.out.println(curr);
-    	Optional<Usuario> user=this.usuarioService.findById(curr.getId());
-		Usuario usuario1=null;
-		Boolean hacked=false;
-		if(user.isPresent()) {
-			usuario1=user.get();
-		}
-		if(!this.facturaService.findByUser(usuario1).contains(this.facturaService.findById(factura.getId()))) {
-			hacked=true;
-		}
-    	ByteArrayInputStream bis = null;
+		ByteArrayInputStream bis = null;
 		
 		if(factura.getPedido()!= null) {
 			List<CestaProducto> productos = cpService.findProdsByCesta(factura.getPedido());
@@ -128,9 +115,7 @@ public class FacturaController {
         HttpHeaders headers = new HttpHeaders();
         String filename = factura.getPedido()!= null ? "factura_pedido": "factura_suscripcion";
         headers.add("Content-Disposition", "attachment; filename="+filename+".pdf");
-        if(hacked==true) {
-        	bis=null;
-        }
+
         return ResponseEntity
                 .ok()
                 .headers(headers)
