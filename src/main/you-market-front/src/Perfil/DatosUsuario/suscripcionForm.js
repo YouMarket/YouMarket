@@ -42,7 +42,6 @@ function SuscripcionForm() {
 							}}
 							onSubmit={(values, { setSubmitting }) => {
 								values.suscripcion.id = document.getElementById('selectSuscripciones').value
-								console.log(values.suscripcion.id)
 								setTimeout(() => {
 									fetch('usuario/updateSuscripcion', {
 											headers: {

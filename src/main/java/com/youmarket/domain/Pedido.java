@@ -37,7 +37,6 @@ public class Pedido extends Cesta{
 	@SafeHtml
 	private String 	poblacion;
 	
-	@Positive
 	@NotNull
 	private int 	numero;
 
