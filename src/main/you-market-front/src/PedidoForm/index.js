@@ -1374,7 +1374,7 @@ function pagar() {
 	             			},
 	             			method:'POST',
 	             			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})
-	             	}).then(console.log(JSON.stringify({carrito: construyeCarrito(), pedidoForm:values}))).then(() =>
+	             	}).then(sessionStorage.clear()).then(() =>
 	             	 {
 	             		 handleSubmit();
 	             	 }).then(() =>
