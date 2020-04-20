@@ -48,7 +48,7 @@ function ShowCesta() {
 				productoCesta.forEach(prod => {
 					tot = tot + ( prod.cantidad * prod.producto.precioIva)
 				})
-				setTotal(tot)
+				setTotal(tot.toFixed(2))
 			});
 	}, []);
 
