@@ -57,23 +57,24 @@ class Login extends React.Component{
 					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 					method:'GET'})
 				      .then(res => res.json())
-				      .then(dietasCheck => {
-				    	  localStorage.setItem('dietasCheck', dietasCheck);
+				      .then(cestasCheck1 => {
+				    	  localStorage.setItem('cestasCheck', cestasCheck1);
 				        
 				      });
 		 }
 		 
 		 enviosCheck() {
-			 fetch('/usuario/dietasCheck' , {headers: {
-					'Content-Type' : 'application/json',
-					'Accept' : 'application/json',
-					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-					method:'GET'})
-				      .then(res => res.json())
-				      .then(dietasCheck => {
-				    	  localStorage.setItem('dietasCheck', dietasCheck);
-				        
-				      });
+			 fetch('/usuario/envios', {
+					headers:{
+					  'Content-Type' : 'application/json',
+					  'Accept' : 'application/json',
+					  'Authorization' : 'Bearer ' + localStorage.getItem('auth')
+					  		},
+					  method:'GET'})
+					       .then(res => res.json())
+					       .then(envios1 => {
+					    	   localStorage.setItem('enviosD',envios1);
+					       });
 		 }
 
 		render(){
@@ -107,6 +108,8 @@ class Login extends React.Component{
 		                    this.onChangeStatus("Logged");
 		                    localStorage.setItem('auth', data.accessToken);
 		                    this.dietasCheck();
+		                    this.cestasCheck();
+		                    this.enviosCheck();
 		                    this.handleRedirect();
 		                  }
 		                else{

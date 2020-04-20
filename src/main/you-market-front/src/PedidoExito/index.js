@@ -8,16 +8,14 @@ import {
 
 			
 class PedidoExito extends React.Component{
-	
-		render(){
-			if(!localStorage.getItem('pedido')){
+	 componentWillMount() {
+		 if(!localStorage.getItem('pedido')){
 				this.props.history.push('/');	
+			}else{
+				localStorage.removeItem('pedido');
 			}
-			
-			function handleRedirect(){
-				 this.props.history.push('/');
-			}
-			
+		  }
+		render(){
 			return(
 
 
