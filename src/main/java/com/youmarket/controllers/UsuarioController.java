@@ -314,12 +314,15 @@ public class UsuarioController {
 	@PostMapping("/updateSuscripcion")
 	public ResponseEntity<ApiResponse> updateSuscripcion(@RequestBody Integer sus, @CurrentUser UserPrincipal curr) {
 		ApiResponse respuesta = new ApiResponse();
-		respuesta.setSuccess(true);
+		respuesta.setSuccess(false);
 		Suscripcion susc = suscripcionService.findById(sus);
-		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
-		user.setSuscripcion(susc);
-		usuarioService.save(user);
-
+		if(susc != null) {
+			respuesta.setSuccess(true);
+			Usuario user = usuarioService.findById(curr.getId()).orElse(null);
+			user.setSuscripcion(susc);
+			usuarioService.save(user);
+		}
+		
 		return ResponseEntity.ok(respuesta);
 	}
 

@@ -123,4 +123,11 @@ public class FacturaController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
 	}
+	
+	@GetMapping("/lastSuscripcion")
+	public Factura lastSuscripcion(@CurrentUser UserPrincipal user) {
+		Usuario usuario = usuarioService.findById(user.getId()).orElse(null);
+		Factura f = facturaService.findLastSuscripcion(usuario);
+		return f;
+	}
 }
