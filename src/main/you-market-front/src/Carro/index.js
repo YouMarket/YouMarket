@@ -49,7 +49,7 @@ let history=useHistory();
 
 	useEffect(()=> {
 		fetchCarrito(carrito);
-		  fetch('https://youmarket-entrega4.herokuapp.com/usuario/cestasCheck' , {headers: {
+		  fetch('/usuario/cestasCheck' , {headers: {
 				'Content-Type' : 'application/json',
 				'Accept' : 'application/json',
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -63,7 +63,7 @@ let history=useHistory();
 	},[]);
 
 	const fetchCestas=useCallback(()=> {
-	    return fetch('https://youmarket-entrega4.herokuapp.com/cesta/user' , {headers: {
+	    return fetch('cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -78,7 +78,7 @@ let history=useHistory();
 	
 
 	  const fetchMsg=useCallback(()=> {
-	    return fetch('https://youmarket-entrega4.herokuapp.com/usuario/alertaPago' , {headers: {
+	    return fetch('/usuario/alertaPago' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -105,13 +105,13 @@ let history=useHistory();
 			<Header/> 
 			{localStorage.getItem('carrolleno') ? <div>
 			<div className="container clearfix">
-			<h1 className="introduction">Este es tu carrito. Â¡EstÃ¡s a pocos pasos de completar tu compra! ðŸ‘�</h1>
+			<h1 className="introduction">Este es tu carrito. ¡Estás a pocos pasos de completar tu compra! 👍</h1>
 				<div className="vaciar-carrito">
 				<Formik
 
 				 onSubmit={(values, { setSubmitting })=> {
 				   setTimeout(()=> {
-					   fetch('https://youmarket-entrega4.herokuapp.com/carritoDestroy', {headers: {
+					   fetch('/carritoDestroy', {headers: {
 
 						'Content-Type' : 'application/json',
 						'Accept' : 'application/json',
@@ -159,7 +159,7 @@ let history=useHistory();
 						</ProductoListado>
 					))}
 	
-					<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} â‚¬</div>
+					<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} €</div>
 					<div className="buttons">
 
 					{ localStorage.getItem('auth') ? (
@@ -189,18 +189,18 @@ let history=useHistory();
 	
 					 { localStorage.getItem('cestasCheck')>0 ? (
 					<div className="guardar-carrito-a-cesta">
-					<h2>Â¿Quieres guardar tu carrito como cesta?</h2>
+					<h2>¿Quieres guardar tu carrito como cesta?</h2>
 					<p>Elige la cesta en la que quieres guardar el carrito.</p>
 					<p>Si guardas este carrito dentro de una cesta que hayas creado,
-						  podrÃ¡s volver a cargar esta cesta como carrito desde la vista
+						  podrás volver a cargar esta cesta como carrito desde la vista
 						  de detalle de la cesta que quieras cargar cuando quieras</p>
-					<p>Si no tienes ningua cesta puedes crearla <a href="/create/cesta" className="link-button">aquÃ­</a></p>
+					<p>Si no tienes ningua cesta puedes crearla <a href="/create/cesta" className="link-button">aquí</a></p>
 					<Formik
 					 initialValues={{id: ''}}
 					 validate={values=> {
 						const errors={};
 						if (values.id==="") {
-						  errors.id='No puede estar vacÃ­o';
+						  errors.id='No puede estar vacío';
 						}
 						return errors;
 					  }}
@@ -209,7 +209,7 @@ let history=useHistory();
 					 onSubmit={(values, { setSubmitting })=> {
 					   setTimeout(()=> {
 
-						   fetch(`https://youmarket-entrega4.herokuapp.com/carritoACesta/${values.id}`, {headers: {
+						   fetch(`/carritoACesta/${values.id}`, {headers: {
 
 							'Content-Type' : 'application/json',
 							'Accept' : 'application/json',
@@ -268,9 +268,9 @@ let history=useHistory();
 		</div>
 	 : (
 	 <div className="container">
-		<h1 className="introduction introduction-empty">Vaya... parece que aÃºn no tienes productos aÃ±adidos</h1>
-	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad} alt="Carro vacÃ­o"/></div>
-		<p className="empty-view-text">Si te apetece, puedes aÃ±adir productos desde <NavLink className="link-button" to="/productos">aquÃ­</NavLink></p>
+		<h1 className="introduction introduction-empty">Vaya... parece que aún no tienes productos añadidos</h1>
+	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad} alt="Carro vacío"/></div>
+		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/productos">aquí</NavLink></p>
 
 	 </div>)}
 	 
