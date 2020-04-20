@@ -11,7 +11,7 @@ interface Props {
 
 function Factura({id, total, totalIva, fechaFactura, pedido}: Props) {
   
-  const url = "http://localhost:8081/factura/generateFactura/" + id
+  const url = "https://youmarket-entrega4.herokuapp.com/factura/generateFactura/" + id
   const dateFormatted = new Date(fechaFactura).toLocaleDateString()
 
   return(

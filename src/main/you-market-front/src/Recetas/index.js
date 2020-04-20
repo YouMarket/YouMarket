@@ -11,7 +11,7 @@ function Recetas() {
 	const { id } = useParams();
 	
 	const fetchRecetas = useCallback(() => {
-		return fetch(`../../../receta/list/${id}`)
+		return fetch(`https://youmarket-entrega4.herokuapp.com/receta/list/${id}`)
 	      .then(res => res.json())
 	      .then(recetas => {
 			setRecetas(recetas)
