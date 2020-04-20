@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.URL;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,14 +28,22 @@ public class Dieta {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@NotBlank
+	@SafeHtml
 	private String tipo;
 	
 	private Boolean activa;
 	
+	@URL
+	@SafeHtml
 	private String url_imagen;
 	
+	@NotBlank
+	@SafeHtml
 	private String descripcion;
 	
+	@NotBlank
+	@SafeHtml
 	private String nombre;
 	
 	@ManyToMany

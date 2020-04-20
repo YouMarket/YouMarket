@@ -34,8 +34,8 @@ insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, tele
 
 insert into factura (id, total, total_iva, usuario_id, suscripcion_id) values (1, 13.43, 17, 1, 7);
 
-insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (123, 'Vegetariana de invierno', 'Vegetariana', True, 'https://static1.abc.es/media/salud/2019/05/17/brocoli-kOoH--620x349@abc.jpg', 'Esto es una dieta sin carne ni pescado');
-insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (234, 'Hiperproteica', 'Hiperproteica', True, 'https://www.aquiconfidencial.es/wp-content/uploads/2018/07/dieta-hiperproteica.jpg', 'Esto es una dieta alta en proteínas. Incluye grandes cantidades de legumbres, carne, pescado y huevo.');
+insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (1, 'Vegetariana de invierno', 'Vegetariana', True, 'https://static1.abc.es/media/salud/2019/05/17/brocoli-kOoH--620x349@abc.jpg', 'Esto es una dieta sin carne ni pescado');
+insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (2, 'Hiperproteica', 'Hiperproteica', True, 'https://www.aquiconfidencial.es/wp-content/uploads/2018/07/dieta-hiperproteica.jpg', 'Esto es una dieta alta en proteínas. Incluye grandes cantidades de legumbres, carne, pescado y huevo.');
 
 
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (1,'Pan de molde',0.79,1,'€','https://www.recetasdepan.net/wp-content/uploads/2019/12/Receta-de-pan-de-molde.jpg',1,1,1);
@@ -71,10 +71,27 @@ insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, depart
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (31,'Habas cocidas 425 g. escurrido',1.85,1.2,'€','https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201909/26/00118029902709____1__600x600.jpg',1,2,7);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (32,'Brócoli 500g.',0.99,1.2,'€','https://static1.abc.es/media/salud/2019/05/17/brocoli-kOoH--620x349@abc.jpg',1,2,8);
 
-insert into dieta_productos (dieta_id, productos_id) values (123, 30);
-insert into dieta_productos (dieta_id, productos_id) values (123, 31);
-insert into dieta_productos (dieta_id, productos_id) values (123, 32);
+insert into dieta_productos (dieta_id, productos_id) values (1, 30);
+insert into dieta_productos (dieta_id, productos_id) values (1, 31);
+insert into dieta_productos (dieta_id, productos_id) values (1, 32);
 
-insert into dieta_productos (dieta_id, productos_id) values (234, 31);
-insert into dieta_productos (dieta_id, productos_id) values (234, 11);
-insert into dieta_productos (dieta_id, productos_id) values (234, 19);
+insert into dieta_productos (dieta_id, productos_id) values (2, 31);
+insert into dieta_productos (dieta_id, productos_id) values (2, 11);
+insert into dieta_productos (dieta_id, productos_id) values (2, 19);
+
+INSERT INTO receta (`id`,`calorias`, `descripcion`, `nombre`, `personas`, `tiempo`, `url_imagen`) values (1,2682, 'Precalentar el horno a 220º C y peparar dos bandejas o fuentes grandes con papel de hornear antiadherente. Enjuagar y escurrir bien las lentejas, con suavidad, tanto si se usan en conserva como si las hemos cocido en casa. Es mejor si las hemos dejado ligeramente firmes. Disponer en un recipiente, añadir el aceite de oliva, el vinagre, salpimentar y mezclar con las especias. Cortar en juliana fina las dos cebollas y combinar con las lentejas. Extender en las dos bandejas, repartiendo la mezcla de tal modo que no se apelotonen demasiado, dejando una sola capa.Hornear ambas bandejas a la vez, cambiando sus posiciones y girándolas pasados 15 minutos. Cuando lleven ya 20-25 minutos, vigilar que no se quemen y remover con una espátula. Continuar horneando hasta que estén muy crujientes y tostadas. Dejar enfriar fuera del horno y servir con ralladura de limón y cebollino o perejil picado, salpimentando al gusto. Aliñar con una vinagreta, si se desea.'
+								, 'Ensalada de lentejas', 4, 40, 'https://i.blogs.es/2b1070/ensalada-lentejas1/1366_2000.jpg');
+INSERT INTO receta (`id`,`calorias`, `descripcion`, `nombre`, `personas`, `tiempo`, `url_imagen`) values (2, 1482, 'Lavamos y troceamos la berenjena en dados de igual tamaño (o lo más similar posible). La colocamos por capas en un colador, sazonando entre capa y capa, y dejamos que suelte los jugos amargos durante 30 minutos. Mientras tanto preparamos el resto de las verduras y las mantenemos en recipientes separados. Pelamos la cebolla y la cortamos en tiras finas (o juliana), Lavamos el pimiento y troceamos el pimiento en trozos . Lavamos el calabacín y lo cortamos en rodajas gruesas primero y después en cuartos. Pelamos los tomates y troceamos. Calentamos un poco de aceite de oliva virgen extra en una sartén y rehogamos la cebolla durante 10 minutos a fuego medio-bajo. Añadimos el pimiento, los dientes de ajo y rehogamos durante unos 8-10 minutos más. Sazonamos y retiramos a una fuente. En la misma sartén rehogamos el calabacín y la berenjena, por separado, hasta que estén tiernos y añadiendo aceite si hiciera falta. Retiramos a la fuente con el resto de verduras. Incorporamos el tomate y sofreímos junto con las hierbas provenzales al tiempo que aplastamos para formar una salsa. Cuando el tomate esté bien cocido añadimos todas las verduras a la cazuela, removemos con cuidado y cocemos 20 minutos más para que los sabores se integren. Servimos inmediatamente.'
+								, 'Pisto y caponata siciliana', 4, 60, 'https://i.blogs.es/47f4b5/ratatuille/1366_2000.jpg');
+INSERT INTO receta (`id`,`calorias`, `descripcion`, `nombre`, `personas`, `tiempo`, `url_imagen`) values (3, 3082, 'Las verduras deben formar parte de tu dieta del mismo modo que las proteínas. Por ello, la mejor opción es que prepares platos que sean abundantes en vegetales y proteínas para saciar tu apetito al máximo. Para hacer esta ensalada para 2 personas necesitarás estos ingredientes: 200 gramos de espinacas frescas, 2 pechugas de pollo, 1 cebolla, 30 gramos de salsa de soja ,Nueces y cacahuetes tostados sin sal, Aceite de oliva ,Sal y pimienta. Lo primero que haremos será limpiar bien las espinacas para eliminar cualquier resto de suciedad. Ahora, lo que haremos será poner un chorrito de aceite en una sartén y picar la cebolla. La echaremos cuando el aceite esté caliente y, a continuación, añadiremos el pollo cortado en finas tiras. Salpimentamos y dejamos que se cocinen durante unos 8 minutos. Añadimos a la sartén los frutos secos y la salsa de soja y removemos para que todos los sabores se integren. Cuando esté todo listo, retiramos del fuego y dejamos que se enfríen ligeramente. En un bol aparte, prepararemos el resto de ingredientes en frío y lo mezclaremos todo para disfrutar de una sabrosa ensalada y muy nutritiva. '
+								, 'Ensalada de espinaca con pollo y soja', 2, 3, 'https://i.blogs.es/3e113e/ensalada-espinacas-pollo/840_560.jpg');
+INSERT INTO receta (`id`,`calorias`, `descripcion`, `nombre`, `personas`, `tiempo`, `url_imagen`) values (4, 1842, 'Y terminamos este apartado hablando de una receta que es perfecta para el desayuno o para la cena. Se trata de preparar unos ricos huevos con jamón serrano que tendrán un sabor muy intenso y delicioso. Para ello, tan solo necesitarás: 2 huevos, Jamón serrano a taquitos, Sal y pimienta, Aceite de oliva. Hay dos opciones para preparar este plato: por un lado, puedes romper los huevos y, así, hacer una especie de salteado con jamón. O, por otro lado, puedes preparar los huevos a la plancha, con poco aceite, y disfrutar de un plato sabroso y delicioso. '
+								, 'Huevos con jamón serrano', 1, 15, 'http://i.ytimg.com/vi/kUnwEm6J2j4/maxresdefault.jpg');
+
+INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (1,1);
+INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (1,2);
+INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (2,3);
+INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (2,4);
+
+
+
