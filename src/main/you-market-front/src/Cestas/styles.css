@@ -1,7 +1,12 @@
 .nueva-cesta{
-	padding-top:2%;
 	text-align:center;
 }
+
+.nueva-cesta a {
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
 .grid-cesta{
 	display: grid;
 	grid-column-gap: 10px;

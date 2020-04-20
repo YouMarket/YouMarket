@@ -20,7 +20,6 @@ function SuscripcionForm() {
 			      .then(res => res.json())
 			      .then(dietasCheck2 => {
 			    	  localStorage.setItem('dietasCheck', dietasCheck2);
-
 			      });
 	 }
 

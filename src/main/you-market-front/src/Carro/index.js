@@ -158,7 +158,7 @@ let history=useHistory();
 									<p>
 										{mensajeAlerta}
 									</p>
-									<a href="/datos-perfil">
+									<a href="/datos-perfil" className="enlace-perfil">
 										<button className="button-finish">Ir a mi perfil</button>
 									</a>
 									<br/>
