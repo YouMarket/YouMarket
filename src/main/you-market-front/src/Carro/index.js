@@ -173,7 +173,7 @@ let history=useHistory();
 									<p>
 										{mensajeAlerta}
 									</p>
-									<a href="/datos-perfil">
+									<a href="/datos-perfil" className="enlace-perfil">
 										<button className="button-finish">Ir a mi perfil</button>
 									</a>
 									<br/>
@@ -190,10 +190,11 @@ let history=useHistory();
 					 { localStorage.getItem('cestasCheck')>0 ? (
 					<div className="guardar-carrito-a-cesta">
 					<h2>¿Quieres guardar tu carrito como cesta?</h2>
-					<p>Elige la cesta en la que quieres guardar el carrito:</p>
-					<p>(Si guardas este carrito dentro de una cesta que hayas creado,
+					<p>Elige la cesta en la que quieres guardar el carrito.</p>
+					<p>Si guardas este carrito dentro de una cesta que hayas creado,
 						  podrás volver a cargar esta cesta como carrito desde la vista
-						  de detalle de la cesta que quieras cargar cuando quieras)</p>
+						  de detalle de la cesta que quieras cargar cuando quieras</p>
+					<p>Si no tienes ningua cesta puedes crearla <a href="/create/cesta" className="link-button">aquí</a></p>
 					<Formik
 					 initialValues={{id: ''}}
 					 validate={values=> {

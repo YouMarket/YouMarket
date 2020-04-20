@@ -41,7 +41,7 @@ public class UsuarioService {
 	}
 
 	public Usuario save(Usuario p) {
-		Assert.isTrue(this.validarDNI(p.getDni()));
+		Assert.isTrue(this.validarDNI(p.getDni()), "El dni no es válido");
 		return repo.save(p);
 
 	}

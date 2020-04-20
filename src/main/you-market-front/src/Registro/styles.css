@@ -57,8 +57,9 @@
 }
 
 .error{
-	padding-left:10%;
-	font-size:90%;
+	font-size:13px;
+	margin: 10px 0;
+	padding: 0;
 }
 
 .label{
@@ -147,6 +148,51 @@
 	border: none;
 	padding: 10px 40px;
 	font-size:	16px;
+	cursor: pointer;
+	font-weight: bold;
 }
 
+.registro-input {
+	font-size:14px;
+	display: block;
+	width:100%;
+	border: 2px solid #779C3D;
+	border-radius: 10px;
+	padding: 0 10px;
+	height: 30px;
+	margin: 20px 0;
+}
 
+.registro-input:focus {
+	font-size:14px;
+	display: block;
+	width:100%;
+	border: 3px solid #779C3D !important;
+	border-radius: 10px;
+	padding: 0 10px;
+	height: 30px;
+	margin: 20px 0 10px;
+}
+
+.registro-label {
+	display: block;
+	font-weight: bold;
+}
+
+.terms-div {
+	margin: 20px;
+}
+
+.row {
+	padding-bottom: 15px;
+}
+
+.terms-div a {
+	color: #779C3D;
+	font-weight: bold;
+}
+
+.terms-div a:hover {
+	color: black;
+	font-weight: bold;
+}

@@ -135,10 +135,9 @@ function DatosUsuario() {
 									'Authorization' : 'Bearer ' + localStorage.getItem('auth')
 								},
 								method:'POST'})
-							.then(function(response) {})
-							.then(() => {history.push('/datos-perfil')})
-
-
+							.then(function(response) {
+								history.push('/datos-perfil')
+							})
 						}, 400);
 					}}
 

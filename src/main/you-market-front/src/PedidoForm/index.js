@@ -28,18 +28,15 @@ function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");
 	  var poblacion1 = document.getElementById("poblacion1");
 	  var cpostal1 = document.getElementById("cpostal1");
-	  var numero1 = document.getElementById("numero1");
 	  var provincia1 = document.getElementById("provincia1");
 
 	  var direccion2 = document.getElementById("direccion2");
 	  var poblacion2 = document.getElementById("poblacion2");
 	  var cpostal2 = document.getElementById("cpostal2");
-	  var numero2 = document.getElementById("numero2");
 	  var provincia2 = document.getElementById("provincia2");
 
 	  poblacion2.value= poblacion1.value;
 	  cpostal2.value= cpostal1.value;
-	  numero2.value= numero1.value;
 	  provincia2.value= provincia1.value;
 	  direccion2.value= direccion1.value;
 
@@ -52,19 +49,16 @@ function copiarDir13() {
 	  var direccion1 = document.getElementById("direccion1");
 	  var poblacion1 = document.getElementById("poblacion1");
 	  var cpostal1 = document.getElementById("cpostal1");
-	  var numero1 = document.getElementById("numero1");
 	  var provincia1 = document.getElementById("provincia1");
 
 	  var direccion3 = document.getElementById("direccion3");
 	  var poblacion3 = document.getElementById("poblacion3");
 	  var cpostal3 = document.getElementById("cpostal3");
-	  var numero3 = document.getElementById("numero3");
 	  var provincia3 = document.getElementById("provincia3");
 
 
 	  poblacion3.value= poblacion1.value;
 	  cpostal3.value= cpostal1.value;
-	  numero3.value= numero1.value;
 	  provincia3.value= provincia1.value;
 	  direccion3.value= direccion1.value;
 
@@ -79,18 +73,15 @@ function copiarDir14() {
 	  var direccion1 = document.getElementById("direccion1");
 	  var poblacion1 = document.getElementById("poblacion1");
 	  var cpostal1 = document.getElementById("cpostal1");
-	  var numero1 = document.getElementById("numero1");
 	  var provincia1 = document.getElementById("provincia1");
 
 	  var direccion4 = document.getElementById("direccion4");
 	  var poblacion4 = document.getElementById("poblacion4");
 	  var cpostal4 = document.getElementById("cpostal4");
-	  var numero4 = document.getElementById("numero4");
 	  var provincia4 = document.getElementById("provincia4");
 
 	  poblacion4.value= poblacion1.value;
 	  cpostal4.value= cpostal1.value;
-	  numero4.value= numero1.value;
 	  provincia4.value= provincia1.value;
 	  direccion4.value= direccion1.value;
 
@@ -115,8 +106,6 @@ export function PedidoForm() {
 				prods.push(JSON.parse(ele))
 			}
 		});
-		console.log('Productos del carrito');
-		console.log(prods);
 		return prods;
 	}
 
@@ -141,11 +130,6 @@ export function PedidoForm() {
 
 
 		precioTotal = totalDeCestas(values);
-		console.log('PRECIO TOTAL');
-		console.log(precioTotalCestas)
-		console.log(precioTotal);
-		console.log('AQUI HIJOS DE PUTA');
-		console.log(values.cestaId1);
 		return precioTotal;
 	}
 
@@ -219,19 +203,19 @@ function pagar() {
 			if(started===true &&
 			   errors.direccion1===undefined && errors.poblacion1===undefined &&
 			   errors.cpostal1===undefined && errors.provincia1===undefined &&
-			   errors.numero1===undefined && errors.fechaEnvio1===undefined &&
+			   errors.fechaEnvio1===undefined &&
 			   errors.horaEnvioFin1===undefined && errors.horaEnvioIni1===undefined &&
 			   errors.direccion2===undefined && errors.poblacion2===undefined &&
 			   errors.cpostal2===undefined && errors.provincia2===undefined &&
-			   errors.numero2===undefined && errors.fechaEnvio2===undefined &&
+			   errors.fechaEnvio2===undefined &&
 			   errors.horaEnvioFin2===undefined && errors.horaEnvioIni2===undefined &&
 			   errors.direccion3===undefined && errors.poblacion3===undefined &&
 			   errors.cpostal3===undefined && errors.provincia3===undefined &&
-			   errors.numero3===undefined && errors.fechaEnvio3===undefined &&
+			   errors.fechaEnvio3===undefined &&
 			   errors.horaEnvioFin3===undefined && errors.horaEnvioIni3===undefined &&
 			   errors.direccion4===undefined && errors.poblacion4===undefined &&
 			   errors.cpostal4===undefined && errors.provincia4===undefined &&
-			   errors.numero4===undefined && errors.fechaEnvio4===undefined &&
+			   errors.fechaEnvio4===undefined &&
 			   errors.horaEnvioFin4===undefined && errors.horaEnvioIni4===undefined){
 
 			 j.style.display = "none";
@@ -269,7 +253,6 @@ function pagar() {
 			 errors.poblacion2=undefined;
 			 errors.cpostal2=undefined;
 			 errors.provincia2=undefined;
-			 errors.numero2=undefined;
 			 errors.fechaEnvio2=undefined;
 			 errors.horaEnvioFin2=undefined;
 			 errors.horaEnvioIni2=undefined;
@@ -299,7 +282,6 @@ function pagar() {
 				errors.poblacion3=undefined;
 				errors.cpostal3=undefined;
 				errors.provincia3=undefined;
-				errors.numero3=undefined;
 				errors.fechaEnvio3=undefined;
 				errors.horaEnvioFin3=undefined;
 				errors.horaEnvioIni3=undefined;
@@ -326,7 +308,6 @@ function pagar() {
 				errors.poblacion4=undefined;
 				errors.cpostal4=undefined;
 				errors.provincia4=undefined;
-				errors.numero4=undefined;
 				errors.fechaEnvio4=undefined;
 				errors.horaEnvioFin4=undefined;
 				errors.horaEnvioIni4=undefined;
@@ -421,10 +402,6 @@ function pagar() {
         }else if(values.provincia1.includes("javascript") || values.provincia1.includes(";")){
         	errors.provincia1 = 'No se permiten esos carácteres';
         }
-
-        if (!values.numero1) {
-        	errors.numero1 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
-        }
         if (!values.fechaEnvio1) {
         	errors.fechaEnvio1 = 'Campo obligatorio';
         }
@@ -453,12 +430,10 @@ function pagar() {
 
 
         if(pedido2copiado === true){
-        	console.log(pedido2copiado)
         	values.direccion2 = values.direccion1;
         	values.poblacion2 = values.poblacion1;
         	values.cpostal2 = 	values.cpostal1;
         	values.provincia2 = values.provincia1;
-        	values.numero2	  = values.numero1;
 
         	pedido2copiado = false;
         }
@@ -468,7 +443,6 @@ function pagar() {
         	values.poblacion3 = values.poblacion1;
         	values.cpostal3 = 	values.cpostal1;
         	values.provincia3 = values.provincia1;
-        	values.numero3	  = values.numero1;
 
         	pedido3copiado = false;
         }
@@ -478,7 +452,6 @@ function pagar() {
         	values.poblacion4 = values.poblacion1;
         	values.cpostal4 = 	values.cpostal1;
         	values.provincia4 = values.provincia1;
-        	values.numero4	  = values.numero1;
 
         	pedido4copiado = false;
         }
@@ -511,10 +484,6 @@ function pagar() {
               	errors.provincia2 = 'No se permiten esos carácteres';
               }
 
-              if (!values.numero2) {
-	        	errors.numero2 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
-              }
-
               if (!values.fechaEnvio2) {
 	        	errors.fechaEnvio2 = 'Campo obligatorio';
               }
@@ -544,7 +513,6 @@ function pagar() {
         		values.poblacion2 = null;
         		values.cpostal2 = null;
         		values.provincia2 = null;
-        		values.numero2 = null;
         		values.fechaEnvio2 = null;
         		values.horaEnvioFin2 = null;
         		values.horaEnvioIni2 = null;
@@ -576,9 +544,6 @@ function pagar() {
               }else if(values.provincia3.includes("javascript") || values.provincia3.includes(";")){
               	errors.provincia3 = 'No se permiten esos carácteres';
               }
-	        if (!values.numero3) {
-	        	errors.numero3 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
-	        }
 	        if (!values.fechaEnvio3) {
 	        	errors.fechaEnvio3 = 'Campo obligatorio';
 	        }
@@ -608,7 +573,6 @@ function pagar() {
         	values.poblacion3 = null;
         	values.cpostal3 = null;
         	values.provincia3 = null;
-        	values.numero3 = null;
         	values.fechaEnvio3 = null;
         	values.horaEnvioFin3 = null;
         	values.horaEnvioIni3 = null;
@@ -641,9 +605,6 @@ function pagar() {
               	errors.provincia4 = 'No se permiten esos carácteres';
               }
 
-	        if (!values.numero4) {
-	        	errors.numero4 = 'Campo obligatorio/Comprueba que no hayas introducido letras';
-	        }
 	        if (!values.fechaEnvio4) {
 	        	errors.fechaEnvio4 = 'Campo obligatorio';
 	        }
@@ -673,7 +634,6 @@ function pagar() {
         	values.poblacion4 = null;
         	values.cpostal4 = null;
         	values.provincia4 = null;
-        	values.numero4 = null;
         	values.fechaEnvio4 = null;
         	values.horaEnvioFin4 = null;
         	values.horaEnvioIni4 = null;
@@ -754,13 +714,13 @@ function pagar() {
 				<br/><br/>
 
 
-	        <label htmlFor="direccion1">Calle*: </label>
+	        <label htmlFor="direccion1">Dirección*: </label>
 	        <Field
 				id="direccion1"
 				type="text"
 				name="direccion1"
 				value={values.direccion1}
-		        placeholder="Calle Cisnes"
+		        placeholder="Calle Cisnes Bloque 11 4ºA"
 				onChange={handleChange}
 				onBlur={handleBlur}
 		      	/>
@@ -770,22 +730,6 @@ function pagar() {
 		        	{errors.direccion1}
 		        </div>
 				<br/><br/>
-
-			<label htmlFor="numero1">Número*: </label>
-	        <Field
-				id="numero1"
-				type="number"
-				name="numero1"
-				onChange={handleChange}
-				onBlur={handleBlur}
-				value={values.numero1}
-	        	min="0"
-				/>
-	        	<div className="errores">
-	        	{errors.numero1}
-	        	</div>
-				<br/><br/>
-
 
 			<label htmlFor="fechaEnvio1">Fecha*: </label>
 			<Field
@@ -802,7 +746,6 @@ function pagar() {
 				</div>
 				<br/><br/>
 
-				<br/>
 			<label htmlFor="horaEnvioIni1">Hora inicial: </label>
 			<Field
 				id="horaEnvioIni1"
@@ -927,7 +870,7 @@ function pagar() {
 				<br/><br/>
 
 
-	        <label htmlFor="direccion2">Calle*: </label>
+	        <label htmlFor="direccion2">Dirección*: </label>
 	        <input
 				id="direccion2"
 				type="text"
@@ -940,21 +883,6 @@ function pagar() {
 		        <div className="errores">
 		        {errors.direccion2}
 		        </div>
-				<br/><br/>
-
-			<label htmlFor="numero2">Número*: </label>
-	        <input
-				id="numero2"
-				type="number"
-				name="numero2"
-				value={values.numero2}
-	        	min="0"
-	        	onChange={handleChange}
-	    		onBlur={handleBlur}
-				/>
-	        	<div className="errores">
-	        		{errors.numero2}
-	        	</div>
 				<br/><br/>
 
 
@@ -973,7 +901,6 @@ function pagar() {
 				</div>
 				<br/><br/>
 
-				<br/>
 			<label htmlFor="horaEnvioIni2">Hora inicial: </label>
 			<input
 				id="horaEnvioIni2"
@@ -1087,13 +1014,13 @@ function pagar() {
 				<br/><br/>
 
 
-	        <label htmlFor="direccion3">Calle*: </label>
+	        <label htmlFor="direccion3">Dirección*: </label>
 	        <input
 				id="direccion3"
 				type="text"
 				name="direccion3"
 				value={values.direccion3}
-		        placeholder="Calle Cisnes"
+		        placeholder="Calle Cisnes Bloque 11 4ºA"
 				onChange={handleChange}
 				onBlur={handleBlur}
 				/>
@@ -1101,22 +1028,6 @@ function pagar() {
 		        {errors.direccion3}
 		        </div>
 				<br/><br/>
-
-			<label htmlFor="numero3">Número*: </label>
-	        <input
-				id="numero3"
-				type="number"
-				name="numero3"
-				value={values.numero3}
-	        	min="0"
-				onChange={handleChange}
-				onBlur={handleBlur}
-				/>
-	        	<div className="errores">
-	        		{errors.numero3}
-	        	</div>
-				<br/><br/>
-
 
 			<label htmlFor="fechaEnvio3">Fecha*: </label>
 			<input
@@ -1133,7 +1044,6 @@ function pagar() {
 				</div>
 				<br/><br/>
 
-				<br/>
 			<label htmlFor="horaEnvioIni3">Hora inicial: </label>
 			<input
 				id="horaEnvioIni3"
@@ -1248,13 +1158,13 @@ function pagar() {
 			<br/><br/>
 
 
-        <label htmlFor="direccion4">Calle*: </label>
+        <label htmlFor="direccion4">Dirección*: </label>
         <input
 			id="direccion4"
 			type="text"
 			name="direccion4"
 			value={values.direccion4}
-	        placeholder="Calle Cisnes"
+	        placeholder="Calle Cisnes Bloque 11 4ºA"
 			onChange={handleChange}
 			onBlur={handleBlur}
 			/>
@@ -1262,22 +1172,6 @@ function pagar() {
 	        	{errors.direccion4}
 	        </div>
 			<br/><br/>
-
-		<label htmlFor="numero4">Número*: </label>
-        <input
-			id="numero4"
-			type="number"
-			name="numero4"
-			value={values.numero4}
-        	min="0"
-    		onChange={handleChange}
-			onBlur={handleBlur}
-			/>
-        	<div className="errores">
-        		{errors.numero4}
-        	</div>
-			<br/><br/>
-
 
 		<label htmlFor="fechaEnvio4">Fecha*: </label>
 		<input
@@ -1294,7 +1188,6 @@ function pagar() {
 			</div>
 			<br/><br/>
 
-			<br/>
 		<label htmlFor="horaEnvioIni4">Hora inicial: </label>
 		<input
 			id="horaEnvioIni4"

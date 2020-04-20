@@ -68,12 +68,10 @@ function ProductoDetalle() {
                 'cantidad': cantidad
             }
             var res = JSON.stringify(jsonProd)
-            console.log(res)
             sessionStorage.setItem('prod_'+id, res)
         }else{
             var strProd = JSON.parse(prodSession)
             strProd.cantidad = parseInt(strProd.cantidad,10)+cantidad;
-            console.log(strProd)
             sessionStorage.setItem('prod_'+id, JSON.stringify(strProd))
 		}
 		setCantidad(0)

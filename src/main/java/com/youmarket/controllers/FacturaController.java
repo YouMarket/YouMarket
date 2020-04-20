@@ -106,7 +106,6 @@ public class FacturaController {
 		ByteArrayInputStream bis = null;
 		
 		if(factura.getPedido()!= null) {
-			System.out.println(factura.getPedido().getId());
 			List<CestaProducto> productos = cpService.findProdsByCesta(factura.getPedido());
 			bis = PDFUtil.pedidoPDFGenerator(factura, productos);
 		}else {

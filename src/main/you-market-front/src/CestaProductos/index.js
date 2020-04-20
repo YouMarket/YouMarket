@@ -27,7 +27,8 @@ const [cestaproductos, setCestaproductos] = useState();
 	<div>	  
 	  <Header/>
 	  <div className="productos-container">
-	  	<div className="grid">
+		  {cestaproductos.length > 0 ? 
+	  	(<div className="grid">
 		      {cestaproductos && cestaproductos.map(cestaproducto => (
 		    		  <div key={cestaproducto.cesta.id}>
 				          <CestaProducto 
@@ -36,7 +37,7 @@ const [cestaproductos, setCestaproductos] = useState();
 				          />
 				      </div>
 		      ))}
-	  	</div>
+	  	</div>) : <p>No hay productos</p>}
 	  </div>
 	</div>
  );

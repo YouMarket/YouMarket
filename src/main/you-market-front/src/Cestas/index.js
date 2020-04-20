@@ -46,30 +46,25 @@ const [cestas, setCestas] = useState([]);
 <div>
   <Header/>
   
-  <div className="nueva-cesta">
-  	<a className="link-button" href="/create/cesta">Nueva cesta</a>
-  	{localStorage.getItem('cestasCheck') > 0 ?
-	  (<div className="cestas-container">
-	  { cestas && cestas.map((cesta) => (
+  <div className="container">
+	<div className="nueva-cesta">
+		<a className="link-button" href="/create/cesta">Nueva cesta</a>
+		{localStorage.getItem('cestasCheck') > 0 ?
+		(<div className="cestas-container">
+		{ cestas && cestas.map((cesta) => (
 
-			    <div key={cesta.id} className="grid-cesta">
-			    <Cesta nombre={cesta.nombre} id={cesta.id} />
+					<div key={cesta.id} className="grid-cesta">
+					<Cesta nombre={cesta.nombre} id={cesta.id} />
 
-	            </div>
+					</div>
 
-	           ))}
+				))}
 
-	  </div>) : (<div><img className="no-cestas-img" src={noCestas} alt="No-cestas"/><p>No hay cestas</p></div>)}
+		</div>) : (<div><img className="no-cestas-img" src={noCestas} alt="No-cestas"/><p>No hay cestas</p></div>)}
 
+	</div>
+	</div>
   </div>
- </div>
  );
 }
 export default Cestas;
-
-//productos= { cesta.productos && cesta.productos.map((p) => (
-//		<div key={p.id} className="productos">
-//	    <a href="../producto/show">{p.nombre}</a>
-//
-//        </div>
-//      {setTotal=total + p.precioIva}

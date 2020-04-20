@@ -40,7 +40,6 @@ export default class RegistroDireccion extends React.Component{
 										body:JSON.stringify(values, null, 7)
 								}).then(response => response.json())
 								  .then(data => {
-									console.log(data)
 									if (data.id!=null) {
 										this.props.history.push('/cesta');
 									}else{
