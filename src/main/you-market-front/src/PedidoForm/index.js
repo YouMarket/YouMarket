@@ -112,7 +112,7 @@ export function PedidoForm() {
 	const[precioTotalCestas, setPrecioTotalCestas] = useState(0.0);
 
 	function totalDeCestas(values){
-		fetch('https://youmarket-entrega4.herokuapp.com/precio/', {
+		fetch('https://youmarket-entrega4.herokuapp.com/pedido/precio/', {
   			headers: {
  				"Content-Type": "application/json"
  			},

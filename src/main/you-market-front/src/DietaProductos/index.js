@@ -11,7 +11,11 @@ const [productos, setProductos] = useState([]);
 	const { id } = useParams();
 
 	const fetchDietaProductos = useCallback(() => {
-	    return fetch(`https://youmarket-entrega4.herokuapp.com/producto/dieta/list/${id}`)
+	    return fetch(`https://youmarket-entrega4.herokuapp.com/producto/dieta/list/${id}`, {headers: {
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+			method:'GET'})
 	      .then(res => res.json())
 	      .then(productos => {
 	        setProductos(productos);

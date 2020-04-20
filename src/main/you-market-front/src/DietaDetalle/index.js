@@ -11,7 +11,11 @@ function DietaDetalle() {
 	const { id } = useParams();
 	
 	const fetchDieta = useCallback(() => {
-	    return fetch(`https://youmarket-entrega4.herokuapp.com/dieta/${id}`)
+	    return fetch(`https://youmarket-entrega4.herokuapp.com/dieta/${id}`, {headers: {
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+			method:'GET'})
 	      .then(res => res.json())
 	      .then(dieta => {
 	        setDieta(dieta)
