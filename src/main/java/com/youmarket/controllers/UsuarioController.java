@@ -264,6 +264,12 @@ public class UsuarioController {
 		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
 		user.setSuscripcion(susc);
 		usuarioService.save(user);
+		
+		if(susc.isDietista()) {
+			respuesta.setMessage(String.valueOf(1));
+		}else {
+			respuesta.setMessage(String.valueOf(0));
+		}
 
 		return ResponseEntity.ok(respuesta);
 	}
