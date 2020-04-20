@@ -1,0 +1,111 @@
+.preciospage {
+    width: 100%;
+}
+
+.preciospage2 {
+    width: 100%;
+}
+
+.preciospage-cards {
+    display: flex;
+}
+
+.preciospage-card {
+    background-color: white;
+    display: inline-block;
+    width: 48%;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin: 0 0.5%;
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border: 1.5px solid rgb(148,194,76);
+}
+
+.preciospage-card img {
+    max-width: 100%;
+}
+
+.card-title {
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.card-envios {
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 30px;
+}
+
+.card-euros {
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 40px;
+}
+
+.card-image {
+    width: 100px;
+    margin: 30px auto;
+    display: block;
+}
+
+.card-text {
+    text-align: center;
+    line-height: 1.25;
+    padding: 0;
+}
+
+.card-text li {
+    list-style: none;
+}
+
+.card-information {
+    margin-top: 20px;
+}
+
+.preciospage-title {
+    font-family: 'Righteous', cursive;
+    text-transform: uppercase;
+    font-size: 40px;
+    color: black;
+    text-align: center;
+    width: 100%;
+    margin: 10px 0 20px;
+}
+
+.preciospage-precios,
+.preciospage-suscripciones {
+    display: flex;
+    padding-bottom: 0;
+}
+
+@media (max-width: 700px){
+    .preciospage-welcome {
+        font-size: 50px;
+        padding: 20px;
+    }
+
+    .preciospage-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .preciospage {
+        background-repeat: repeat;
+        height: auto;
+    }
+
+    .preciospage-cards,
+    .preciospage-precios,
+    .preciospage-suscripciones {
+        display: block;
+    }
+}

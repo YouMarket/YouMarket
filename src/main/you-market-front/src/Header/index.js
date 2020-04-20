@@ -59,6 +59,7 @@ function Header() {
 				<img className="logo" src={logo} alt="Logo"/>
 			</NavLink>
 			<div className="header-links">
+				<Link to="/precios" className="header-link" >Precios</Link>
 				<Link to="/productos" className="header-link" >Productos</Link>
 				{localStorage.getItem('dietasCheck')==1 ?
 				(<Link className="header-link" to="/dieta/list">Dietas</Link>)  : <div></div>}
