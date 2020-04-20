@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.jsonwebtoken.lang.Assert;
+
 import com.youmarket.configuration.SecurityConfiguration;
 import com.youmarket.configuration.response.ApiResponse;
 import com.youmarket.configuration.security.CurrentUser;
@@ -167,7 +169,7 @@ public class UsuarioController {
 	@PostMapping("/signUpAll")
 	public ResponseEntity<ApiResponse> signUpAll(@RequestBody SignUpForm form)
 			throws MalformedURLException, URISyntaxException {
-
+		
 		ApiResponse respuesta = new ApiResponse();
 		if (usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
 			Usuario usuario = form.getUsuario();

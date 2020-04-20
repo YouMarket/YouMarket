@@ -90,10 +90,6 @@ public class CestaService {
 
 	}
 
-	public Cesta saveProductos(@Valid Cesta c, List<Producto> productos) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public void borrarPorIdSeguro(Integer id, UserPrincipal cu)	 {
 		Optional<Cesta> c=this.cestaRepository.findById(id);
