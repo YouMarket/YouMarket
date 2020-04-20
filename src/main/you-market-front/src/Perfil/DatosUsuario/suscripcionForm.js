@@ -12,7 +12,7 @@ function SuscripcionForm() {
     let history = useHistory();
 
     function dietasCheck() {
-		  fetch('usuario/dietasCheck' , {headers: {
+		  fetch('/usuario/dietasCheck' , {headers: {
 				'Content-Type' : 'application/json',
 				'Accept' : 'application/json',
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},

@@ -29,7 +29,7 @@ const [cestas, setCestas] = useState([]);
 	
 	useEffect(() => {
 	    fetchCestas(cestas);
-	     fetch('usuario/cestasCheck' , {headers: {
+	     fetch('/usuario/cestasCheck' , {headers: {
 			'Content-Type' : 'application/json',
 			'Accept' : 'application/json',
 			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},

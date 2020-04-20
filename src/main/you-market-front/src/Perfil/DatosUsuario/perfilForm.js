@@ -11,7 +11,7 @@ const [usuario, setUsuario] = useState();
     let history = useHistory();
 	
  const fetchUsuario = useCallback(() => {
-	    return  fetch('usuario/userPerfil', {headers: {
+	    return  fetch('/usuario/userPerfil', {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -26,7 +26,7 @@ const [usuario, setUsuario] = useState();
 const [direccion, setDireccion] = useState();
 	
 const fetchUsuario2 = useCallback(() => {
-	    return  fetch('usuario/direccion', {headers: {
+	    return  fetch('/usuario/direccion', {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -145,7 +145,7 @@ if (localStorage.getItem('auth')==null){
 			}}
 						onSubmit={(values, { setSubmitting }) => {
 							setTimeout(() => {
-								 fetch('usuario/updatePerfil', {headers: {
+								 fetch('../../../usuario/updatePerfil', {headers: {
                                             'Content-Type' : 'application/json',
                                             'Accept' : 'application/json',
                                             'Authorization' : 'Bearer ' + localStorage.getItem('auth')

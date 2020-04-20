@@ -49,7 +49,7 @@ let history=useHistory();
 
 	useEffect(()=> {
 		fetchCarrito(carrito);
-		   fetch('usuario/cestasCheck' , {headers: {
+		   fetch('/usuario/cestasCheck' , {headers: {
 				'Content-Type' : 'application/json',
 				'Accept' : 'application/json',
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -78,7 +78,7 @@ let history=useHistory();
 	
 
 	  const fetchMsg=useCallback(()=> {
-	    return  fetch('usuario/alertaPago' , {headers: {
+	    return  fetch('/usuario/alertaPago' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -111,7 +111,7 @@ let history=useHistory();
 
 				 onSubmit={(values, { setSubmitting })=> {
 				   setTimeout(()=> {
-					    fetch('carritoDestroy', {headers: {
+					    fetch('/carritoDestroy', {headers: {
 
 						'Content-Type' : 'application/json',
 						'Accept' : 'application/json',

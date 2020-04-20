@@ -13,7 +13,7 @@ let history = useHistory();
 const { id } = useParams();
 
 	const fetchCesta = useCallback(() => {
-	    return fetch(` cesta/${id}`, {headers:{
+	    return fetch(`../../../cesta/${id}`, {headers:{
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -49,7 +49,7 @@ if (localStorage.getItem('auth')==null){
 
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            fetch(` cesta/${id}`, {
+            fetch(`../../cesta/${id}`, {
                 headers: {
                   "Content-Type": "application/json"
                 },
