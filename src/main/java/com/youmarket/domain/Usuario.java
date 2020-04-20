@@ -56,7 +56,6 @@ public class Usuario {
 
 	@Column(name="fecha_nacimiento")
 	@Temporal(TemporalType.DATE)
-	@Past
 	private Date fechaNacimiento;
 	
 	@ManyToOne(optional= true)
@@ -70,7 +69,7 @@ public class Usuario {
 	private String cPostal;
 	
 	@Column(name="pedido_restante")
-	@Range(min=0, max=4)
+	@Range(min=0, max=5)
 	private Integer pedidosRestantes;
 
 	@NotBlank
