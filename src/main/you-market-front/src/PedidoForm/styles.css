@@ -108,7 +108,7 @@
 }
 
 .pedido-form-envio-container input[type="number"] {
-    width: 50px;
+    width: 100px;
 }
 
 .pedido-margin {
