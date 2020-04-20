@@ -30,6 +30,7 @@ function SuscripcionForm() {
             <Navegacion />
 
 			<div className="container">
+			<p style={{ margin: 20 }}>Si cambias tu suscripción, podrás pagarla cuando acabe tu suscripción actual.</p>
 			<Card title="Modificación de la suscripción" subTitle="Seleccione la suscripción a la que desea cambiar" style={{ margin: 20 }}>
 
 				<Formik
@@ -77,7 +78,7 @@ function SuscripcionForm() {
 									</ListaSuscripciones>
 
 
-									<button type="submit" className="boton" disabled={isSubmitting}>
+									<button type="submit" className="button-finish" disabled={isSubmitting}>
 										Enviar
 									</button>
 

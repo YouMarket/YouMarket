@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 
-
 public class FormPedidos {
 
 	private String 		direccion1;	

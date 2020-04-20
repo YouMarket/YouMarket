@@ -12,6 +12,14 @@ function updatePrecioFinal(cantidad, precio){
 	return precioFinal
 }
 
+function limpiaStorage(){
+	sessionStorage.clear();
+
+}
+
+
+
+
 function Carro() {
 precioFinal=0.00
 const[carrito, setCarrito]=useState([]);
@@ -21,12 +29,22 @@ const[mensajeAlerta, setMensajeAlerta] = useState([]);
 let history=useHistory();
 
 	const fetchCarrito=useCallback(()=> {
-		return fetch('carrito')
-			.then(res=> res.json())
-			.then(carrito=> {
-				setCarrito(carrito)
-			});
+		return construyeCarrito();
+		
 	}, []);
+
+	function construyeCarrito(){
+		var prods = [];
+		Object.keys(sessionStorage).forEach(element => {
+			var ele = sessionStorage.getItem(element)
+			if (JSON.parse(ele)){
+				prods.push(JSON.parse(ele))
+			}
+			setCarrito(prods)
+		});
+		setCarrito(prods)
+		return 0;
+	}
 
 	useEffect(()=> {
 		fetchCarrito(carrito);
@@ -103,7 +121,7 @@ let history=useHistory();
 				   <Form onSubmit={handleSubmit}>
 	
 					 <div className="button-carrito-a-cesta">
-					 <button type="submit" disabled={isSubmitting} className="button-vaciar">
+					 <button type="submit" disabled={isSubmitting} onClick={() => limpiaStorage()} className="button-vaciar">
 					 Vaciar
 					 </button>
 					 </div>
@@ -173,12 +191,13 @@ let history=useHistory();
 	
 					 onSubmit={(values, { setSubmitting })=> {
 					   setTimeout(()=> {
-						   fetch(`/carritoACesta`, {headers: {
+
+						   fetch(`/carritoACesta/${values.id}`, {headers: {
 							'Content-Type' : 'application/json',
 							'Accept' : 'application/json',
 							'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 								   method:'POST',
-								   body:JSON.stringify(values, null, 2)
+								   body:JSON.stringify(carrito, null, 1)
 						   }).then((response)=> {
 							   setSubmitting=false;
 	
@@ -231,7 +250,7 @@ let history=useHistory();
 		</div>
 	 : (
 	 <div className="container">
-		<h1 className="introduction introduction-empty">Vaya.. parece que aún no tienes productos añadidos</h1>
+		<h1 className="introduction introduction-empty">Vaya... parece que aún no tienes productos añadidos</h1>
 	 	<div className="introduction"><img className="carrito-empty-image" src={shoppingSad} alt="Carro vacío"/></div>
 		<p className="empty-view-text">Si te apetece, puedes añadir productos desde <NavLink className="link-button" to="/productos">aquí</NavLink></p>
 	 </div>)}

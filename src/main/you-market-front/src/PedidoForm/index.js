@@ -19,8 +19,10 @@ var pedido3copiado = false;
 var pedido4copiado = false;
 
 function setPedidoCheck(){
-	
+
 }
+
+
 
 function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");
@@ -105,8 +107,52 @@ export function PedidoForm() {
 	const [envioTomas, setEnvioTomas] = useState(localStorage.getItem('enviosD'));
 
 
+	function construyeCarrito(){
+		var prods = [];
+		Object.keys(sessionStorage).forEach(element => {
+			var ele = sessionStorage.getItem(element)
+			if (JSON.parse(ele)){
+				prods.push(JSON.parse(ele))
+			}
+		});
+		console.log('Productos del carrito');
+		console.log(prods);
+		return prods;
+	}
 
-	useEffect(() => {
+	const[precioTotalCestas, setPrecioTotalCestas] = useState(0.0);
+
+	function totalDeCestas(values){
+		fetch('precio/', {
+  			headers: {
+ 				"Content-Type": "application/json"
+ 			},
+ 			method:'POST',
+ 			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})}).
+ 			then(res => res.json()).then(precio1 => setPrecioTotalCestas(precio1));
+		return precioTotalCestas;
+	}
+
+	function precioTotal(values){
+		var precioTotal = 0.0;
+		construyeCarrito().forEach(element => {
+			precioTotal = precioTotal + element.producto.precioIva * element.cantidad;
+		})
+
+
+		precioTotal = totalDeCestas(values);
+		console.log('PRECIO TOTAL');
+		console.log(precioTotalCestas)
+		console.log(precioTotal);
+		console.log('AQUI HIJOS DE PUTA');
+		console.log(values.cestaId1);
+		return precioTotal;
+	}
+
+
+
+
+	useEffect(() => {construyeCarrito(),
 		fetch('/usuario/envios', {
 			headers:{
 			  'Content-Type' : 'application/json',
@@ -126,14 +172,15 @@ export function PedidoForm() {
 
 
 
-	const precio = () => {
+	const precio = (values) => {
 		const [total, setTotal] = useState(0.0);
 		const fetchTotal = useCallback(() => {
 		     return fetch('../precioTotalCarrito', {headers:{
 		  'Content-Type' : 'application/json',
 		  'Accept' : 'application/json',
 		  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		  method:'GET'})
+		  method:'GET',
+		  body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})})
 		       .then(res => res.json())
 		       .then(total => {
 		         setTotal(total)
@@ -203,7 +250,7 @@ function pagar() {
 			 j.style.display = "none";
 		}
 			else if(started===false){
-				 
+
 			}
 	}
 
@@ -325,9 +372,9 @@ function pagar() {
 
 		if(localStorage.getItem('auth')==null){
 			history.push('/login');
-			
+
 		}
-		
+
 		if(!localStorage.getItem('carrolleno')){
 			history.push('/');
 		}
@@ -491,7 +538,7 @@ function pagar() {
               if (values.fechaEnvio2 < today) {
   	        	errors.fechaEnvio2 = 'Fecha no válida';
                 }
-              
+
         	} else {
         		values.direccion2 = null;
         		values.poblacion2 = null;
@@ -545,7 +592,7 @@ function pagar() {
             }else if(values.horaEnvioFin3 < values.horaEnvioIni3){
           	  errors.horaEnvioFin3 = 'La hora de inicio de entrega no puede mayor a la de final'
             }
-	        
+
 	        if (values.horaEnvioFin3==="" || values.horaEnvioIni3==null) {
 	        	errors.horaEnvioFin3 = 'Campo obligatorio';
 	        }
@@ -636,21 +683,7 @@ function pagar() {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-        	fetch('/pedido/create', {
-        			headers: {
-        				"Content-Type": "application/json",
-        				'Accept' : 'application/json',
-        				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-        			method:'POST',
-        			body:JSON.stringify(values, null, 2)
-        	}).then(() =>
-        	 {
-        		 localStorage.removeItem('carrolleno');
-        		 handleRedirect();
-        	 })
-          setSubmitting(false);
-        }, 400);
+        setTimeout(() => { }, 400);
       }}
     >
       {({
@@ -727,7 +760,7 @@ function pagar() {
 				type="text"
 				name="direccion1"
 				value={values.direccion1}
-		        placeholder="c/Cisnes"
+		        placeholder="Calle Cisnes"
 				onChange={handleChange}
 				onBlur={handleBlur}
 		      	/>
@@ -810,7 +843,9 @@ function pagar() {
 			   { cestas().map((cesta) => (
 
 								   <option value={cesta.id}>{cesta.nombre}</option>
+
 								   ))}
+
 			   <option value="0">Carrito</option>
 			   </select>
 			   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
@@ -1058,7 +1093,7 @@ function pagar() {
 				type="text"
 				name="direccion3"
 				value={values.direccion3}
-		        placeholder="c/Cisnes"
+		        placeholder="Calle Cisnes"
 				onChange={handleChange}
 				onBlur={handleBlur}
 				/>
@@ -1219,7 +1254,7 @@ function pagar() {
 			type="text"
 			name="direccion4"
 			value={values.direccion4}
-	        placeholder="c/Cisnes"
+	        placeholder="Calle Cisnes"
 			onChange={handleChange}
 			onBlur={handleBlur}
 			/>
@@ -1322,24 +1357,24 @@ function pagar() {
 		<br/><br/>
 		</div>
 		<div>
-        <a id="pagar-a" href="#" onClick={pagar}>
-        	Pagar
+        <a id="pagar-a" href="#">
+        	<button onClick={pagar} className="button-finish">Pagar</button>
         </a>
         	</div>
         	<div className="grid" id="paypal-b">
 			<h2>Elige tu método de pago 👇</h2>
 
 	         <PayPalButton
-				 amount={precio()}
-	         onSuccess={(values, { setSubmitting }) => {
+				 amount={precioTotal(values)}
+	         onSuccess={(valuesP, { setSubmitting }) => {
 	             setTimeout(() => {
 	             	fetch('', {
 	             			headers: {
 	             				"Content-Type": "application/json"
 	             			},
 	             			method:'POST',
-	             			body:JSON.stringify(values, null, 2)
-	             	}).then(() =>
+	             			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})
+	             	}).then(console.log(JSON.stringify({carrito: construyeCarrito(), pedidoForm:values}))).then(() =>
 	             	 {
 	             		 handleSubmit();
 	             	 }).then(() =>

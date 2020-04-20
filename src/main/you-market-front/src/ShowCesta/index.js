@@ -1,3 +1,4 @@
+
 import React,  { useCallback, useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
@@ -5,161 +6,125 @@ import './styles.css';
 import Cesta from '../Cesta';
 import Header from '../Header';
 import { Formik } from 'formik';
+
 import { useHistory } from "react-router-dom";
 
+
 function ShowCesta() {
-const [cesta, setCesta] = useState();
-const [productoCesta, setProductoCesta] = useState();
-const [total, setTotal] = useState(0.0);
-let history = useHistory();
-const { id } = useParams();
+	const [cesta, setCesta] = useState();
+	const [productoCesta, setProductoCesta] = useState();
+	const [total, setTotal] = useState(0.0);
+	let history = useHistory();
+	const { id } = useParams();
 
 	const fetchCesta = useCallback(() => {
-	    return fetch(`../../../cesta/${id}`, {headers:{
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		method:'GET'})
-	      .then(res => res.json())
-	      .then(cesta => {
-	        setCesta(cesta)
+		return fetch(`../../../cesta/${id}`, {
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json',
+				'Authorization': 'Bearer ' + localStorage.getItem('auth')
+			},
+			method: 'GET'
+		})
+			.then(res => res.json())
+			.then(cesta => {
+				setCesta(cesta)
 
-	      });
-	  }, []);
-
-
-	useEffect(() => {
-	    fetchCesta(cesta);
-	  }, []);
+			});
+	}, []);
 
 	const fetchProductoCesta = useCallback(() => {
-	    return fetch(`../../../cesta/productos/${id}`, {headers:{
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		method:'GET'})
-	      .then(res => res.json())
-	      .then(productoCesta => {
-	        setProductoCesta(productoCesta)
-
-	      });
-	  }, []);
+		return fetch(`../../../cesta/productos/${id}`, {
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json',
+				'Authorization': 'Bearer ' + localStorage.getItem('auth')
+			},
+			method: 'GET'
+		})
+			.then(res => res.json())
+			.then(productoCesta => {
+				setProductoCesta(productoCesta)
+				var tot = 0.0
+				productoCesta.forEach(prod => {
+					tot = tot + ( prod.cantidad * prod.producto.precioIva)
+				})
+				setTotal(tot)
+			});
+	}, []);
 
 	useEffect(() => {
+		fetchCesta(cesta);
 		fetchProductoCesta(productoCesta);
-	  }, []);
+	}, []);
 
-	const fetchTotal = useCallback(() => {
-	    return fetch(`../../../cesta/productos/total/${id}`, {headers:{
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		method:'GET'})
-	      .then(res => res.json())
-	      .then(total1 => {
-	        setTotal(total1)
+	function storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad){
+        var prodSession = sessionStorage.getItem('prod_'+id);
+        if(!prodSession){
+            var jsonProd = {
+                'producto': {
+                    'id': id, 
+                    'nombre': nombre,
+                    'precioIva': precio,
+                    'supermercado': supermercado,
+                    'urlImagen': urlImagen,
+                    'unidad': unidad
+                },
+                'cantidad': cantidad
+            }
+            var res = JSON.stringify(jsonProd)
+            console.log(res)
+            sessionStorage.setItem('prod_'+id, res)
+        }else{
+            var strProd = JSON.parse(prodSession)
+            strProd.cantidad = parseInt(strProd.cantidad,10)+cantidad;
+            console.log(strProd)
+            sessionStorage.setItem('prod_'+id, JSON.stringify(strProd))
+        }
+	}
 
-	      });
-	  }, []);
+	function storeAsCarrito(){
+		productoCesta.forEach(prod => {
+			storeProdSession(prod.producto.id, prod.cantidad, prod.producto.nombre, prod.producto.precioIva, prod.producto.urlImagen, prod.producto.supermercado, prod.producto.unidad)
+		});
+		history.push('/carro')
+	}
 
-	useEffect(() => {
-		fetchTotal(total);
-	  }, []);
-
-
-	if (!cesta){
+	if (!cesta) {
 		return null;
 	}
 
-	if (localStorage.getItem('auth')==null){
+	if (localStorage.getItem('auth') == null) {
 		history.push('/login');
 	}
 
+	return (
+		<div>
+			<Header />
 
-  return(
-<div>
-  <Header/>
+			<div className="cesta-container-show">
 
-	  <div className="cesta-container-show">
+				<Cesta nombre={cesta.nombre} id={cesta.id} total="" />
+				<h2 className="show-cesta-h">Productos</h2>
+				<div className="separador"></div>
+				{productoCesta && productoCesta.map((productoC) => (
 
-	  <Cesta nombre={cesta.nombre} id={cesta.id} total=""/>
-	<h2 className="show-cesta-h">Productos</h2>
-	  <div className="separador"></div>
-	  { productoCesta && productoCesta.map((productoC) => (
+					<div key={productoC.producto.id} className="div-productos-cesta">
+						<Link to={`/show/producto/${productoC.producto.id}`}> {productoC.producto.nombre}
+						</Link> x{productoC.cantidad}
+						<img src={productoC.url} />
+					</div>
 
-			    <div key={productoC.producto.id} className="div-productos-cesta">
-			    
-			    <Link to={`/show/producto/${productoC.producto.id}`}> {productoC.producto.nombre}
-			    </Link> x{productoC.cantidad}
-			    <img src={productoC.url} alt={productoC.nombre}/>
+				))}
+				<p className="cesta-total">Total: {total}€</p>
 
-
-			    
-			    </div>
-
-	           ))}
-	  <p className="cesta-total">Total: {total}€</p>
-	    
-	    <Formik
-         initialValues={{id}}
-
-         onSubmit={(values, { setSubmitting }) => {
-           setTimeout(() => {
-           	fetch(`/cestaACarrito`, {headers: {
-        		'Content-Type' : 'application/json',
-        		'Accept' : 'application/json',
-        		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-           			method:'POST',
-           			body:JSON.stringify(values, null, 2)
-           	}).then((response)=> {
-           		setSubmitting=false;
-
-           	}).then(() =>
-           	{history.push("/carro");}
-               )
-
-
-           }, 400);
-         }}
-       >
-         {({
-           values,
-           errors,
-           touched,
-           handleChange,
-           handleBlur,
-           handleSubmit,
-           isSubmitting,
-           /* and other goodies */
-         }) => (
-           <form onSubmit={handleSubmit}>
-           <div className="grid-form-cesta">
-           
-             <input
-             id="id"
-               type="hidden"
-               name="id"
-               onChange={handleChange}
-               onBlur={handleBlur}
-               value={id}
-             	className="id-input-cesta"
-             />
-
-             <div className="grid2-carrito-cesta">
-             <button type="submit" disabled={isSubmitting} className="submit-cesta-carrito">
-             Añadir
-             </button>
-             </div>
-             </div>
-           </form>
-
-         )}
-       </Formik>
-
-	           
-	  </div>
-
-  </div>
- );
+				<div className="grid2-carrito-cesta">
+					<button onClick={() => {storeAsCarrito()}}  className="submit-cesta-carrito">
+						Añadir
+            		</button>
+				</div>
+			</div>
+		</div>
+	);
 }
 export default ShowCesta;

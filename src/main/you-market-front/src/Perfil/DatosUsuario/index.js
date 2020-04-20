@@ -137,7 +137,7 @@ function DatosUsuario() {
 			</Card>
 			<div className="a-cambio-perfil">
 			{meses != 1 &&
-				<a href="/cambio-suscripcion" className="modificar-suscripcion">
+				<a href="/cambio-suscripcion" className="modificar-button">
 					<button className="button-finish">Modificar Suscripción</button>
 				</a>
 
@@ -151,7 +151,7 @@ function DatosUsuario() {
 			}
 			</div>
 			<div className="a-cambio-perfil2">
-			<a href="/cambio-perfil">
+			<a href="/cambio-perfil" className="modificar-button">
 			<button className="button-finish">Modificar Perfil</button>
 			</a>
 			</div>
@@ -166,13 +166,12 @@ function DatosUsuario() {
 				</div>
 			</Card>
 
-			{ <button className="boton-perfil" onClick={() => {if (window.confirm('¿Seguro que desea eliminar su cuenta?')) deleteUser()}}>Eliminar cuenta</button> }
+			{ <button className="button-perfil button-finish" onClick={() => {if (window.confirm('¿Seguro que desea eliminar su cuenta?')) deleteUser()}}>Eliminar cuenta</button> }
 
 
 			<a href={urlPDF} target="_blank">
-				<button className="button-finish">Exportar información del usuario en PDF</button>
+				<button className="button-perfil button-finish">Exportar información del usuario en PDF</button>
 			</a>
-			{/* <button className="boton-perfil">Cambiar datos</button>*/}
 		</div>
 	</div>
  );
