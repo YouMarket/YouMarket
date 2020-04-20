@@ -40,12 +40,12 @@ function Recetas() {
 	  		(<div>
 			<h2 className="container">¡Aquí tienes las recetas de la dieta que has seleccionado!</h2>
 			<div className="recetas-container container">
+			{recetas.length > 0 ? 
 				<div className="grid">
-					{recetas.length > 0 ? 
-					<div>{recetas && recetas.map(receta => (
-						<Receta id={receta.id} imagen={receta.imagen} nombre={receta.nombre} personas={receta.personas} tiempo={receta.tiempo} calorias={receta.calorias} />
-					))}</div>:<h1 className="container">No hay recetas</h1>}
-				</div>
+					{recetas && recetas.map(receta => (
+						<Receta id={receta.id} url_imagen={receta.url_imagen} nombre={receta.nombre} personas={receta.personas} tiempo={receta.tiempo} calorias={receta.calorias} />
+					))}
+				</div>:<h1 className="container">No hay recetas</h1>}
 			</div>
 			</div>) :(<SinAcceso/>)}
 	</div>

@@ -68,13 +68,13 @@ insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, depart
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (31,'Habas cocidas 425 g. escurrido',1.85,1.2,'€','https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201909/26/00118029902709____1__600x600.jpg',1,2,7);
 insert into producto (id, nombre, precio, precio_iva, unidad, url_imagen, departamento, supermercado_id, marca) values (32,'Brócoli 500g.',0.99,1.2,'€','https://static1.abc.es/media/salud/2019/05/17/brocoli-kOoH--620x349@abc.jpg',1,2,8);
 
-insert into dieta_productos (dieta_id, productos_id) values (123, 30);
-insert into dieta_productos (dieta_id, productos_id) values (123, 31);
-insert into dieta_productos (dieta_id, productos_id) values (123, 32);
+insert into dieta_productos (dieta_id, productos_id) values (1, 30);
+insert into dieta_productos (dieta_id, productos_id) values (1, 31);
+insert into dieta_productos (dieta_id, productos_id) values (1, 32);
 
-insert into dieta_productos (dieta_id, productos_id) values (234, 31);
-insert into dieta_productos (dieta_id, productos_id) values (234, 11);
-insert into dieta_productos (dieta_id, productos_id) values (234, 19);
+insert into dieta_productos (dieta_id, productos_id) values (2, 31);
+insert into dieta_productos (dieta_id, productos_id) values (2, 11);
+insert into dieta_productos (dieta_id, productos_id) values (2, 19);
 
 INSERT INTO receta (`id`,`calorias`, `descripcion`, `nombre`, `personas`, `tiempo`, `url_imagen`) values (1,2682, 'Precalentar el horno a 220º C y peparar dos bandejas o fuentes grandes con papel de hornear antiadherente. Enjuagar y escurrir bien las lentejas, con suavidad, tanto si se usan en conserva como si las hemos cocido en casa. Es mejor si las hemos dejado ligeramente firmes. Disponer en un recipiente, añadir el aceite de oliva, el vinagre, salpimentar y mezclar con las especias. Cortar en juliana fina las dos cebollas y combinar con las lentejas. Extender en las dos bandejas, repartiendo la mezcla de tal modo que no se apelotonen demasiado, dejando una sola capa.Hornear ambas bandejas a la vez, cambiando sus posiciones y girándolas pasados 15 minutos. Cuando lleven ya 20-25 minutos, vigilar que no se quemen y remover con una espátula. Continuar horneando hasta que estén muy crujientes y tostadas. Dejar enfriar fuera del horno y servir con ralladura de limón y cebollino o perejil picado, salpimentando al gusto. Aliñar con una vinagreta, si se desea.'
 								, 'Ensalada de lentejas', 4, 40, 'https://i.blogs.es/2b1070/ensalada-lentejas1/1366_2000.jpg');
@@ -85,10 +85,10 @@ INSERT INTO receta (`id`,`calorias`, `descripcion`, `nombre`, `personas`, `tiemp
 INSERT INTO receta (`id`,`calorias`, `descripcion`, `nombre`, `personas`, `tiempo`, `url_imagen`) values (4, 1842, 'Y terminamos este apartado hablando de una receta que es perfecta para el desayuno o para la cena. Se trata de preparar unos ricos huevos con jamón serrano que tendrán un sabor muy intenso y delicioso. Para ello, tan solo necesitarás: 2 huevos, Jamón serrano a taquitos, Sal y pimienta, Aceite de oliva. Hay dos opciones para preparar este plato: por un lado, puedes romper los huevos y, así, hacer una especie de salteado con jamón. O, por otro lado, puedes preparar los huevos a la plancha, con poco aceite, y disfrutar de un plato sabroso y delicioso. '
 								, 'Huevos con jamón serrano', 1, 15, 'http://i.ytimg.com/vi/kUnwEm6J2j4/maxresdefault.jpg');
 
-INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (123,1);
-INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (123,2);
-INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (234,3);
-INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (234,4);
+INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (1,1);
+INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (1,2);
+INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (2,3);
+INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (2,4);
 
 
 

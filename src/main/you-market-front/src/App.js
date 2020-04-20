@@ -38,6 +38,7 @@ import AlertaBrecha from './AlertaBrecha';
 import PedidoExito from './PedidoExito';
 import Recetas from './Recetas';
 import Receta from './Receta';
+import RecetaDetalle from './RecetaDetalle';
 
 function App() {
 
@@ -133,7 +134,7 @@ function App() {
 					<Recetas />
 				</Route>
 				<Route path="/recetas/:id">
-					<Receta />
+					<RecetaDetalle />
 				</Route>
 				<Route path="/productos">
 					<Productos />
