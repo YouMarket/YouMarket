@@ -62,7 +62,7 @@ public class CestaService {
 		cestaRepository.deleteById(c.getId());
 	}
 
-	public Object findById(Integer id, UserPrincipal currentUser) {
+	public Cesta findById(Integer id, UserPrincipal currentUser) {
 		Cesta res=null;
 		Optional<Cesta> c=cestaRepository.findById(id);
 		if(c.isPresent()) {

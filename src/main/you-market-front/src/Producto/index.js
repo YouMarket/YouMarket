@@ -13,6 +13,7 @@ interface Props {
 	unidad: string,
 }
 
+
 function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) {
 	
 	const [cantidad, setCantidad] = useState(0);
@@ -31,43 +32,39 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 		setCantidad(cantidad + 1)
 		document.getElementById(idContador).textContent = cantidad
 	}
-	
+  
+	function storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad){
+        var prodSession = sessionStorage.getItem('prod_'+id);
+        if(!prodSession){
+            var jsonProd = {
+                'producto': {
+                    'id': id, 
+                    'nombre': nombre,
+                    'precioIva': precio,
+                    'supermercado': {
+                        'nombre': supermercado
+                    },
+                    'urlImagen': urlImagen,
+                    'unidad': unidad
+                },
+                'cantidad': cantidad
+            }
+            var res = JSON.stringify(jsonProd)
+            console.log(res)
+            sessionStorage.setItem('prod_'+id, res)
+        }else{
+            var strProd = JSON.parse(prodSession)
+            strProd.cantidad = parseInt(strProd.cantidad,10)+cantidad;
+            console.log(strProd)
+            sessionStorage.setItem('prod_'+id, JSON.stringify(strProd))
+        }
+    }
+
 	function sendToBack(id, cantidad, nombre, precio, urlImagen, supermercado, unidad) {
-		var prodSession = sessionStorage.getItem('prod_'+id);
-		if(!prodSession){
-			var jsonProd = {
-				'producto': {
-					'id': id, 
-					'nombre': nombre,
-					'precioIva': precio,
-					'supermercado': {
-						'nombre': supermercado
-					},
-					'urlImagen': urlImagen,
-					'unidad': unidad
-				},
-				'cantidad': cantidad
-			}
-			var res = JSON.stringify(jsonProd)
-			console.log(res)
-			sessionStorage.setItem('prod_'+id, res)
-		}else{
-			var strProd = JSON.parse(prodSession)
-			strProd.cantidad = parseInt(strProd.cantidad,10)+cantidad;
-			console.log(strProd)
-			sessionStorage.setItem('prod_'+id, JSON.stringify(strProd))
-		}
+		storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad)
+
 
 		setCantidad(0);
-		fetch('/carrito', {
-			headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json",
-			},
-			method:'POST',
-			body:JSON.stringify({postId: id, postCantidad: cantidad})
-		})
-		
 	}
 
   return(

@@ -75,7 +75,7 @@ function Header() {
 			<a href="#" className="hamburger-menu" onClick={menuInteraction}>
 				<img src={menu} className="hamburger-icon" alt="Menu"/>
 			</a>
-			<Link className="login" to={login}>
+			<Link className="login" onClick={() => sessionStorage.clear()} to={login}>
 				{loginEsp}
 			</Link>
 		</div>

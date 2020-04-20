@@ -15,10 +15,8 @@ function DietaDetalle() {
 	      .then(res => res.json())
 	      .then(dieta => {
 	        setDieta(dieta)
-	        console.log(dieta);
 	      });
 	  	}, []);
-    console.log(dieta);
     useEffect(() => {
 	    fetchDieta(dieta);
 	  }, []);	

@@ -22,6 +22,8 @@ function setPedidoCheck(){
 	
 }
 
+
+
 function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");
 	  var poblacion1 = document.getElementById("poblacion1");
@@ -103,10 +105,55 @@ export function PedidoForm() {
 	let history = useHistory();
 
 	const [envioTomas, setEnvioTomas] = useState(0);
+	
 
 
+	function construyeCarrito(){
+		var prods = [];
+		Object.keys(sessionStorage).forEach(element => {
+			var ele = sessionStorage.getItem(element)
+			if (JSON.parse(ele)){
+				prods.push(JSON.parse(ele))
+			}
+		});
+		console.log('Productos del carrito');
+		console.log(prods);
+		return prods;
+	}
+	
+	const[precioTotalCestas, setPrecioTotalCestas] = useState(0.0);
+	
+	function totalDeCestas(values){
+		fetch('precio/', {
+  			headers: {
+ 				"Content-Type": "application/json"
+ 			},
+ 			method:'POST',
+ 			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})}).
+ 			then(res => res.json()).then(precio1 => setPrecioTotalCestas(precio1));
+		return precioTotalCestas;
+	}
+	
+	function precioTotal(values){
+		var precioTotal = 0.0;
+		construyeCarrito().forEach(element => {
+			precioTotal = precioTotal + element.producto.precioIva * element.cantidad;
+		})
+		
+		
+		precioTotal = totalDeCestas(values);
+		console.log('PRECIO TOTAL');
+		console.log(precioTotalCestas)
+		console.log(precioTotal);
+		console.log('AQUI HIJOS DE PUTA');
+		console.log(values.cestaId1);
+		return precioTotal;
+	}
 
-	useEffect(() => {
+
+	
+
+	useEffect(() => {construyeCarrito(),
 		fetch('/usuario/envios', {
 			headers:{
 			  'Content-Type' : 'application/json',
@@ -124,14 +171,15 @@ export function PedidoForm() {
 
 
 
-	const precio = () => {
+	const precio = (values) => {
 		const [total, setTotal] = useState(0.0);
 		const fetchTotal = useCallback(() => {
 		     return fetch('../precioTotalCarrito', {headers:{
 		  'Content-Type' : 'application/json',
 		  'Accept' : 'application/json',
 		  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		  method:'GET'})
+		  method:'GET',
+		  body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})})
 		       .then(res => res.json())
 		       .then(total => {
 		         setTotal(total)
@@ -141,7 +189,7 @@ export function PedidoForm() {
 		 useEffect(() => {
 		  fetchTotal(total);
 		   }, []);
-
+		 
 		 return total;
 	}
 
@@ -605,21 +653,7 @@ function pagar() {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-        	fetch('/pedido/create', {
-        			headers: {
-        				"Content-Type": "application/json",
-        				'Accept' : 'application/json',
-        				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-        			method:'POST',
-        			body:JSON.stringify(values, null, 2)
-        	}).then(() =>
-        	 {
-        		 localStorage.removeItem('carrolleno');
-        		 handleRedirect();
-        	 })
-          setSubmitting(false);
-        }, 400);
+        setTimeout(() => { }, 400);
       }}
     >
       {({
@@ -779,7 +813,9 @@ function pagar() {
 			   { cestas().map((cesta) => (
 
 								   <option value={cesta.id}>{cesta.nombre}</option>
+								   
 								   ))}
+			  
 			   <option value="0">Carrito</option>
 			   </select>
 			   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
@@ -1299,16 +1335,16 @@ function pagar() {
 			<h2>Elige tu método de pago 👇</h2>
 
 	         <PayPalButton
-				 amount={precio()}
-	         onSuccess={(values, { setSubmitting }) => {
+				 amount={precioTotal(values)}
+	         onSuccess={(valuesP, { setSubmitting }) => {
 	             setTimeout(() => {
 	             	fetch('', {
 	             			headers: {
 	             				"Content-Type": "application/json"
 	             			},
 	             			method:'POST',
-	             			body:JSON.stringify(values, null, 2)
-	             	}).then(() =>
+	             			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})
+	             	}).then(console.log(JSON.stringify({carrito: construyeCarrito(), pedidoForm:values}))).then(() =>
 	             	 {
 	             		 handleSubmit();
 	             	 }).then(() =>
