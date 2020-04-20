@@ -45,8 +45,8 @@ class Login extends React.Component{
 					method:'GET'})
 				      .then(res => res.json())
 				      .then(dietasCheck => {
-						localStorage.setItem('dietasCheck', dietasCheck);
-				        
+				    	  localStorage.setItem('dietasCheck', dietasCheck);
+						  this.handleRedirect();
 				      });
 		 }
 		 
@@ -59,7 +59,7 @@ class Login extends React.Component{
 				      .then(res => res.json())
 				      .then(cestasCheck1 => {
 				    	  localStorage.setItem('cestasCheck', cestasCheck1);
-				        
+
 				      });
 		 }
 		 
@@ -107,10 +107,9 @@ class Login extends React.Component{
 						if (data.accessToken!=null) {
 		                    this.onChangeStatus("Logged");
 		                    localStorage.setItem('auth', data.accessToken);
-		                    this.dietasCheck();
 		                    this.cestasCheck();
 		                    this.enviosCheck();
-		                    this.handleRedirect();
+		                    this.dietasCheck();
 		                  }
 		                else{
 		                	this.onChangeErrors("Contraseña incorrecta");
