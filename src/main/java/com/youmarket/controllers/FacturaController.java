@@ -87,9 +87,7 @@ public class FacturaController {
 	@RequestMapping(value = "/pdf", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> descargaPDF(){
-		
-		
-		ByteArrayInputStream bis = PDFUtil.suscripcionPDFGenerator(null, null);
+		ByteArrayInputStream bis = PDFUtil.suscripcionPDFGenerator(null);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=prueba.pdf");
@@ -104,7 +102,6 @@ public class FacturaController {
 	@RequestMapping(value = "/generateFactura/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
   	public ResponseEntity<InputStreamResource> descargaPDF(@PathVariable Integer id){
-    
     	Factura factura = facturaService.findById(id);
 		ByteArrayInputStream bis = null;
 		
@@ -113,10 +110,7 @@ public class FacturaController {
 			List<CestaProducto> productos = cpService.findProdsByCesta(factura.getPedido());
 			bis = PDFUtil.pedidoPDFGenerator(factura, productos);
 		}else {
-			Suscripcion sus = suscripcionService.findSuscripcionByPrecio(factura.getTotalIva());
-			System.out.println(factura.getTotalIva());
-			System.out.println(sus);
-			bis = PDFUtil.suscripcionPDFGenerator(factura, sus);
+			bis = PDFUtil.suscripcionPDFGenerator(factura);
 		}
 
         HttpHeaders headers = new HttpHeaders();
@@ -128,5 +122,12 @@ public class FacturaController {
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
+	}
+	
+	@GetMapping("/lastSuscripcion")
+	public Factura lastSuscripcion(@CurrentUser UserPrincipal user) {
+		Usuario usuario = usuarioService.findById(user.getId()).orElse(null);
+		Factura f = facturaService.findLastSuscripcion(usuario);
+		return f;
 	}
 }
