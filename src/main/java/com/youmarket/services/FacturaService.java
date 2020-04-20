@@ -58,6 +58,9 @@ public class FacturaService {
 		f.setTotal(importeSinIVA.setScale(2, RoundingMode.HALF_UP).doubleValue());
 		f.setFechaFactura(fechaPago);
 		f.setUsuario(user);
+		if(user!=null) {
+			f.setSuscripcion(user.getSuscripcion());
+		}
 		f.setPedido(p);
 		return repo.save(f);
 	}

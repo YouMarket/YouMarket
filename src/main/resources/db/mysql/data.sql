@@ -16,10 +16,13 @@ insert into departamento (id, nombre) values (3, 'Vinos');
 insert into departamento (id, nombre) values (4, 'Perfumería');
 
 insert into suscripcion (id, nombre, precio, envios, dietista) values (1, 'Un envío sin dietista', 6, 1, false);
-insert into suscripcion (id, nombre, precio, envios, dietista) values (2, 'Dos envío sin dietista', 10, 2, false);
-insert into suscripcion (id, nombre, precio, envios, dietista) values (3, 'Tres envío sin dietista', 14, 3, false);
-insert into suscripcion (id, nombre, precio, envios, dietista) values (4, 'Cuatro envío sin dietista', 17, 4, false);
-insert into suscripcion (id, nombre, precio, envios, dietista) values (5, 'Cuatro envío con dietista', 20, 4, true);
+insert into suscripcion (id, nombre, precio, envios, dietista) values (2, 'Un envío con dietista', 9, 1, true);
+insert into suscripcion (id, nombre, precio, envios, dietista) values (3, 'Dos envíos sin dietista', 10, 2, false);
+insert into suscripcion (id, nombre, precio, envios, dietista) values (4, 'Dos envíos con dietista', 13, 2, true);
+insert into suscripcion (id, nombre, precio, envios, dietista) values (5, 'Tres envíos sin dietista', 14, 3, false);
+insert into suscripcion (id, nombre, precio, envios, dietista) values (6, 'Tres envíos con dietista', 17, 3, true);
+insert into suscripcion (id, nombre, precio, envios, dietista) values (7, 'Cuatro envíos sin dietista', 17, 4, false);
+insert into suscripcion (id, nombre, precio, envios, dietista) values (8, 'Cuatro envíos con dietista', 20, 4, true);
 
 insert into role(id, name) values (1, 'CLIENTE');
 insert into role(id, name) values (2, 'CLIENTE_CON_DIETAS');
@@ -29,7 +32,7 @@ insert into role(id, name) values (4, 'ADMIN');
 insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, telefono, suscripcion_id) 
 	values (1, 'Primer', 'Usuario', '00000000T', '41001', 'cliente@cliente.es', '1234asdf', '666999888', 4);
 
-insert into factura (id, total, total_iva, usuario_id) values (1, 13.43, 17, 1);
+insert into factura (id, total, total_iva, usuario_id, suscripcion_id) values (1, 13.43, 17, 1, 7);
 
 insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (1, 'Vegetariana de invierno', 'Vegetariana', True, 'https://static1.abc.es/media/salud/2019/05/17/brocoli-kOoH--620x349@abc.jpg', 'Esto es una dieta sin carne ni pescado');
 insert into dieta (id, nombre, tipo, activa, url_imagen, descripcion) values (2, 'Hiperproteica', 'Hiperproteica', True, 'https://www.aquiconfidencial.es/wp-content/uploads/2018/07/dieta-hiperproteica.jpg', 'Esto es una dieta alta en proteínas. Incluye grandes cantidades de legumbres, carne, pescado y huevo.');

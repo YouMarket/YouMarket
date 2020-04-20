@@ -46,6 +46,10 @@ public class Factura {
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
+	@ManyToOne(optional= true)
+	@JoinColumn(name="suscripcion_id")
+	private Suscripcion suscripcion;
+	
 	@ManyToOne(optional = true)
 	@JoinColumn(name="pedido_id")
 	private Pedido pedido;

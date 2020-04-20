@@ -36,7 +36,8 @@ public class PDFUtil {
 	
 	
 	private static NumberFormat numFormatter = new DecimalFormat("#0.00"); 
-	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	private static SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 	
 	@Autowired
 	CestaProductoService cpService;
@@ -55,7 +56,7 @@ public class PDFUtil {
 			p.add("\nDirección: "+factura.getPedido().getDireccion());
 		}
 		if(factura.getFechaFactura() != null)
-			p.add("\nFecha de la factura: "+ dateFormatter.format(factura.getFechaFactura()));
+			p.add("\nFecha de la factura: "+ dateTimeFormatter.format(factura.getFechaFactura()));
 		p.setAlignment(Element.ALIGN_JUSTIFIED);
 
 		return p;
@@ -83,7 +84,7 @@ public class PDFUtil {
 		table.addCell(hcell);
 
 		headFont.setSize(12);
-		hcell = new PdfPCell(new Phrase(dateFormatter.format(new Date()), headFont));
+		hcell = new PdfPCell(new Phrase(dateTimeFormatter.format(new Date()), headFont));
 		hcell.setBorderWidth(0f);
 		hcell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		hcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -92,7 +93,7 @@ public class PDFUtil {
 		return table;
 	}
 	
-	public static ByteArrayInputStream suscripcionPDFGenerator(Factura factura, Suscripcion suscripcion) {
+	public static ByteArrayInputStream suscripcionPDFGenerator(Factura factura) {
 
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -101,7 +102,7 @@ public class PDFUtil {
 
 			PdfPTable table = cabecera("Factura de suscripción");
 			Paragraph p = new Paragraph();
-			p.add("\nSuscripción: "+suscripcion.getNombre());
+			p.add("\nSuscripción: "+factura.getSuscripcion().getNombre());
 			p.setAlignment(Element.ALIGN_JUSTIFIED);
 
 			Paragraph pFactura = parrafoFactura(factura, factura.getUsuario());
@@ -253,10 +254,13 @@ public class PDFUtil {
 			Paragraph pUsuario = datosUsuario(user);
 			
 			Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+			
+			List<Paragraph> dirs = parrafoDirecciones(direcciones);
+			
 			Paragraph pd = new Paragraph();
 			headFont.setSize(18);
 			pd.add(new Phrase("\nDirección del usuario: ",headFont));
-			List<Paragraph> dirs = parrafoDirecciones(direcciones);
+			
 			
 			Paragraph pc = new Paragraph();
 			pc.add(new Phrase("\nCestas del usuario: ",headFont));
@@ -279,22 +283,32 @@ public class PDFUtil {
 			document.add(new Paragraph("\n"));
 			document.add(pUsuario);
 			document.add(pd);
+			
 			for (Paragraph paragraph : dirs) {
 				document.add(paragraph);
 			}
-			document.add(pc);
-			for (Paragraph paragraph : cs) {
-				document.add(paragraph);
-			}
-			document.add(pp);
-			for (Paragraph paragraph : ps) {
-				document.add(paragraph);
-			}
-			document.add(pf);
-			for (Paragraph paragraph : fs) {
-				document.add(paragraph);
+			
+			if(!productosCestas.isEmpty() && !cs.isEmpty()) {
+				
+				document.add(pc);
+				for (Paragraph paragraph : cs) {
+					document.add(paragraph);
+				}
 			}
 			
+			if(!productosPedidos.isEmpty()) {
+				document.add(pp);
+				for (Paragraph paragraph : ps) {
+					document.add(paragraph);
+				}
+			}
+			
+			if(!fs.isEmpty()) {
+				document.add(pf);
+				for (Paragraph paragraph : fs) {
+					document.add(paragraph);
+				}
+			}
 
 			document.close();
 		} catch (DocumentException ex) {
@@ -347,16 +361,19 @@ public class PDFUtil {
 	private static List<Paragraph> parrafoCestas(List<List<CestaProducto>> productosCestas) throws DocumentException {
 		List<Paragraph> lista = new ArrayList<>();
 		for (List<CestaProducto> cesta : productosCestas) {
-			Paragraph p = new Paragraph();
-			p.add("\n");
-			Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-			headFont.setSize(15);
-			p.add(new Phrase("Cesta ID. "+cesta.get(0).getCesta().getId(),headFont));
-			p.add("\nNombre: "+cesta.get(0).getCesta().getNombre());
-			p.add("\n");
-			p.add(tablaPedidos(null, cesta));
-			p.add("\n");
-			lista.add(p);
+			if(!cesta.isEmpty()) {
+				Paragraph p = new Paragraph();
+				p.add("\n");
+				Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+				headFont.setSize(15);
+				p.add(new Phrase("Cesta ID. "+cesta.get(0).getCesta().getId(),headFont));
+				p.add("\nNombre: "+cesta.get(0).getCesta().getNombre());
+				p.add("\n");
+				p.add(tablaPedidos(null, cesta));
+				p.add("\n");
+				lista.add(p);
+			}
+			
 		}
 		return lista;
 	}
@@ -375,9 +392,11 @@ public class PDFUtil {
 				p.add("\nPoblación: "+ pedido.getPoblacion());
 				p.add("\nProvincia: "+ pedido.getProvincia());
 				if(pedido.getFechaHoraPedido() != null)
-					p.add("\nFecha pedido: "+dateFormatter.format(pedido.getFechaHoraPedido()));
-				p.add("\nHora inicio recepción: "+pedido.getHoraEnvioIni());
-				p.add("\nHora máxima recepción: "+pedido.getHoraEnvioFin());
+					p.add("\nFecha de realización del pedido: "+dateTimeFormatter.format(pedido.getFechaHoraPedido()));
+				if(pedido.getFechaEnvio() != null)
+					p.add("\nFecha prevista de recepción: "+ dateFormatter.format(pedido.getFechaEnvio()));
+				p.add("\nHora inicio recepción: "+pedido.getHoraEnvioIni()+":00");
+				p.add("\nHora máxima recepción: "+pedido.getHoraEnvioFin()+":00");
 				
 				p.add("\n");
 				p.add(tablaPedidos(pedido.getFactura(), cesta));
@@ -396,8 +415,9 @@ public class PDFUtil {
 				p.add("\nFactura del pedido ID. "+f.getPedido().getId());
 			}else {
 				p.add("\nFactura de suscripción.");
+				p.add("\nSuscripción: "+ f.getSuscripcion().getNombre());
 			}
-			p.add("\nFecha de la factura: "+dateFormatter.format(f.getFechaFactura()));
+			p.add("\nFecha de la factura: "+dateTimeFormatter.format(f.getFechaFactura()));
 			p.add("\nImporte total de la factura: "+f.getTotal()+" €");
 			p.add("\nImporte total con IVA de la factura: "+f.getTotalIva()+" €");
 			lista.add(p);
