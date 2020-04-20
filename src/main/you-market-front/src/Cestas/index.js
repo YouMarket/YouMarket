@@ -15,7 +15,7 @@ const [cestas, setCestas] = useState([]);
 	}
 
 	const fetchCestas = useCallback(() => {
-	    return fetch('https://youmarket-entrega4.herokuapp.com/cesta/user' , {headers: {
+	    return  fetch('cesta/user' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -29,7 +29,7 @@ const [cestas, setCestas] = useState([]);
 	
 	useEffect(() => {
 	    fetchCestas(cestas);
-	    fetch('https://youmarket-entrega4.herokuapp.com/usuario/cestasCheck' , {headers: {
+	     fetch('usuario/cestasCheck' , {headers: {
 			'Content-Type' : 'application/json',
 			'Accept' : 'application/json',
 			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},

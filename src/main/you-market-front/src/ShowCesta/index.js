@@ -17,7 +17,7 @@ function ShowCesta() {
 	const { id } = useParams();
 
 	const fetchCesta = useCallback(() => {
-		return fetch(`https://youmarket-entrega4.herokuapp.com/cesta/${id}`, {
+		return fetch(` cesta/${id}`, {
 			headers: {
 				'Content-Type': 'application/json',
 				'Accept': 'application/json',
@@ -33,7 +33,7 @@ function ShowCesta() {
 	}, []);
 
 	const fetchProductoCesta = useCallback(() => {
-		return fetch(`https://youmarket-entrega4.herokuapp.com/cesta/productos/${id}`, {
+		return fetch(` cesta/productos/${id}`, {
 			headers: {
 				'Content-Type': 'application/json',
 				'Accept': 'application/json',

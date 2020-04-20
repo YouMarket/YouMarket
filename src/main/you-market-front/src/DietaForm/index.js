@@ -39,7 +39,7 @@ class DietaForm extends React.Component{
 			
 		onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-        	fetch('https://youmarket-entrega4.herokuapp.com/dieta', {
+        	 fetch('dieta', {
         			headers: {
         				"Content-Type": "application/json",
         				'Accept' : 'application/json',

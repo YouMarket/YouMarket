@@ -19,7 +19,7 @@ class formCesta extends React.Component{
 	    }
 	
 	cestasCheck() {
-		 fetch('https://youmarket-entrega4.herokuapp.com/usuario/cestasCheck' , {headers: {
+		  fetch('usuario/cestasCheck' , {headers: {
 				'Content-Type' : 'application/json',
 				'Accept' : 'application/json',
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -45,7 +45,7 @@ class formCesta extends React.Component{
 
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-        	fetch('https://youmarket-entrega4.herokuapp.com/cesta', {
+        	 fetch('cesta', {
         			headers: {
         				"Content-Type": "application/json",
         				'Authorization' : 'Bearer ' + localStorage.getItem('auth')

@@ -11,7 +11,7 @@ const [cestaproductos, setCestaproductos] = useState();
 	const { id } = useParams();
 	
 	const fetchCestaProductos = useCallback(() => {
-	    return fetch(`https://youmarket-entrega4.herokuapp.com/cesta/productos/dieta/list/${id}`)
+	    return fetch(` cesta/productos/dieta/list/${id}`)
 	      .then(res => res.json())
 	      .then(cestaproductos => {
 	        setCestaproductos(cestaproductos);

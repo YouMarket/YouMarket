@@ -11,7 +11,7 @@ function PedidosUsuario() {
 	
 	
 	const fetchUsuario = useCallback(() => {
-		return fetch('https://youmarket-entrega4.herokuapp.com/usuario/getUser' , {headers: {
+		return  fetch('usuario/getUser' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -23,7 +23,7 @@ function PedidosUsuario() {
 		}, []);	
 
 	const fetchPedidos = useCallback(() => {
-		return fetch('https://youmarket-entrega4.herokuapp.com/pedido/getAll' , {headers: {
+		return  fetch('pedido/getAll' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json'},
 		method:'GET'})
