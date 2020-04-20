@@ -56,11 +56,6 @@ function SuscripcionForm() {
 									  .then(data => {
 										if (data.success) {
 											history.push('/datos-perfil');
-											if(data.message == '1'){
-												localStorage.setItem('dietasCheck', 1);
-											}else{
-												localStorage.removeItem('dietasCheck');
-											}
 										  }
 										else{
 											this.state.errors = data.message

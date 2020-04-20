@@ -28,14 +28,14 @@ function Dietas() {
 		history.push('/login');
 	}
     
-    if (!localStorage.getItem('dietasCheck')){
+    if (localStorage.getItem('dietasCheck')===0){
 		history.push('/404');
 	}
 	
 	return(
 	  <div>
 	  	  <Header/>
-	  	{localStorage.getItem('dietasCheck') ?
+		{localStorage.getItem('dietasCheck')===1 ?
 			(<div className="dietas-page-container container">
 			<h1 className="container dietas-title">Estas son las dietas que tenemos disponibles actualmente, ¡disfrútalas! 🥳</h1>
 				<div className="dietas-container">

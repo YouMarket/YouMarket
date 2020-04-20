@@ -45,8 +45,7 @@ class Login extends React.Component{
 					method:'GET'})
 				      .then(res => res.json())
 				      .then(dietasCheck => {
-						  if (dietasCheck == 1 )
-				    		  localStorage.setItem('dietasCheck', dietasCheck);
+						localStorage.setItem('dietasCheck', dietasCheck);
 				        
 				      });
 		 }
