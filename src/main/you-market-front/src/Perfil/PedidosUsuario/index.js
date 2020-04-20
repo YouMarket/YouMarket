@@ -11,7 +11,8 @@ function PedidosUsuario() {
 	const fetchPedidos = useCallback(() => {
 		return fetch('pedido/getAll' , {headers: {
 		'Content-Type' : 'application/json',
-		'Accept' : 'application/json'},
+		'Accept' : 'application/json',
+		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 		method:'GET'})
 			.then(res => res.json())
 			.then(pedidos => {

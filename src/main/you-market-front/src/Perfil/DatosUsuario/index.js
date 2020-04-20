@@ -45,7 +45,7 @@ function DatosUsuario() {
 		}, []);
 
 	function deleteUser() {
-		fetch('/usuario/eliminarUsuario', {
+		 fetch('/usuario/eliminarUsuario', {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ function DatosUsuario() {
 						currency="EUR"
 						onSuccess={() => {
 						setTimeout(() => {
-							fetch('/factura/createSuscripcion', {
+							 fetch('/factura/createSuscripcion', {
 								headers: {
 									'Content-Type' : 'application/json',
 									'Accept' : 'application/json',
