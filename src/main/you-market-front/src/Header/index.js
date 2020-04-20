@@ -59,7 +59,6 @@ function Header() {
 				<img className="logo" src={logo} alt="Logo"/>
 			</NavLink>
 			<div className="header-links">
-				<Link to="/precios" className="header-link" >Precios</Link>
 				<Link to="/productos" className="header-link" >Productos</Link>
 				{localStorage.getItem('dietasCheck')==1 ?
 				(<Link className="header-link" to="/dieta/list">Dietas</Link>)  : <div></div>}
@@ -82,7 +81,6 @@ function Header() {
 			</Link>
 		</div>
 		<div id="menuLinks">
-			<Link to="/precios" className="menuLink" onClick={closeMenu}>Precios</Link>
 			<Link to="/productos" className="menuLink" onClick={closeMenu}>Productos</Link>
 			{localStorage.getItem('dietasCheck')==1 ?
 			<Link className="menuLink" to="/dieta/list" onClick={closeMenu}>Dietas</Link> : <div></div>}

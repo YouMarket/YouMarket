@@ -183,6 +183,18 @@ public class PedidoController {
 		if(!myMap.get("horaEnvioIni4").equals("null")) {
 			pedidos.setHoraEnvioIni4(new Integer(myMap.get("horaEnvioIni4")));
 		}
+		if(!myMap.get("numero1").equals("null")) {
+			pedidos.setNumero1(new Integer(myMap.get("numero1")));
+		}
+		if(!myMap.get("numero2").equals("null")) {
+			pedidos.setNumero2(new Integer(myMap.get("numero2")));
+		}
+		if(!myMap.get("numero3").equals("null")) {
+			pedidos.setNumero3(new Integer(myMap.get("numero3")));
+		}
+		if(!myMap.get("numero4").equals("null")) {
+			pedidos.setNumero4(new Integer(myMap.get("numero4")));
+		}
 		if(!myMap.get("provincia1").equals("null")) {
 			pedidos.setProvincia1(myMap.get("provincia1"));
 		}
@@ -418,6 +430,18 @@ public class PedidoController {
 		}
 		if(!myMap.get("horaEnvioIni4").equals("null")) {
 			pedidos.setHoraEnvioIni4(new Integer(myMap.get("horaEnvioIni4")));
+		}
+		if(!myMap.get("numero1").equals("null")) {
+			pedidos.setNumero1(new Integer(myMap.get("numero1")));
+		}
+		if(!myMap.get("numero2").equals("null")) {
+			pedidos.setNumero2(new Integer(myMap.get("numero2")));
+		}
+		if(!myMap.get("numero3").equals("null")) {
+			pedidos.setNumero3(new Integer(myMap.get("numero3")));
+		}
+		if(!myMap.get("numero4").equals("null")) {
+			pedidos.setNumero4(new Integer(myMap.get("numero4")));
 		}
 		if(!myMap.get("provincia1").equals("null")) {
 			pedidos.setProvincia1(myMap.get("provincia1"));
