@@ -19,7 +19,7 @@ var pedido3copiado = false;
 var pedido4copiado = false;
 
 function setPedidoCheck(){
-	
+
 }
 
 
@@ -104,8 +104,7 @@ export function PedidoForm() {
 
 	let history = useHistory();
 
-	const [envioTomas, setEnvioTomas] = useState(0);
-	
+	const [envioTomas, setEnvioTomas] = useState(localStorage.getItem('enviosD'));
 
 
 	function construyeCarrito(){
@@ -120,9 +119,9 @@ export function PedidoForm() {
 		console.log(prods);
 		return prods;
 	}
-	
+
 	const[precioTotalCestas, setPrecioTotalCestas] = useState(0.0);
-	
+
 	function totalDeCestas(values){
 		fetch('precio/', {
   			headers: {
@@ -133,14 +132,14 @@ export function PedidoForm() {
  			then(res => res.json()).then(precio1 => setPrecioTotalCestas(precio1));
 		return precioTotalCestas;
 	}
-	
+
 	function precioTotal(values){
 		var precioTotal = 0.0;
 		construyeCarrito().forEach(element => {
 			precioTotal = precioTotal + element.producto.precioIva * element.cantidad;
 		})
-		
-		
+
+
 		precioTotal = totalDeCestas(values);
 		console.log('PRECIO TOTAL');
 		console.log(precioTotalCestas)
@@ -151,7 +150,7 @@ export function PedidoForm() {
 	}
 
 
-	
+
 
 	useEffect(() => {construyeCarrito(),
 		fetch('/usuario/envios', {
@@ -164,6 +163,8 @@ export function PedidoForm() {
 			       .then(res => res.json())
 			       .then(envios1 => {
 			    	   setEnvioTomas(envios1);
+			    	   localStorage.removeItem('enviosD');
+			    	   localStorage.setItem('enviosD', envios1);
 			       });
 
 		  }, []);
@@ -189,7 +190,7 @@ export function PedidoForm() {
 		 useEffect(() => {
 		  fetchTotal(total);
 		   }, []);
-		 
+
 		 return total;
 	}
 
@@ -233,6 +234,7 @@ function pagar() {
 			   errors.numero4===undefined && errors.fechaEnvio4===undefined &&
 			   errors.horaEnvioFin4===undefined && errors.horaEnvioIni4===undefined){
 
+			 j.style.display = "none";
 			 x.style.display = "block";
 			 y.style.display = "none";
 			 z.style.display = "none";
@@ -248,8 +250,6 @@ function pagar() {
 			 j.style.display = "none";
 		}
 			else if(started===false){
-
-			}else{
 
 			}
 	}
@@ -343,7 +343,7 @@ function pagar() {
 		const[cestas, setCestas] = useState([]);
 
 	const fetchCestas = useCallback(() => {
-	    return fetch('/cesta/user' , {headers: {
+	    return fetch('/cesta/user/llenas' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -367,14 +367,14 @@ function pagar() {
 
 
 	const handleRedirect = () => {
-		history.push('/');
+		history.push('/pedidoexito');
 	}
 
 		if(localStorage.getItem('auth')==null){
 			history.push('/login');
-			
+
 		}
-		
+
 		if(!localStorage.getItem('carrolleno')){
 			history.push('/');
 		}
@@ -442,7 +442,14 @@ function pagar() {
         }
         if (values.horaEnvioFin1 < 9 || values.horaEnvioIni1<9 || values.horaEnvioFin1 > 21 || values.horaEnvioIni1 > 22) {
         	errors.horaEnvioFin1 = 'En este tramo horario no se realizan entregas';
+        }else if(values.horaEnvioFin1 === values.horaEnvioIni1) {
+        	errors.horaEnvioFin1 = 'La hora de inicio de entrega no puede ser igual a la de final'
+        }else if(values.horaEnvioFin1 < values.horaEnvioIni1){
+      	  errors.horaEnvioFin1 = 'La hora de inicio de entrega no puede mayor a la de final'
         }
+        if (values.fechaEnvio1 < today) {
+	        	errors.fechaEnvio1 = 'Fecha no válida';
+            }
 
 
         if(pedido2copiado === true){
@@ -516,6 +523,10 @@ function pagar() {
               }
               if (values.horaEnvioFin2 < 9 || values.horaEnvioIni2<9 || values.horaEnvioFin2 > 21 || values.horaEnvioIni2 > 22) {
 	        	errors.horaEnvioFin2 = 'En este tramo horario no se realizan entregas'
+              }else if(values.horaEnvioFin2 === values.horaEnvioIni2) {
+	        	errors.horaEnvioFin2 = 'La hora de inicio de entrega no puede ser igual a la de final'
+              }else if(values.horaEnvioFin2 < values.horaEnvioIni2){
+            	  errors.horaEnvioFin2 = 'La hora de inicio de entrega no puede mayor a la de final'
               }
               if (values.horaEnvioFin2==="" || values.horaEnvioIni2==null) {
 	        	errors.horaEnvioFin2 = 'Campo obligatorio';
@@ -524,6 +535,10 @@ function pagar() {
               if (values.horaEnvioIni2==="" || values.horaEnvioIni2==null) {
 	        	errors.horaEnvioFin2 = 'Campo obligatorio';
               }
+              if (values.fechaEnvio2 < today) {
+  	        	errors.fechaEnvio2 = 'Fecha no válida';
+                }
+
         	} else {
         		values.direccion2 = null;
         		values.poblacion2 = null;
@@ -572,7 +587,12 @@ function pagar() {
 	        }
 	        if (values.horaEnvioFin3 < 9 || values.horaEnvioIni3<9 || values.horaEnvioFin3 > 21 || values.horaEnvioIni3 > 22) {
 	        	errors.horaEnvioFin3 = 'En este tramo horario no se realizan entregas'
-	        }
+	        }else if(values.horaEnvioFin3 === values.horaEnvioIni3) {
+	        	errors.horaEnvioFin3 = 'La hora de inicio de entrega no puede ser igual a la de final'
+            }else if(values.horaEnvioFin3 < values.horaEnvioIni3){
+          	  errors.horaEnvioFin3 = 'La hora de inicio de entrega no puede mayor a la de final'
+            }
+
 	        if (values.horaEnvioFin3==="" || values.horaEnvioIni3==null) {
 	        	errors.horaEnvioFin3 = 'Campo obligatorio';
 	        }
@@ -580,6 +600,9 @@ function pagar() {
 	        if (values.horaEnvioIni3==="" || values.horaEnvioIni3==null) {
 	        	errors.horaEnvioFin3 = 'Campo obligatorio';
 	        }
+	        if (values.fechaEnvio3 < today) {
+  	        	errors.fechaEnvio3 = 'Fecha no válida';
+                }
         } else {
         	values.direccion3 = null;
         	values.poblacion3 = null;
@@ -629,7 +652,11 @@ function pagar() {
 	        }
 	        if (values.horaEnvioFin4 < 9 || values.horaEnvioIni4<9 || values.horaEnvioFin4 > 21 || values.horaEnvioIni4 > 22) {
 	        	errors.horaEnvioFin4 = 'En este tramo horario no se realizan entregas'
-	        }
+	        }else if(values.horaEnvioFin4 === values.horaEnvioIni4) {
+	        	errors.horaEnvioFin4 = 'La hora de inicio de entrega no puede ser igual a la de final'
+            }else if(values.horaEnvioFin4 < values.horaEnvioIni4){
+          	  errors.horaEnvioFin4 = 'La hora de inicio de entrega no puede mayor a la de final'
+            }
 	        if (values.horaEnvioFin4==="" || values.horaEnvioIni4==null) {
 	        	errors.horaEnvioFin4 = 'Campo obligatorio';
 	        }
@@ -637,6 +664,9 @@ function pagar() {
 	        if (values.horaEnvioIni4==="" || values.horaEnvioIni4==null) {
 	        	errors.horaEnvioFin4 = 'Campo obligatorio';
 	        }
+	        if (values.fechaEnvio4 < today) {
+  	        	errors.fechaEnvio4 = 'Fecha no válida';
+                }
 
         } else {
         	values.direccion4 = null;
@@ -730,7 +760,7 @@ function pagar() {
 				type="text"
 				name="direccion1"
 				value={values.direccion1}
-		        placeholder="c/Cisnes"
+		        placeholder="Calle Cisnes"
 				onChange={handleChange}
 				onBlur={handleBlur}
 		      	/>
@@ -813,9 +843,9 @@ function pagar() {
 			   { cestas().map((cesta) => (
 
 								   <option value={cesta.id}>{cesta.nombre}</option>
-								   
+
 								   ))}
-			  
+
 			   <option value="0">Carrito</option>
 			   </select>
 			   <p className="error-required-cesta-a-carrito">{errors.id && touched.id && errors.id}</p>
@@ -1063,7 +1093,7 @@ function pagar() {
 				type="text"
 				name="direccion3"
 				value={values.direccion3}
-		        placeholder="c/Cisnes"
+		        placeholder="Calle Cisnes"
 				onChange={handleChange}
 				onBlur={handleBlur}
 				/>
@@ -1224,7 +1254,7 @@ function pagar() {
 			type="text"
 			name="direccion4"
 			value={values.direccion4}
-	        placeholder="c/Cisnes"
+	        placeholder="Calle Cisnes"
 			onChange={handleChange}
 			onBlur={handleBlur}
 			/>
@@ -1327,8 +1357,8 @@ function pagar() {
 		<br/><br/>
 		</div>
 		<div>
-        <a id="pagar-a" href="#" onClick={pagar}>
-        	Pagar
+        <a id="pagar-a" href="#">
+        	<button onClick={pagar} className="button-finish">Pagar</button>
         </a>
         	</div>
         	<div className="grid" id="paypal-b">

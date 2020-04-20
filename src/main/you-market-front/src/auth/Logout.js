@@ -13,6 +13,8 @@ class Logout extends React.Component{
 		handleRedirect = () => {
 		    localStorage.removeItem('auth'); 
 		    localStorage.removeItem('dietasCheck'); 
+		    localStorage.removeItem('enviosD');
+		    localStorage.removeItem('cestasCheck'); 
 			this.props.history.push('/login');
 	    }
 			

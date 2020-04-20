@@ -10,6 +10,7 @@ import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
+import javax.persistence.Lob;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +38,7 @@ public class Receta {
 
 	@NotBlank
 	@SafeHtml
+	@Lob
 	private String descripcion;
 
 	@Positive

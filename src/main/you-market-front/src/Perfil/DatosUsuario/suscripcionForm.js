@@ -30,6 +30,8 @@ function SuscripcionForm() {
             <Navegacion />
 
 			<div className="container">
+			<p style={{ margin: 20 }}>Si cambias tu suscripción, podrás realizar el pago el día 1 del próximo mes.</p>
+			<p style={{ margin: 20 }}><b> ATENCIÓN: </b> una vez pagada la nueva suscripción, si aún tenías algún envío en la antigua, los perderás.</p>
 			<Card title="Modificación de la suscripción" subTitle="Seleccione la suscripción a la que desea cambiar" style={{ margin: 20 }}>
 
 				<Formik
@@ -54,6 +56,7 @@ function SuscripcionForm() {
 									}).then(response => response.json())
 									  .then(data => {
 										if (data.success) {
+											dietasCheck();
 											history.push('/datos-perfil');
 										  }
 										else{
@@ -76,7 +79,7 @@ function SuscripcionForm() {
 									</ListaSuscripciones>
 
 
-									<button type="submit" className="boton" disabled={isSubmitting}>
+									<button type="submit" className="button-finish" disabled={isSubmitting}>
 										Enviar
 									</button>
 

@@ -62,6 +62,12 @@ public class CestaController {
 		Integer id=currentUser.getId();
         return ResponseEntity.ok(cestaService.cestasPorUsuario(id));
     }
+	
+	@GetMapping("/user/llenas")
+    public ResponseEntity<List<Cesta>> cestasPorUsuarioLlenas(@CurrentUser UserPrincipal currentUser) {
+		Integer id=currentUser.getId();
+        return ResponseEntity.ok(cestaService.cestasPorUsuarioLlenas(id));
+    }
 
 	@GetMapping("/{id}")
     public ResponseEntity<Object> cestaPorId(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal currentUser) {
