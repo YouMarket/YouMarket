@@ -70,6 +70,7 @@ public class Pedido extends Cesta{
 	@Column(name="orden_entrega")
 	private int ordenEntrega;
 	
+	
 	private String retraso;
 	
 	@OneToOne(fetch= FetchType.LAZY)

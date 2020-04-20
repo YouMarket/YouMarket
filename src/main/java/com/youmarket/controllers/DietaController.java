@@ -38,19 +38,5 @@ public class DietaController {
     public ResponseEntity<Object> dietaPorId(@Valid @PathVariable Integer id) {
         return ResponseEntity.ok(dietaService.findById(id));
     }
-	
-	@PostMapping
-    public ResponseEntity<Dieta> create(@RequestBody Dieta d) {
-		Dieta dietaGuardada = dietaService.save(d);
-		
-		URI location= ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(dietaGuardada.getId()).toUri();
-        return ResponseEntity.created(location).build();
-    }
-	
-	@DeleteMapping("/delete/{id}")
-	public void delete(@PathVariable int id) {
-		this.dietaService.deleteById(id);
-	}
 
 }

@@ -9,7 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.URL;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +29,8 @@ public class Producto {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@NotBlank
+	@SafeHtml
 	@Column(name="nombre", length=50)
 	private String nombre;
 	
@@ -34,6 +40,8 @@ public class Producto {
 	@Positive
 	private double precioIva;
 	
+	@NotBlank
+	@SafeHtml
 	@Column(name="descripcion", length = 255)
 	private String descripcion;
 	
@@ -55,9 +63,13 @@ public class Producto {
 	@JoinColumn(name="supermercado_id")
 	private Supermercado supermercado;
 	
+	@URL
+	@SafeHtml
 	@Column(name="url_imagen")
 	private String urlImagen;
 	
+	@NotBlank
+	@SafeHtml
 	@JoinColumn(name="unidad")
 	private String unidad;
 
