@@ -62,7 +62,7 @@ public class CestaService {
 		cestaRepository.deleteById(c.getId());
 	}
 
-	public Object findById(Integer id, UserPrincipal currentUser) {
+	public Cesta findById(Integer id, UserPrincipal currentUser) {
 		Cesta res=null;
 		Optional<Cesta> c=cestaRepository.findById(id);
 		if(c.isPresent()) {
@@ -110,12 +110,21 @@ public class CestaService {
 				cestaProductoService.deleteByCestaId(id);
 			}
 			cestasProductos=(List<CestaProducto>) cestaProductoService.CestasProductoPorCestaId(id, cu);
-			System.out.println("Anvorguesa");
-			System.out.println(cestasProductos.size());
 			if(cestasProductos.size()==0) {
 				cestaRepository.deleteById(id);
 
 		}}
+	}
+
+	public List<Cesta> cestasPorUsuarioLlenas(Integer id) {
+		List<Cesta> res = cestaRepository.cestaPorUsuario(id);
+		
+		for(Cesta c:res) {
+			if(this.cestaProductoService.cpPorCesta(c.getId()).isEmpty()) {
+				res.remove(c);
+			}
+		}
+		return res;
 	}
 
 }

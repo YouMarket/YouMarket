@@ -60,7 +60,7 @@ function Header() {
 			</NavLink>
 			<div className="header-links">
 				<Link to="/productos" className="header-link" >Productos</Link>
-				{localStorage.getItem('dietasCheck')===1 ?
+				{localStorage.getItem('dietasCheck')==1 ?
 				(<Link className="header-link" to="/dieta/list">Dietas</Link>)  : <div></div>}
 				<Link className="header-link" to="/cesta">Cestas</Link>
 			</div>
@@ -76,13 +76,13 @@ function Header() {
 			<a href="#" className="hamburger-menu" onClick={menuInteraction}>
 				<img src={menu} className="hamburger-icon" alt="Menu"/>
 			</a>
-			<Link className="login" to={login}>
+			<Link className="login" onClick={() => sessionStorage.clear()} to={login}>
 				{loginEsp}
 			</Link>
 		</div>
 		<div id="menuLinks">
 			<Link to="/productos" className="menuLink" onClick={closeMenu}>Productos</Link>
-			{localStorage.getItem('dietasCheck')===1 ?
+			{localStorage.getItem('dietasCheck')==1 ?
 			<Link className="menuLink" to="/dieta/list" onClick={closeMenu}>Dietas</Link> : <div></div>}
 			<Link className="menuLink" to="/cesta" onClick={closeMenu}>Cestas</Link>
 			<Link className="menuLink" to="/perfil" onClick={closeMenu}>Mi perfil</Link>

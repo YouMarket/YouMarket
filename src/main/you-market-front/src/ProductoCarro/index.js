@@ -13,14 +13,7 @@ interface Props {
 }
 
 function eliminarProducto(id) {
-	fetch('/eliminarProducto', {
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-		},
-		method:'POST',
-		body:JSON.stringify({postId: id})
-	})
+	sessionStorage.removeItem("prod_"+id)
 	window.location.reload(false)
 }
 

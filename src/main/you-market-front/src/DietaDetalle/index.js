@@ -15,10 +15,8 @@ function DietaDetalle() {
 	      .then(res => res.json())
 	      .then(dieta => {
 	        setDieta(dieta)
-	        console.log(dieta);
 	      });
 	  	}, []);
-    console.log(dieta);
     useEffect(() => {
 	    fetchDieta(dieta);
 	  }, []);	
@@ -43,6 +41,10 @@ function DietaDetalle() {
 					<p>Puedes ver los productos de esta dieta en el siguiente enlace:</p>
 					<NavLink to={`../../../producto/dieta/list/${dieta.id}`} className="dieta-detalle-productos link-button">
 					Productos
+					</NavLink>
+
+					<NavLink to={`../../../recetas/list/${dieta.id}`} className="dieta-detalle-recetas link-button">
+					Recetas relacionadas con esta dieta
 					</NavLink>
 				</div>
 	  	  	</div>

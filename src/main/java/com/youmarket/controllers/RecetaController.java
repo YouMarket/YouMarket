@@ -22,7 +22,7 @@ public class RecetaController{
     private RecetaService recetaService;
     
     @RequestMapping(value = "/list/{id}", method = RequestMethod.GET)
-    public List<Receta> listaRecetas(@PathVariable Integer id){
+    public List<Receta> listaRecetas(@Valid @PathVariable Integer id){
         List<Receta> recetas = recetaService.findByDietaId(id);
         return recetas;
     }
