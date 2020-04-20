@@ -9,7 +9,6 @@ import Header from '../Header';
 function Cestas() {
 let history = useHistory();
 const [cestas, setCestas] = useState([]);
-const [cestasCheck, setCestasCheck]=useState();
 
 	if(localStorage.getItem('auth')==null){
 		history.push('/login');
@@ -28,25 +27,19 @@ const [cestasCheck, setCestasCheck]=useState();
 	      });
 	  }, []);
 	
-	const cestasCheck2 = useCallback(() => {
-		 return fetch('/usuario/cestasCheck' , {headers: {
-				'Content-Type' : 'application/json',
-				'Accept' : 'application/json',
-				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-				method:'GET'})
-			      .then(res => res.json())
-			      .then(cestasCheck1 => {
-			    	  setCestasCheck(cestasCheck1);
-			    	  localStorage.removeItem('cestasCheck');
-			  	      localStorage.setItem('cestasCheck', cestasCheck1);
-			        
-			      });
-	}, []);
-
-
 	useEffect(() => {
 	    fetchCestas(cestas);
-	    cestasCheck2(cestasCheck);
+	    fetch('/usuario/cestasCheck' , {headers: {
+			'Content-Type' : 'application/json',
+			'Accept' : 'application/json',
+			'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+			method:'GET'})
+		      .then(res => res.json())
+		      .then(cestasCheck1 => {
+		    	  localStorage.removeItem('cestasCheck');
+		  	      localStorage.setItem('cestasCheck', cestasCheck1);
+		        
+		      });
 	  }, []);
 	
   return(
