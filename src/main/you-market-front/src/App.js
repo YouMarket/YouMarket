@@ -38,6 +38,7 @@ import AlertaBrecha from './AlertaBrecha';
 import PedidoExito from './PedidoExito';
 import Recetas from './Recetas';
 import Receta from './Receta';
+import Precios from './Precios';
 import RecetaDetalle from './RecetaDetalle';
 
 function App() {
@@ -138,6 +139,9 @@ function App() {
 				</Route>
 				<Route path="/productos">
 					<Productos />
+				</Route>
+				<Route path="/precios">
+					<Precios />
 				</Route>
 				<Route path="/">
 					<Inicio/>
