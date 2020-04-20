@@ -105,8 +105,7 @@ public class FacturaController {
             produces = MediaType.APPLICATION_PDF_VALUE)
   	public ResponseEntity<InputStreamResource> descargaPDF(@PathVariable Integer id, @CurrentUser UserPrincipal curr){
     	Factura factura = facturaService.findById(id);
-    	System.out.println(id);
-    	System.out.println(curr);
+ 
     	Optional<Usuario> user=this.usuarioService.findById(curr.getId());
 		Usuario usuario1=null;
 		Boolean hacked=false;
