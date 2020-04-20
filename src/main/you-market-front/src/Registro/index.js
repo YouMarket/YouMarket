@@ -23,7 +23,9 @@ class RegistroUsuario extends React.Component{
 	}
 
   	render(){
-		
+  		var today = new Date();
+  		var year= today.getFullYear();
+  		today.setFullYear(year-18);
 		return (
 			<div>	  
 				<Header/>
@@ -94,6 +96,8 @@ class RegistroUsuario extends React.Component{
 							}
 							if(!values.usuario.fechaNacimiento || !/[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(values.usuario.fechaNacimiento)){
 								errors.fechaNacimiento='Debe introducir una fecha con formato Año - mes - dia' 
+							}else if(new Date(values.usuario.fechaNacimiento)>today){
+								errors.fechaNacimiento='Tienes que ser mayor de edad';
 							}
 							if(!values.usuario.password || !/^[a-zA-Z0-9]{6,20}$/.test(values.usuario.password)){
 								errors.password='La contraseña debe tener mínimo de 6 carácteres y puede contener letras y números' 
@@ -145,9 +149,7 @@ class RegistroUsuario extends React.Component{
 								}).then(response => response.json())
 								  .then(data => {
 									
-									console.log(data)
 									if (data.success) {
-										console.log(data)
 										localStorage.registroOK='Registrado correctamente, inicie sesión para empezar a comprar.'
 										this.handleRedirect();
 									  }

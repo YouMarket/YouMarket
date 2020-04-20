@@ -18,6 +18,19 @@ class formCesta extends React.Component{
 	      this.props.history.push('/cesta');
 	    }
 	
+	cestasCheck() {
+		 fetch('/usuario/cestasCheck' , {headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+				method:'GET'})
+			      .then(res => res.json())
+			      .then(cestasCheck1 => {
+			    	  localStorage.setItem('cestasCheck', cestasCheck1);
+			        
+			      });
+	 }
+	
 	render(){ 
 		{this.compruebaAuth();}
 		
@@ -39,6 +52,8 @@ class formCesta extends React.Component{
         			body:JSON.stringify(values, null, 2)
         	}).then((response)=> {
         		setSubmitting=false;
+        		localStorage.removeItem('cestasCheck');
+        		this.cestasCheck();
 
 
         	}).then(() =>

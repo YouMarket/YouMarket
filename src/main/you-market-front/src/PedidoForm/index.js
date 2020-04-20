@@ -102,7 +102,7 @@ export function PedidoForm() {
 
 	let history = useHistory();
 
-	const [envioTomas, setEnvioTomas] = useState(0);
+	const [envioTomas, setEnvioTomas] = useState(localStorage.getItem('enviosD'));
 
 
 
@@ -117,6 +117,8 @@ export function PedidoForm() {
 			       .then(res => res.json())
 			       .then(envios1 => {
 			    	   setEnvioTomas(envios1);
+			    	   localStorage.removeItem('enviosD');
+			    	   localStorage.setItem('enviosD', envios1);
 			       });
 
 		  }, []);
@@ -185,6 +187,7 @@ function pagar() {
 			   errors.numero4===undefined && errors.fechaEnvio4===undefined &&
 			   errors.horaEnvioFin4===undefined && errors.horaEnvioIni4===undefined){
 
+			 j.style.display = "none";
 			 x.style.display = "block";
 			 y.style.display = "none";
 			 z.style.display = "none";
@@ -200,9 +203,7 @@ function pagar() {
 			 j.style.display = "none";
 		}
 			else if(started===false){
-
-			}else{
-
+				 
 			}
 	}
 
@@ -295,7 +296,7 @@ function pagar() {
 		const[cestas, setCestas] = useState([]);
 
 	const fetchCestas = useCallback(() => {
-	    return fetch('/cesta/user' , {headers: {
+	    return fetch('/cesta/user/llenas' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -319,7 +320,7 @@ function pagar() {
 
 
 	const handleRedirect = () => {
-		history.push('/');
+		history.push('/pedidoexito');
 	}
 
 		if(localStorage.getItem('auth')==null){

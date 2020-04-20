@@ -21,6 +21,7 @@ function eliminarProducto(id) {
 		method:'POST',
 		body:JSON.stringify({postId: id})
 	})
+	localStorage.removeItem('carrolleno');
 	window.location.reload(false)
 }
 
