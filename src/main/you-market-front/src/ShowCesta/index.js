@@ -85,7 +85,9 @@ function ShowCesta() {
 		productoCesta.forEach(prod => {
 			storeProdSession(prod.producto.id, prod.cantidad, prod.producto.nombre, prod.producto.precioIva, prod.producto.urlImagen, prod.producto.supermercado, prod.producto.unidad)
 		});
-		history.push('/carro')
+		localStorage.removeItem('carrolleno');
+		localStorage.setItem('carrolleno',true);
+		history.push('/carro');
 	}
 
 	if (!cesta) {
