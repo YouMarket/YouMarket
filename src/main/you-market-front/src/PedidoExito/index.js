@@ -13,6 +13,7 @@ class PedidoExito extends React.Component{
 				this.props.history.push('/');	
 			}else{
 				localStorage.removeItem('pedido');
+				localStorage.removeItem('carrolleno');
 			}
 		  }
 		render(){
