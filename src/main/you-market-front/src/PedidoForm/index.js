@@ -112,7 +112,7 @@ export function PedidoForm() {
 	const[precioTotalCestas, setPrecioTotalCestas] = useState(0.0);
 
 	function totalDeCestas(values){
-		fetch('precio/', {
+		 fetch('pedido/precio/', {
   			headers: {
  				"Content-Type": "application/json"
  			},
@@ -137,7 +137,7 @@ export function PedidoForm() {
 
 
 	useEffect(() => {construyeCarrito(),
-		fetch('/usuario/envios', {
+		 fetch('usuario/envios', {
 			headers:{
 			  'Content-Type' : 'application/json',
 			  'Accept' : 'application/json',
@@ -159,7 +159,7 @@ export function PedidoForm() {
 	const precio = (values) => {
 		const [total, setTotal] = useState(0.0);
 		const fetchTotal = useCallback(() => {
-		     return fetch('../precioTotalCarrito', {headers:{
+		     return  fetch('precioTotalCarrito', {headers:{
 		  'Content-Type' : 'application/json',
 		  'Accept' : 'application/json',
 		  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -324,7 +324,7 @@ function pagar() {
 		const[cestas, setCestas] = useState([]);
 
 	const fetchCestas = useCallback(() => {
-	    return fetch('/cesta/user/llenas' , {headers: {
+	    return  fetch('cesta/user/llenas' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},

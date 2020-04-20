@@ -65,6 +65,7 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 		}
 
 
+
 		setCantidad(0);
 	}
 

@@ -13,7 +13,7 @@ function ProductoDetalle() {
 	const { id } = useParams();
 	
 	const fetchProducto = useCallback(() => {
-	    return fetch(`../../../producto/${id}`)
+	    return fetch(` producto/${id}`)
 	      .then(res => res.json())
 	      .then(producto => {
 	        setProducto(producto)
@@ -48,6 +48,7 @@ function ProductoDetalle() {
 		setCantidad(cantidad + 1)
 		document.getElementById(idContador).textContent = cantidad
 	}
+
 
 	function storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad){
 		if(cantidad!=0){
