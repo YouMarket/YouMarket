@@ -16,7 +16,6 @@ function Factura({id, total, totalIva, fechaFactura, pedido}: Props) {
 
 
     function descarga() {
-        console.log('entra en la funcion');
         fetch(url, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('auth')
