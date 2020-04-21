@@ -1,7 +1,6 @@
 .homepage {
     background: url('../assets/supermercado-desenfocado.jpg') 100% 100%;
     width: 100%;
-    height: 100%;
     position: absolute;
     background-size: cover;
 }
