@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './styles.css';
 import Header from '../Header';
 import cesta from '../assets/basket.svg'
 import suscripcion from '../assets/subscription.svg'
 import furgoneta from '../assets/van.svg'
 import dieta from '../assets/fruit.svg'
+import AlertaBrecha from '../AlertaBrecha';
 
 function Inicio() {
+
+    const [estadoBrecha, setEstadoBrecha] = useState([]);
+
+    const fetchDevuelveBrecha = useCallback(() => {
+        return fetch('/brecha/devuelveBrecha',{
+            method: 'GET'
+        }).then(
+            response => response.json()
+        ).then(
+            estadoBrecha => {
+                setEstadoBrecha(estadoBrecha)
+        });
+    }, []);
+
+    useEffect(() => {
+	    fetchDevuelveBrecha(estadoBrecha);
+	  }, []);	
 
   return(
       <div>
         <Header/>
+        {estadoBrecha == true ? <p><AlertaBrecha/></p> :
 		<div className="homepage">
             <p className="homepage-welcome">Bienvenidos a You Market</p>
             <div className="homepage-services container">
@@ -44,7 +63,7 @@ function Inicio() {
                 </div>
             </div>
   		</div>    
-      </div>
+        }</div>
  );
 }
 

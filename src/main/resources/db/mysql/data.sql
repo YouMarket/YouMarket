@@ -30,7 +30,18 @@ insert into role(id, name) values (3, 'DIETISTA');
 insert into role(id, name) values (4, 'ADMIN');
 
 insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, telefono, suscripcion_id) 
-	values (1, 'Primer', 'Usuario', '00000000T', '41001', 'cliente@cliente.es', '1234asdf', '666999888', 4);
+	values (1, 'YouMarket', 'Administrador', '00000000T', '41001', 'admin@youmarket.es', '$2a$10$fX7k2syxD.Pjy5XK3gm0/Osok5QalZUhPbgR30DABexosc6kfsgdm', '6111111', 4);
+insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, telefono, suscripcion_id) 
+	values (2, 'Juan', 'Alforja', '00000000T', '41001', 'alforja@gmail.com', '$10$sTLY/Atp7SE95SQVuRgmiuVYFVskeHzKNIi0vWz3OwmlrraT4OTue', '6111111', 8);
+insert into usuario (id, nombre, apellidos, dni, c_postal, email, password, telefono, suscripcion_id) 
+	values (3, 'María', 'Parra', '00000000T', '41001', 'mariaparra@gmail.com', '$10$GZDZoRArJC4Ds4EWzywMZuvt.dbBAVzACpUjS1XyCuFpfvSfKLWta', '6111111', 7);
+insert into user_roles(user_id, role_id)
+	values(1, 4);
+insert into user_roles(user_id, role_id)
+	values(2, 2);
+insert into user_roles(user_id, role_id)
+	values(3, 1);
+    
 
 insert into factura (id, total, total_iva, usuario_id, suscripcion_id) values (1, 13.43, 17, 1, 7);
 
@@ -92,6 +103,8 @@ INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (1,1);
 INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (1,2);
 INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (2,3);
 INSERT INTO dieta_recetas(dieta_id, recetas_id) VALUES (2,4);
+
+insert into brecha (id, activada) values (2, 0);
 
 
 

@@ -13,27 +13,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import io.jsonwebtoken.lang.Assert;
+import java.util.Set;
 
 import com.youmarket.configuration.SecurityConfiguration;
 import com.youmarket.configuration.response.ApiResponse;
@@ -63,6 +43,9 @@ import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -71,8 +54,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -502,6 +487,18 @@ public class UsuarioController {
 			}
 
 			return res;
+
+		}
+
+		@GetMapping("/adminCheck")
+		public ResponseEntity<Integer> adminCheck(@CurrentUser UserPrincipal curr){
+			Integer res=0;
+			Usuario user = this.usuarioService.findById(curr.getId()).orElse(null);
+			Set<Role> roleSet = user.getRoles();
+			if(roleSet.contains(new Role((long) 4, RoleName.ADMIN))){
+				res = 1;
+			}
+			return ResponseEntity.ok(res);
 
 		}
 }
