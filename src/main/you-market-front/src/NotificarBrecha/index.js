@@ -8,7 +8,9 @@ import {
 
 			
 class NotificarBrecha extends React.Component{
-	
+		
+		
+		
 		constructor(props){
 		    super(props);
 		    
@@ -23,9 +25,29 @@ class NotificarBrecha extends React.Component{
 		            'Authorization': 'Bearer ' + localStorage.getItem('auth')
 		        },
 		        method: 'GET'
-		    }).then(
-		    	window.reload()
-		    )
+		    })
+		    .then(
+		    		fetch('/brecha/devuelveBrecha', {
+				        headers: {
+				            'Authorization': 'Bearer ' + localStorage.getItem('auth')
+				        },
+				        method: 'GET'
+				    }).then(
+				    	response => response.json()
+				    ).then(
+				    	res => {
+				    		this.setState({estadoBrecha:res})
+				    		if(this.state.estadoBrecha == true){
+				    			window.alert("La notificación de brecha se encuentra activada")
+				    		} else {
+				    			window.alert("La notificación de brecha se encuentra desactivada")	
+				    		}
+
+				    	}
+				    )
+		    ).then(
+		    	//this.props.history.push("asdasdsdas")
+		    );
 		}
 		
 		 componentWillMount() {
@@ -38,14 +60,21 @@ class NotificarBrecha extends React.Component{
 			    	response => response.json()
 			    ).then(
 			    	res => {
-			    		window.alert(res)
 			    		this.setState({estadoBrecha:res})
+			    		if(this.state.estadoBrecha == true){
+			    			window.alert("La notificación de brecha se encuentra activada")
+			    		} else {
+			    			window.alert("La notificación de brecha se encuentra desactivada")			    			
+			    		}
 			    	}
 			    )
 			    
 		 }
-		
+		 
 		render(){
+			
+			const estadoBrecha = this.state.estadoBrecha;
+			
 			return(
 		<div >
 		<Header/>
@@ -58,7 +87,7 @@ class NotificarBrecha extends React.Component{
 			<h1> USTED VA A NOTIFICAR UNA BRECHA DE SEGURIDAD </h1>
 			
 			<p>
-				La brecha se encuentra: 
+				La brecha se encuentra: {this.state.estadoBrecha}
 			</p>
 		  	
 			<a href="#" onClick={this.hazFetch}> Activar/desactivar notificación de brecha </a>
