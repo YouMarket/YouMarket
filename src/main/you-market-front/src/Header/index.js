@@ -59,6 +59,8 @@ function Header() {
 				<img className="logo" src={logo} alt="Logo"/>
 			</NavLink>
 			<div className="header-links">
+				{localStorage.getItem('adminCheck')==1 ?
+				(<Link to="/brecha" className="header-link" >Notificar brecha</Link>):<div></div>}
 				<Link to="/precios" className="header-link" >Precios</Link>
 				<Link to="/productos" className="header-link" >Productos</Link>
 				{localStorage.getItem('dietasCheck')==1 ?
@@ -82,6 +84,8 @@ function Header() {
 			</Link>
 		</div>
 		<div id="menuLinks">
+			{localStorage.getItem('adminCheck')==1 ?
+			<Link to="/brecha" className="menuLink" >Notificar brecha</Link>:<div></div>}
 			<Link to="/precios" className="menuLink" onClick={closeMenu}>Precios</Link>
 			<Link to="/productos" className="menuLink" onClick={closeMenu}>Productos</Link>
 			{localStorage.getItem('dietasCheck')==1 ?
