@@ -29,22 +29,21 @@ public class BrechaController {
 
 	@RequestMapping("/alertar")
 	public void activaDesactivaBrecha(@CurrentUser UserPrincipal logged){
-		//TODO: COMPROBAR QUE ES ADMIN
 		Usuario user = this.usuarioService.findById(logged.getId()).orElse(null);
 		Set<Role> roleSet = user.getRoles();
 		boolean isAdmin = roleSet.contains(new Role((long) 4, RoleName.ADMIN));
 		Assert.isTrue(isAdmin);
-		//Usuario user = usuarioService.findById(logged.getId()).orElse(null);
-		//Assert.isTrue(user.getSuscripcion().isDietista());
+		
 		
 		brechaService.activaDesactivaBrecha();
 	}
 	
 	@RequestMapping("/devuelveBrecha")
 	public Boolean devuelveBrecha(@CurrentUser UserPrincipal logged){
-		//TODO: COMPROBAR QUE ES ADMIN
-		//Usuario user = usuarioService.findById(logged.getId()).orElse(null);
-		//Assert.isTrue(user.getSuscripcion().isDietista());
+		Usuario user = this.usuarioService.findById(logged.getId()).orElse(null);
+		Set<Role> roleSet = user.getRoles();
+		boolean isAdmin = roleSet.contains(new Role((long) 4, RoleName.ADMIN));
+		Assert.isTrue(isAdmin);
 		
 		return this.brechaService.devuelveBrecha();
 	}
