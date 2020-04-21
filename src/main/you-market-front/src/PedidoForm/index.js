@@ -1261,9 +1261,10 @@ function pagar() {
 				 amount={precioTotal(values)}
 	         onSuccess={(valuesP, { setSubmitting }) => {
 	             setTimeout(() => {
-	             	fetch('', {
+	             	fetch('/pedido/create', {
 	             			headers: {
-	             				"Content-Type": "application/json"
+	             				"Content-Type": "application/json",
+	             				'Authorization' : 'Bearer ' + localStorage.getItem('auth')
 	             			},
 	             			method:'POST',
 	             			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})
