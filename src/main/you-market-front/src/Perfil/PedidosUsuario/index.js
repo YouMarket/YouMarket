@@ -7,9 +7,10 @@ import {Card} from 'primereact/card';
 function PedidosUsuario() {
 
 	const [pedidos, setPedidos] = useState([]);
-		
-	const fetchPedidos = useCallback(() => {
-		return fetch('pedido/getAll' , {headers: {
+	
+	
+	const fetchUsuario = useCallback(() => {
+		return fetch('https://youmarket-entrega4.herokuapp.com/usuario/getUser' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},

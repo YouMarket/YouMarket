@@ -13,7 +13,7 @@ function DatosUsuario() {
 
 
 	const [usuario, setUsuario] = useState([]);
-	const urlPDF = "http://localhost:8081/usuario/exportPDF";
+	const urlPDF = "https://youmarket-entrega4.herokuapp.com/usuario/exportPDF";
 	const [direccion, setDireccion] = useState([]);
 	const [suscripcion, setSuscripcion] = useState([]);
 	const [ultimaSuscripcion, setUltimaSuscripcion] = useState([]);
@@ -21,7 +21,7 @@ function DatosUsuario() {
 	const [meses, setMeses] = useState([]);
 
 	const fetchUsuario = useCallback(() => {
-		return fetch('usuario/getUser' , {headers: {
+		return fetch('https://youmarket-entrega4.herokuapp.com/usuario/getUser' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -33,7 +33,7 @@ function DatosUsuario() {
 		}, []);
 
 	const fetchSuscripcion = useCallback(() => {
-		return fetch('usuario/getSuscripcion' , {headers: {
+		return fetch('https://youmarket-entrega4.herokuapp.com/usuario/getSuscripcion' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -45,7 +45,7 @@ function DatosUsuario() {
 		}, []);
 
 	function deleteUser() {
-		 fetch('/usuario/eliminarUsuario', {
+		fetch('https://youmarket-entrega4.herokuapp.com/usuario/eliminarUsuario', {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ function DatosUsuario() {
 	}
 
 	const fetchDireccion = useCallback(() => {
-		return fetch('direccion/principal' , {headers: {
+		return fetch('https://youmarket-entrega4.herokuapp.com/direccion/principal' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -69,7 +69,7 @@ function DatosUsuario() {
 		}, []);
 
 	const fetchPagoSus = useCallback(() => {
-		return fetch('suscripcion/pagada' , {headers: {
+		return fetch('https://youmarket-entrega4.herokuapp.com/suscripcion/pagada' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -83,7 +83,7 @@ function DatosUsuario() {
 
 
 	const fetchUltimaSuscripcion = useCallback(() => {
-		return fetch('factura/lastSuscripcion' , {headers: {
+		return fetch('https://youmarket-entrega4.herokuapp.com/factura/lastSuscripcion' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -151,7 +151,7 @@ function DatosUsuario() {
 						currency="EUR"
 						onSuccess={() => {
 						setTimeout(() => {
-							 fetch('/factura/createSuscripcion', {
+							fetch('https://youmarket-entrega4.herokuapp.com/factura/createSuscripcion', {
 								headers: {
 									'Content-Type' : 'application/json',
 									'Accept' : 'application/json',

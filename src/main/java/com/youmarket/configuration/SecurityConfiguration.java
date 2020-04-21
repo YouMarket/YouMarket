@@ -50,7 +50,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.cors()
 			.and().csrf().disable()
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
-			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 			.and().authorizeRequests()
 				.antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html",
 						"/**/*.css", "/**/*.js")

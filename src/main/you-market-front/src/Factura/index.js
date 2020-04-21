@@ -9,10 +9,11 @@ interface Props {
     pedido: Number
 }
 
-function Factura({ id, total, totalIva, fechaFactura, pedido }: Props) {
+function Factura({id, total, totalIva, fechaFactura, pedido}: Props) {
+  
+  const url = "https://youmarket-entrega4.herokuapp.com/factura/generateFactura/" + id
+  const dateFormatted = new Date(fechaFactura).toLocaleDateString()
 
-    const url = "http://localhost:8081/factura/generateFactura/" + id
-    const dateFormatted = new Date(fechaFactura).toLocaleDateString()
 
     function descarga() {
         console.log('entra en la funcion');
