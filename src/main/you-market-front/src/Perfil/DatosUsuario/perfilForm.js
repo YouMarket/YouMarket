@@ -173,14 +173,15 @@ if (localStorage.getItem('auth')==null){
 							isSubmitting,
 							/* and other goodies */
 						}) => (
+							<div className="registro-container">
 							<form onSubmit={handleSubmit}>
 							<Card title="Editar perfil" subTitle="Cambie los datos que desee modificar" style={{ margin: 20 }}>
 
 							<div className="row">
 								<span className="span">
-									<label htmlFor="nomIn" className="label">Nombre: </label>
+									<label htmlFor="nomIn" className="registro-label">Nombre: </label>
 									<input
-										className="input"
+										className="registro-input"
 										type="text"
 										name="usuario.nombre"
 										id="nombreIn"
@@ -193,9 +194,9 @@ if (localStorage.getItem('auth')==null){
 							</div>
 							<div className="row">
 								<span  className="span"> 
-									<label className="label" htmlFor="apellidosIn">Apellidos: </label>
+									<label className="registro-label" htmlFor="apellidosIn">Apellidos: </label>
 									<input
-										className="input"
+										className="registro-input"
 										type="text"
 										name="usuario.apellidos"
 										id="apellidosIn"
@@ -209,10 +210,10 @@ if (localStorage.getItem('auth')==null){
 							</div>
 							<div className="row">
 								<span  className="span">
-									<label className="label" htmlFor="telefono" >Teléfono: </label>
+									<label className="registro-label" htmlFor="telefono" >Teléfono: </label>
 									
 									<input
-										className="input"
+										className="registro-input"
 										type="text"
 										name="usuario.telefono"
 										id="telefono"
@@ -226,9 +227,9 @@ if (localStorage.getItem('auth')==null){
 					
 							<div className="row">
 								<span  className="span">
-									<label className="label" htmlFor="email" >Email </label>
+									<label className="registro-label" htmlFor="email" >Email </label>
 									<input
-										className="input"
+										className="registro-input"
 										type="text"
 										name="usuario.email"
 										id="email"
@@ -245,9 +246,9 @@ if (localStorage.getItem('auth')==null){
 						<Card title="Dirección del usuario" subTitle="Todos los datos son obligatorios" style={{margin: 20}}> 
 							<div className="row">
 								<span  className="span">
-									<label className="label" htmlFor="direccion">Dirección completa:</label>
+									<label className="registro-label" htmlFor="direccion">Dirección completa:</label>
 									<input
-										className="input"
+										className="registro-input"
 										type="text"
 										name="dir.direccion"
 										id="direccion"
@@ -260,9 +261,9 @@ if (localStorage.getItem('auth')==null){
 							</div>
 							<div className="row">
 								<span  className="span">
-									<label className="label" htmlFor="poblacion" >Municipio: </label>
+									<label className="registro-label" htmlFor="poblacion" >Municipio: </label>
 									<input
-										className="input"
+										className="registro-input"
 										type="text"
 										name="dir.poblacion"
 										id="poblacion"
@@ -275,9 +276,9 @@ if (localStorage.getItem('auth')==null){
 							</div>
 							<div className="row">
 								<span  className="span">
-									<label className="label" htmlFor="provincia"  >Provincia </label>
+									<label className="registro-label" htmlFor="provincia"  >Provincia </label>
 									<input
-										className="input"
+										className="registro-input"
 										type="text"
 										name="dir.provincia"
 										id="provincia"
@@ -290,9 +291,9 @@ if (localStorage.getItem('auth')==null){
 							</div>
 							<div className="row">
 								<span  className="span">
-									<label className="label" htmlFor="cpostal" >Código postal </label>
+									<label className="registro-label" htmlFor="cpostal" >Código postal </label>
 									<input
-										className="input"
+										className="registro-input"
 										type="text"
 										name="dir.cpostal"
 										id="cpostal"
@@ -310,6 +311,7 @@ if (localStorage.getItem('auth')==null){
                                 </button></a>
 							
 						    </form>
+							</div>
 						)}
 					</Formik>
                    
