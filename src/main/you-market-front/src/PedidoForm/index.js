@@ -1261,7 +1261,7 @@ function pagar() {
 				 amount={precioTotal(values)}
 	         onSuccess={(valuesP, { setSubmitting }) => {
 	             setTimeout(() => {
-	             	fetch('', {
+	             	fetch('https://youmarket-entrega4.herokuapp.com/pedido/create', {
 	             			headers: {
 	             				"Content-Type": "application/json"
 	             			},
