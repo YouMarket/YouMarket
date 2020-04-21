@@ -83,23 +83,8 @@ public class FacturaController {
 		return facturaService.findFromUser(usuario);
 	}
 
-	@RequestMapping(value = "/pdf", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> descargaPDF() {
-		ByteArrayInputStream bis = PDFUtil.suscripcionPDFGenerator(null);
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Disposition", "inline; filename=prueba.pdf");
-
-		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
-				.body(new InputStreamResource(bis));
-	}
-
 	@RequestMapping(value = "/generateFactura/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> descargaPDF(@PathVariable Integer id, @CurrentUser UserPrincipal curr) {
-		
-		if(curr == null) {
-			return null;
-		}
 		Factura factura = facturaService.findById(id);
 		
 		Optional<Usuario> user = this.usuarioService.findById(curr.getId());

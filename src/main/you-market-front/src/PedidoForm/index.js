@@ -154,30 +154,6 @@ export function PedidoForm() {
 		  }, []);
 
 
-
-
-	const precio = (values) => {
-		const [total, setTotal] = useState(0.0);
-		const fetchTotal = useCallback(() => {
-		     return  fetch('../precioTotalCarrito', {headers:{
-		  'Content-Type' : 'application/json',
-		  'Accept' : 'application/json',
-		  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		  method:'GET',
-		  body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})})
-		       .then(res => res.json())
-		       .then(total => {
-		         setTotal(total)
-		       });
-		   }, []);
-
-		 useEffect(() => {
-		  fetchTotal(total);
-		   }, []);
-
-		 return total;
-	}
-
 function empieza() {
 	if(started===false){
 		started=true;

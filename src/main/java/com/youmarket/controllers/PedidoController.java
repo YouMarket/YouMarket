@@ -72,9 +72,7 @@ public class PedidoController {
 		List<Pedido> pedidos = pedidoService.findAllByUser(principal.getId());
 		return pedidos;
 	}
-	
-	
-	
+
 	@PostMapping("/create")
 	public ResponseEntity<List<Pedido>> createPedidos(@RequestBody Map<String, Object> frontdata, @CurrentUser UserPrincipal currentUser) throws URISyntaxException {
 

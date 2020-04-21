@@ -58,16 +58,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/usuario/*").permitAll()
 				.antMatchers("/usuario/signIn").permitAll()
 				.antMatchers("/usuario/signUp").permitAll()
-				.antMatchers("/direccion/dirs").permitAll()
 				.antMatchers("/usuario/signIn").permitAll()
 				.antMatchers("/usuario/signUp").permitAll()
 				.antMatchers("/usuario/signUpAll").permitAll()
 				.antMatchers("/suscripcion/all").permitAll()
-				.antMatchers("/producto/*").permitAll()
 				.antMatchers("/dieta/list").permitAll()
 				.antMatchers("/show/dieta/*").permitAll()
 				.antMatchers("/create/dieta").permitAll()
+				
+				//Autenticados
+				.antMatchers("/factura/**").authenticated()
+				.antMatchers("/carritoACesta/**").authenticated()
 				.antMatchers("/pedido").authenticated()
+				.antMatchers("/pedido/create").authenticated()
+				.antMatchers("/pedido/getAll").authenticated()
+				.antMatchers("/cesta/**").authenticated()
+				.antMatchers("/dieta/**").authenticated()
+				.antMatchers("/direccion/**").authenticated()
+				.antMatchers("/factura/**").authenticated()
+				.antMatchers("/receta/**").authenticated()
+				.antMatchers("/suscripcion/pago").authenticated()
+				.antMatchers("/suscripcion/update").authenticated()
+				.antMatchers("/suscripcion/pagada").authenticated()
+				//poner todos los metodos autenticated de usuario
+				//Publicos
+				.antMatchers("/producto/*").permitAll()
+				.antMatchers("/supermercado/*").permitAll()
+				.antMatchers("/usuario/signUpAll").permitAll()
+				.antMatchers("/usuario/signIn").permitAll()
 				.anyRequest().permitAll();
 
 		// Add our custom JWT security filter

@@ -29,14 +29,8 @@ public class DireccionController {
 	@Autowired
 	UsuarioService usuarioService;
 
-	@PostMapping("/save")
-	public Direccion saveNewDir(@RequestBody Direccion dir) {
+	public Direccion saveNewDir(Direccion dir) {
 		return direccionService.save(dir);
-	}
-	
-	@GetMapping("/dirs")
-	public List<Direccion> listAllDirecciones(){
-		return direccionService.findAll();
 	}
 	
 	@GetMapping("/misDirecciones")

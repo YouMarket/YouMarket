@@ -48,18 +48,21 @@ let history=useHistory();
 	}
 
 	useEffect(()=> {
-		fetchCarrito(carrito);
-		  fetch('/usuario/cestasCheck' , {headers: {
-				'Content-Type' : 'application/json',
-				'Accept' : 'application/json',
-				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-				method:'GET'})
-			      .then(res => res.json())
-			      .then(cestasCheck1 => {
-			    	  localStorage.removeItem('cestasCheck');
-			  	      localStorage.setItem('cestasCheck', cestasCheck1);
-			        
-			      });
+		if(localStorage.getItem('auth') ){
+			fetchCarrito(carrito);
+			fetch('/usuario/cestasCheck' , {headers: {
+				  'Content-Type' : 'application/json',
+				  'Accept' : 'application/json',
+				  'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+				  method:'GET'})
+					.then(res => res.json())
+					.then(cestasCheck1 => {
+						localStorage.removeItem('cestasCheck');
+						  localStorage.setItem('cestasCheck', cestasCheck1);
+					  
+					});
+		}
+		
 	},[]);
 
 	const fetchCestas=useCallback(()=> {
@@ -91,8 +94,10 @@ let history=useHistory();
 	  }, []);
 	
 	  useEffect(()=> {
-		fetchCestas(cestas);
-		fetchMsg();
+		if(localStorage.getItem('auth') ){
+			fetchCestas(cestas);
+			fetchMsg();
+		}
 	  }, []);
 	  
 	  function carritoLleno(){

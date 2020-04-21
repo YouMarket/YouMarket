@@ -25,15 +25,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.jsonwebtoken.lang.Assert;
 
 import com.youmarket.configuration.SecurityConfiguration;
 import com.youmarket.configuration.response.ApiResponse;
@@ -61,19 +58,6 @@ import com.youmarket.services.PedidoService;
 import com.youmarket.services.RoleService;
 import com.youmarket.services.SuscripcionService;
 import com.youmarket.services.UsuarioService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("usuario")
@@ -145,26 +129,6 @@ public class UsuarioController {
 		userSummary.setPassword(null);
 		return userSummary;
 	}
-
-	// @PostMapping("/signUp")
-	// public Usuario signUp(@RequestBody Usuario usuario) {
-	//
-	// Suscripcion sus =
-	// suscripcionService.findById(usuario.getSuscripcion().getId());
-	// usuario.setSuscripcion(sus);
-	// if(sus.isDietista()) {
-	// Role userRole =
-	// roleService.findByName(RoleName.CLIENTE_CON_DIETAS).orElse(null);
-	// usuario.setRoles(Collections.singleton(userRole));
-	// }else {
-	// Role userRole = roleService.findByName(RoleName.CLIENTE).orElse(null);
-	// usuario.setRoles(Collections.singleton(userRole));
-	// }
-	//
-	// usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
-	// Usuario signUpped = usuarioService.save(usuario);
-	// return signUpped;
-	// }
 
 	@PostMapping("/signUpAll")
 	public ResponseEntity<ApiResponse> signUpAll(@RequestBody SignUpForm form)
@@ -358,8 +322,6 @@ public class UsuarioController {
 	@RequestMapping(value = "/exportPDF", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> exportPDF (@CurrentUser UserPrincipal userr){
-		if(userr == null)
-			return null;
 		Usuario user = usuarioService.findById(userr.getId()).orElse(null);
 
 		//incluye facturas de usuario y de pedido
