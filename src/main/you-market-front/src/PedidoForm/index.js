@@ -1263,7 +1263,8 @@ function pagar() {
 	             setTimeout(() => {
 	             	fetch('https://youmarket-entrega4.herokuapp.com/pedido/create', {
 	             			headers: {
-	             				"Content-Type": "application/json"
+	             				"Content-Type": "application/json",
+	             				'Authorization' : 'Bearer ' + localStorage.getItem('auth')
 	             			},
 	             			method:'POST',
 	             			body:JSON.stringify({carrito: construyeCarrito(), pedidoForm:values})
