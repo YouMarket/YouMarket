@@ -38,7 +38,7 @@ class Login extends React.Component{
    		}
 		 
 		 dietasCheck() {
-			 fetch('https://youmarket-entrega4.herokuapp.com/usuario/dietasCheck' , {headers: {
+			 fetch('/usuario/dietasCheck' , {headers: {
 					'Content-Type' : 'application/json',
 					'Accept' : 'application/json',
 					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -51,7 +51,7 @@ class Login extends React.Component{
 		 }
 		 
 		 cestasCheck() {
-			 fetch('https://youmarket-entrega4.herokuapp.com/usuario/cestasCheck' , {headers: {
+			 fetch('/usuario/cestasCheck' , {headers: {
 					'Content-Type' : 'application/json',
 					'Accept' : 'application/json',
 					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -64,7 +64,7 @@ class Login extends React.Component{
 		 }
 		 
 		 enviosCheck() {
-			 fetch('https://youmarket-entrega4.herokuapp.com/usuario/envios', {
+			 fetch('/usuario/envios', {
 					headers:{
 					  'Content-Type' : 'application/json',
 					  'Accept' : 'application/json',
@@ -94,7 +94,7 @@ class Login extends React.Component{
 
 		      onSubmit={(values, { setSubmitting }) => {
 		        setTimeout(() => {
-		        	fetch('https://youmarket-entrega4.herokuapp.com/usuario/signIn', {
+		        	fetch('../usuario/signIn', {
 		        			headers: {
 		        				"Content-Type": "application/json"
 		        			},

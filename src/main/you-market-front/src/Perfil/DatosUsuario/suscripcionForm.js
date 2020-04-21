@@ -12,7 +12,7 @@ function SuscripcionForm() {
     let history = useHistory();
 
     function dietasCheck() {
-		 fetch('https://youmarket-entrega4.herokuapp.com/usuario/dietasCheck' , {headers: {
+		  fetch('/usuario/dietasCheck' , {headers: {
 				'Content-Type' : 'application/json',
 				'Accept' : 'application/json',
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -43,7 +43,7 @@ function SuscripcionForm() {
 							onSubmit={(values, { setSubmitting }) => {
 								values.suscripcion.id = document.getElementById('selectSuscripciones').value
 								setTimeout(() => {
-									fetch('https://youmarket-entrega4.herokuapp.com/usuario/updateSuscripcion', {
+									fetch('usuario/updateSuscripcion', {
 											headers: {
 												'Content-Type' : 'application/json',
 												'Accept' : 'application/json',

@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -28,7 +29,6 @@ import com.youmarket.domain.CestaProducto;
 import com.youmarket.domain.Direccion;
 import com.youmarket.domain.Factura;
 import com.youmarket.domain.Pedido;
-import com.youmarket.domain.Suscripcion;
 import com.youmarket.domain.Usuario;
 import com.youmarket.services.CestaProductoService;
 
@@ -66,7 +66,7 @@ public class PDFUtil {
 		PdfPTable table = new PdfPTable(3);
 		table.setWidthPercentage(80);
 
-		Image imagen = Image.getInstance(ClassLoader.getSystemResource("img/logo.png").getFile());
+		Image imagen = Image.getInstance(new URL("https://i.ibb.co/99fHDqR/logo.png"));
 		imagen.scaleAbsolute(60, 60);
 
 		PdfPCell hcell;

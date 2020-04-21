@@ -5,36 +5,21 @@ import Navegacion from '../Navegacion';
 import {Card} from 'primereact/card';
 
 function PedidosUsuario() {
-	
-	const [usuario, setUsuario] = useState([]);
+
 	const [pedidos, setPedidos] = useState([]);
-	
-	
-	const fetchUsuario = useCallback(() => {
-		return fetch('https://youmarket-entrega4.herokuapp.com/usuario/getUser' , {headers: {
+		
+	const fetchPedidos = useCallback(() => {
+		return fetch('pedido/getAll' , {headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
 		'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
-		method:'GET'})
-			.then(res => res.json())
-			.then(usuario => {
-				setUsuario(usuario)
-			});
-		}, []);	
-
-	const fetchPedidos = useCallback(() => {
-		return fetch('https://youmarket-entrega4.herokuapp.com/pedido/getAll' , {headers: {
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json'},
 		method:'GET'})
 			.then(res => res.json())
 			.then(pedidos => {
 				setPedidos(pedidos)
 			});
 		}, []);		
-	
 	useEffect(() => {
-		fetchUsuario(usuario);
 		fetchPedidos(pedidos);
 		}, []);
 
