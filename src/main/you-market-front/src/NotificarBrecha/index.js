@@ -9,8 +9,6 @@ import {
 			
 class NotificarBrecha extends React.Component{
 		
-		
-		
 		constructor(props){
 		    super(props);
 		    
@@ -26,28 +24,9 @@ class NotificarBrecha extends React.Component{
 		        },
 		        method: 'GET'
 		    })
-		    .then(
-		    		fetch('/brecha/devuelveBrecha', {
-				        headers: {
-				            'Authorization': 'Bearer ' + localStorage.getItem('auth')
-				        },
-				        method: 'GET'
-				    }).then(
-				    	response => response.json()
-				    ).then(
-				    	res => {
-				    		this.setState({estadoBrecha:res})
-				    		if(this.state.estadoBrecha == true){
-				    			window.alert("La notificación de brecha se encuentra activada")
-				    		} else {
-				    			window.alert("La notificación de brecha se encuentra desactivada")	
-				    		}
-
-				    	}
-				    )
-		    ).then(
-		    	//this.props.history.push("asdasdsdas")
-		    );
+		   
+			.then(window.location.href="/")
+			
 		}
 		
 		 componentWillMount() {
@@ -62,9 +41,9 @@ class NotificarBrecha extends React.Component{
 			    	res => {
 			    		this.setState({estadoBrecha:res})
 			    		if(this.state.estadoBrecha == true){
-			    			window.alert("La notificación de brecha se encuentra activada")
+			    			window.alert("La notificaciÃ³n de brecha se encuentra activada")
 			    		} else {
-			    			window.alert("La notificación de brecha se encuentra desactivada")			    			
+			    			window.alert("La notificaciÃ³n de brecha se encuentra desactivada")			    			
 			    		}
 			    	}
 			    )
@@ -85,13 +64,7 @@ class NotificarBrecha extends React.Component{
 			<div className="producto-detalle-container container clearfix" >
 			
 			<h1> USTED VA A NOTIFICAR UNA BRECHA DE SEGURIDAD </h1>
-			
-			<p>
-				La brecha se encuentra: {this.state.estadoBrecha}
-			</p>
-		  	
-			<a href="#" onClick={this.hazFetch}> Activar/desactivar notificación de brecha </a>
-		  	
+			<button onClick={this.hazFetch} >Activar/Desactivar notificaciÃ³n</button>
 		  </div>
 		  </center>
 		</div>
