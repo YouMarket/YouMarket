@@ -46,7 +46,6 @@ class Login extends React.Component{
 				      .then(res => res.json())
 				      .then(dietasCheck => {
 				    	  localStorage.setItem('dietasCheck', dietasCheck);
-						  this.handleRedirect();
 				      });
 		 }
 
