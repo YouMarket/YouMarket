@@ -45,15 +45,18 @@ function DatosUsuario() {
 		}, []);
 
 	function deleteUser() {
+		var url= "/logout";
 		fetch('https://youmarket-entrega4.herokuapp.com/usuario/eliminarUsuario', {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 			method:'POST'
-		});
-		var url= "/logout";
-    	window.location = url;
+		}).then(
+				{
+					window.location = url;
+						});
+				}
 	}
 
 	const fetchDireccion = useCallback(() => {

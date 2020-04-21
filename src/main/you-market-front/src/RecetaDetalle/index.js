@@ -11,8 +11,13 @@ function RecetaDetalle() {
 	const { id } = useParams();
 	
 	const fetchReceta = useCallback(() => {
-	    return fetch(`https://youmarket-entrega4.herokuapp.com/receta/${id}`)
-	      .then(res => res.json())
+	    return fetch(`https://youmarket-entrega4.herokuapp.com/receta/${id}`, {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+			method:'POST'
+		}).then(res => res.json())
 	      .then(receta => {
 	        setReceta(receta)
 	      });
