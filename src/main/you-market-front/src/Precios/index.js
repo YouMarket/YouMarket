@@ -62,8 +62,10 @@ function Precios() {
                     </div>
                 </div>
             </div>
-            <br/>
-            <a href="/terminosYCondiciones" className="link-button">Acceder a los terminos y condiciones de la web.</a>
+
+            <div className="terminosYCondiciones-a-enlace">
+        	<a href="/terminosYCondiciones" className="link-button">Acceder a los terminos y condiciones de la web</a>
+        	</div>
   		</div>    
         
         

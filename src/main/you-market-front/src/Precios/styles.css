@@ -5,7 +5,10 @@
 .preciospage2 {
     width: 100%;
 }
-
+.terminosYCondiciones-a-enlace{
+	text-align:center;
+	margin-top:40px;
+}
 .preciospage-cards {
     display: flex;
 }
