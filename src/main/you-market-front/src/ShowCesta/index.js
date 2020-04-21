@@ -117,11 +117,12 @@ function ShowCesta() {
 				))}
 				<p className="cesta-total">Total: {total}€</p>
 
-				<div className="grid2-carrito-cesta">
-					<button onClick={() => {storeAsCarrito()}}  className="submit-cesta-carrito button-finish">
-						Añadir estos productos al carrito
-            		</button>
-				</div>
+				{productoCesta && productoCesta.length > 0 ? (
+						<div className="grid2-carrito-cesta">
+		                        <button onClick={() => {storeAsCarrito()}}  className="submit-cesta-carrito button-finish">
+		                            Añadir estos productos al carrito
+		                        </button>
+		                    </div>) : (<div></div>)}
 			</div>
 		</div>
 	);
