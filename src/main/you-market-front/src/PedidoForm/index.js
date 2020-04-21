@@ -239,85 +239,48 @@ function pagar() {
 	}
 
 
-	const mostrarPedido2 = () => {
-		pedido2copiado=false;
-		var x = document.getElementById("pedido2");
-		var y = document.getElementById("enlace2");
-
-		if (x.style.display === "flex") {
-			 pedido2mostrado = "no";
-			 x.style.display = "none";
-			 y.style.display = "none";
-
-			 errors.direccion2=undefined;
-			 errors.poblacion2=undefined;
-			 errors.cpostal2=undefined;
-			 errors.provincia2=undefined;
-			 errors.fechaEnvio2=undefined;
-			 errors.horaEnvioFin2=undefined;
-			 errors.horaEnvioIni2=undefined;
-
-		} else {
-			 pedido2mostrado = "si";
-			 x.style.display = "flex";
-			 //Si tiene más de 2, se muestra el enlace de mostrar tercer pedido
-			 if(envioTomas > 2){
-				 y.style.display = "flex";
-			 }
-		}
-
-		return false;
+const mostrarPedido2 = () => {
+	pedido2copiado=false;
+	var x = document.getElementById("pedido2");
+	var y = document.getElementById("enlace2");
+	var y2 = document.getElementById("enlace1");
+	
+		 pedido2mostrado = "si";
+		 x.style.display = "flex";
+		 y2.style.display="none";
+		 //Si tiene más de 2, se muestra el enlace de mostrar tercer pedido
+		 if(envioTomas > 2){
+			 y.style.display = "flex";
 	}
 
-	const mostrarPedido3 = () => {
-		  var x = document.getElementById("pedido3");
-		  var y = document.getElementById("enlace3")
+	return false;
+}
 
-		  if (x.style.display === "flex") {
-			  	pedido3mostrado = "no";
-			    x.style.display = "none";
-			    y.style.display = "none";
+const mostrarPedido3 = () => {
+	  var x = document.getElementById("pedido3");
+	  var y = document.getElementById("enlace3");
+	  var y2 = document.getElementById("enlace2");
 
-			    errors.direccion3=undefined;
-				errors.poblacion3=undefined;
-				errors.cpostal3=undefined;
-				errors.provincia3=undefined;
-				errors.fechaEnvio3=undefined;
-				errors.horaEnvioFin3=undefined;
-				errors.horaEnvioIni3=undefined;
-		  } else {
-			  	pedido3mostrado = "si";
-			    x.style.display = "flex";
-				//Si tiene más de 3, se muestra el enlace de mostrar cuarto pedido
-				if(envioTomas > 3){
-					y.style.display = "flex";
-				}
-		  }
-		  return false;
-	};
+		  	pedido3mostrado = "si";
+		    x.style.display = "flex";
+		    y2.style.display = "none";
+			//Si tiene más de 3, se muestra el enlace de mostrar cuarto pedido
+			if(envioTomas > 3){
+				y.style.display = "flex";
+	  }
+	  return false;
+};
 
-	const mostrarPedido4 = () => {
-		  var x = document.getElementById("pedido4");
-		  var y = document.getElementById("enlace4")
-		  if (x.style.display === "flex") {
-			  	pedido4mostrado = "no";
-			    x.style.display = "none";
-			    y.style.display = "none";
+const mostrarPedido4 = () => {
+	  var x = document.getElementById("pedido4");
+	  var y2 = document.getElementById("enlace3");
+	
+		  	pedido4mostrado = "si";
+		    x.style.display = "flex";
+		    y2.style.display = "none";
+	  return false;
+};
 
-			    errors.direccion4=undefined;
-				errors.poblacion4=undefined;
-				errors.cpostal4=undefined;
-				errors.provincia4=undefined;
-				errors.fechaEnvio4=undefined;
-				errors.horaEnvioFin4=undefined;
-				errors.horaEnvioIni4=undefined;
-		  } else {
-			  	pedido4mostrado = "si";
-			    x.style.display = "flex";
-			    y.style.display = "flex";
-		  }
-		  return false;
-	};
 
 
 	const cestas = () => {
@@ -802,7 +765,7 @@ function pagar() {
 	        <div id="enlace1" className="pedido-margin">
 	        		<div>
 						<a href="#enlaceMostrarPedido2" className="link-button" onClick={mostrarPedido2} id="enlaceMostrarPedido2">
-						+ Añadir/eliminar pedido número 2
+						+ Añadir pedido número 2
 						</a>
 	        		</div>
 	        </div>
@@ -952,7 +915,7 @@ function pagar() {
 		<div id="enlace2" className="pedido-margin">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido3" className="link-button" onClick={mostrarPedido3} id="enlaceMostrarPedido3">
-				+ Añadir/Eliminar pedido número 3
+				+ Añadir pedido número 3
 			</a>
 			<br/><br/>
 			<br/><br/>
@@ -1097,7 +1060,7 @@ function pagar() {
 		<div id="enlace3" className="pedido-margin">
 			<br/><br/>
 			<a href="#enlaceMostrarPedido4" className="link-button" onClick={mostrarPedido4} id="enlaceMostrarPedido4">
-				+ Añadir/Eliminar pedido número 4
+				+ Añadir pedido número 4
 			</a>
 			<br/><br/>
 			<br/><br/>
