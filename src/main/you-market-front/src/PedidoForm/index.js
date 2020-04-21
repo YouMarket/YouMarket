@@ -387,7 +387,7 @@ const mostrarPedido4 = () => {
         }else if(values.horaEnvioFin1 < values.horaEnvioIni1){
       	  errors.horaEnvioFin1 = 'La hora de inicio de entrega no puede mayor a la de final'
         }
-        if (values.fechaEnvio1 < today) {
+        if (values.fechaEnvio1 <= today) {
 	        	errors.fechaEnvio1 = 'Fecha no válida';
             }
 
@@ -467,7 +467,7 @@ const mostrarPedido4 = () => {
               if (values.horaEnvioIni2==="" || values.horaEnvioIni2==null) {
 	        	errors.horaEnvioFin2 = 'Campo obligatorio';
               }
-              if (values.fechaEnvio2 < today) {
+              if (values.fechaEnvio2 <= today) {
   	        	errors.fechaEnvio2 = 'Fecha no válida';
                 }
 
@@ -528,7 +528,7 @@ const mostrarPedido4 = () => {
 	        if (values.horaEnvioIni3==="" || values.horaEnvioIni3==null) {
 	        	errors.horaEnvioFin3 = 'Campo obligatorio';
 	        }
-	        if (values.fechaEnvio3 < today) {
+	        if (values.fechaEnvio3 <= today) {
   	        	errors.fechaEnvio3 = 'Fecha no válida';
                 }
         } else {
@@ -588,7 +588,7 @@ const mostrarPedido4 = () => {
 	        if (values.horaEnvioIni4==="" || values.horaEnvioIni4==null) {
 	        	errors.horaEnvioFin4 = 'Campo obligatorio';
 	        }
-	        if (values.fechaEnvio4 < today) {
+	        if (values.fechaEnvio4 <= today) {
   	        	errors.fechaEnvio4 = 'Fecha no válida';
                 }
 
