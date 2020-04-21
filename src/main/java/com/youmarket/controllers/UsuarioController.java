@@ -259,7 +259,6 @@ public class UsuarioController {
 
 	@GetMapping("/getUser")
 	public Usuario getUser(@CurrentUser UserPrincipal currentUser) {
-		System.out.println(currentUser);
 		return usuarioService.findById(currentUser.getId()).get();
 	}
 
@@ -356,10 +355,12 @@ public class UsuarioController {
 		return ResponseEntity.ok(respuesta);
 	}
 
-	@RequestMapping(value = "/exportPDF/{idUsuario}", method = RequestMethod.GET,
+	@RequestMapping(value = "/exportPDF", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> exportPDF (@PathVariable Integer idUsuario){
-		Usuario user = usuarioService.findById(idUsuario).orElse(null);
+	public ResponseEntity<InputStreamResource> exportPDF (@CurrentUser UserPrincipal userr){
+		if(userr == null)
+			return null;
+		Usuario user = usuarioService.findById(userr.getId()).orElse(null);
 
 		//incluye facturas de usuario y de pedido
 		List<Factura> facturas = fService.findByUser(user);

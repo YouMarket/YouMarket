@@ -55,7 +55,6 @@ function ShowCesta() {
 	useEffect(() => {
 		fetchCesta(cesta);
 		fetchProductoCesta(productoCesta);
-
 	}, []);
 
 	function storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad){
@@ -126,6 +125,5 @@ function ShowCesta() {
 			</div>
 		</div>
 	);
-
 }
 export default ShowCesta;

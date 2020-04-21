@@ -49,7 +49,6 @@ function ProductoDetalle() {
 		document.getElementById(idContador).textContent = cantidad
 	}
 
-
 	function storeProdSession(id, cantidad, nombre, precio, urlImagen, supermercado, unidad){
 		if(cantidad!=0){
 			localStorage.setItem('carrolleno', true);

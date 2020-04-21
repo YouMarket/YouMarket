@@ -54,19 +54,16 @@ public class CarritoSessionController {
 
 	@GetMapping("/carrito")
 	public ResponseEntity<List<ProductoCarrito>> carritoGet(HttpSession session){
-
 //		@SuppressWarnings("unchecked")
 //		Map<Producto, Integer> carrito = (Map<Producto, Integer>)session.getAttribute("SESSION_CARRITO");
 //		if(carrito == null){
 //			carrito = new HashMap<>();
 //		}
 		return null;
-
 	}
 
 
 	@PostMapping("/carrito")
-
 	public List<ProductoCarrito> carritoPost(@RequestBody Map<String,Integer> postProducto, HttpServletRequest request, HttpSession session){
 //		Producto p = this.productoService.findById(postProducto.get("postId"));
 //		int cantidad = postProducto.get("postCantidad");

@@ -12,7 +12,6 @@ const [displayedProducts, setDisplayedProducts] = useState([]);
 	    return fetch('https://youmarket-entrega4.herokuapp.com/producto/list')
 	      .then(res => res.json())
 	      .then(productos => {
-
 			setProductos(productos);
 			setDisplayedProducts(productos);
 	      });

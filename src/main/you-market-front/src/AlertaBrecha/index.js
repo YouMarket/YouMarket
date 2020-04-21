@@ -25,7 +25,7 @@ class AlertaBrecha extends React.Component{
 			<h1> SE HA PRODUCIDO UNA BRECHA DE SEGURIDAD </h1>
 			
 			<p>
-				Revise su bandeja de entrada, ah� encontrar� toda la informaci�n
+				Revise su bandeja de entrada, ahí encontrará toda la información
 				referente a lo sucedido y a las medidas que puede tomar.
 			</p>
 		  	<p>
