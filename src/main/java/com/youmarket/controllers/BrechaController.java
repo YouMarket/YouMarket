@@ -39,11 +39,7 @@ public class BrechaController {
 	}
 	
 	@RequestMapping("/devuelveBrecha")
-	public ResponseEntity<Boolean> devuelveBrecha(@CurrentUser UserPrincipal logged){
-		Usuario user = this.usuarioService.findById(logged.getId()).orElse(null);
-		Set<Role> roleSet = user.getRoles();
-		boolean isAdmin = roleSet.contains(new Role((long) 4, RoleName.ADMIN));
-		Assert.isTrue(isAdmin);
+	public ResponseEntity<Boolean> devuelveBrecha(){
 		
 		return ResponseEntity.ok(this.brechaService.devuelveBrecha());
 	}

@@ -64,7 +64,7 @@ class NotificarBrecha extends React.Component{
 			<div className="producto-detalle-container container clearfix" >
 			
 			<h1> USTED VA A NOTIFICAR UNA BRECHA DE SEGURIDAD </h1>
-			<button onClick={this.hazFetch} >Activar/Desactivar notificación</button>
+			<button className="button-finish" onClick={this.hazFetch} >Activar / Desactivar notificación</button>
 		  </div>
 		  </center>
 		</div>
