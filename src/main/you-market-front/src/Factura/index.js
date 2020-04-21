@@ -15,7 +15,6 @@ function Factura({ id, total, totalIva, fechaFactura, pedido }: Props) {
     const dateFormatted = new Date(fechaFactura).toLocaleDateString()
 
     function descarga() {
-        console.log('entra en la funcion');
         fetch(url, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('auth')
@@ -40,8 +39,8 @@ function Factura({ id, total, totalIva, fechaFactura, pedido }: Props) {
     return (
         <div className="factura-container">
             <p className="factura-field factura-id"><b>ID: </b>{id}</p>
-            <p className="factura-field factura-precio"><b>Precio: </b>{total} €</p>
-            <p className="factura-field factura-precioIva"><b>Precio con IVA: </b>{totalIva} €</p>
+            <p className="factura-field factura-precio"><b>Precio: </b>{total.toFixed(2)} €</p>
+            <p className="factura-field factura-precioIva"><b>Precio con IVA: </b>{totalIva.toFixed(2)} €</p>
             <p className="factura-field factura-fecha"><b>Fecha: </b>{dateFormatted}</p>
             {pedido != null ? <p className="factura-field factura-pedido"><b>ID Pedido: </b>{pedido}</p> : <p></p>}
             <a target="_blank">
