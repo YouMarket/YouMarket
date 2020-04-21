@@ -85,7 +85,7 @@ function ShowCesta() {
 			storeProdSession(prod.producto.id, prod.cantidad, prod.producto.nombre, prod.producto.precioIva, prod.producto.urlImagen, prod.producto.supermercado, prod.producto.unidad)
 		});
 		localStorage.removeItem('carrolleno');
-		localStorage.setItem('carrolleno',true);
+		localStorage.setItem('carrolleno',true);			
 		history.push('/carro');
 	}
 
@@ -116,12 +116,13 @@ function ShowCesta() {
 
 				))}
 				<p className="cesta-total">Total: {total}€</p>
-
+				
+				{productoCesta && productoCesta.length > 0 ? (
 				<div className="grid2-carrito-cesta">
-					<button onClick={() => {storeAsCarrito()}}  className="submit-cesta-carrito button-finish">
-						Añadir estos productos al carrito
-            		</button>
-				</div>
+                        <button onClick={() => {storeAsCarrito()}}  className="submit-cesta-carrito button-finish">
+                            Añadir estos productos al carrito
+                        </button>
+                    </div>) : (<div></div>)}
 			</div>
 		</div>
 	);
