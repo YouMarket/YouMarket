@@ -53,11 +53,9 @@ function DatosUsuario() {
 				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
 			method:'POST'
 		}).then(
-				{
-					window.location = url;
-						});
-				}
-	}
+			window.location = url
+				);
+		}
 
 	const fetchDireccion = useCallback(() => {
 		return fetch('https://youmarket-entrega4.herokuapp.com/direccion/principal' , {headers: {

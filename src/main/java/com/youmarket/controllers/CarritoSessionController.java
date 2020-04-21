@@ -1,7 +1,6 @@
 package com.youmarket.controllers;
 
 import java.math.BigDecimal;
-
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,7 +139,7 @@ public class CarritoSessionController {
 	@PostMapping("/carritoACesta/{idCesta}")
 	public Cesta carritoACesta(@RequestBody List<ProductoCarrito> prods, @PathVariable Integer idCesta, @CurrentUser UserPrincipal currentUser){
 		Cesta c = this.cestaService.findById(idCesta, currentUser);
-		
+		this.cpService.deleteByCestaId(c.getId());
 		for (ProductoCarrito p : prods) {
 			CestaProducto cp = new CestaProducto();
 			cp.setCantidad(p.getCantidad());
