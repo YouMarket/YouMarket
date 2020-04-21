@@ -11,7 +11,13 @@ function RecetaDetalle() {
 	const { id } = useParams();
 	
 	const fetchReceta = useCallback(() => {
-	    return fetch(`../../../receta/${id}`)
+	    return fetch(`../../../receta/${id}`, {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+			method:'POST'
+		})
 	      .then(res => res.json())
 	      .then(receta => {
 	        setReceta(receta)
