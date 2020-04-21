@@ -24,4 +24,8 @@ public class BrechaService {
 		this.brechaRepository.save(brecha1);
 	}
 	
+	public Boolean devuelveBrecha() {
+		return this.brechaRepository.findAll().get(0).getActivada();
+	}
+	
 }

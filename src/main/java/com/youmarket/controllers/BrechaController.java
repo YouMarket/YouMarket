@@ -28,7 +28,7 @@ public class BrechaController {
 	private UsuarioService usuarioService;
 
 	@RequestMapping("/alertar")
-	public void activaDesactivaBrecha(Model model, @CurrentUser UserPrincipal logged){
+	public void activaDesactivaBrecha(@CurrentUser UserPrincipal logged){
 		//TODO: COMPROBAR QUE ES ADMIN
 		Usuario user = this.usuarioService.findById(logged.getId()).orElse(null);
 		Set<Role> roleSet = user.getRoles();
@@ -39,5 +39,16 @@ public class BrechaController {
 		
 		brechaService.activaDesactivaBrecha();
 	}
+	
+	@RequestMapping("/devuelveBrecha")
+	public Boolean devuelveBrecha(@CurrentUser UserPrincipal logged){
+		//TODO: COMPROBAR QUE ES ADMIN
+		//Usuario user = usuarioService.findById(logged.getId()).orElse(null);
+		//Assert.isTrue(user.getSuscripcion().isDietista());
+		
+		return this.brechaService.devuelveBrecha();
+	}
+	
+	
 
 }
