@@ -12,7 +12,8 @@ class Logout extends React.Component{
 
 		handleRedirect = () => {
 		    localStorage.removeItem('auth'); 
-		    localStorage.removeItem('dietasCheck'); 
+			localStorage.removeItem('dietasCheck');
+			localStorage.removeItem('adminCheck');  
 		    localStorage.removeItem('enviosD');
 		    localStorage.removeItem('cestasCheck'); 
 		    localStorage.removeItem('carrolleno'); 

@@ -49,6 +49,19 @@ class Login extends React.Component{
 						  this.handleRedirect();
 				      });
 		 }
+
+		 adminCheck() {
+			fetch('/usuario/adminCheck' , {headers: {
+				   'Content-Type' : 'application/json',
+				   'Accept' : 'application/json',
+				   'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
+				   method:'GET'})
+					 .then(res => res.json())
+					 .then(adminCheck => {
+						 localStorage.setItem('adminCheck', adminCheck);
+						 this.handleRedirect();
+					 });
+		}
 		 
 		 cestasCheck() {
 			 fetch('/usuario/cestasCheck' , {headers: {
@@ -109,7 +122,8 @@ class Login extends React.Component{
 		                    localStorage.setItem('auth', data.accessToken);
 		                    this.cestasCheck();
 		                    this.enviosCheck();
-		                    this.dietasCheck();
+							this.dietasCheck();
+							this.adminCheck();
 		                  }
 		                else{
 		                	this.onChangeErrors("Contraseña incorrecta");
