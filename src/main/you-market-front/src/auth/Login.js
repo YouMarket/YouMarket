@@ -38,7 +38,7 @@ class Login extends React.Component{
    		}
 		 
 		 dietasCheck() {
-			 fetch('/usuario/dietasCheck' , {headers: {
+			 fetch('https://youmarket-entrega4.herokuapp.com/usuario/dietasCheck' , {headers: {
 					'Content-Type' : 'application/json',
 					'Accept' : 'application/json',
 					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -50,7 +50,7 @@ class Login extends React.Component{
 		 }
 
 		 adminCheck() {
-			fetch('/usuario/adminCheck' , {headers: {
+			fetch('https://youmarket-entrega4.herokuapp.com/usuario/adminCheck' , {headers: {
 				   'Content-Type' : 'application/json',
 				   'Accept' : 'application/json',
 				   'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -63,7 +63,7 @@ class Login extends React.Component{
 		}
 		 
 		 cestasCheck() {
-			 fetch('/usuario/cestasCheck' , {headers: {
+			 fetch('https://youmarket-entrega4.herokuapp.com/usuario/cestasCheck' , {headers: {
 					'Content-Type' : 'application/json',
 					'Accept' : 'application/json',
 					'Authorization' : 'Bearer ' + localStorage.getItem('auth')},
@@ -76,7 +76,7 @@ class Login extends React.Component{
 		 }
 		 
 		 enviosCheck() {
-			 fetch('/usuario/envios', {
+			 fetch('https://youmarket-entrega4.herokuapp.com/usuario/envios', {
 					headers:{
 					  'Content-Type' : 'application/json',
 					  'Accept' : 'application/json',

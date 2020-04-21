@@ -12,7 +12,7 @@ function Inicio() {
     const [estadoBrecha, setEstadoBrecha] = useState([]);
 
     const fetchDevuelveBrecha = useCallback(() => {
-        return fetch('/brecha/devuelveBrecha',{
+        return fetch('https://youmarket-entrega4.herokuapp.com/brecha/devuelveBrecha',{
             method: 'GET'
         }).then(
             response => response.json()

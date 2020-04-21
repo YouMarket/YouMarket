@@ -18,7 +18,7 @@ class NotificarBrecha extends React.Component{
 		}
 		
 		hazFetch() {
-			fetch('/brecha/alertar', {
+			fetch('https://youmarket-entrega4.herokuapp.com/brecha/alertar', {
 		        headers: {
 		            'Authorization': 'Bearer ' + localStorage.getItem('auth')
 		        },
@@ -30,7 +30,7 @@ class NotificarBrecha extends React.Component{
 		}
 		
 		 componentWillMount() {
-				fetch('/brecha/devuelveBrecha', {
+				fetch('https://youmarket-entrega4.herokuapp.com/brecha/devuelveBrecha', {
 			        headers: {
 			            'Authorization': 'Bearer ' + localStorage.getItem('auth')
 			        },
