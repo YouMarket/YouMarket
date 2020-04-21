@@ -158,9 +158,9 @@ function DatosUsuario() {
 									'Authorization' : 'Bearer ' + localStorage.getItem('auth')
 								},
 								method:'POST'})
-							.then(function(response) {
-								history.push('/datos-perfil')
-							})
+							.then(
+								window.location.reload()
+							)
 						}, 400);
 					}}
 

@@ -55,11 +55,12 @@ function SuscripcionForm() {
 									  .then(data => {
 										if (data.success) {
 											dietasCheck();
+											history.push('/datos-perfil');
 										  }
 										else{
 											this.state.errors = data.message
 											}
-									  }).then(window.location.reload());
+									  });
 
 								setSubmitting(false);
 								}, 400);
