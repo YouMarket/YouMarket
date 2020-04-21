@@ -104,7 +104,6 @@ function DatosUsuario() {
 
 
 	function descarga() {
-		console.log('entra en la funcion');
 		fetch(urlPDF, {
 			headers: {
 				'Authorization': 'Bearer ' + localStorage.getItem('auth')
