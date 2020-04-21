@@ -156,7 +156,7 @@ let history=useHistory();
 						</ProductoListado>
 					))}
 	
-					<div className="price"><b>Precio final: </b>{Math.round(precioFinal * 100) / 100} €</div>
+					<div className="price"><b>Precio final: </b>{precioFinal.toFixed(2)} €</div>
 					<div className="buttons">
 
 					{ localStorage.getItem('auth') ? (

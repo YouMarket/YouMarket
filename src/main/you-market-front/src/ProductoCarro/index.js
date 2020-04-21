@@ -28,7 +28,7 @@ function ProductoListado({id, urlImagen, nombre, supermercado, precioIva, unidad
 		<img className="producto-list-imagen" src={urlImagen} alt={urlImagen}/>
 		<div className="producto-list-info clearfix">
 			<p className="producto-list-nombre">{nombre}</p>
-			<p className="producto-list-precio">{precioIva} {unidad}</p>
+			<p className="producto-list-precio">{precioIva.toFixed(2)} {unidad}</p>
 			<p className="producto-list-supermercado">{supermercado}</p>
 			<p className="producto-list-cantidad"><b>Unidades:</b> {cantidad}</p>
 			<img className="borrar-producto" src={removeButton} onClick={() => eliminarProducto(id)} alt="Eliminar producto"/>

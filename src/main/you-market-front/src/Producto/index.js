@@ -74,7 +74,7 @@ function Producto({id, urlImagen, nombre, supermercado, precio, unidad}: Props) 
 			<NavLink to={`../../../show/producto/${id}`} className="link">
 			<img className="producto-imagen" src={urlImagen} alt="Imagen"/>
 			<div className="producto-info">
-				<p className="producto-precio no-link">{precio} {unidad}</p>
+				<p className="producto-precio no-link">{precio.toFixed(2)} {unidad}</p>
 				<p className="producto-nombre no-link">{nombre}</p>
 				<p className="producto-supermercado no-link">{supermercado}</p>
 			</div>
