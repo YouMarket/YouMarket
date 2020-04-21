@@ -17,7 +17,7 @@ function CestaProducto({id, producto, cesta}: Props) {
   		<img className="cesta-producto-imagen" src={producto.urlImagen} alt="Imagen"/>
   	
   	<div className="cesta-producto-info">
-  		<p className="cesta-producto-precio">{producto.precio} {producto.unidad}</p>
+  		<p className="cesta-producto-precio">{producto.precio.toFixed(2)} {producto.unidad}</p>
   		<p className="cesta-producto-nombre">{producto.nombre}</p>
   		<p className="cesta-producto-supermercado">{producto.supermercado.nombre}</p>
   	</div>
