@@ -30,7 +30,7 @@ class TerminoYCondiciones extends React.Component{
 			<p>
 				El usuario puede elegir y cambiar la clave para su acceso de administración de la cuenta en cualquier momento,
 				en caso de que se haya registrado y que sea necesario para la compra de alguno de nuestros productos.
-				https://youmarket-entrega3.herokuapp.com/ no asume la responsabilidad en caso de que entregue dicha clave
+				https://you-market-entrega-4.netlify.app/ no asume la responsabilidad en caso de que entregue dicha clave
 					a terceros.
 			</p>
 			<p>
