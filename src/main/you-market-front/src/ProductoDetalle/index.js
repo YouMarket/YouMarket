@@ -94,10 +94,10 @@ function ProductoDetalle() {
 							{renderDescription}
 
 							<div className="producto-detalle-field">
-								<b> Precio: </b> {producto.precio} {producto.unidad}
+								<b> Precio: </b> {producto.precio.toFixed(2)} {producto.unidad}
 							</div>
 							<div className="producto-detalle-field">
-								<b> Precio con IVA: </b> {producto.precioIva} {producto.unidad}
+								<b> Precio con IVA: </b> {producto.precioIva.toFixed(2)} {producto.unidad}
 							</div>
 							<div className="producto-detalle-field">
 								<b> Marca: </b>{producto.marca.nombre}
@@ -113,7 +113,7 @@ function ProductoDetalle() {
 									<img className="mas" src={plus} onClick={plusProduct} alt="Añadir uno"/>
 								</div>
 								<button className="producto-detalle-add" onClick={() => storeProdSession(producto.id, cantidad, producto.nombre,
-									 producto.precio, producto.urlImagen, producto.supermercado, producto.unidad)}>AÑADIR AL CARRO</button>
+									 producto.precioIva, producto.urlImagen, producto.supermercado, producto.unidad)}>AÑADIR AL CARRO</button>
 							</div>
 						</div>
 				</div>

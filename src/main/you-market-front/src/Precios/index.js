@@ -45,10 +45,10 @@ function Precios() {
                     <div className="card-information">
                         <p className="card-envios">Servicio estándar</p>
                         <ul className="card-text">
-                            <li> 1 envío: 6 € </li>
-                            <li> 2 envíos: 10 € </li>
-                            <li> 3 envíos: 14 € </li>
-                            <li> 4 envíos: 17 € </li>
+                            <li> 1 envío: 6,00 € </li>
+                            <li> 2 envíos: 10,00 € </li>
+                            <li> 3 envíos: 14,00 € </li>
+                            <li> 4 envíos: 17,00 € </li>
                         </ul>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ function Precios() {
                     <div className="card-information">
                         <p className="card-envios">Servicio de dietistas</p>
                         <p className="card-euros">
-                         + 3 €
+                         + 3,00 €
                         </p>
 
                     </div>

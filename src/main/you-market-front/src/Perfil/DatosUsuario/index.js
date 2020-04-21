@@ -139,7 +139,7 @@ function DatosUsuario() {
 					<p>Fecha de nacimiento: {new Date(usuario.fechaNacimiento).toLocaleDateString()} </p>
 					<p>Zona de reparto: {usuario.cpostal}</p>
 					<p>Suscripción: {suscripcion.nombre} </p>
-					<p>Precio: {suscripcion.precio} €</p>
+					<p>Precio: {suscripcion.precio.toFixed(2)} €</p>
 					<p>Pedidos restantes: {usuario.pedidosRestantes}</p>
   					{ultimaSuscripcion.fechaFactura ? <p>Último pago realizado de la suscripción: {new Date(ultimaSuscripcion.fechaFactura).toLocaleDateString()}</p>: <p></p>}
 				</div>
@@ -158,9 +158,9 @@ function DatosUsuario() {
 									'Authorization' : 'Bearer ' + localStorage.getItem('auth')
 								},
 								method:'POST'})
-							.then(function(response) {
-								history.push('/datos-perfil')
-							})
+							.then(
+								window.location.reload()
+							)
 						}, 400);
 					}}
 

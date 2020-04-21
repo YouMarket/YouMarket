@@ -23,7 +23,7 @@ function ListaSuscripciones() {
 	return(
 	  <div>
 	  	<select className="input-select" id="selectSuscripciones">
-            {suscripciones.map((suscripcion) => <option key={suscripcion.id} value={suscripcion.id}>{suscripcion.nombre} {suscripcion.precio} €</option>)}
+            {suscripciones.map((suscripcion) => <option key={suscripcion.id} value={suscripcion.id}>{suscripcion.nombre} {suscripcion.precio.toFixed(2)} €</option>)}
 
 		</select>
 	 </div>
