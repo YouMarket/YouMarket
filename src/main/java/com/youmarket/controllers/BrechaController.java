@@ -34,7 +34,6 @@ public class BrechaController {
 		boolean isAdmin = roleSet.contains(new Role((long) 4, RoleName.ADMIN));
 		Assert.isTrue(isAdmin);
 
-		System.out.println("aaaaaaaaaa");
 		brechaService.activaDesactivaBrecha();
 	}
 
