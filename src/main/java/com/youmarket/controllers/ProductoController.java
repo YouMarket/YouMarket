@@ -1,8 +1,6 @@
-
 package com.youmarket.controllers;
 
 import java.util.List;
-
 
 import javax.validation.Valid;
 
@@ -15,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.youmarket.domain.Dieta;
+import com.youmarket.domain.Marca;
 import com.youmarket.domain.Producto;
+import com.youmarket.domain.Supermercado;
 import com.youmarket.services.DietaService;
 import com.youmarket.services.ProductoService;
 
@@ -47,4 +47,15 @@ public class ProductoController {
 		List<Producto> productos = di.getProductos();
 		return productos;
 	}
+
+	@RequestMapping("/marcas")
+	public List<Marca> listMarcas(Model model){
+		return productoService.getMarcas();
+	}
+
+	@RequestMapping("/supermercados")
+	public List<Supermercado> listSupermercados(Model model){
+		return productoService.getSupermercados();
+	}
+
 }
