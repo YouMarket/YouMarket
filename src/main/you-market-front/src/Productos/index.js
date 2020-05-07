@@ -58,22 +58,58 @@ const [displayedProducts, setDisplayedProducts] = useState([]);
 		setDisplayedProducts(displayedProducts)
 	};
 
-	function filterMarcas(event){
-		var searchQuery = event.target.value.toLowerCase();
-		var productosFiltrados = displayedProducts.filter(function(el){
-			var serchVal = el.marca.nombre.toLowerCase();
-			return serchVal.indexOf(searchQuery)!==-1;
-		});
-		setDisplayedProducts(productosFiltrados) 
-	}
-
-	function filterSupermercados(event){
-		var searchQuery = event.target.value.toLowerCase();
-		var productosFiltrados = displayedProducts.filter(function(el){
-			var serchVal = el.supermercado.nombre.toLowerCase();
-			return serchVal.indexOf(searchQuery)!==-1;
-		});
-		setDisplayedProducts(productosFiltrados) 
+	function filter(){
+		var inputSearch = document.getElementById("input-search").value
+		var selectMarcas = document.getElementById("select-marcas").value
+		var selectSupermercados = document.getElementById("select-supermercados").value
+		var productosFiltradosTotal = []
+		
+		if (selectMarcas == "" && selectSupermercados == "" && inputSearch == ""){ // Todos vacíos
+			productosFiltradosTotal = productos
+		} else if (selectMarcas != "" && selectSupermercados == "" && inputSearch == ""){ // Solo marca
+			productosFiltradosTotal = productos.filter(function(el){
+				var serchVal = el.marca.nombre.toLowerCase();
+				return serchVal.indexOf(selectMarcas.toLowerCase())!==-1;
+			});
+		} else if (selectSupermercados != "" && selectMarcas == "" && inputSearch == ""){ // Solo supermercados
+			productosFiltradosTotal = productos.filter(function(el){
+				var serchVal = el.supermercado.nombre.toLowerCase();
+				return serchVal.indexOf(selectSupermercados.toLowerCase())!==-1;
+			});
+		} else if (selectSupermercados != "" && selectMarcas != "" && inputSearch == ""){ // Marca y super
+			productosFiltradosTotal = productos.filter(function(el){
+				var serchValSuper = el.supermercado.nombre.toLowerCase();
+				var serchValMarca = el.marca.nombre.toLowerCase();
+				return serchValSuper.indexOf(selectSupermercados.toLowerCase())!==-1 && serchValMarca.indexOf(selectMarcas.toLowerCase())!==-1;
+			});
+		} else if (selectSupermercados != "" && selectMarcas == "" && inputSearch != ""){ // Supermercado y buscador
+			productosFiltradosTotal = productos.filter(function(el){
+				var serchValSuper = el.supermercado.nombre.toLowerCase();
+				var serchValBuscador = el.nombre.toLowerCase();
+				return serchValSuper.indexOf(selectSupermercados.toLowerCase())!==-1 && serchValBuscador.indexOf(inputSearch.toLowerCase())!==-1;
+			});
+		} else if (selectSupermercados == "" && selectMarcas != "" && inputSearch != ""){ // Marca y buscador
+			productosFiltradosTotal = productos.filter(function(el){
+				var serchValMarca = el.marca.nombre.toLowerCase();
+				var serchValBuscador = el.nombre.toLowerCase();
+				return serchValMarca.indexOf(selectMarcas.toLowerCase())!==-1 && serchValBuscador.indexOf(inputSearch.toLowerCase())!==-1;
+			}); 
+		} else if (selectSupermercados != "" && selectMarcas != "" && inputSearch != ""){ // Todos rellenos
+			productosFiltradosTotal = productos.filter(function(el){
+				var searchValSuper = el.supermercado.nombre.toLowerCase();
+				var serchValMarca = el.marca.nombre.toLowerCase();
+				var serchValBuscador = el.nombre.toLowerCase();
+				return serchValMarca.indexOf(selectMarcas.toLowerCase())!==-1 && serchValBuscador.indexOf(inputSearch.toLowerCase())!==-1 && searchValSuper.indexOf(selectSupermercados.toLowerCase())!==-1;
+			});
+		} else if (selectSupermercados == "" && selectMarcas == "" && inputSearch != ""){ // Solo buscador
+			productosFiltradosTotal = productos.filter(function(el){
+				var serchValBuscador = el.nombre.toLowerCase();
+				return serchValBuscador.indexOf(inputSearch.toLowerCase())!==-1;
+			});
+		}
+		
+		setDisplayedProducts(productosFiltradosTotal)
+		
 	}
 
 	function resetFilters(){
@@ -86,10 +122,10 @@ const [displayedProducts, setDisplayedProducts] = useState([]);
 	  <Header/>
 	  <div className="productos-page container">
 		<h1 className="productos-title">Aquí tienes los productos disponibles 🤙</h1>
-		<input className="productos-search" type="text" onChange={search} placeholder="Busca aquí tus productos favoritos..."/>
+		<input id="input-search" className="productos-search" type="text" onChange={filter} placeholder="Busca aquí tus productos favoritos..."/>
 		<div className="productos-filtro filtroMarca">
 			<p>Filtra por marca:</p>
-			<select name="marcas" onChange={filterMarcas}>
+			<select id="select-marcas" name="marcas" onChange={filter}>
 				<option key="null" value="">------------</option>
 				{marcas.map(marca => 
 					<option key={marca.id} value={marca.nombre}>{marca.nombre}</option>
@@ -99,8 +135,8 @@ const [displayedProducts, setDisplayedProducts] = useState([]);
 
 		<div className="productos-filtro filtroSuper">
 			<p>Filtra por supermercado:</p>
-			<select name="supermercados" onChange={filterSupermercados}>
-				<option key="null" value="---">------------</option>
+			<select id="select-supermercados" name="supermercados" onChange={filter}>
+				<option key="null" value="">------------</option>
 				{supermercados.map(supermercado => 
 					<option key={supermercado.id} value={supermercado.nombre}>{supermercado.nombre}</option>
 				)}
