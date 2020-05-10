@@ -22,17 +22,16 @@ import lombok.NoArgsConstructor;
 public class Cesta {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="nombre", length=255)
+
+	@Column(name = "nombre", length = 255)
 	@NotBlank
 	@SafeHtml
 	private String nombre;
-	
+
 	@ManyToOne(optional = false)
-	@JoinColumn(name="usuario_id")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
 
 }

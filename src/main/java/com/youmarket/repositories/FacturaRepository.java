@@ -2,11 +2,11 @@ package com.youmarket.repositories;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
 import com.youmarket.domain.Factura;
 import com.youmarket.domain.Usuario;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 

@@ -131,30 +131,10 @@ public class UsuarioController {
 		return userSummary;
 	}
 
-	// @PostMapping("/signUp")
-	// public Usuario signUp(@RequestBody Usuario usuario) {
-	//
-	// Suscripcion sus =
-	// suscripcionService.findById(usuario.getSuscripcion().getId());
-	// usuario.setSuscripcion(sus);
-	// if(sus.isDietista()) {
-	// Role userRole =
-	// roleService.findByName(RoleName.CLIENTE_CON_DIETAS).orElse(null);
-	// usuario.setRoles(Collections.singleton(userRole));
-	// }else {
-	// Role userRole = roleService.findByName(RoleName.CLIENTE).orElse(null);
-	// usuario.setRoles(Collections.singleton(userRole));
-	// }
-	//
-	// usuario.setPassword(sc.passwordEncoder().encode(usuario.getPassword()));
-	// Usuario signUpped = usuarioService.save(usuario);
-	// return signUpped;
-	// }
-
 	@PostMapping("/signUpAll")
 	public ResponseEntity<ApiResponse> signUpAll(@RequestBody SignUpForm form)
 			throws MalformedURLException, URISyntaxException {
-		
+
 		ApiResponse respuesta = new ApiResponse();
 		if (usuarioService.checkUsuariAvailability(form.getUsuario().getEmail())) {
 			Usuario usuario = form.getUsuario();
@@ -189,14 +169,15 @@ public class UsuarioController {
 	}
 
 	@PutMapping("/updatePerfil")
-	public ResponseEntity<ApiResponse> updateDatosPerfil(@RequestBody SignUpForm form, @CurrentUser UserPrincipal logged){
+	public ResponseEntity<ApiResponse> updateDatosPerfil(@RequestBody SignUpForm form,
+			@CurrentUser UserPrincipal logged) {
 		ApiResponse respuesta = new ApiResponse();
 		Usuario user = usuarioService.findById(logged.getId()).orElse(null);
 		Direccion direccionActual = dirService.findPrincipalByUser(user);
 		Usuario usuarioForm = form.getUsuario();
 		Direccion direccionForm = form.getDir();
 
-		if(usuarioForm.getEmail().equals(user.getEmail())){
+		if (usuarioForm.getEmail().equals(user.getEmail())) {
 			user.setNombre(usuarioForm.getNombre());
 			user.setApellidos(usuarioForm.getApellidos());
 			user.setTelefono(usuarioForm.getTelefono());
@@ -233,12 +214,7 @@ public class UsuarioController {
 				respuesta.setMessage("Datos actualizados con éxito");
 			}
 		}
-			
-		
 
-		
-			
-			
 		return ResponseEntity.ok(respuesta);
 	}
 
@@ -283,7 +259,7 @@ public class UsuarioController {
 		ApiResponse respuesta = new ApiResponse();
 		Usuario usuario = this.usuarioService.findById(current.getId()).orElse(null);
 		List<Direccion> direcciones = this.dirService.findAllByUser(usuario);
-		for(Direccion d : direcciones){
+		for (Direccion d : direcciones) {
 			this.dirService.delete(d);
 		}
 		usuario.setApellidos("Eliminado");
@@ -303,35 +279,32 @@ public class UsuarioController {
 		ApiResponse respuesta = new ApiResponse();
 		respuesta.setSuccess(false);
 		Suscripcion susc = suscripcionService.findById(sus);
-		if(susc != null) {
+		if (susc != null) {
 			respuesta.setSuccess(true);
 			Usuario user = usuarioService.findById(curr.getId()).orElse(null);
 			user.setSuscripcion(susc);
 			usuarioService.save(user);
 		}
-		
+
 		return ResponseEntity.ok(respuesta);
 	}
 
-
 	@GetMapping("/alertaPago")
-	public ResponseEntity<ApiResponse> alertaPago(@CurrentUser UserPrincipal curr){
+	public ResponseEntity<ApiResponse> alertaPago(@CurrentUser UserPrincipal curr) {
 		ApiResponse respuesta = new ApiResponse();
 		Usuario user = usuarioService.findById(curr.getId()).orElse(null);
 		Factura last = fService.findLastSuscripcion(user);
 
 		respuesta.setSuccess(true);
 		respuesta.setMessage("OK");
-		if(last == null) {
+		if (last == null) {
 			respuesta.setMessage("Para poder realizar su primer pedido, tiene primero que abonar la suscripción.");
 			respuesta.setSuccess(false);
-		}else if( last.getFechaFactura()!= null) {
-			LocalDate fechaFactura = last.getFechaFactura().toInstant()
-				      .atZone(ZoneId.systemDefault())
-				      .toLocalDate();
+		} else if (last.getFechaFactura() != null) {
+			LocalDate fechaFactura = last.getFechaFactura().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			LocalDate fecha = LocalDate.now();
 
-			if(fecha.getMonthValue() > fechaFactura.getMonthValue() && user.getPedidosRestantes() == 0) {
+			if (fecha.getMonthValue() > fechaFactura.getMonthValue() && user.getPedidosRestantes() == 0) {
 				respuesta.setMessage("Aún no ha pagado la suscripción de este mes y no le quedan pedidos.");
 				respuesta.setSuccess(false);
 			}
@@ -340,14 +313,13 @@ public class UsuarioController {
 		return ResponseEntity.ok(respuesta);
 	}
 
-	@RequestMapping(value = "/exportPDF", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> exportPDF (@CurrentUser UserPrincipal userr){
-		if(userr == null)
+	@RequestMapping(value = "/exportPDF", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> exportPDF(@CurrentUser UserPrincipal userr) {
+		if (userr == null)
 			return null;
 		Usuario user = usuarioService.findById(userr.getId()).orElse(null);
 
-		//incluye facturas de usuario y de pedido
+		// incluye facturas de usuario y de pedido
 		List<Factura> facturas = fService.findByUser(user);
 		List<Direccion> direcciones = dirService.findAllByUser(user);
 		List<Cesta> cestas = cestaService.cestasPorUsuario(user.getId());
@@ -363,28 +335,24 @@ public class UsuarioController {
 			productosPedidos.add(prods);
 		}
 
+		ByteArrayInputStream bis = PDFUtil.usuarioPDFGenerator(user, direcciones, productosCestas, productosPedidos,
+				facturas);
 
-		ByteArrayInputStream bis = PDFUtil.usuarioPDFGenerator(user, direcciones, productosCestas, productosPedidos, facturas);
+		HttpHeaders headers = new HttpHeaders();
+		String filename = "export_usuario_" + user.getEmail();
+		headers.add("Content-Disposition", "attachment; filename=" + filename + ".pdf");
 
-        HttpHeaders headers = new HttpHeaders();
-        String filename = "export_usuario_"+user.getEmail();
-        headers.add("Content-Disposition", "attachment; filename="+filename+".pdf");
-
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(bis));
+		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+				.body(new InputStreamResource(bis));
 	}
 
 	@GetMapping("/envios")
 	public ResponseEntity<Integer> enviosRestantes(@CurrentUser UserPrincipal curr) {
 		Integer envios = 0;
-		Usuario usuario1 = null;
 
-		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		Optional<Usuario> user = this.usuarioService.findById(curr.getId());
 
-		if(user.isPresent()) {
+		if (user.isPresent()) {
 			envios = user.get().getPedidosRestantes();
 		}
 
@@ -410,95 +378,94 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/dietasCheck")
-		public ResponseEntity<Integer> dietasCheck(@CurrentUser UserPrincipal curr){
-			Boolean result=false;
-			Integer res=0;
-			Usuario usuario1=null;
+	public ResponseEntity<Integer> dietasCheck(@CurrentUser UserPrincipal curr) {
+		Boolean result = false;
+		Integer res = 0;
+		Usuario usuario1 = null;
 
-			Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		Optional<Usuario> user = this.usuarioService.findById(curr.getId());
 
-			if(user.isPresent()) {
-				usuario1 = user.get();
-			}
-
-			result=usuario1.getSuscripcion().isDietista();
-
-			if(result==true) {
-				res=1;
-			}
-
-			return ResponseEntity.ok(res);
-
-		}
-	
-	@GetMapping("/cestasCheck")
-	public ResponseEntity<Integer> cestasCheck(@CurrentUser UserPrincipal curr){
-		Boolean result=false;
-		Integer res=0;
-		Usuario usuario1=null;
-
-		Optional<Usuario> user=this.usuarioService.findById(curr.getId());
-
-		if(user.isPresent()) {
+		if (user.isPresent()) {
 			usuario1 = user.get();
 		}
 
-		List<Cesta> cestas=this.cestaService.cestasPorUsuario(usuario1.getId());
-		
-		if(cestas.size() > 0) {
-			res=1;
+		result = usuario1.getSuscripcion().isDietista();
+
+		if (result == true) {
+			res = 1;
 		}
 
 		return ResponseEntity.ok(res);
 
 	}
 
-		@GetMapping("/userPerfil")
-		public ResponseEntity<Usuario> userPerfil(@CurrentUser UserPrincipal curr){
-			Usuario usuario1=null;
+	@GetMapping("/cestasCheck")
+	public ResponseEntity<Integer> cestasCheck(@CurrentUser UserPrincipal curr) {
+		Integer res = 0;
+		Usuario usuario1 = null;
 
-			Optional<Usuario> user=this.usuarioService.findById(curr.getId());
+		Optional<Usuario> user = this.usuarioService.findById(curr.getId());
 
-			if(user.isPresent()) {
-				usuario1 = user.get();
-			}
-
-			return ResponseEntity.ok(usuario1);
-
+		if (user.isPresent()) {
+			usuario1 = user.get();
 		}
 
-		@GetMapping("/direccion")
-		public ResponseEntity<Direccion> userDireccion(@CurrentUser UserPrincipal curr){
-			Optional<Usuario> user=this.usuarioService.findById(curr.getId());
-			Usuario usuario1=null;
-			if(user.isPresent()) {
-				usuario1=user.get();
-			}
+		List<Cesta> cestas = this.cestaService.cestasPorUsuario(usuario1.getId());
 
-			usuario1.setPassword(null);
-
-			List<Direccion> direcciones=this.direccionService.findAllByUser(usuario1);
-			ResponseEntity<Direccion> res;
-			if(direcciones.size()==0) {
-				res= null;
-			}else {
-
-			res= ResponseEntity.ok(direcciones.get(0));
-			}
-
-			return res;
-
+		if (cestas.size() > 0) {
+			res = 1;
 		}
 
-		@GetMapping("/adminCheck")
-		public ResponseEntity<Integer> adminCheck(@CurrentUser UserPrincipal curr){
-			Integer res=0;
-			Usuario user = this.usuarioService.findById(curr.getId()).orElse(null);
-			Set<Role> roleSet = user.getRoles();
-			if(roleSet.contains(new Role((long) 4, RoleName.ADMIN))){
-				res = 1;
-			}
-			return ResponseEntity.ok(res);
+		return ResponseEntity.ok(res);
 
+	}
+
+	@GetMapping("/userPerfil")
+	public ResponseEntity<Usuario> userPerfil(@CurrentUser UserPrincipal curr) {
+		Usuario usuario1 = null;
+
+		Optional<Usuario> user = this.usuarioService.findById(curr.getId());
+
+		if (user.isPresent()) {
+			usuario1 = user.get();
 		}
+
+		return ResponseEntity.ok(usuario1);
+
+	}
+
+	@GetMapping("/direccion")
+	public ResponseEntity<Direccion> userDireccion(@CurrentUser UserPrincipal curr) {
+		Optional<Usuario> user = this.usuarioService.findById(curr.getId());
+		Usuario usuario1 = null;
+		if (user.isPresent()) {
+			usuario1 = user.get();
+		}
+
+		usuario1.setPassword(null);
+
+		List<Direccion> direcciones = this.direccionService.findAllByUser(usuario1);
+		ResponseEntity<Direccion> res;
+		if (direcciones.size() == 0) {
+			res = null;
+		} else {
+
+			res = ResponseEntity.ok(direcciones.get(0));
+		}
+
+		return res;
+
+	}
+
+	@GetMapping("/adminCheck")
+	public ResponseEntity<Integer> adminCheck(@CurrentUser UserPrincipal curr) {
+		Integer res = 0;
+		Usuario user = this.usuarioService.findById(curr.getId()).orElse(null);
+		Set<Role> roleSet = user.getRoles();
+		if (roleSet.contains(new Role((long) 4, RoleName.ADMIN))) {
+			res = 1;
+		}
+		return ResponseEntity.ok(res);
+
+	}
 }

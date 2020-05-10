@@ -24,22 +24,22 @@ import lombok.NoArgsConstructor;
 public class Suscripcion {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotBlank
 	@SafeHtml
-	@JoinColumn(name="nombre")
+	@JoinColumn(name = "nombre")
 	private String nombre;
-	
+
 	@Positive
 	private Double precio;
-	
-	@Range(min=0, max =4)
+
+	@Range(min = 0, max = 4)
 	private Integer envios;
-	
+
 	@Column(nullable = false)
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean dietista;
-	
+
 }

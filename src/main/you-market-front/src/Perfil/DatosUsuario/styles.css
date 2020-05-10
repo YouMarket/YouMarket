@@ -1,46 +1,45 @@
-
-.seccion-perfil{
-	padding: 20px 60px;
+.seccion-perfil {
+  padding: 20px 60px;
 }
 
-.informacion-personal{
-	margin-bottom: 60px;
+.informacion-personal {
+  margin-bottom: 60px;
 }
 
-.informacion-usuario{
-	margin-bottom: 60px;
+.informacion-usuario {
+  margin-bottom: 60px;
 }
 
-.boton-perfil{
-	border-radius: 10px;
-	background-color: #8bb547;
-	border: none;
-	padding: 10px 40px;
-	font-size:	16px;
+.boton-perfil {
+  border-radius: 10px;
+  background-color: #8bb547;
+  border: none;
+  padding: 10px 40px;
+  font-size: 16px;
 }
 
-.a-cambio-perfil{
-	margin-right:5%;
-	flex:left;
+.a-cambio-perfil {
+  margin-right: 5%;
+  flex: left;
 }
-.a-cambio-perfil2{
-	flex:right;
+.a-cambio-perfil2 {
+  flex: right;
 }
 
-.card-container{
-	padding: 40px 30px;
-	width: 50%;
-	margin: 0 auto;
+.card-container {
+  padding: 40px 30px;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .modificar-button {
-	margin: 20px;
+  margin: 20px;
 }
 
 .button-perfil {
-	margin: 20px;
+  margin: 20px;
 }
 
 #selectSuscripciones {
-	margin: 20px 0;
+  margin: 20px 0;
 }

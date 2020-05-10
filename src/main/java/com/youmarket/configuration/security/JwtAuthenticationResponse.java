@@ -1,7 +1,7 @@
 package com.youmarket.configuration.security;
 
 public class JwtAuthenticationResponse {
-	private String accessToken;
+    private String accessToken;
     private String tokenType = "Bearer";
 
     public JwtAuthenticationResponse(String accessToken) {

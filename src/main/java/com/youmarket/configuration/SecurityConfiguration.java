@@ -3,7 +3,6 @@ package com.youmarket.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -46,29 +45,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.cors()
-			.and().csrf().disable()
-			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
-			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-			.and().authorizeRequests()
+		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).and().authorizeRequests()
 				.antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.html",
 						"/**/*.css", "/**/*.js")
-				.permitAll()
-				.antMatchers("/usuario/*").permitAll()
-				.antMatchers("/usuario/signIn").permitAll()
-				.antMatchers("/usuario/signUp").permitAll()
-				.antMatchers("/direccion/dirs").permitAll()
-				.antMatchers("/usuario/signIn").permitAll()
-				.antMatchers("/usuario/signUp").permitAll()
-				.antMatchers("/usuario/signUpAll").permitAll()
-				.antMatchers("/suscripcion/all").permitAll()
-				.antMatchers("/producto/*").permitAll()
-				.antMatchers("/dieta/list").permitAll()
-				.antMatchers("/show/dieta/*").permitAll()
-				.antMatchers("/create/dieta").permitAll()
-				.antMatchers("/pedido").authenticated()
-				.anyRequest().permitAll();
+				.permitAll().antMatchers("/usuario/*").permitAll().antMatchers("/usuario/signIn").permitAll()
+				.antMatchers("/usuario/signUp").permitAll().antMatchers("/direccion/dirs").permitAll()
+				.antMatchers("/usuario/signIn").permitAll().antMatchers("/usuario/signUp").permitAll()
+				.antMatchers("/usuario/signUpAll").permitAll().antMatchers("/suscripcion/all").permitAll()
+				.antMatchers("/producto/*").permitAll().antMatchers("/dieta/list").permitAll()
+				.antMatchers("/show/dieta/*").permitAll().antMatchers("/create/dieta").permitAll()
+				.antMatchers("/pedido").authenticated().anyRequest().permitAll();
 
 		// Add our custom JWT security filter
 		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

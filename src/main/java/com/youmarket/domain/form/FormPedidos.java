@@ -1,65 +1,62 @@
 package com.youmarket.domain.form;
 
 import java.util.Date;
-import java.util.List;
-
 
 public class FormPedidos {
 
-	private String 		direccion1;	
-	private String 		poblacion1;	
-	private Integer 	numero1;	
-	private String 		provincia1;	
-	private String 		cpostal1;
-	private Date 		fechaEnvio1;	
-	private Integer 	horaEnvioIni1;
-	private Integer 	horaEnvioFin1;
-	private Integer 	cestaId1;
-	
-	private String 		direccion2;	
-	private String 		poblacion2;	
-	private Integer 	numero2;	
-	private String 		provincia2;	
-	private String 		cpostal2;
-	private Date 		fechaEnvio2;	
-	private Integer 	horaEnvioIni2;
-	private Integer 	horaEnvioFin2;
-	private Integer 	cestaId2;
-	
-	private String 		direccion3;	
-	private String 		poblacion3;	
-	private Integer 	numero3;	
-	private String 		provincia3;	
-	private String 		cpostal3;
-	private Date 		fechaEnvio3;	
-	private Integer 	horaEnvioIni3;
-	private Integer 	horaEnvioFin3;
-	private Integer 	cestaId3;
-	
-	private String 		direccion4;	
-	private String 		poblacion4;	
-	private Integer 	numero4;	
-	private String 		provincia4;	
-	private String 		cpostal4;
-	private Date 		fechaEnvio4;	
-	private Integer 	horaEnvioIni4;
-	private Integer 	horaEnvioFin4;
-	private Integer 	cestaId4;
-	
+	private String direccion1;
+	private String poblacion1;
+	private Integer numero1;
+	private String provincia1;
+	private String cpostal1;
+	private Date fechaEnvio1;
+	private Integer horaEnvioIni1;
+	private Integer horaEnvioFin1;
+	private Integer cestaId1;
+
+	private String direccion2;
+	private String poblacion2;
+	private Integer numero2;
+	private String provincia2;
+	private String cpostal2;
+	private Date fechaEnvio2;
+	private Integer horaEnvioIni2;
+	private Integer horaEnvioFin2;
+	private Integer cestaId2;
+
+	private String direccion3;
+	private String poblacion3;
+	private Integer numero3;
+	private String provincia3;
+	private String cpostal3;
+	private Date fechaEnvio3;
+	private Integer horaEnvioIni3;
+	private Integer horaEnvioFin3;
+	private Integer cestaId3;
+
+	private String direccion4;
+	private String poblacion4;
+	private Integer numero4;
+	private String provincia4;
+	private String cpostal4;
+	private Date fechaEnvio4;
+	private Integer horaEnvioIni4;
+	private Integer horaEnvioFin4;
+	private Integer cestaId4;
+
 	public FormPedidos() {
 		super();
 	}
-	
-	public FormPedidos(String direccion1, String poblacion1, Integer numero1, String provincia1, String cpostal1, Date fechaEnvio1,
-			Integer horaEnvioIni1, Integer horaEnvioFin1, Integer cestaId1,
-			String direccion2, String poblacion2, Integer numero2, String provincia2, String cpostal2, Date fechaEnvio2,
-			Integer horaEnvioIni2, Integer horaEnvioFin2, Integer cestaId2,
-			String direccion3, String poblacion3, Integer numero3, String provincia3, String cpostal3, Date fechaEnvio3,
-			Integer horaEnvioIni3, Integer horaEnvioFin3, Integer cestaId3,
-			String direccion4, String poblacion4, Integer numero4, String provincia4, String cpostal4, Date fechaEnvio4,
-			Integer horaEnvioIni4, Integer horaEnvioFin4, Integer cestaId4
-			) {
-		
+
+	public FormPedidos(String direccion1, String poblacion1, Integer numero1, String provincia1, String cpostal1,
+			Date fechaEnvio1, Integer horaEnvioIni1, Integer horaEnvioFin1, Integer cestaId1, String direccion2,
+			String poblacion2, Integer numero2, String provincia2, String cpostal2, Date fechaEnvio2,
+			Integer horaEnvioIni2, Integer horaEnvioFin2, Integer cestaId2, String direccion3, String poblacion3,
+			Integer numero3, String provincia3, String cpostal3, Date fechaEnvio3, Integer horaEnvioIni3,
+			Integer horaEnvioFin3, Integer cestaId3, String direccion4, String poblacion4, Integer numero4,
+			String provincia4, String cpostal4, Date fechaEnvio4, Integer horaEnvioIni4, Integer horaEnvioFin4,
+			Integer cestaId4) {
+
 		super();
 		this.direccion1 = direccion1;
 		this.poblacion1 = poblacion1;
@@ -68,9 +65,9 @@ public class FormPedidos {
 		this.cpostal1 = cpostal1;
 		this.fechaEnvio1 = fechaEnvio1;
 		this.horaEnvioFin1 = horaEnvioFin1;
-		this.horaEnvioIni1 = horaEnvioIni1;	
-		this.cestaId1 = cestaId1;	
-		
+		this.horaEnvioIni1 = horaEnvioIni1;
+		this.cestaId1 = cestaId1;
+
 		this.direccion2 = direccion2;
 		this.poblacion2 = poblacion2;
 		this.numero2 = numero2;
@@ -78,10 +75,10 @@ public class FormPedidos {
 		this.cpostal2 = cpostal2;
 		this.fechaEnvio2 = fechaEnvio2;
 		this.horaEnvioFin2 = horaEnvioFin2;
-		this.horaEnvioIni2 = horaEnvioIni2;	
-		this.horaEnvioIni1 = horaEnvioIni1;	
-		this.cestaId2 = cestaId2;	
-		
+		this.horaEnvioIni2 = horaEnvioIni2;
+		this.horaEnvioIni1 = horaEnvioIni1;
+		this.cestaId2 = cestaId2;
+
 		this.direccion3 = direccion3;
 		this.poblacion3 = poblacion3;
 		this.numero3 = numero3;
@@ -89,9 +86,9 @@ public class FormPedidos {
 		this.cpostal3 = cpostal3;
 		this.fechaEnvio3 = fechaEnvio3;
 		this.horaEnvioFin3 = horaEnvioFin3;
-		this.horaEnvioIni3 = horaEnvioIni3;	
-		this.cestaId3=cestaId3;	
-		
+		this.horaEnvioIni3 = horaEnvioIni3;
+		this.cestaId3 = cestaId3;
+
 		this.direccion4 = direccion4;
 		this.poblacion4 = poblacion4;
 		this.numero4 = numero4;
@@ -99,8 +96,8 @@ public class FormPedidos {
 		this.cpostal4 = cpostal4;
 		this.fechaEnvio4 = fechaEnvio4;
 		this.horaEnvioFin4 = horaEnvioFin4;
-		this.horaEnvioIni4 = horaEnvioIni4;		
-		this.cestaId4 = cestaId4;	
+		this.horaEnvioIni4 = horaEnvioIni4;
+		this.cestaId4 = cestaId4;
 	}
 
 	public String getDireccion1() {
@@ -194,7 +191,7 @@ public class FormPedidos {
 	public void setHoraEnvioFin1(Integer horaEnvioFin1) {
 		this.horaEnvioFin1 = horaEnvioFin1;
 	}
-	
+
 	public void setCestaId1(Integer cestaId1) {
 		this.cestaId1 = cestaId1;
 	}
@@ -390,7 +387,5 @@ public class FormPedidos {
 	public void setHoraEnvioFin4(Integer horaEnvioFin4) {
 		this.horaEnvioFin4 = horaEnvioFin4;
 	}
-	
-	
-	
+
 }

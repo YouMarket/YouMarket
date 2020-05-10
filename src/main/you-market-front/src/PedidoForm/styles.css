@@ -1,126 +1,120 @@
-.tituloPedido{
-	margin-right:auto;
+.tituloPedido {
+  margin-right: auto;
 }
 
-.mismaLinea{
-	display:flex;
-	
+.mismaLinea {
+  display: flex;
 }
 
 #antonios {
-	float:left;
+  float: left;
 }
 
 #inlines {
-	display:inline;
+  display: inline;
 }
 
 #pedido2 {
-	display:none;
+  display: none;
 }
 
 #pedido3 {
-	display:none;
+  display: none;
 }
 
 #pedido4 {
-	display:none;
+  display: none;
 }
 
-
 #enlace2 {
-	display:none;
+  display: none;
 }
 
 #enlace3 {
-	display:none;
+  display: none;
 }
 
 .botonCopiar {
-    display: inline-block;
-    background-color: black;
-    border: none;
-    color: white;
-    margin-top: 20px;
-    padding: 15px 32px;
-    clear: both;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
+  display: inline-block;
+  background-color: black;
+  border: none;
+  color: white;
+  margin-top: 20px;
+  padding: 15px 32px;
+  clear: both;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .errores {
-	color:red;
-	font-weight: bold;
-	display:inline;
+  color: red;
+  font-weight: bold;
+  display: inline;
 }
 
 .pedido-container label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-.pedido-0-container{
-	text-align:center;	
+.pedido-0-container {
+  text-align: center;
 }
 
-.imagen-0-pedidos{
-	width:40%;
-	margin:auto;
+.imagen-0-pedidos {
+  width: 40%;
+  margin: auto;
 }
 
-#paypal-b{
-	display:none;
-	text-align:center;
+#paypal-b {
+  display: none;
+  text-align: center;
 }
 
 .pedido-container input {
-    padding: 8px 5px;
-    margin-right: 20px;
-}
-
-.pedido-container legend {
-    
+  padding: 8px 5px;
+  margin-right: 20px;
 }
 
 .pedido-container fieldset {
-    border: 0;
-    padding: 0;
+  border: 0;
+  padding: 0;
 }
 
 .pedido-container form {
-    margin-top: 50px;
-}
-
-.pedido-form-envio-container{
-	width:100%;
+  margin-top: 50px;
 }
 
 .pedido-form-envio-container {
-    border: 2px solid rgb(148,194,76, 0.75);
-    padding: 10px 30px;
+  width: 100%;
+}
+
+.pedido-form-envio-container {
+  border: 2px solid rgb(148, 194, 76, 0.75);
+  padding: 10px 30px;
 }
 
 .pedido-form-envio-container input {
-    width: 400px;
-    font-size: 15px;
-    margin-left: 20px;
+  width: 400px;
+  font-size: 15px;
+  margin-left: 20px;
 }
 
 .pedido-form-envio-container input[type="number"] {
-    width: 100px;
+  width: 100px;
 }
 
 .pedido-margin {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 #enlace1 a,
 #enlace2 a,
 #enlace3 a {
-    height: 30px;
+  height: 30px;
 }
 
 .botonCopiar:hover {
-    color: white;
+  color: white;
 }

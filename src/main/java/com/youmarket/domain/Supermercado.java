@@ -21,29 +21,28 @@ import lombok.NoArgsConstructor;
 public class Supermercado {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Column(name="nombre", length=50)
+	@Column(name = "nombre", length = 50)
 	private String nombre;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Column(name="descripcion", length = 250)
+	@Column(name = "descripcion", length = 250)
 	private String descripcion;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Pattern(regexp ="\\b\\d{5}\\b")
-	@Column(name="c_postal", length = 5)
+	@Pattern(regexp = "\\b\\d{5}\\b")
+	@Column(name = "c_postal", length = 5)
 	private String cPostal;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Column(name="intolerancia", length = 250)
+	@Column(name = "intolerancia", length = 250)
 	private String intolerancia;
 
-	
 }

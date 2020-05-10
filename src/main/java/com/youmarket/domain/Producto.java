@@ -1,4 +1,5 @@
 package com.youmarket.domain;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,53 +25,53 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 public class Producto {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Column(name="nombre", length=50)
+	@Column(name = "nombre", length = 50)
 	private String nombre;
-	
+
 	@Positive
 	private double precio;
-	
+
 	@Positive
 	private double precioIva;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Column(name="descripcion", length = 255)
+	@Column(name = "descripcion", length = 255)
 	private String descripcion;
-	
-	@Column(name="peso", columnDefinition="Decimal(10,2) default '0.00'")
+
+	@Column(name = "peso", columnDefinition = "Decimal(10,2) default '0.00'")
 	private double peso;
-	
-	@ManyToOne(optional= true)
-	@JoinColumn(name="marca")
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "marca")
 	private Marca marca;
-	
-	@ManyToOne(optional= true)
-	@JoinColumn(name="departamento")
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "departamento")
 	private Departamento departamento;
-	
+
 	@ManyToMany
 	private List<Etiqueta> etiqueta;
-	
-	@ManyToOne(optional= true)
-	@JoinColumn(name="supermercado_id")
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "supermercado_id")
 	private Supermercado supermercado;
-	
+
 	@URL
 	@SafeHtml
-	@Column(name="url_imagen")
+	@Column(name = "url_imagen")
 	private String urlImagen;
-	
+
 	@NotBlank
 	@SafeHtml
-	@JoinColumn(name="unidad")
+	@JoinColumn(name = "unidad")
 	private String unidad;
 
 	public Producto(int id, String name, double precio) {
@@ -135,8 +136,4 @@ public class Producto {
 		return result;
 	}
 
-
-
-	
-	
 }

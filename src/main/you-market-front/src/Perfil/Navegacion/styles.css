@@ -1,40 +1,36 @@
-.perfil-links{
-	padding: 30px 60px;
-	justify-content: space-between;
-	border-bottom: 1px solid #aaaaaa !important;
-	background-color: #d5f2a5;
-	align-items: center;
-	box-shadow:0 2px 5px #aaaaaa;
+.perfil-links {
+  padding: 30px 60px;
+  justify-content: space-between;
+  border-bottom: 1px solid #aaaaaa !important;
+  background-color: #d5f2a5;
+  align-items: center;
+  box-shadow: 0 2px 5px #aaaaaa;
 }
 
- .separador-menu{
-	display: none;
-	border-bottom: none !important;
-	text-align: center;
+.separador-menu {
+  display: none;
+  border-bottom: none !important;
+  text-align: center;
 }
- 
-.perfil-link{
-	text-decoration: none;
-	color: black;
-	margin-top: 15px;
-	margin-bottom: 15px;
-	text-align: center;
-    width: 33.33%;
-	display: inline-block;
+
+.perfil-link {
+  text-decoration: none;
+  color: black;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  width: 33.33%;
+  display: inline-block;
 }
 
 .perfil-link:hover {
-	font-weight: bold;
-    color: black !important;
+  font-weight: bold;
+  color: black !important;
 }
 
-
-@media (max-width: 600px){
-	
-	.perfil-link {
-		width: 100%;
-		display: block;
-	}
-
+@media (max-width: 600px) {
+  .perfil-link {
+    width: 100%;
+    display: block;
+  }
 }
-

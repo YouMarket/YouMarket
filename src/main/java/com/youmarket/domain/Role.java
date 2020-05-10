@@ -1,10 +1,17 @@
 package com.youmarket.domain;
 
-import javax.persistence.*;
-
-import org.hibernate.annotations.NaturalId;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.youmarket.domain.enums.RoleName;
+
+import org.hibernate.annotations.NaturalId;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,8 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "role")
 public class Role {
 
-	
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

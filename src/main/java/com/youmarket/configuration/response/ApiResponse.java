@@ -1,7 +1,7 @@
 package com.youmarket.configuration.response;
 
 public class ApiResponse {
-	
+
     private Boolean success;
     private String message;
 
@@ -9,7 +9,7 @@ public class ApiResponse {
         this.success = success;
         this.message = message;
     }
-    
+
     public ApiResponse() {
     }
 

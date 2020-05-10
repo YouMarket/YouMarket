@@ -24,34 +24,34 @@ import lombok.NoArgsConstructor;
 public class Direccion {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="direccion")
+
+	@Column(name = "direccion")
 	@NotBlank
 	@SafeHtml
 	private String direccion;
-	
+
 	@Column(nullable = false)
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean principal;
-	
+
 	@NotBlank
 	@SafeHtml
 	private String poblacion;
-	
+
 	@NotBlank
 	@SafeHtml
 	private String provincia;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Pattern(regexp ="\\b\\d{5}\\b")
-	@Column(name="c_postal")
+	@Pattern(regexp = "\\b\\d{5}\\b")
+	@Column(name = "c_postal")
 	private String cpostal;
-	
+
 	@ManyToOne(optional = false)
-	@JoinColumn(name="usuario_id")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
+
 }

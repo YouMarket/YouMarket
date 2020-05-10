@@ -1,155 +1,155 @@
-.container{
-    padding-top: 50px;
-    max-width: 1110px;
-    margin: 0 auto;
-    padding: 50px 20px;
+.container {
+  padding-top: 50px;
+  max-width: 1110px;
+  margin: 0 auto;
+  padding: 50px 20px;
 }
 
-.vaciar-carrito{
-	padding-bottom:3.5%;
-	text-align:center;
+.vaciar-carrito {
+  padding-bottom: 3.5%;
+  text-align: center;
 }
 
-.button-vaciar{
-	display: inline-block;
-    border: none;
-    color: white;
-    margin-top: 20px;
-    padding: 15px 32px;
-    clear: both;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: red;
-	
+.button-vaciar {
+  display: inline-block;
+  border: none;
+  color: white;
+  margin-top: 20px;
+  padding: 15px 32px;
+  clear: both;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: red;
 }
+
 .guardar-carrito-a-cesta {
-    clear: both;
-    display:block;
-    padding-top: 30px;
+  clear: both;
+  display: block;
+  padding-top: 30px;
 }
 
-.button-carrito-a-cesta{
-	float: none !important;
-    width: 90%;
-    margin-top: 2%;
-    margin-left:2%;
-    display: block;
+.button-carrito-a-cesta {
+  float: none !important;
+  width: 90%;
+  margin-top: 2%;
+  margin-left: 2%;
+  display: block;
 }
 
-.error-required-cesta-a-carrito{
-	color:red;
+.error-required-cesta-a-carrito {
+  color: red;
 }
 
 select {
   margin-bottom: 1em;
   padding: 2% 10%;
-  font-size:110%;
-  text-align:center;
-  margin:auto;
+  font-size: 110%;
+  text-align: center;
+  margin: auto;
   border: 0;
-  border-bottom: 2px solid green; 
+  border-bottom: 2px solid green;
   font-weight: bold;
   border-radius: 0;
 }
 
 @media only screen and (max-width: 500px) {
+  .container {
+    padding: 20px 8px;
+  }
 
-    .container {
-        padding: 20px 8px;
-    }
+  .buttons {
+    float: none !important;
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+  }
 
-    .buttons {
-        float: none !important;
-        width: 90%;
-        margin: 0 auto;
-        display: block;
-    }
+  .button-finish,
+  .save-cesta {
+    width: 100%;
+  }
 
-    .button-finish, .save-cesta {
-        width: 100%;
-    }
+  .price {
+    float: none !important;
+    max-width: 90% !important;
+    margin: 0 auto;
+    display: block;
+    padding: 0;
+    text-align: center;
+  }
 
-    .price {
-        float: none !important;
-        max-width: 90% !important;
-        margin: 0 auto;
-        display: block;
-        padding: 0;
-        text-align: center;
-    }
-    
-    .guardar-carrito-a-cesta{
-	padding-top:2%;
-}
-
+  .guardar-carrito-a-cesta {
+    padding-top: 2%;
+  }
 }
 
 .products-container-list {
-    max-width: 600px;
-    margin: 0 auto;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .introduction {
-    text-align: center;
-    width: 100%;
-    margin-bottom: 1%;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1%;
 }
 
 .buttons {
-    clear: both;
-    float: right;
+  clear: both;
+  float: right;
 }
 
 .save-cesta {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
-.button-finish, .save-cesta {
-    display: inline-block;
-    background-color: black;
-    border: none;
-    color: white;
-    margin-top: 20px;
-    padding: 15px 32px;
-    clear: both;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
+.button-finish,
+.save-cesta {
+  display: inline-block;
+  background-color: black;
+  border: none;
+  color: white;
+  margin-top: 20px;
+  padding: 15px 32px;
+  clear: both;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .price {
-    float: right;
-    font-size: 18px;
-    text-transform: uppercase;
-    padding: 20px;
-    clear: both;
+  float: right;
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 20px;
+  clear: both;
 }
 
-.guardar-carrito-a-cesta{
-	text-align:center;
-	margin:auto;
+.guardar-carrito-a-cesta {
+  text-align: center;
+  margin: auto;
 }
 
-.button-carrito-a-cesta{
-	float: none !important;
-        width: 90%;
-        margin: auto;
-        display: block;
+.button-carrito-a-cesta {
+  float: none !important;
+  width: 90%;
+  margin: auto;
+  display: block;
 }
 
 .carrito-empty-image {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .empty-view-text {
-    width: 100%;
-    text-align: center;
-    margin-top: 50px;
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .enlace-perfil {
-    float: right;
+  float: right;
 }

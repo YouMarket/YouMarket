@@ -20,7 +20,7 @@ import io.jsonwebtoken.lang.Assert;
 @RestController
 @RequestMapping("/brecha")
 public class BrechaController {
-	
+
 	@Autowired
 	private BrechaService brechaService;
 
@@ -28,22 +28,20 @@ public class BrechaController {
 	private UsuarioService usuarioService;
 
 	@RequestMapping("/alertar")
-	public void activaDesactivaBrecha(@CurrentUser UserPrincipal logged){
+	public void activaDesactivaBrecha(@CurrentUser UserPrincipal logged) {
 		Usuario user = this.usuarioService.findById(logged.getId()).orElse(null);
 		Set<Role> roleSet = user.getRoles();
 		boolean isAdmin = roleSet.contains(new Role((long) 4, RoleName.ADMIN));
 		Assert.isTrue(isAdmin);
-		
+
 		System.out.println("aaaaaaaaaa");
 		brechaService.activaDesactivaBrecha();
 	}
-	
+
 	@RequestMapping("/devuelveBrecha")
-	public ResponseEntity<Boolean> devuelveBrecha(){
-		
+	public ResponseEntity<Boolean> devuelveBrecha() {
+
 		return ResponseEntity.ok(this.brechaService.devuelveBrecha());
 	}
-	
-	
 
 }

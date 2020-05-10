@@ -16,11 +16,11 @@ public class SupermercadoController {
 
 	@Autowired
 	private SupermercadoService supermercadoService;
-	
+
 	@RequestMapping("/list")
-	public List<Supermercado> listSupermercados(Model model){
-		List<Supermercado> supermercados=supermercadoService.listaSupermercados();
-		
+	public List<Supermercado> listSupermercados(Model model) {
+		List<Supermercado> supermercados = supermercadoService.listaSupermercados();
+
 		return supermercados;
 	}
 }

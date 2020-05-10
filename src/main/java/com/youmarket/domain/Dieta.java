@@ -20,37 +20,36 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @Entity
 public class Dieta {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotBlank
 	@SafeHtml
 	private String tipo;
-	
+
 	private Boolean activa;
-	
+
 	@URL
 	@SafeHtml
 	private String url_imagen;
-	
+
 	@NotBlank
 	@SafeHtml
 	private String descripcion;
-	
+
 	@NotBlank
 	@SafeHtml
 	private String nombre;
-	
+
 	@ManyToMany
 	private List<Producto> productos;
-	
+
 	@ManyToMany
 	private List<Receta> recetas;
-	
-	
+
 }
