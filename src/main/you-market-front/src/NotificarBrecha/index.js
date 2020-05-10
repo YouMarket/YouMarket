@@ -41,7 +41,6 @@ class NotificarBrecha extends React.Component {
   }
 
   render() {
-    const estadoBrecha = this.state.estadoBrecha;
 
     return (
       <div>

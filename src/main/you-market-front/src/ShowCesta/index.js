@@ -123,7 +123,7 @@ function ShowCesta() {
                 {productoC.producto.nombre}
               </Link>{" "}
               x{productoC.cantidad}
-              <img src={productoC.url} />
+              <img src={productoC.url} alt="Producto" />
             </div>
           ))}
         <p className="cesta-total">Total: {total}€</p>
