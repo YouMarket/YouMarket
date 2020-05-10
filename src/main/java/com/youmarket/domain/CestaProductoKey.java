@@ -8,25 +8,20 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 class CestaProductoKey implements Serializable {
- 
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -3275049524365314122L;
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "producto_id")
-    Producto producto;
- 
-	@ManyToOne(optional=false)
-    @JoinColumn(name = "cesta_id")
-    Cesta cesta;
+	Producto producto;
 
-    
-    
-    public CestaProductoKey(){
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "cesta_id")
+	Cesta cesta;
+
+	public CestaProductoKey() {
 		super();
 	}
-    
+
 	public CestaProductoKey(Producto producto, Cesta cesta) {
 		super();
 		this.producto = producto;
@@ -79,35 +74,5 @@ class CestaProductoKey implements Serializable {
 			return false;
 		return true;
 	}
-
-	// @Override
-	// public int hashCode() {
-	// 	final int prime = 31;
-	// 	int result = 1;
-	// 	result = prime * result + cestaId;
-	// 	result = prime * result + productoId;
-	// 	return result;
-	// }
-
-	// @Override
-	// public boolean equals(Object obj) {
-	// 	if (this == obj)
-	// 		return true;
-	// 	if (obj == null)
-	// 		return false;
-	// 	if (getClass() != obj.getClass())
-	// 		return false;
-	// 	CestaProductoKey other = (CestaProductoKey) obj;
-	// 	if (cestaId != other.cestaId)
-	// 		return false;
-	// 	if (productoId != other.productoId)
-	// 		return false;
-	// 	return true;
-	// }
-
-	
-
-	
- 
 
 }

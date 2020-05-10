@@ -18,7 +18,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Range;
@@ -35,41 +34,41 @@ import lombok.NoArgsConstructor;
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@NotBlank
 	@SafeHtml
-	@Column(name="nombre", length=100)
+	@Column(name = "nombre", length = 100)
 	private String nombre;
 
 	@NotBlank
 	@SafeHtml
-	@Column(name="apellidos", length=150)
+	@Column(name = "apellidos", length = 150)
 	private String apellidos;
 
 	@NotBlank
 	@SafeHtml
 	@Pattern(regexp = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")
-	@Column(name="dni", length=9)
+	@Column(name = "dni", length = 9)
 	private String dni;
 
-	@Column(name="fecha_nacimiento")
+	@Column(name = "fecha_nacimiento")
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
-	
-	@ManyToOne(optional= true)
-	@JoinColumn(name="suscripcion_id")
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "suscripcion_id")
 	private Suscripcion suscripcion;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Pattern(regexp ="\\b\\d{5}\\b")
-	@Column(name="c_postal", length = 5)
+	@Pattern(regexp = "\\b\\d{5}\\b")
+	@Column(name = "c_postal", length = 5)
 	private String cPostal;
-	
-	@Column(name="pedido_restante")
-	@Range(min=0, max=5)
+
+	@Column(name = "pedido_restante")
+	@Range(min = 0, max = 5)
 	private Integer pedidosRestantes;
 
 	@NotBlank
@@ -80,12 +79,10 @@ public class Usuario {
 	private String password;
 
 	@SafeHtml
-	@Column(name="telefono", length=20)
+	@Column(name = "telefono", length = 20)
 	private String telefono;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 }

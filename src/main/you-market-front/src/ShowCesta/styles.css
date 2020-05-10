@@ -1,88 +1,83 @@
-.cesta-container-show{
-	display: flex;
-	flex-direction: column;
-	margin:auto;
-
+.cesta-container-show {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
-.cesta-icon{
-	text-align:center;
+.cesta-icon {
+  text-align: center;
 }
 
-
-.cesta-editar{
-	text-align:center;
-	width: 110px;
-    margin: 0 auto;
+.cesta-editar {
+  text-align: center;
+  width: 110px;
+  margin: 0 auto;
 }
 
-.cesta-imagen{
-
-	max-width: 65%;
+.cesta-imagen {
+  max-width: 65%;
 }
 
-
-.cesta-info{
-	text-align:center;
-	max-width: 300px;
-
+.cesta-info {
+  text-align: center;
+  max-width: 300px;
 }
 
-.div-productos-cesta{
-	text-align:center;
-	margin: 8px 0;
+.div-productos-cesta {
+  text-align: center;
+  margin: 8px 0;
 }
 
 .div-productos-cesta a {
-	text-align: center;
-	color: black;
-	text-decoration: underline;
+  text-align: center;
+  color: black;
+  text-decoration: underline;
 }
 
 .div-productos-cesta a:hover {
-	text-align: center;
-	color: rgb(148,194,76);;
-	text-decoration: underline;
+  text-align: center;
+  color: rgb(148, 194, 76);
+  text-decoration: underline;
 }
 
-.cesta-nombre{
-	text-align:center;
+.cesta-nombre {
+  text-align: center;
 }
 
-.cesta-productos{
-	margin: 0 0 0px 0;
+.cesta-productos {
+  margin: 0 0 0px 0;
 }
 
-.cesta-id{
-	margin: 0 0 0px 0;
+.cesta-id {
+  margin: 0 0 0px 0;
 }
 
 .grid2-carrito-cesta {
-	margin: 20px auto;
+  margin: 20px auto;
 }
 
-.show-cesta-h{
-	padding-top:2%;
-	padding-bottom:0.5%;
-	display:block;
-	margin:auto;	
+.show-cesta-h {
+  padding-top: 2%;
+  padding-bottom: 0.5%;
+  display: block;
+  margin: auto;
 }
 
-.separador{
-	display:block;
-	margin-left:auto;
-	margin-right:auto;
-	border-bottom:solid 0.5px black;
- 	width:50%;
- 	height:1%;
- 	width:30%;
-  	height:1%;
-  	margin-bottom: 1%;	
+.separador {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: solid 0.5px black;
+  width: 50%;
+  height: 1%;
+  width: 30%;
+  height: 1%;
+  margin-bottom: 1%;
 }
 
-.cesta-total{
-	display:block;
-	margin:auto;
-	font-size:150%;
-	padding-top:2%;
+.cesta-total {
+  display: block;
+  margin: auto;
+  font-size: 150%;
+  padding-top: 2%;
 }

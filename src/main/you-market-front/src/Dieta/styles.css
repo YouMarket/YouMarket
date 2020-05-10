@@ -1,34 +1,32 @@
-.dieta-container{
-	display: flex;
-	flex-direction: column;
-	border: 1px solid #aaaaaa;
-	text-decoration: none;
-	color: black;
-	letter-spacing: 0.4px;
+.dieta-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #aaaaaa;
+  text-decoration: none;
+  color: black;
+  letter-spacing: 0.4px;
 }
 
 .dieta-container:hover {
-	color: black;
-	font-weight: bold;
+  color: black;
+  font-weight: bold;
 }
 
-.dieta-imagen{
-	height: 200px;
-	max-width: 240px;
-	display: block;
-	object-fit:cover;
-	border-bottom: 1px solid #aaaaaa;
+.dieta-imagen {
+  height: 200px;
+  max-width: 240px;
+  display: block;
+  object-fit: cover;
+  border-bottom: 1px solid #aaaaaa;
 }
 
-.dieta-info{
-	display: flex;
-	flex-direction: column;
-	padding: 16px;
-	max-width: 100%;
+.dieta-info {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  max-width: 100%;
 }
 
-.dieta-nombre{
-	margin: 0 0 8px 0;
+.dieta-nombre {
+  margin: 0 0 8px 0;
 }
-
-

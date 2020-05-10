@@ -1,86 +1,83 @@
-
-
 .receta-detalle-imagen {
-	width: 400px;
-	height: 400px;
-	float: left;
-	object-fit: cover;
+  width: 400px;
+  height: 400px;
+  float: left;
+  object-fit: cover;
 }
 
 .receta-detalle-info {
-	float: left;
-	padding: 30px;
-	position: relative;
-	width: calc(100% - 400px);
+  float: left;
+  padding: 30px;
+  position: relative;
+  width: calc(100% - 400px);
 }
 
 .receta-detalle-field {
-	margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .receta-detalle-nombre {
-	font-family: 'Fredoka One', cursive;
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
-	color: rgb(148,194,76);
-	text-shadow: 2px 0 2px black;
+  font-family: "Fredoka One", cursive;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgb(148, 194, 76);
+  text-shadow: 2px 0 2px black;
 }
 
 .receta-detalle-productos {
-	position: absolute;
-	bottom: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 .receta-detalle-recetas {
-	position: absolute;
-	bottom: -80px;
+  position: absolute;
+  bottom: -80px;
 }
 
 .receta-detalle-info p {
-	margin-top: 40px;
+  margin-top: 40px;
 }
 
 .receta-personas,
 .receta-tiempo,
 .receta-calorias {
-    padding-left: 35px;
-    position: relative;
+  padding-left: 35px;
+  position: relative;
 }
 
 .receta-personas::after,
 .receta-tiempo::after,
 .receta-calorias::after {
-    width: 25px;
-    height: 25px;
-    background-size: 25px !important;
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
+  width: 25px;
+  height: 25px;
+  background-size: 25px !important;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .receta-personas::after {
-    background: url('../assets/people.svg')
+  background: url("../assets/people.svg");
 }
 
 .receta-tiempo::after {
-    background: url('../assets/clock.svg')
+  background: url("../assets/clock.svg");
 }
 
 .receta-calorias::after {
-    background: url('../assets/calories.svg')
+  background: url("../assets/calories.svg");
 }
 
 @media only screen and (max-width: 700px) {
-	.receta-detalle-info {
-		width: 100%;
-		float: none;
-	}
+  .receta-detalle-info {
+    width: 100%;
+    float: none;
+  }
 
-	.receta-detalle-imagen {
-		width: 100%;
-		float: none;
-	}
-
+  .receta-detalle-imagen {
+    width: 100%;
+    float: none;
+  }
 }

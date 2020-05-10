@@ -27,23 +27,23 @@ public class DietaController {
 	@Autowired
 	private DietaService dietaService;
 
-	@Autowired 
+	@Autowired
 	private UsuarioService usuarioService;
-		
+
 	@RequestMapping("/list")
-	public List<Dieta> listDietas(Model model, @CurrentUser UserPrincipal logged){
+	public List<Dieta> listDietas(Model model, @CurrentUser UserPrincipal logged) {
 		Usuario user = usuarioService.findById(logged.getId()).orElse(null);
 		Assert.isTrue(user.getSuscripcion().isDietista());
-		List<Dieta> dietas=dietaService.findAll();
-			
+		List<Dieta> dietas = dietaService.findAll();
+
 		return dietas;
 	}
-	
+
 	@GetMapping("/{id}")
-    public ResponseEntity<Object> dietaPorId(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal logged) {
+	public ResponseEntity<Object> dietaPorId(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal logged) {
 		Usuario user = usuarioService.findById(logged.getId()).orElse(null);
 		Assert.isTrue(user.getSuscripcion().isDietista());
-        return ResponseEntity.ok(dietaService.findById(id));
-    }
+		return ResponseEntity.ok(dietaService.findById(id));
+	}
 
 }

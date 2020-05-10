@@ -1,10 +1,10 @@
-import React,  { useCallback, useState, useEffect} from 'react';
-import { Formik, Field} from 'formik';
-import './styles.css'
-import noPedido from "./no-del.png";
-import { withRouter, useHistory } from 'react-router-dom';
-import Header from '../Header';
+import { Field, Formik } from 'formik';
+import React, { useCallback, useEffect, useState } from 'react';
 import { PayPalButton } from "react-paypal-button-v2";
+import { useHistory, withRouter } from 'react-router-dom';
+import Header from '../Header';
+import noPedido from "./no-del.png";
+import './styles.css';
 
 var today = new Date().toISOString().split('T')[0];
 var errors = {};
@@ -17,12 +17,6 @@ var pedido4mostrado;
 var pedido2copiado = false;
 var pedido3copiado = false;
 var pedido4copiado = false;
-
-function setPedidoCheck(){
-
-}
-
-
 
 function copiarDir12() {
 	  var direccion1 = document.getElementById("direccion1");

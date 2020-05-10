@@ -1,6 +1,5 @@
 package com.youmarket.domain;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,18 +20,17 @@ import lombok.NoArgsConstructor;
 public class Marca {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Column(name="nombre", length=100)
+	@Column(name = "nombre", length = 100)
 	private String nombre;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Column(name="descripcion")
+	@Column(name = "descripcion")
 	private String descripcion;
-	
-	
+
 }

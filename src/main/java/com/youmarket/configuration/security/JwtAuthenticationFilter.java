@@ -20,15 +20,18 @@ import java.io.IOException;
  * 
  * @author alvaroesteban
  * 
- * We’ll use JWTAuthenticationFilter to implement a filter that:
+ *         We’ll use JWTAuthenticationFilter to implement a filter that:
  *
- *   - reads JWT authentication token from the Authorization header of all the requests
- *   - validates the token
- *   - loads the user details associated with that token.
- *   - Sets the user details in Spring Security’s SecurityContext. Spring Security uses the user details to perform authorization checks. 
- *   	We can also access the user details stored in the SecurityContext in our controllers to perform our business logic.
+ *         - reads JWT authentication token from the Authorization header of all
+ *         the requests - validates the token - loads the user details
+ *         associated with that token. - Sets the user details in Spring
+ *         Security’s SecurityContext. Spring Security uses the user details to
+ *         perform authorization checks. We can also access the user details
+ *         stored in the SecurityContext in our controllers to perform our
+ *         business logic.
  *
- *	This class get the JWT token from the request, validate it, load the user associated with the token, and pass it to Spring Security -
+ *         This class get the JWT token from the request, validate it, load the
+ *         user associated with the token, and pass it to Spring Security -
  *
  */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -42,11 +45,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     /**
-     * We’re first parsing the JWT retrieved from the Authorization header of the request and obtaining the user’s Id. 
-     * After that, We’re loading the user’s details from the database and setting the authentication inside spring security’s context.
+     * We’re first parsing the JWT retrieved from the Authorization header of the
+     * request and obtaining the user’s Id. After that, We’re loading the user’s
+     * details from the database and setting the authentication inside spring
+     * security’s context.
      */
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(request);
 
@@ -54,12 +60,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 Long userId = tokenProvider.getUserIdFromJWT(jwt);
 
                 /*
-                    Note that you could also encode the user's username and roles inside JWT claims
-                    and create the UserDetails object by parsing those claims from the JWT.
-                    That would avoid the following database hit. It's completely up to you.
+                 * Note that you could also encode the user's username and roles inside JWT
+                 * claims and create the UserDetails object by parsing those claims from the
+                 * JWT. That would avoid the following database hit. It's completely up to you.
                  */
                 UserDetails userDetails = customUserDetailsService.loadUserById(userId);
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);

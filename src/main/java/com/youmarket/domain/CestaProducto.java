@@ -33,7 +33,7 @@ public class CestaProducto {
 	@Min(1)
 	int cantidad;
 
-	public void setId(Producto producto, Cesta cesta){
+	public void setId(Producto producto, Cesta cesta) {
 		this.id = new CestaProductoKey(producto, cesta);
 	}
 }

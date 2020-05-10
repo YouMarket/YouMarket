@@ -16,8 +16,10 @@ import java.util.stream.Collectors;
  * 
  * @author alvaroesteban
  * 
- * This is the class whose instances will be returned from our custom UserDetailsService. 
- * Spring Security will use the information stored in the UserPrincipal object to perform authentication and authorization.
+ *         This is the class whose instances will be returned from our custom
+ *         UserDetailsService. Spring Security will use the information stored
+ *         in the UserPrincipal object to perform authentication and
+ *         authorization.
  *
  */
 @SuppressWarnings("serial")
@@ -36,7 +38,8 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(int id, String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(int id, String name, String username, String email, String password,
+            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -45,20 +48,11 @@ public class UserPrincipal implements UserDetails {
         this.authorities = authorities;
     }
 
-    @SuppressWarnings("deprecation")
-	public static UserPrincipal create(Usuario user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-                new SimpleGrantedAuthority(role.getName().name())
-        ).collect(Collectors.toList());
+    public static UserPrincipal create(Usuario user) {
+        List<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
 
-        return new UserPrincipal(
-                user.getId(),
-                user.getNombre(),
-                "",
-                user.getEmail(),
-                user.getPassword(),
-                authorities
-        );
+        return new UserPrincipal(user.getId(), user.getNombre(), "", user.getEmail(), user.getPassword(), authorities);
     }
 
     public int getId() {
@@ -110,8 +104,10 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         UserPrincipal that = (UserPrincipal) o;
         return Objects.equals(id, that.id);
     }

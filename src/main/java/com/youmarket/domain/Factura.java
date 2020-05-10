@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,32 +25,32 @@ import lombok.NoArgsConstructor;
 public class Factura {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Positive
 	@NotNull
 	private Double total;
-	
-	@Column(name="total_iva")
+
+	@Column(name = "total_iva")
 	@Positive
 	@NotNull
 	private Double totalIva;
-	
-	@Column(name="fecha_factura")
+
+	@Column(name = "fecha_factura")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaFactura;
 
 	@ManyToOne(optional = true)
-	@JoinColumn(name="usuario_id")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
-	@ManyToOne(optional= true)
-	@JoinColumn(name="suscripcion_id")
-	private Suscripcion suscripcion;
-	
+
 	@ManyToOne(optional = true)
-	@JoinColumn(name="pedido_id")
+	@JoinColumn(name = "suscripcion_id")
+	private Suscripcion suscripcion;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;
-	
+
 }

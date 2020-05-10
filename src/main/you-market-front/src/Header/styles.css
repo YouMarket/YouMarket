@@ -1,68 +1,67 @@
-
-.header-container{
-	box-shadow: 0 2px 5px #aaaaaa;
-	display: flex;
-	align-items: center;
+.header-container {
+  box-shadow: 0 2px 5px #aaaaaa;
+  display: flex;
+  align-items: center;
 }
 
 .page-logo {
-	margin-right: auto;
+  margin-right: auto;
 }
 
-.logo{
-	height: 80px;
-	width: 80px;
-	margin: 0 0 8px 32px;
+.logo {
+  height: 80px;
+  width: 80px;
+  margin: 0 0 8px 32px;
 }
 
-.header-links{
-	display: none;
-	margin: 0 0 0 auto;
+.header-links {
+  display: none;
+  margin: 0 0 0 auto;
 }
 
 .header-links a,
 .menuLink,
-.login{
-	color: black !important;
+.login {
+  color: black !important;
 }
 
 .header-links a::after,
 .menuLink::after,
 .login::after {
-	content: '';
-	display: block;
-	height: 3px;
-	width: 0;
-	background: transparent;
-	transition: width .5s ease, background-color .5s ease;
+  content: "";
+  display: block;
+  height: 3px;
+  width: 0;
+  background: transparent;
+  transition: width 0.5s ease, background-color 0.5s ease;
 }
 
 .header-links a:hover,
 .menuLink:hover,
 .login:hover {
-	color: black !important;
+  color: black !important;
 }
 
 .login {
-	margin-right: 32px;
+  margin-right: 32px;
 }
 
 .header-links a:hover::after,
 .menuLink:hover::after,
 .login:hover::after {
-	width: 100%;
-	background: #779C3D;
+  width: 100%;
+  background: #779c3d;
 }
 
-.header-link{
-	margin-right:32px;
-	text-decoration: none;
-	color: black;
-	font-weight: 500;
-	text-transform: uppercase;
+.header-link {
+  margin-right: 32px;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
-.hamburger-menu{
+.hamburger-menu {
   color: white;
   padding: 14px 16px;
   text-decoration: none;
@@ -71,91 +70,91 @@
 }
 
 .hamburger-icon {
-	height: 40px;
-	width: 40px;
-	color: #aaaaaa;
+  height: 40px;
+  width: 40px;
+  color: #aaaaaa;
 }
 
 .carro {
-	margin-left: auto;
-	display: inline-block;
+  margin-left: auto;
+  display: inline-block;
 }
 
 .perfil {
-	display: none;
+  display: none;
 }
 
 .perfil {
-	display: none;
+  display: none;
 }
 
-.icon{
-	height: 40px;
-	width: 40px;
+.icon {
+  height: 40px;
+  width: 40px;
 }
 
 #menuLinks {
-	display: none;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 8px;
-	background-color: #8bb547;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: #8bb547;
 }
 
-.menuLink{
-	text-decoration: none;
-	margin: 16px 0;
-	color: #464646;
+.menuLink {
+  text-decoration: none;
+  margin: 16px 0;
+  color: #464646;
 }
 
 .carro-contador {
-	background-color: black;
-	color: white;
-	border-radius: 50%;
-	text-align: center;
-	width: 20px;
-	height: 20px;
-	padding: 4px;
-	margin: 0;
-	position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .carro-contador-container {
-	height: 44px;
-	width: 30px;
-	float: right;
-	margin-left: 10px;
+  height: 44px;
+  width: 30px;
+  float: right;
+  margin-left: 10px;
 }
 
-@media (min-width: 600px){
-	.header-links {
-		display: flex;
-	}
+@media (min-width: 600px) {
+  .header-links {
+    display: flex;
+  }
 
-	.hamburger-menu	{
-		display: none;
-	}
+  .hamburger-menu {
+    display: none;
+  }
 
-	.carro-menu-container {
-		margin-left: 0;
-		margin-right: 32px
-	}
+  .carro-menu-container {
+    margin-left: 0;
+    margin-right: 32px;
+  }
 
-	#menuLinks {
-		display: none;
-	}
+  #menuLinks {
+    display: none;
+  }
 
-	.perfil{
-		display: block;
-		margin-right: 32px;
-	}
-	
-	.login{
-		display: block;
-		margin-right: 20px;
-	}
+  .perfil {
+    display: block;
+    margin-right: 32px;
+  }
+
+  .login {
+    display: block;
+    margin-right: 20px;
+  }
 }

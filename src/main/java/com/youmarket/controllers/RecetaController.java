@@ -21,26 +21,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("receta")
-public class RecetaController{
+public class RecetaController {
 
     @Autowired
     private RecetaService recetaService;
 
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @RequestMapping(value = "/list/{id}", method = RequestMethod.GET)
-    public List<Receta> listaRecetas(@PathVariable Integer id, @CurrentUser UserPrincipal logged){
+    public List<Receta> listaRecetas(@PathVariable Integer id, @CurrentUser UserPrincipal logged) {
         Usuario user = usuarioService.findById(logged.getId()).orElse(null);
-		Assert.isTrue(user.getSuscripcion().isDietista());
+        Assert.isTrue(user.getSuscripcion().isDietista());
         List<Receta> recetas = recetaService.findByDietaId(id);
         return recetas;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> recetaDetalle(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal logged){
+    public ResponseEntity<Object> recetaDetalle(@Valid @PathVariable Integer id, @CurrentUser UserPrincipal logged) {
         Usuario user = usuarioService.findById(logged.getId()).orElse(null);
-		Assert.isTrue(user.getSuscripcion().isDietista());
+        Assert.isTrue(user.getSuscripcion().isDietista());
         return ResponseEntity.ok(recetaService.findById(id));
     }
 

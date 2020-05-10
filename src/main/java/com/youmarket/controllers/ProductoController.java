@@ -25,36 +25,36 @@ public class ProductoController {
 
 	@Autowired
 	private ProductoService productoService;
-	
+
 	@Autowired
 	private DietaService dietaService;
-	
+
 	@RequestMapping("/list")
-	public List<Producto> listProductos(Model model){
-		List<Producto> productos=productoService.listaProductos();
-		
+	public List<Producto> listProductos(Model model) {
+		List<Producto> productos = productoService.listaProductos();
+
 		return productos;
 	}
-	
+
 	@GetMapping("/{id}")
-    public ResponseEntity<Object> productoPorId(@Valid @PathVariable Integer id) {
-        return ResponseEntity.ok(productoService.findById(id));
-    }
-	
+	public ResponseEntity<Object> productoPorId(@Valid @PathVariable Integer id) {
+		return ResponseEntity.ok(productoService.findById(id));
+	}
+
 	@RequestMapping("/dieta/list/{id}")
-	public List<Producto> listProductosByDiet(@PathVariable Integer id){
+	public List<Producto> listProductosByDiet(@PathVariable Integer id) {
 		Dieta di = this.dietaService.findById(id);
 		List<Producto> productos = di.getProductos();
 		return productos;
 	}
 
 	@RequestMapping("/marcas")
-	public List<Marca> listMarcas(Model model){
+	public List<Marca> listMarcas(Model model) {
 		return productoService.getMarcas();
 	}
 
 	@RequestMapping("/supermercados")
-	public List<Supermercado> listSupermercados(Model model){
+	public List<Supermercado> listSupermercados(Model model) {
 		return productoService.getSupermercados();
 	}
 

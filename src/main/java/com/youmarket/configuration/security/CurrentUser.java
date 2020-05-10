@@ -7,10 +7,10 @@ import java.lang.annotation.*;
  * 
  * @author alvaroesteban
  * 
- * This is a custom annotation to access currently logged in user
+ *         This is a custom annotation to access currently logged in user
  *
  */
-@Target({ElementType.PARAMETER, ElementType.TYPE})
+@Target({ ElementType.PARAMETER, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @AuthenticationPrincipal

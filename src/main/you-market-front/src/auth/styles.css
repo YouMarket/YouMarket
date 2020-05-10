@@ -1,97 +1,96 @@
-
 @charset "ISO-8859-1";
 
-.error-login{
-	color: red;
-	padding-top:5%;
+.error-login {
+  color: red;
+  padding-top: 5%;
 }
 
-.registry-in-login{
-	text-align:center;	
+.registry-in-login {
+  text-align: center;
 }
 
-.registrado-p{
-	text-align:center;
-	color:green;
+.registrado-p {
+  text-align: center;
+  color: green;
 }
 
 a:hover {
-  color: #BDECB6;
+  color: #bdecb6;
 }
 
 a:active {
-  color: #2D572C;
+  color: #2d572c;
 }
 
 .login-form {
-	max-width: 400px;
-	margin: 0 auto;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .span-login {
-	width: 100%;
+  width: 100%;
 }
 
 .register-link {
-	color: #779C3D !important;
+  color: #779c3d !important;
 }
 
 .register-link:hover {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .input-login {
-	font-size:18px;
-	display: block;
-	width:100%;
-	border: 2px solid #779C3D;
-	border-radius: 25px;
-	padding: 0 20px;
-	height: 40px;
-	margin: 20px 0;
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  border: 2px solid #779c3d;
+  border-radius: 25px;
+  padding: 0 20px;
+  height: 40px;
+  margin: 20px 0;
 }
 
-.logo-umarket{
-	display: block;
- 	margin-left: auto;
-  	margin-right: auto;
-	padding-top:1%;
-	padding-bottom:1%;
-	max-height: 400px;
-    max-width: 300px;
+.logo-umarket {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  max-height: 400px;
+  max-width: 300px;
 }
 
-.span-login{
-	margin:auto
+.span-login {
+  margin: auto;
 }
 
-.error-login{
-	padding-left:32.5%;
-	font-size:120%;
+.error-login {
+  padding-left: 32.5%;
+  font-size: 120%;
 }
 
-.login-label{
-	font-size:20px;
+.login-label {
+  font-size: 20px;
 }
 
 .input-login:focus {
-	border:3px solid #779C3D;
+  border: 3px solid #779c3d;
 }
 
-.submit-login{
-	display: block;
-	margin-left:auto;
-	margin-right:auto;
-	background-color: #779C3D; /* Green */
-  	border: none;
-  	color: white;
-  	text-align: center;
-  	text-decoration: none;
-	font-size: 18px;
-	padding: 10px 20px;
-	margin-top: 40px;
+.submit-login {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #779c3d; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 20px;
+  margin-top: 40px;
 }
 
 .caja-form {
-	padding: 20px 50px;
+  padding: 20px 50px;
 }

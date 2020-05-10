@@ -1,10 +1,6 @@
 import React from 'react';
-
+import { withRouter } from 'react-router-dom';
 import Header from '../Header';
-import {
-	  withRouter
-	} from 'react-router-dom';
-
 			
 class TerminoYCondiciones extends React.Component{
 		

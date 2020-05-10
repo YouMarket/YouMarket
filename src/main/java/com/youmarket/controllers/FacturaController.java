@@ -96,12 +96,12 @@ public class FacturaController {
 
 	@RequestMapping(value = "/generateFactura/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> descargaPDF(@PathVariable Integer id, @CurrentUser UserPrincipal curr) {
-		
-		if(curr == null) {
+
+		if (curr == null) {
 			return null;
 		}
 		Factura factura = facturaService.findById(id);
-		
+
 		Optional<Usuario> user = this.usuarioService.findById(curr.getId());
 		Usuario usuario1 = null;
 		Boolean hacked = false;

@@ -20,17 +20,17 @@ import lombok.NoArgsConstructor;
 public class Departamento {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="nombre", length=100)
+
+	@Column(name = "nombre", length = 100)
 	@NotBlank
 	@SafeHtml
 	private String nombre;
-	
+
 	@NotBlank
 	@SafeHtml
-	@Column(name="descripcion")
+	@Column(name = "descripcion")
 	private String descripcion;
-	
+
 }
