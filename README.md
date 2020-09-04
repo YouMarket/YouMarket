@@ -1,6 +1,6 @@
-# YouMarket
+﻿# YouMarket
 
-_Proyecto para la asignatura ISPP_
+_Proyecto para la asignatura ISPP_HOLO
 
 ## Indicaciones para GIT 🚀
 
