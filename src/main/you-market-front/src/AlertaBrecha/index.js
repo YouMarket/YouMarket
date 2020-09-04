@@ -1,19 +1,14 @@
-import React,  { useFetch, useCallback, useState, useEffect } from 'react';
+import React from 'react';
 
-import style from './styles.css';
+import './styles.css';
 import Header from '../Header';
-import { Formik } from 'formik';
 import {
 	  withRouter
 	} from 'react-router-dom';
 
 			
 class AlertaBrecha extends React.Component{
-	 constructor(props) {
-		    super(props);
-
-		  }
-		
+			
 		render(){
 			return(
 
@@ -30,7 +25,7 @@ class AlertaBrecha extends React.Component{
 			<h1> SE HA PRODUCIDO UNA BRECHA DE SEGURIDAD </h1>
 			
 			<p>
-				Revise su bandeja de entrada, ahí encontrará toda la información
+				Revise su bandeja de entrada, ahï¿½ encontrarï¿½ toda la informaciï¿½n
 				referente a lo sucedido y a las medidas que puede tomar.
 			</p>
 		  	<p>

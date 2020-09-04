@@ -11,8 +11,9 @@ import {Card} from 'primereact/card';
 function DatosUsuario() {
 	let history = useHistory();
 
-
+	
 	const [usuario, setUsuario] = useState([]);
+	const urlPDF = "http://localhost:8081/usuario/exportPDF/"+usuario.id;
 	const [direccion, setDireccion] = useState([]);
 	const [suscripcion, setSuscripcion] = useState([]);
 	const [pagada, setPagada] = useState([]);
@@ -74,7 +75,6 @@ function DatosUsuario() {
 		method:'GET'})
 			.then(res => res.json())
 			.then(response => {
-				console.log(response)
 				setPagada(response.success)
 				setMeses(response.message)
 			});
@@ -92,7 +92,7 @@ function DatosUsuario() {
 	<div>
 		<Header/>
 		<Navegacion/>
-		<div className="card-container">
+		<div className="container">
 			
 			<Card title="Información Personal" style={{margin: 20}} >
 				<div >
@@ -136,14 +136,14 @@ function DatosUsuario() {
 			}
 			</Card>
 
-			{meses != 1 && 
-				<a href="/cambio-suscripcion">
+			{meses !== 1 && 
+				<a href="/cambio-suscripcion" className="modificar-suscripcion">
 					<button className="button-finish">Modificar Suscripción</button>
 				</a>
 			}
 
 			{
-				meses == 1 && 
+				meses === 1 && 
 				<div>
 					<p>Ya ha realizado una modificación en su suscripción para el mes siguiente. Hasta entonces, no podrá volver a modificarla.</p>
 				</div>
@@ -160,9 +160,12 @@ function DatosUsuario() {
 				</div>
 			</Card>
 			
-			{ <button className="boton-perfil" onClick={() => {if (window.confirm('¿Seguro que desea eliminar su cuenta?')) deleteUser}}>Eliminar cuenta</button> }
+			{ <button className="boton-perfil" onClick={() => {if (window.confirm('¿Seguro que desea eliminar su cuenta?')) deleteUser()}}>Eliminar cuenta</button> }
 
 			
+			<a href={urlPDF} target="_blank">
+				<button className="button-finish">Exportar información del usuario en PDF</button>
+			</a>
 			{/* <button className="boton-perfil">Cambiar datos</button>*/}
 		</div>
 	</div>
